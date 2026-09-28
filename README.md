@@ -17,13 +17,13 @@ Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP An
 | **03** | [Scope and Applicability of AI Systems](docs/module_03_scope_applicability.md) | 5-Stufen-Entscheidungstrichter & Risikomatrix | 🟢 Aufbereitet |
 | **04** | [Risk Based Approach to AI](docs/module_04_risk_based_approach.md) | FMEA, Silent Degradation & 5 KI-Fehlermodi | 🟢 Aufbereitet |
 | **05** | [Intended Use and Model Definition](docs/module_05_intended_use_model_definition.md) | Die Zaun-Metapher, Scope Creep & technische Model Definition | 🟢 Aufbereitet |
-| **06** | [Data Governance and Data Quality](docs/module_06_data_governance_quality.md) | ALCOA+, Data Lineage & strikte Testdatenisolation | 🟡 Bereit |
-| **07** | [AI Model Development and Training](docs/module_07_model_development_training.md) | Algorithmenauswahl, Hyperparameter & Frozen Weights | 🟡 Bereit |
-| **08** | [Validation and Performance Testing](docs/module_08_validation_performance_testing.md) | Adversarial Testing, Performance-Metriken & IQ/OQ/PQ | 🟡 Bereit |
-| **09** | [Explainability and Transparency](docs/module_09_explainability_transparency.md) | XAI, Black-Box-Vermeidung & proportionale Transparenz | 🟡 Bereit |
-| **10** | [Human Oversight / Human in the Loop](docs/module_10_human_oversight_hitl.md) | HITL vs. HOTL, Override-Befugnis & Operator-Qualifikation | 🟡 Bereit |
-| **11** | [Lifecycle Management and Continuous Monitoring](docs/module_11_lifecycle_continuous_monitoring.md) | Data- & Concept-Drift-Erkennung, Alarmschwellen & Retraining | 🟡 Bereit |
-| **12** | [Audit and Inspection Readiness](docs/module_12_audit_inspection_readiness.md) | AI-Inventar, Inspektionssimulation & Behördenverteidigung | 🟡 Bereit |
+| **06** | [Data Governance and Data Quality](docs/module_06_data_governance_quality.md) | ALCOA+, Data Lineage & strikte Testdatenisolation | 🟢 Aufbereitet |
+| **07** | [AI Model Development and Training](docs/module_07_model_development_training.md) | Algorithmenauswahl, Hyperparameter & Frozen Weights | 🟢 Aufbereitet |
+| **08** | [Validation and Performance Testing](docs/module_08_validation_performance_testing.md) | Adversarial Testing, Performance-Metriken & IQ/OQ/PQ | 🟢 Aufbereitet |
+| **09** | [Explainability and Transparency](docs/module_09_explainability_transparency.md) | XAI, Black-Box-Vermeidung & proportionale Transparenz | 🟢 Aufbereitet |
+| **10** | [Human Oversight / Human in the Loop](docs/module_10_human_oversight_hitl.md) | HITL vs. HOTL, Override-Befugnis & Operator-Qualifikation | 🟢 Aufbereitet |
+| **11** | [Lifecycle Management and Continuous Monitoring](docs/module_11_lifecycle_continuous_monitoring.md) | Data- & Concept-Drift-Erkennung, Alarmschwellen & Retraining | 🟢 Aufbereitet |
+| **12** | [Audit and Inspection Readiness](docs/module_12_audit_inspection_readiness.md) | AI-Inventar, Inspektionssimulation & Behördenverteidigung | 🟢 Aufbereitet |
 
 ---
 
