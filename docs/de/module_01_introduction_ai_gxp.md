@@ -60,7 +60,7 @@ graph LR
 2. **NLP zur Abweichungstriagierung (Deviations):** Systematische Herabstufung kritischer Vorfälle, da unübliche Abkürzungen oder nicht-standardisierte Freitexte das Sprachmodell verzerrten.
 3. **Predictive Maintenance bei Bioreaktoren:** Ein unbemerkter Sensorwechsel führte zu Sensor-Drift $\rightarrow$ das Modell verpasste den Ausfall kritischer Messsonden.
 
-### 4. Die 6 Säulen für „Trustworthy AI“ (Annex 22 Playbook)
+### 4. Die 6 Säulen für „Trustworthy AI“ ([Didaktik])
 1. **Intended Use Definition:** Präzise Festlegung des Verwendungszwecks vor Beginn der technischen Entwicklung.
 2. **Data Governance:** Trainingsdaten müssen mit der gleichen Strenge behandelt werden wie kritische pharmazeutische Rohstoffe (*Critical Raw Materials*).
 3. **Independent Test Sets:** Validierung ausschließlich mit Daten, die das Modell im Training niemals gesehen hat.
@@ -68,7 +68,7 @@ graph LR
 5. **Meaningful Human Oversight (HITL):** Echte, qualifizierte menschliche Kontrolle – kein reines formales „Checkbox-Abnicken“.
 6. **Continuous Monitoring:** Permanente Überwachung auf Drift, Anomalien und Performance-Abfall über den gesamten Lebenszyklus bis zur Außerbetriebnahme.
 
-### 5. Das „Three-Legged Stool“-Governance-Modell
+### 5. Das „Three-Legged Stool“-Governance-Modell ([Didaktik])
 - **QA (Quality Assurance):** Etabliert das Governance-Framework, genehmigt Akzeptanzkriterien und verteidigt das System bei Inspektionen.
 - **Validation Specialists:** Übersetzen den *Intended Use* in messbare Spezifikationen, designen unabhängige Testdatensätze und führen die Modellqualifizierung durch.
 - **IT / Data Science:** Betreiben die MLOps-Infrastruktur, sichern Daten-Pipelines und tragen die technische Systemverantwortung.

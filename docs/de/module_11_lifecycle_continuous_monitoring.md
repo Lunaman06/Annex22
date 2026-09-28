@@ -10,7 +10,7 @@
 
 ## 🎯 Lernziele & Leitfragen
 1. **Die Illusion permanenter Validierung:** Warum ist der Go-Live bei KI-Systemen nicht das Ende, sondern erst der Beginn der eigentlichen Validierungsarbeit?
-2. **Die 3 Drift-Typen:** Wie unterscheiden sich *Data Drift*, *Concept Drift* und *Performance Drift* und warum ist Concept Drift für pharmazeutische Prozesse am gefährlichsten?
+2. **Die 3 Drift-Typen ([Didaktik / Best Practice]):** Wie unterscheiden sich *Data Drift*, *Concept Drift* und *Performance Drift* und warum ist Concept Drift für pharmazeutische Prozesse am gefährlichsten?
 3. **Change Control & Re-Training:** Warum führt das Einspielen neuer Modellgewichte ohne formale Revalidierung zum sofortigen Verlust des GMP-Status?
 4. **Configuration Drift:** Warum stellt das formlose Nachjustieren von Alarmschwellenwerten an der Linie eine unzulässige Systemänderung dar?
 5. **Periodic Review & Außerbetriebnahme:** Welche Makro-Analysen verlangt Annex 22 in regelmäßigen Audits und wie sieht ein kontrolliertes Decommissioning aus?
@@ -21,7 +21,7 @@
 
 ```mermaid
 flowchart TD
-    subgraph DriftTypes["⚠️ Die 3 Formen des Leistungsabfalls"]
+    subgraph DriftTypes["⚠️ Die 3 Formen des Leistungsabfalls ([Didaktik / Best Practice])"]
         D1["1. Data Drift (Covariate Shift)<br/><i>Veränderung der Eingangsverteilung (z.B. neue Rohstoff-Charge, Sensoralterung)</i>"]
         D2["2. Concept Drift<br/><i>Veränderung der Ursache-Wirkungs-Beziehung (z.B. geänderte Prozesschemie)</i>"]
         D3["3. Performance Drift<br/><i>Symptomatischer Abfall von Recall, Precision oder F1-Score</i>"]

@@ -8,7 +8,7 @@
 
 ---
 
-## 🧭 Kernkonzept im Überblick: Der Scoping-Entscheidungstrichter
+## 🧭 Kernkonzept im Überblick: Der Scoping-Entscheidungstrichter ([Didaktik])
 
 ```mermaid
 flowchart TD
@@ -29,7 +29,7 @@ flowchart TD
 
 ## 🎯 Lernziele & Leitfragen
 1. **Was sind die Gefahren von „Over-Claiming“ und „Under-Claiming“ beim KI-Scoping?**
-2. **Wie funktioniert der 5-Stufen-Entscheidungstrichter (*Decision Funnel*)?**
+2. **Wie funktioniert der 5-Stufen-Entscheidungstrichter (*Decision Funnel*, [Didaktik])?**
 3. **Wie ist das didaktische Risikoraster aufgebaut ([Didaktik])?**
 4. **Welche Lehren ziehen wir aus den Grenzfällen (Sichtprüfung, LLM-Berichte, Cloud-SaaS)?**
 5. **Welche Pflichtelemente gehören in ein audit-festes *AI Inventory*?**
@@ -43,7 +43,7 @@ flowchart TD
 - **Under-Claiming (Unterregulierung):** Ein echtes KI-System im GMP-Bereich übersehen oder herunterspielen. **Folge:** Vorprogrammierter schwerer Mangel (*Audit Finding*) bei der nächsten Behördeninspektion.
 - **Ziel:** Ein disziplinierter, methodischer Mittelweg mit nachvollziehbarer Begründung (*Scoping Rationale*).
 
-### 2. Der 5-Stufen-Entscheidungstrichter (*Decision Funnel*)
+### 2. Der 5-Stufen-Entscheidungstrichter (*Decision Funnel*) ([Didaktik])
 Jede Software und jeder Algorithmus durchläuft diese fünf Stufen:
 1. **Ist es wirklich KI?** Nur Systeme mit statistischem Lernen, Mustererkennung oder generativer KI fallen unter den AI-Begriff. Reine regelbasierte Logik, Expertensysteme und deterministische Algorithmen bleiben rein unter **Annex 11** ([Draft §1]).
 2. **Besteht ein GMP-Einfluss?** Betrifft es kritische Prozesse der Arzneimittelherstellung mit direktem oder indirektem Einfluss auf Patientensicherheit, Produktqualität oder Datenintegrität ([Draft §1])?

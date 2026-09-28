@@ -39,7 +39,7 @@ graph TD
 
 ---
 
-## 2. Das duale Lebenszyklus-Modell (Dual Lifecycle Model)
+## 2. Das duale Lebenszyklus-Modell (Dual Lifecycle Model) ([Best Practice: ISPE GAMP])
 
 Die größte methodische Neuerung im ISPE GAMP AI Guide ist das **duale Lebenszyklus-Modell**. Klassische Software hat einen einzigen Code-Lebenszyklus. Ein KI-System besteht jedoch aus zwei parallel laufenden, eng verzahnten Zyklen:
 
@@ -140,7 +140,7 @@ graph TD
 
 ---
 
-## 📋 Zusammenfassung: Die 10 Gebote des ISPE GAMP AI Guides
+## 📋 Zusammenfassung: Die 10 Gebote des ISPE GAMP AI Guides ([Best Practice: ISPE GAMP])
 
 1. **Context of Use:** Bestimme vor jeder Zeile Code das Risiko für Patient, Produkt und Datenintegrität.
 2. **Data is Code:** Behandle Trainingsdaten mit derselben Strenge wie regulierten Programmcode.

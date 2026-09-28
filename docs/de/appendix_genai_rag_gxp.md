@@ -38,7 +38,7 @@ Der im Juli 2025 von der Europäischen Kommission veröffentlichte Entwurf (Kons
 
 ---
 
-## 3. Die GxP-konforme Architektur: RAG-First (Retrieval-Augmented Generation)
+## 3. Die GxP-konforme Architektur: RAG-First ([Best Practice: GenAI-Praxis])
 
 Ein LLM darf im regulierten pharmazeutischen Umfeld **niemals frei aus seinem antrainierten Weltwissen antworten**. Die etablierte Best Practice ist die **RAG-Architektur**, die das Sprachmodell auf ein streng kontrolliertes, qualifiziertes Dokumentenarchiv beschränkt:
 
@@ -84,7 +84,7 @@ flowchart TD
 
 ---
 
-## 4. Automatisierte Validierungsmetriken: Die „RAG Triad“
+## 4. Automatisierte Validierungsmetriken: Die „RAG Triad“ ([Best Practice: RAG Triad / TruLens])
 
 Anstelle von Accuracy und F1-Score setzt die Validierung von GenAI auf das standardisierte **RAG-Triad-Framework** (unterstützt durch Tools wie *Ragas, TruLens, DeepEval*):
 

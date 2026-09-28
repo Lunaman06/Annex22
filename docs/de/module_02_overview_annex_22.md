@@ -89,7 +89,7 @@ graph TD
 - **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein QA-Team nutzte NLP zur Abweichungstriagierung. Prüfer klickten Vorschläge der KI nach kurzer Zeit nur noch blind ab (*Perfunctory Review* / Rubber-Stamping).
 - **Lösung ([Didaktik]):** Neugestaltung des Workflows! Der Mensch stuft die Abweichung **zuerst unabhängig ein**, bevor die KI-Empfehlung eingeblendet wird (*Active Challenge*).
 
-### 6. Die 5-stufige Implementierungs-Roadmap
+### 6. Die 5-stufige Implementierungs-Roadmap ([Didaktik])
 1. **Stage 1 (Governance):** Etablierung eines KI-Governance-Frameworks im bestehenden QMS (inkl. Cloud & Supplier Oversight).
 2. **Stage 2 (Inventory):** Aufbau eines lebenden KI-Inventars mit Kritikalitätsklassifizierung.
 3. **Stage 3 (Gap Triage):** Identifikation und Behebung von Validierungslücken bei Hochrisikosystemen.
