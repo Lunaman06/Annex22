@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Interaktives Wissens- und Compliance-Portal für EU GMP Annex 22: Künstliche Intelligenz und Machine Learning in der pharmazeutischen Produktion." />
+    <title>EU GMP Annex 22 | AI Compliance Portal</title>
+
+    <!-- Prevent Flash of Unstyled Content (FOUC) for themes -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('annex22_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
