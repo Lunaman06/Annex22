@@ -1,11 +1,40 @@
 # Modul 05: Intended Use and Model Definition
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟢 Aufbereitet & Strukturiert |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=C-mXphEyJjk&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 08:25 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_05_transcript.md) |
+<div align="center">
+
+**[⬅ Modul 04: Risk Based Approach to AI](module_04_risk_based_approach.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 06: Data Governance and Data Quality ➔](module_06_data_governance_quality.md)**
+
+</div>
+
+---
+
+## 🧭 Kernkonzept im Überblick: Die Zaun-Metapher & Scope-Schutz
+
+```mermaid
+graph TD
+    subgraph Inside["Innerhalb des Zauns (Validierter Betriebsbereich)"]
+        direction TB
+        IN1["Spezifizierte Produkte, Packmittel & Linien"]
+        IN2["Validierte Sensoren & Datenformate"]
+        IN3["Quantitativ belegte Performance (Accuracy/Recall)"]
+        IN4["Rechtsverbindlicher Intended Use Freigabestatus"]
+    end
+
+    subgraph Fence["Der regulatorische Zaun"]
+        direction TB
+        FENCE["🛡️ OUT-OF-DISTRIBUTION (OOD) DETECTION<br/>Harte System-Blockade bei unzulässigen Eingaben"]
+    end
+
+    subgraph Outside["Außerhalb des Zauns (Unvalidiertes Niemandsland)"]
+        direction TB
+        OUT1["Neue Packmittel ohne Re-Validierung (Scope Creep)"]
+        OUT2["Neuartige Erstauftretungen & Safety Events"]
+        OUT3["Anfahrprozesse & Notbetrieb ohne URS-Spezifikation"]
+        OUT4["❌ Automatische Systemabschaltung & Menschliche Eskalation"]
+    end
+
+    Inside <==> Fence <==> Outside
+```
 
 ---
 
@@ -18,7 +47,7 @@
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Das vertragliche Herzstück (*The Contractual Heart*)
 - **Kein Marketingtext:** Der *Intended Use* ist kein unverbindliches Projektdokument, sondern eine **rechtlich bindende regulatorische Verpflichtung**.
@@ -84,5 +113,8 @@ Während der *Intended Use* den operativen Rahmen definiert, legt die *Model Def
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Platz für systemspezifische URS-Vorlagen und Definitionen für geplante KI-Systeme.*
+<div align="center">
+
+**[⬅ Modul 04: Risk Based Approach to AI](module_04_risk_based_approach.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 06: Data Governance and Data Quality ➔](module_06_data_governance_quality.md)**
+
+</div>

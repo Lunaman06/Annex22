@@ -1,11 +1,39 @@
 # Modul 02: Overview of Annex 22
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟢 Aufbereitet & Strukturiert |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=ZWZ0stmf374&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 08:02 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_02_transcript.md) |
+<div align="center">
+
+**[⬅ Modul 01: Intro to AI in GxP](module_01_introduction_ai_gxp.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 03: Scope and Applicability ➔](module_03_scope_applicability.md)**
+
+</div>
+
+---
+
+## 🧭 Kernkonzept im Überblick: Koexistenz & Automation Bias Schutz
+
+```mermaid
+graph TD
+    subgraph Foundation["1. Regulatorisches Fundament: Annex 11"]
+        F1["Computerised Systems Validation (CSV)"]
+        F2["IQ / OQ / PQ & User Requirements"]
+        F3["Audit Trails & Physische Zugriffskontrollen"]
+    end
+
+    subgraph Annex22["2. Der KI-Aufsatz: Annex 22"]
+        A1["Rechtsverbindlicher Intended Use"]
+        A2["Strikte Testdaten-Isolation"]
+        A3["Proportionale Explainability"]
+        A4["Continuous Drift Monitoring"]
+    end
+
+    subgraph ChallengeLoop["3. Schutz vor Automation Bias"]
+        C1["Operator sichtet Ereignis"] --> C2["Mensch stuft unabhängig ein<br/>(Blind Review)"]
+        C2 --> C3["KI-Empfehlung wird eingeblendet"]
+        C3 --> C4["Aktiver Abgleich & Freigabe<br/>(Active Challenge)"]
+    end
+
+    Foundation --> Annex22
+    Annex22 -. "Gestaltung der Human Oversight" .-> ChallengeLoop
+```
 
 ---
 
@@ -18,7 +46,7 @@
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Entstehung und Harmonisierung mit EU-Recht
 - **Ausgangslage:** Traditionelle CSV (Computerised Systems Validation) testet Systeme, die exakt tun, was programmiert wurde. Lernende Algorithmen sprengten dieses Konzept.
@@ -92,5 +120,8 @@
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Notizen zu Schnittstellen mit bestehenden CSV-Richtlinien und Schulungsbedarfen in der QA.*
+<div align="center">
+
+**[⬅ Modul 01: Intro to AI in GxP](module_01_introduction_ai_gxp.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 03: Scope and Applicability ➔](module_03_scope_applicability.md)**
+
+</div>

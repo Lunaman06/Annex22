@@ -1,11 +1,38 @@
 # Modul 04: Risk Based Approach to AI
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟢 Aufbereitet & Strukturiert |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=6ZpznHuwpjg&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 10:12 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_04_transcript.md) |
+<div align="center">
+
+**[⬅ Modul 03: Scope and Applicability](module_03_scope_applicability.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 05: Intended Use and Model Definition ➔](module_05_intended_use_model_definition.md)**
+
+</div>
+
+---
+
+## 🧭 Kernkonzept im Überblick: Die 5 KI-Fehlermodi & Silent Degradation
+
+```mermaid
+graph TD
+    subgraph FailModes["Die 5 KI-spezifischen Fehlermodi (FMEA-Erweiterung)"]
+        M1["1. Systematic Bias<br/>(Verzerrte Trainingsdaten)"]
+        M2["2. Distribution Shift<br/>(Data & Concept Drift)"]
+        M3["3. Adversarial / Edge Cases<br/>(Ungelernte Extremwerte)"]
+        M4["4. Confidence Miscalibration<br/>(Hochsicher, aber falsch)"]
+        M5["5. Spurious Correlations<br/>(Scheinkausalitäten gelernt)"]
+    end
+
+    subgraph Impact["Die Auswirkung"]
+        Silent["⚠️ SILENT DEGRADATION<br/>(Kein Absturz, kein Error-Code,<br/>sondern schleichender Qualitätsverlust)"]
+    end
+
+    subgraph Mitigation["Annex 22 Gegenmaßnahmen"]
+        OOD["Out-of-Distribution (OOD) Detection"]
+        HITL["100% Human-in-the-Loop"]
+        DriftMon["Kontinuierliches statistisches Monitoring"]
+    end
+
+    FailModes ==> Silent
+    Silent ==> Mitigation
+```
 
 ---
 
@@ -18,7 +45,7 @@
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Das Proportionalitätsgebot (*Proportionality Mandate*)
 - **Die Gefahr flacher Governance:** Wer versucht, ein einfaches Backoffice-KI-Tool mit der gleichen bürokratischen Tiefe zu validieren wie ein System zur Chargenfreigabe, betreibt reines *Compliance Theater*.
@@ -82,5 +109,8 @@ Herkömmliche IT-Risikovorlagen reichen für Annex 22 nicht aus. Ein Inspektor e
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Notizen zur Anpassung der betriebsinternen FMEA-Vorlagen um KI-spezifische Risikokriterien.*
+<div align="center">
+
+**[⬅ Modul 03: Scope and Applicability](module_03_scope_applicability.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 05: Intended Use and Model Definition ➔](module_05_intended_use_model_definition.md)**
+
+</div>

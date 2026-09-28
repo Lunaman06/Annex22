@@ -1,11 +1,33 @@
 # Modul 01: Introduction to AI in GxP Environments
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟢 Aufbereitet & Strukturiert |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=UnDBgKPAhow&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 09:50 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_01_transcript.md) |
+<div align="center">
+
+**[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 02: Overview of Annex 22 ➔](module_02_overview_annex_22.md)**
+
+</div>
+
+---
+
+## 🧭 Kernkonzept im Überblick: Der Paradigmenwechsel
+
+```mermaid
+graph LR
+    subgraph A11["Traditionelle CSV (Annex 11)"]
+        direction TB
+        A1["Programmierter Code<br/>(Line-by-Line)"] --> A2["Deterministisches System<br/>(Wie ein Taschenrechner)"]
+        A2 --> A3["Feste Spezifikation<br/>(Input A ➔ Output B)"]
+        A3 --> A4["Einmaliges Testen<br/>(Sign-off & Done)"]
+    end
+
+    subgraph A22["KI / Machine Learning (Annex 22)"]
+        direction TB
+        B1["Trainingsdaten & ALCOA+"] --> B2["Emergente Modell-Logik<br/>(Statistisches Lernen)"]
+        B2 --> B3["Generalisierung & Randfälle<br/>(Adversarial / Edge Cases)"]
+        B3 --> B4["Kontinuierliches Monitoring<br/>(Schutz vor Silent Drift)"]
+    end
+
+    A11 -. "Paradigmenwechsel" .-> A22
+```
 
 ---
 
@@ -17,7 +39,7 @@
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Die Definition von KI in GxP
 - **Annex 22 greift nur bei lernenden Systemen:** Statistische Lernverfahren, Mustererkennung (*pattern recognition*) und generative Methoden.
@@ -78,5 +100,8 @@
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Trage hier deine Gedanken, SOP-Überlegungen oder Firmen-spezifische Fragestellungen ein.*
+<div align="center">
+
+**[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 02: Overview of Annex 22 ➔](module_02_overview_annex_22.md)**
+
+</div>

@@ -1,11 +1,29 @@
 # Modul 03: Scope and Applicability of AI Systems
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟢 Aufbereitet & Strukturiert |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=kNL-ZjNRDeQ&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 08:35 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_03_transcript.md) |
+<div align="center">
+
+**[⬅ Modul 02: Overview of Annex 22](module_02_overview_annex_22.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 04: Risk Based Approach to AI ➔](module_04_risk_based_approach.md)**
+
+</div>
+
+---
+
+## 🧭 Kernkonzept im Überblick: Der Scoping-Entscheidungstrichter
+
+```mermaid
+flowchart TD
+    Start["Software-System / Algorithmus"] --> Q1{"1. Basiert das System auf<br/>statistischem Lernen / ML?"}
+    
+    Q1 -- Nein (Regelbasiert) --> ANNEX11["✅ Bleibt rein unter Annex 11<br/>(Klassische CSV)"]
+    Q1 -- Ja --> Q2{"2. Hat es direkten oder indirekten<br/>Einfluss auf GxP-Prozesse?"}
+    
+    Q2 -- Nein --> OOS["❌ Out of Scope<br/>(Standard-IT-Kontrollen)"]
+    Q2 -- Ja --> Q3["3. Risikoklassifizierung<br/>(Unacceptable / High / Moderate / Low)"]
+    
+    Q3 --> Q4{"4. Architektur-Check:<br/>Statisch oder Dynamisch?"}
+    Q4 -- Dynamisch --> REJECT["🚫 Unzulässig für kritischen GMP-Betrieb!"]
+    Q4 -- Statisch --> INV["📋 Eintragung in das AI-Inventar<br/>(Verbindliche Scoping Rationale)"]
+```
 
 ---
 
@@ -18,7 +36,7 @@
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Das Dilemma beim Scoping: Over-Claiming vs. Under-Claiming
 - **Over-Claiming (Überregulierung):** Jedes noch so einfache Stück Standardsoftware aus Angst als „KI unter Annex 22“ deklarieren. **Folge:** Das Validierungsteam wird mit unnötigem Aufwand gelähmt.
@@ -37,7 +55,7 @@ Jede Software und jeder Algorithmus durchläuft diese fünf Stufen:
 
 | Risikostufe | Definition & Beispiele | Regulatorische Konsequenz |
 | :--- | :--- | :--- |
-| **Unacceptable** | Kontinuierlich online lernende Modelle, die autonome Freigabeentscheidungen treffen. | **Striker Ausschluss** unter Annex 22. Nicht zulässig. |
+| **Unacceptable** | Kontinuierlich online lernende Modelle, die autonome Freigabeentscheidungen treffen. | **Strikter Ausschluss** unter Annex 22. Nicht zulässig. |
 | **High Risk** | Statische KI, die PAT-Messungen steuert, CQA-Relevanz hat oder autonome Gut-/Schlecht-Sortierung durchführt. | Vollumfängliche Validierung, Worst-Case-Tests, kontinuierliches Drift-Monitoring, 100% HITL. |
 | **Moderate Risk** | KI als Entscheidungshilfe (*Decision Support* / Advisory), z.B. Triage von Abweichungen. | Schlankere Test-Sets, aktive menschliche Überprüfung vor Wirksamkeit. |
 | **Low Risk** | Administrative Backoffice-Anwendungen ohne jeden Einfluss auf Produktqualität oder Patientensicherheit. | Standardmäßige IT-Good-Practices ausreichend. |
@@ -93,5 +111,8 @@ Das Master-Verzeichnis für Inspektoren muss für jedes System zwingend enthalte
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Notizen zur Bestandsaufnahme von KI-Tools im eigenen Unternehmen und Prüfung von Vendor-Verträgen.*
+<div align="center">
+
+**[⬅ Modul 02: Overview of Annex 22](module_02_overview_annex_22.md)** &nbsp;|&nbsp; **[🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)** &nbsp;|&nbsp; **[Modul 04: Risk Based Approach to AI ➔](module_04_risk_based_approach.md)**
+
+</div>

@@ -1,23 +1,22 @@
 # Modul 08: Validation and Performance Testing
 
-| Eigenschaft | Details |
-| :--- | :--- |
-| **Status** | 🟡 In Vorbereitung / Noch nicht bearbeitet |
-| **Video-Link** | [YouTube Video ansehen](https://www.youtube.com/watch?v=9AGeFbRXa98&list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L) |
-| **Dauer** | 10:26 |
-| **Original-Transkript** | [Transkript öffnen](../data/transcripts/markdown/module_08_transcript.md) |
+<div align="center">
+
+**[⬅ Vorheriges Modul](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_09_explainability_transparency.md)**
+
+</div>
 
 ---
 
 ## 🎯 Lernziele & Leitfragen
 1. Was sind die Kernanforderungen von Annex 22 für dieses Themenfeld?
-2. Welche Unterscheidung trifft die Guideline (z.B. deterministisch vs. stochastisch, statisch vs. kontinuierlich lernend)?
+2. Welche Unterscheidung trifft die Guideline für Validation and Performance Testing?
 3. Welche praktischen Konsequenzen ergeben sich für pharmazeutische Qualitätsmanagementsysteme (QMS)?
 
 ---
 
-## 📌 Deutsche Zusammenfassung (Key Takeaways)
-*Trage hier deine Zusammenfassung oder generierte Kernaussagen ein.*
+## 📌 Fachliche Zusammenfassung (Key Takeaways)
+*Dieses Modul wird aktuell mit den Inhalten des Annex-22-Frameworks synchronisiert.*
 
 - **Hintergrund:** 
 - **Wichtigste Regularien:** 
@@ -31,10 +30,13 @@
 ---
 
 ## 📋 GxP-Compliance Checklist & Kontrollfragen
-- [ ] Frage 1?
-- [ ] Frage 2?
+- [ ] Kontrollfrage 1?
+- [ ] Kontrollfrage 2?
 
 ---
 
-## ✍️ Eigene Notizen & Vertiefung
-*Hier ist Platz für persönliche Notizen, Vergleiche mit bestehenden SOPs und weiterführende Fragen.*
+<div align="center">
+
+**[⬅ Vorheriges Modul](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_09_explainability_transparency.md)**
+
+</div>

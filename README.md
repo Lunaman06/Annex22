@@ -1,29 +1,29 @@
-# 🇪🇺 EU GMP Annex 22: AI Compliance in Pharma - Lernprojekt
+# 🇪🇺 EU GMP Annex 22: AI Compliance in Pharma
 
-Ein interaktives Wissens- und Lern-Repository zum **Draft EU GMP Annex 22** („Artificial Intelligence and Machine Learning in GxP Environments“), basierend auf der 12-teiligen Fachreihe.
+Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP Annex 22** („Artificial Intelligence and Machine Learning in GxP Environments“).
 
-- **YouTube Playlist:** [EU GMP Annex 22 AI Compliance in Pharma](https://youtube.com/playlist?list=PLsyAi2EwvNNjE-uAH1N_3d6JBa8yF8v1L)
-- **Hauptthemen:** AI/ML-Validierung, Deterministische vs. dynamische Modelle, Explainability, Human-in-the-Loop, Datenintegrität (ALCOA+) und Audit-Readiness.
+- **Themenschwerpunkte:** AI/ML-Validierung, Deterministische vs. dynamische Modelle, Explainability, Human-in-the-Loop, Datenintegrität (ALCOA+) und Audit-Readiness.
+- **Zielgruppe:** QA, CSV-Validierungsexperten, IT/Data Science und Qualified Persons (QP).
 
 ---
 
 ## 📚 Curriculum & Modulübersicht
 *Das zentrale Wissens- und Prozess-Framework findest du in ➔ **[docs/annex22_regulatory_framework.md](docs/annex22_regulatory_framework.md)**.*
 
-| # | Modul / Thema | Dauer | Transkript | Lernnotizen | Status |
-| :-: | :--- | :---: | :---: | :---: | :---: |
-| **01** | [Introduction to AI in GxP Environments](docs/module_01_introduction_ai_gxp.md) | 09:50 | [Markdown](data/transcripts/markdown/module_01_transcript.md) | [Study Notes](docs/module_01_introduction_ai_gxp.md) | 🟢 Aufbereitet |
-| **02** | [Overview of Annex 22](docs/module_02_overview_annex_22.md) | 08:02 | [Markdown](data/transcripts/markdown/module_02_transcript.md) | [Study Notes](docs/module_02_overview_annex_22.md) | 🟢 Aufbereitet |
-| **03** | [Scope and Applicability of AI Systems](docs/module_03_scope_applicability.md) | 08:35 | [Markdown](data/transcripts/markdown/module_03_transcript.md) | [Study Notes](docs/module_03_scope_applicability.md) | 🟢 Aufbereitet |
-| **04** | [Risk Based Approach to AI](docs/module_04_risk_based_approach.md) | 10:12 | [Markdown](data/transcripts/markdown/module_04_transcript.md) | [Study Notes](docs/module_04_risk_based_approach.md) | 🟢 Aufbereitet |
-| **05** | [Intended Use and Model Definition](docs/module_05_intended_use_model_definition.md) | 08:25 | [Markdown](data/transcripts/markdown/module_05_transcript.md) | [Study Notes](docs/module_05_intended_use_model_definition.md) | 🟢 Aufbereitet |
-| **06** | [Data Governance and Data Quality](docs/module_06_data_governance_quality.md) | 09:18 | *(in Sync)* | [Study Notes](docs/module_06_data_governance_quality.md) | 🟡 Bereit |
-| **07** | [AI Model Development and Training](docs/module_07_model_development_training.md) | 09:21 | *(in Sync)* | [Study Notes](docs/module_07_model_development_training.md) | 🟡 Bereit |
-| **08** | [Validation and Performance Testing](docs/module_08_validation_performance_testing.md) | 10:26 | *(in Sync)* | [Study Notes](docs/module_08_validation_performance_testing.md) | 🟡 Bereit |
-| **09** | [Explainability and Transparency](docs/module_09_explainability_transparency.md) | 08:14 | *(in Sync)* | [Study Notes](docs/module_09_explainability_transparency.md) | 🟡 Bereit |
-| **10** | [Human Oversight / Human in the Loop](docs/module_10_human_oversight_hitl.md) | 07:19 | *(in Sync)* | [Study Notes](docs/module_10_human_oversight_hitl.md) | 🟡 Bereit |
-| **11** | [Lifecycle Management and Continuous Monitoring](docs/module_11_lifecycle_continuous_monitoring.md) | 09:38 | *(in Sync)* | [Study Notes](docs/module_11_lifecycle_continuous_monitoring.md) | 🟡 Bereit |
-| **12** | [Audit and Inspection Readiness](docs/module_12_audit_inspection_readiness.md) | 09:13 | *(in Sync)* | [Study Notes](docs/module_12_audit_inspection_readiness.md) | 🟡 Bereit |
+| # | Modul / Thema | Kernfokus | Status |
+| :-: | :--- | :--- | :---: |
+| **01** | [Introduction to AI in GxP Environments](docs/module_01_introduction_ai_gxp.md) | Die 6 Säulen für Trustworthy AI & CSV-Paradigmenwechsel | 🟢 Aufbereitet |
+| **02** | [Overview of Annex 22](docs/module_02_overview_annex_22.md) | Koexistenz mit Annex 11, Automation Bias & Roadmap | 🟢 Aufbereitet |
+| **03** | [Scope and Applicability of AI Systems](docs/module_03_scope_applicability.md) | 5-Stufen-Entscheidungstrichter & Risikomatrix | 🟢 Aufbereitet |
+| **04** | [Risk Based Approach to AI](docs/module_04_risk_based_approach.md) | FMEA, Silent Degradation & 5 KI-Fehlermodi | 🟢 Aufbereitet |
+| **05** | [Intended Use and Model Definition](docs/module_05_intended_use_model_definition.md) | Die Zaun-Metapher, Scope Creep & technische Model Definition | 🟢 Aufbereitet |
+| **06** | [Data Governance and Data Quality](docs/module_06_data_governance_quality.md) | ALCOA+, Data Lineage & strikte Testdatenisolation | 🟡 Bereit |
+| **07** | [AI Model Development and Training](docs/module_07_model_development_training.md) | Algorithmenauswahl, Hyperparameter & Frozen Weights | 🟡 Bereit |
+| **08** | [Validation and Performance Testing](docs/module_08_validation_performance_testing.md) | Adversarial Testing, Performance-Metriken & IQ/OQ/PQ | 🟡 Bereit |
+| **09** | [Explainability and Transparency](docs/module_09_explainability_transparency.md) | XAI, Black-Box-Vermeidung & proportionale Transparenz | 🟡 Bereit |
+| **10** | [Human Oversight / Human in the Loop](docs/module_10_human_oversight_hitl.md) | HITL vs. HOTL, Override-Befugnis & Operator-Qualifikation | 🟡 Bereit |
+| **11** | [Lifecycle Management and Continuous Monitoring](docs/module_11_lifecycle_continuous_monitoring.md) | Data- & Concept-Drift-Erkennung, Alarmschwellen & Retraining | 🟡 Bereit |
+| **12** | [Audit and Inspection Readiness](docs/module_12_audit_inspection_readiness.md) | AI-Inventar, Inspektionssimulation & Behördenverteidigung | 🟡 Bereit |
 
 ---
 
