@@ -9,18 +9,32 @@
 
 Für Jahrzehnte stützte sich die pharmazeutische Industrie bei computergestützten Systemen auf **EU GMP Annex 11** (deterministische Software: *gleicher Input führt immer zum gleichen Output*). Moderne KI- und Machine-Learning-Systeme lernen jedoch emergent aus Daten und können im Betrieb schleichend degradieren (*Silent Drift*).
 
-Mit dem im Juli 2025 von der Europäischen Kommission (EMA / PIC/S) vorgelegten **Draft Annex 22** entsteht der weltweit erste verbindliche regulatorische Rahmen, der den Einsatz von KI in der pharmazeutischen Produktion regelt.
+Mit dem im Juli 2025 von der Europäischen Kommission (EMA / PIC/S) vorgelegten **Draft Annex 22** entsteht der weltweit erste spezifische regulatorische Rahmen für den Einsatz von KI in der pharmazeutischen Produktion.
 
 ```mermaid
 graph LR
-    A["EU AI Act<br/>(Horizontale Produktsicherheit)"] --> C["EU GMP Annex 22<br/>(Pharma-spezifischer Standard)"]
-    B["EU GMP Annex 11<br/>(Klassische CSV-Basis)"] --> C
-    C ==> D["GMP-Produktion, QC-Labor & Chargenfreigabe"]
+    subgraph DigitalPackage["EudraLex Vol. 4 Digital Package (2025/2026)"]
+        direction TB
+        P1["Kapitel 4 Revision<br/><i>(Dokumentation & Datenintegrität)</i>"]
+        P2["Annex 11 Revision<br/><i>(Computerised Systems: Cloud, Agile, QMS)</i>"]
+        P3["Annex 22 Neufassung<br/><i>(Artificial Intelligence & ML)</i>"]
+    end
+
+    A["EU AI Act<br/>(Horizontale Produktsicherheit)"] --> DigitalPackage
+    DigitalPackage ==> D["GMP-Produktion, QC-Labor & Chargenfreigabe"]
+
+    style DigitalPackage fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
+### Rechtlicher Status & Verbindlichkeit:
+* **Aktueller Status (Stand 2026):** Der Annex 22 ist derzeit ein **Draft (Entwurf)** unter finaler Überarbeitung durch die *EMA GMDP Inspectors Working Group* und PIC/S. Die öffentliche Konsultationsphase endete im Oktober 2025; das offizielle Inkrafttreten wird für **Ende 2026 / Anfang 2027** (inkl. Übergangsfrist) erwartet.
+* **Faktische Prüfungsrelevanz heute:** Obwohl formell noch nicht in Kraft, wenden Behörden (EMA, FDA, nationale Inspektoren) die Prinzipien des Drafts bereits heute als **„State of the Art“**-Prüfmaßstab bei Inspektionen nach Annex 11 an.
+* **Das EudraLex Digital Package:** Annex 22 steht nicht allein, sondern bildet zusammen mit der Revision von **Annex 11** (Computerised Systems) und **Kapitel 4** (Dokumentation) die moderne digitale Verfassung der europäischen Pharmaindustrie.
+
 ### Die 3 Kernbotschaften:
-1. **Annex 22 ersetzt Annex 11 nicht:** Annex 11 bleibt das Fundament (IQ/OQ, physische Kontrollen, Audit Trails). Annex 22 ergänzt spezifische Anforderungen für lernende Algorithmen.
-2. **Statisch vor Dynamisch:** Im kritischen GMP-Betrieb sind nur **statische Modelle (eingefrorene Modellgewichte)** zulässig. Sich selbst im laufenden Betrieb weitertrainierende Modelle sind für Freigabeentscheidungen ausgeschlossen.
+1. **Annex 22 ersetzt Annex 11 nicht:** Annex 11 bleibt das Fundament (IQ/OQ, physische Kontrollen, Audit Trails, Cloud-Sicherheit). Annex 22 ergänzt spezifische Anforderungen für lernende Algorithmen.
+2. **Statisch vor Dynamisch:** Im kritischen GMP-Betrieb sind nur **statische Modelle (eingefrorene Modellgewichte / Frozen Weights)** zulässig. Sich selbst im laufenden Betrieb weitertrainierende Modelle sind für Freigabeentscheidungen ausgeschlossen.
 3. **Mensch vor Maschine (Human-in-the-Loop):** Die finale Verantwortung für Produktqualität und Patientensicherheit verbleibt ausnahmslos beim qualifizierten pharmazeutischen Personal (z.B. Qualified Person).
 
 ---
@@ -129,3 +143,14 @@ flowchart TD
 | **3** | **Daten wie Rohstoffe behandeln** | Trainingsdaten unterliegen denselben ALCOA+-Standards wie pharmazeutische Wirkstoffe. |
 | **4** | **Echtes Hinterfragen (Active Challenge)** | Menschliche Prüfer müssen unabhängig einstufen können, um unkritisches Abnicken (*Automation Bias*) auszuschließen. |
 | **5** | **Instrumentierung gegen Silent Drift** | Ein KI-System muss ab Tag 1 über ein statistisches Monitoring verfügen, das Leistungsabfälle sofort meldet. |
+
+---
+
+## 4. Spezial-Leitfäden & Industrie-Best-Practices (Anhänge)
+
+Zur Schließung spezifischer technischer Lücken und für moderne Automatisierungsarchitekturen stehen zwei vertiefende Spezial-Dossiers bereit:
+
+* 🤖 **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**  
+  *Sonderstatus unter Annex 22, RAG-Architektur, ALCOA+-Zitierpflicht, das Metrik-Trio der „RAG Triad“ (Groundedness, Context Relevance, Answer Relevance), Prompt Governance als Code und deterministische Guardrails.*
+* 📘 **[Leitfaden: ISPE GAMP® AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**  
+  *Das duale Lebenszyklus-Modell (Software- vs. Daten-Zyklus), GAMP-Kategorisierung für KI (Cat 1 bis Cat 5), Quality Risk Management nach ICH Q9 (R1), Lieferanten- & Cloud-Oversight sowie das Konzept der „Living Validation“.*

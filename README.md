@@ -2,7 +2,10 @@
 
 Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP Annex 22** („Artificial Intelligence and Machine Learning in GxP Environments“).
 
-- **Themenschwerpunkte:** AI/ML-Validierung, Deterministische vs. dynamische Modelle, Explainability, Human-in-the-Loop, Datenintegrität (ALCOA+) und Audit-Readiness.
+> [!NOTE]
+> **Rechtlicher Status:** Der Annex 22 ist derzeit ein **Entwurf (Draft)** der Europäischen Kommission, EMA und PIC/S (Konsultationsphase beendet, finale Verabschiedung erwartet für Ende 2026/Anfang 2027). Behörden wenden die Grundsätze jedoch bereits heute als **„State of the Art“**-Erwartungshaltung bei Inspektionen unter Annex 11 an.
+
+- **Themenschwerpunkte:** AI/ML-Validierung, Deterministische vs. dynamische Modelle, Explainability, Human-in-the-Loop, Datenintegrität (ALCOA+), MLOps und Audit-Readiness.
 - **Zielgruppe:** QA, CSV-Validierungsexperten, IT/Data Science und Qualified Persons (QP).
 
 ---
@@ -11,7 +14,7 @@ Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP An
 *Das zentrale Wissens- und Prozess-Framework findest du in ➔ **[docs/00_overview.md](docs/00_overview.md)**.*
 
 | # | Modul / Thema | Kernfokus | Status |
-| :-: | :--- | :--- | :---: |
+| :-: | :--- | :--- | :--- |
 | **01** | [Introduction to AI in GxP Environments](docs/module_01_introduction_ai_gxp.md) | Die 6 Säulen für Trustworthy AI & CSV-Paradigmenwechsel | 🟢 Aufbereitet |
 | **02** | [Overview of Annex 22](docs/module_02_overview_annex_22.md) | Koexistenz mit Annex 11, Automation Bias & Roadmap | 🟢 Aufbereitet |
 | **03** | [Scope and Applicability of AI Systems](docs/module_03_scope_applicability.md) | 5-Stufen-Entscheidungstrichter & Risikomatrix | 🟢 Aufbereitet |
@@ -24,6 +27,13 @@ Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP An
 | **10** | [Human Oversight / Human in the Loop](docs/module_10_human_oversight_hitl.md) | HITL vs. HOTL, Override-Befugnis & Operator-Qualifikation | 🟢 Aufbereitet |
 | **11** | [Lifecycle Management and Continuous Monitoring](docs/module_11_lifecycle_continuous_monitoring.md) | Data- & Concept-Drift-Erkennung, Alarmschwellen & Retraining | 🟢 Aufbereitet |
 | **12** | [Audit and Inspection Readiness](docs/module_12_audit_inspection_readiness.md) | AI-Inventar, Inspektionssimulation & Behördenverteidigung | 🟢 Aufbereitet |
+
+### 📖 Spezial-Dossiers & Etablierte Industrie-Standards (Anhänge)
+
+| Thema | Dokument | Kerninhalte |
+| :--- | :--- | :--- |
+| **GenAI & RAG** | [Leitfaden: Generative KI & RAG im GxP-Umfeld](docs/appendix_genai_rag_gxp.md) | RAG-First-Architektur, ALCOA+-Zitierpflicht, RAG Triad Metriken (Groundedness), Prompt Governance und Guardrails |
+| **GAMP Best Practice** | [ISPE GAMP® AI Guide & Best Practices](docs/appendix_ispe_gamp_ai_best_practices.md) | Duales Lebenszyklus-Modell (Software vs. Daten), GAMP-Kategorien für KI, QRM (ICH Q9 R1), Cloud/Supplier Oversight & Living Validation |
 
 ---
 

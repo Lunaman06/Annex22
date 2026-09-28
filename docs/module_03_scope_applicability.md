@@ -67,15 +67,17 @@ Jede Software und jeder Algorithmus durchläuft diese fünf Stufen:
 - *Fehlschluss:* Die Firma stufte das System als „Moderate Risk“ ein, weil ja ein Mensch Grenzfälle prüft.
 - *Annex-22-Realität:* **High Risk!** Die autonome Entscheidungsrate für 95%+ der Vials bestimmt das Risiko. Partielle menschliche Kontrolle senkt die Risikoklasse nicht magisch ab. Zwingend: Drift-Monitoring und definierter Fallback auf manuelle Inspektion.
 
-#### Fall 2: Generative AI (LLMs) für Abweichungsberichte (Deviations)
-- *Situation:* Ein LLM formuliert aus stichpunktartigen Operator-Notizen vollständige Abweichungsberichte, die anschließend von der QA gegengezeichnet werden.
-- *Gefahr:* Der Text beeinflusst subtil die Wahrnehmung des Prüfers (*Cognitive Framing*) hinsichtlich Ursachen und CAPA-Maßnahmen.
-- *Lösung:* Dokumentierte Kennzahlen (*Tracking Metrics*), wie oft und wie stark der menschliche Prüfer den KI-Text tatsächlich modifiziert hat.
+#### Fall 2: Der Sonderstatus von Generativer KI (GenAI & LLMs)
+- *Regulatorische Ausgangslage:* Im **Draft Annex 22** schließt die Europäische Kommission LLMs und generative Modelle für autonome, entscheidungsrelevante GMP-Tätigkeiten explizit aus. Grund sind das stochastische Antwortverhalten und das Risiko von **Halluzinationen** (überzeugend klingende, aber frei erfundene pharmazeutische Aussagen).
+- *Der zulässige GxP-Korridor:* LLMs dürfen unter strengen Auflagen als **assistierende Werkzeuge („Drafting Assistants“)** eingesetzt werden (z.B. Erstellung eines ersten Roh-Entwurfs für einen Abweichungsbericht oder Zusammenfassung von Labor-Rohdaten).
+- *Architektur-Vorgabe:* Direkte freie Prompts sind unzulässig. Zwingend gefordert ist eine **RAG-Architektur (Retrieval-Augmented Generation)**, die das Modell strikt auf freigegebene Firmen-SOPs begrenzt und jeden Satz mit auditierbaren ALCOA+-Zitaten belegt.
+- *Detail-Leitfaden:* Eine vollständige Ausarbeitung von RAG-Validierungsmetriken (Groundedness, Context Relevance), Prompt Governance und Guardrails findest du im separaten Dossier:  
+  ➔ **[Vertiefender Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**
 
 #### Fall 3: Cloud-SaaS-KI von Drittanbietern (Black-Box über API)
 - *Leitsatz:* **„You cannot outsource your GMP accountability.“**
-- *Problem:* Wenn der Cloud-Anbieter im Hintergrund kontinuierliche Updates einspielt, ist das System für den Pharmahersteller nicht validierbar.
-- *Lösung:* Cloud-KI darf ausschließlich als sekundäres, beratendes Werkzeug dienen. Primäre Berechnungen müssen auf intern validierten Systemen gegengeprüft werden.
+- *Problem:* Wenn der Cloud-Anbieter im Hintergrund kontinuierliche Updates einspielt oder Bibliotheken ändert, ist das System für den Pharmahersteller nicht validierbar (*Uncontrolled Environment Drift*).
+- *Lösung:* Cloud-KI darf ausschließlich auf Basis formaler *Quality Agreements* und Service Level Agreements (SLAs) betrieben werden, die unangekündigte Modelländerungen vertraglich ausschließen. Primäre Freigabeberechnungen müssen auf intern validierten Systemen gegengeprüft werden. Siehe auch ➔ **[ISPE GAMP AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**.
 
 ### 5. Das audit-feste „AI Inventory“
 Das Master-Verzeichnis für Inspektoren muss für jedes System zwingend enthalten:

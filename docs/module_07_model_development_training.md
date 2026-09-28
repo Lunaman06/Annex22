@@ -20,28 +20,26 @@
 ## 🧭 Visualisierung: Vom Ad-hoc-Experiment zum GxP-Modell
 
 ```mermaid
-flowchart LR
-    subgraph DataScience["❌ Konventionelle Data Science"]
+flowchart TD
+    subgraph DS["❌ Konventionelle Data Science (Ad-hoc)"]
         direction TB
-        DS1["Fokus: Benchmark-Accuracy"]
-        DS2["Ad-hoc Scripting & Jupyter"]
-        DS3["Hyperparameter per Bauchgefühl"]
-        DS4["Flüchtige Umgebungen"]
+        DS1["Fokus: Reine Benchmark-Accuracy"] --> DS2["Ad-hoc Scripting in Notebooks"]
+        DS2 --> DS3["Hyperparameter per Bauchgefühl"]
+        DS3 --> DS4["Flüchtige Umgebungen & variable Seeds"]
     end
 
-    subgraph Annex22["✅ Annex 22 GMP Engineering"]
+    DS ==>|Zwingender Paradigmenwechsel für GxP| A22
+
+    subgraph A22["✅ Annex 22 GMP Engineering (Controlled)"]
         direction TB
-        G1["Fokus: Trustworthiness & Kalibrierung"]
-        G2["Validierte MLOps Pipeline (Annex 11)"]
-        G3["Systematische Hyperparameter-Suche"]
-        G4["Reproduzierbar: Git + DVC + Fixed Seeds"]
-        G5["Frozen Weights & Standardized Model Card"]
+        G1["Fokus: Trustworthiness & Kalibrierung"] --> G2["Validierte MLOps- & Cloud-Pipeline (Annex 11)"]
+        G2 --> G3["Systematische Hyperparameter-Suche mit Rationale"]
+        G3 --> G4["Reproduzierbarkeit: Git + DVC + Fixed Seeds"]
+        G4 --> G5["Frozen Weights & standardisierte Model Card"]
     end
 
-    DataScience ==>|Paradigmenwechsel| Annex22
-
-    style DataScience fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style Annex22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style DS fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 ---
@@ -69,10 +67,13 @@ Tritt später im Routinebetrieb eine Qualitätsabweichung (*OOS/Deviation*) oder
 > [!CAUTION]
 > **Praxisfall:** Ein Unternehmen konnte im Rahmen einer Reklamationsuntersuchung die Entscheidung eines Modells für eine bestimmte Charge nicht aufklären, da Software-Bibliotheken zwischenzeitlich aktualisiert worden waren und die Random Seeds nicht protokolliert wurden. Die Unfähigkeit, das Modell historisch nachzubauen, führte zu einer schweren behördlichen Mängelrüge (*Major Inspection Finding*).
 
-### 3. MLOps-Plattformen als validierungspflichtige GxP-Infrastruktur
-Data-Science-Teams nutzen heute standardmäßig Plattformen wie MLflow, Weights & Biases, DVC, AWS SageMaker oder Azure ML.
+### 3. MLOps & Cloud-Plattformen als validierungspflichtige GxP-Infrastruktur (Vendor Oversight)
+Data-Science-Teams nutzen heute standardmäßig Cloud- und MLOps-Plattformen wie MLflow, Weights & Biases, DVC, AWS SageMaker oder Azure ML.
 * **Regulatorische Konsequenz:** Werden diese Tools zur Entwicklung, Protokollierung oder Versionierung von Modellen genutzt, die pharmazeutische Entscheidungen beeinflussen, gelten sie als **Computerised Systems**.
 * Sie unterliegen damit vollumfänglich der Qualifizierungs- und Validierungspflicht nach **EU GMP Annex 11** (Zugriffskontrollen, Audit Trails, Datensicherheit, Desaster Recovery).
+* **Lieferantenüberwachung (Cloud & Third-Party Vendor Oversight):**
+  * Eine einfache SOC-2- oder ISO-27001-Zertifizierung des Cloud-Anbieters reicht für GxP **nicht** aus.
+  * Das pharmazeutische Unternehmen bleibt vollumfänglich verantwortlich (*Regulated User Accountability*). Es muss über Service Level Agreements (SLAs) und Quality Agreements vertraglich sicherstellen, dass Cloud-Updates nicht unangekündigt Pipeline-Abhängigkeiten oder Rechenkerne verändern (*Uncontrolled Environment Drift*).
 
 ### 4. Hyperparameter-Tuning & Die goldene Validierungsregel
 Hyperparameter (z.B. Lernrate, Baumtiefe, Regularisierungsfaktoren, Epochenanzahl) steuern die mathematische Konvergenz des Modells:

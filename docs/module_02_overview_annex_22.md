@@ -48,19 +48,20 @@ graph TD
 
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
-### 1. Entstehung und Harmonisierung mit EU-Recht
-- **Ausgangslage:** Traditionelle CSV (Computerised Systems Validation) testet Systeme, die exakt tun, was programmiert wurde. Lernende Algorithmen sprengten dieses Konzept.
-- **Entwicklung:** EMA und PIC/S orientierten sich an der realen Machine-Learning-Literatur, um praxisgerechte und technisch machbare Anforderungen zu schaffen.
+### 1. Entstehung, EudraLex Digital Package & Rechtsstatus
+- **Das EudraLex Vol. 4 Digital Package:** Annex 22 wurde nicht isoliert veröffentlicht, sondern bildet ein zusammenhängendes Modernisierungspaket für computergestützte Systeme zusammen mit der **Revision von Annex 11** (Cloud, agile Methoden, Datenintegrität) und der **Revision von Kapitel 4** (Dokumentation).
+- **Aktueller Rechtsstatus:** Der Text ist aktuell ein **Draft (Entwurf)** von EMA und PIC/S (Konsultation bis Okt. 2025; finale Verabschiedung Ende 2026/Anfang 2027 erwartet). Er ist jedoch schon heute faktisch prüfungsrelevant, da Inspektoren ihn als Stand von Wissenschaft und Technik (*State of the Art*) ansehen.
 - **Harmonisierung:** Annex 22 ist so konzipiert, dass er nahtlos neben dem **EU AI Act**, der **DSGVO (GDPR)** und der **Medical Device Regulation (MDR)** steht, um regulatorische Widersprüche im EU-Binnenmarkt zu vermeiden.
 
 ### 2. Annex 11 vs. Annex 22 (Koexistenz statt Ersatz)
 - **Annex 22 ersetzt Annex 11 NICHT!**
-- **Annex 11 bleibt das Fundament:** IQ/OQ-Strukturen, Audit Trails, Zugriffskontrollen, deterministische Basisvalidierung bleiben unverändert unter Annex 11.
+- **Annex 11 bleibt das Fundament:** IQ/OQ-Strukturen, Audit Trails, Zugriffskontrollen, Cloud-Sicherheit und deterministische Basisvalidierung bleiben unverändert unter Annex 11.
 - **Annex 22 setzt oben auf:** Für lernende Algorithmen verlangt Annex 22 zwingend zusätzliche Disziplinen:
   - Verbindliche *Intended Use Specification*,
-  - Strikt isolierte, unabhängige Testdatensätze (*Independent Test Sets*),
+  - Strikt isolierte, unabhängige Testdatensätze (*Independent Test Sets*) mit personeller Trennung (*Staff Independence*),
   - Risikoproportionale *Explainability*,
-  - Kontinuierliches Lebenszyklus-Monitoring gegen *Model Drift*.
+  - Kontinuierliches Lebenszyklus-Monitoring gegen *Model Drift*,
+  - Lückenlose Lieferanten- und Cloud-Überwachung (*Supplier Governance*).
 
 ### 3. Was ist „In Scope“ und was ist „Out of Scope“?
 - **In Scope (Reguliert):**
@@ -83,17 +84,18 @@ graph TD
   - Anfällig für stochastische Variabilität und „Halluzinationen“ (*Confabulation*).
   - **Verboten für:** Kritische Entscheidungen wie Chargenfreigabe oder Spezifikationsfestlegungen.
   - **Erlaubt für:** Assistive Hilfstätigkeiten (Zusammenfassen langer Dokumente, Rohentwürfe für SOPs), sofern strenge menschliche Überprüfung und finale Freigabe durch qualifiziertes Personal erfolgen.
+  - Siehe Details im ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
 
 ### 5. Das Phänomen „Automation Bias“ & Human Oversight
 - **Fallbeispiel:** Ein QA-Team nutzte NLP zur Abweichungstriagierung. Prüfer klickten Vorschläge der KI nach kurzer Zeit nur noch blind ab (*Perfunctory Review* / Rubber-Stamping).
 - **Lösung:** Neugestaltung des Workflows! Der Mensch muss die Abweichung **zuerst unabhängig einstufen**, bevor die KI-Empfehlung eingeblendet wird (*Active Challenge*).
 
 ### 6. Die 5-stufige Implementierungs-Roadmap
-1. **Stage 1 (Governance):** Etablierung eines KI-Governance-Frameworks im bestehenden QMS.
+1. **Stage 1 (Governance):** Etablierung eines KI-Governance-Frameworks im bestehenden QMS (inkl. Cloud & Supplier Oversight).
 2. **Stage 2 (Inventory):** Aufbau eines lebenden KI-Inventars mit Kritikalitätsklassifizierung.
 3. **Stage 3 (Gap Triage):** Identifikation und Behebung von Validierungslücken bei Hochrisikosystemen.
 4. **Stage 4 (Cross-Functional Literacy):** Abbau von Silos zwischen IT, Data Science und QA.
-5. **Stage 5 (Lifecycle Discipline):** Verankerung von kontinuierlichem Drift-Monitoring und Change Control.
+5. **Stage 5 (Lifecycle Discipline):** Verankerung von kontinuierlichem Drift-Monitoring und Change Control (Orientierung an ➔ **[ISPE GAMP AI Guide & Best Practices](appendix_ispe_gamp_ai_best_practices.md)**).
 
 ---
 

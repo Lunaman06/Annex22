@@ -68,13 +68,18 @@ Annex 22 verlangt daher vier komplementäre Dimensionen:
 * **Kein Verschieben der Torpfosten:** Alle quantitativen Akzeptanzkriterien (z.B. *Recall $\ge 99,5\%$, Precision $\ge 90\%$, ECE $\le 0,05$*) müssen **vor der Durchführung der Tests auf dem Testdatensatz formal im Validierungsplan genehmigt und versiegelt werden**.
 * Wer Kriterien nachträglich lockert, nachdem die Testdaten ausgewertet wurden, begeht eine schwerwiegende GMP-Verletzung.
 
-### 4. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
+### 4. Personelle Unabhängigkeit beim Testen (Staff Independence & Blind Testing)
+Ein entscheidender Punkt im **PIC/S- und Annex-22-Draft** ist die organisatorische Trennung:
+* **Keine Selbstprüfung:** Es reicht nicht aus, dass Testdaten mathematisch isoliert sind. Die Personen, die den finalen Validierungstest planen, durchführen und abnehmen (Validierungsingenieure / QA), müssen **organisatorisch unabhängig** von den Data Scientists sein, die das Modell entwickelt und trainiert haben.
+* **Blind Testing:** Die Entwickler dürfen die spezifischen Testdaten und Fehlerfälle des formalen Qualifizierungstests vorab nicht einsehen, um unbewusste Verzerrungen (*Confirmation Bias*) oder verdeckte Optimierungen auf das Test-Set auszuschließen.
+
+### 5. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
 Eine Validierung darf sich nicht auf „Schönwetter-Szenarien“ (*Sunny Day Testing*) beschränken:
 * **Fault Injection Testing:** Während der Performance Qualification (PQ) werden gezielt defekte Eingangsdaten, verfälschte Sensorwerte und Signalabbrüche simuliert.
 * **OOD-Erkennungslogik:** Das Modell muss nachweislich in der Lage sein, zu erkennen, wenn ein Datenpunkt außerhalb des spezifizierten *Intended Use* liegt (*Out-of-Distribution*).
 * **Graceful Degradation:** Statt im unbekannten Raum blind weiterzuraten, muss das System die Vorhersage sicher verweigern (*Safe State*) und die Kontrolle mit einer Alarmmeldung an den qualifizierten Menschen übergeben.
 
-### 5. Evidenz-Rückverfolgbarkeit (Drill-Down Capability)
+### 6. Evidenz-Rückverfolgbarkeit (Drill-Down Capability)
 Für Behördeninspektoren (EMA, FDA) ist die formale Struktur der Validierungsdokumentation entscheidend:
 * Ein Auditor muss in der Lage sein, ausgehend von einer Metrik im Executive Summary über die Konfusionsmatrix bis hin zu den **konkreten Rohdatenpunkten des Testsets** durchzudringen (*Drill-Down*).
 * Fehlt dieser lückenlose Nachweis oder basiert die Validierung auf undokumentierten Skripten, gilt der gesamte Validierungsnachweis als kontaminiert.
@@ -84,6 +89,7 @@ Für Behördeninspektoren (EMA, FDA) ist die formale Struktur der Validierungsdo
 ## 💡 Zentrale Fachbegriffe & Konzepte (Glossar)
 
 - **Statistical AI Validation:** Validierungskonzept, das Modelle über multivariate, statistische Testverfahren auf ungesehenen Daten qualifiziert, anstatt starre Einzelschritt-Skripte abzuarbeiten.
+- **Staff Independence (Personelle Unabhängigkeit):** Die organisatorische Trennung zwischen dem Entwicklerteam des Modells und den Testern, die den formalen Validierungs- und OQ/PQ-Test planen und bewerten.
 - **Recall (Sensitivität):** Anteil der tatsächlich fehlerhaften Einheiten, die das Modell korrekt als solche erkennt ($\frac{TP}{TP + FN}$).
 - **Precision (Genauigkeit der Positivmeldung):** Anteil der vom Modell als fehlerhaft gemeldeten Einheiten, die tatsächlich defekt sind ($\frac{TP}{TP + FP}$).
 - **Expected Calibration Error (ECE):** Statistisches Maß für die Differenz zwischen der vom Modell gemeldeten Vorhersagesicherheit (Konfidenz) und der tatsächlichen Fehlerhäufigkeit.
@@ -97,6 +103,7 @@ Für Behördeninspektoren (EMA, FDA) ist die formale Struktur der Validierungsdo
 ### Absolute Must-Haves:
 - [ ] Wurden quantitative Akzeptanzkriterien für das gesamte **Metric Quad** (F1, Recall, Precision, ECE) vor dem Testlauf verbindlich genehmigt?
 - [ ] Wurde das Modell ausschließlich auf einem echten, bisher **ungesehenen Hold-out Test Set** validiert?
+- [ ] Wurde die formale Validierung von **organisatorisch unabhängigem Personal (Staff Independence)** durchgeführt?
 - [ ] Wurde die OOD-Logik (*Out-of-Distribution Detection*) mit echten Grenzwert- und Stördaten qualifiziert?
 - [ ] Wurden Fault-Injection-Tests durchgeführt, um das sichere Übergabeverhalten (*Graceful Degradation*) an den Menschen zu beweisen?
 - [ ] Ist der Validierungsbericht lückenlos rückverfolgbar (vom KPI im Fließtext bis zur Rohdaten-Zeile des Testsets)?
