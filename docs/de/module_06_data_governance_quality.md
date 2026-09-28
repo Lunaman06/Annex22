@@ -49,9 +49,9 @@ Im klassischen Software-Engineering (Annex 11) diktiert der programmierte Code d
 
 | ALCOA+ Attribut | Klassische CSV-Bedeutung | Spezifische AI-Bedeutung ([Best Practice]) |
 | :--- | :--- | :--- |
-| **Complete (Vollständig)** | Dokumente ohne fehlende Seiten | **Keine unbegründete Selektion:** Verwerfen von Prozessausreißern, fehlerhaften Batches oder Randwerten ohne formale Dokumentation und Begründung ist unzulässig ([Draft §5.2 analog für Testdaten]). |
+| **Complete (Vollständig)** | Dokumente ohne fehlende Seiten | **Keine unbegründete Selektion:** Verwerfen von Prozessausreißern, fehlerhaften Batches oder Randwerten ohne formale Dokumentation und Begründung ist unzulässig ([Draft §5.5 analog für Testdaten]). |
 | **Consistent (Konsistent)** | Einheitliche Datums- & Namenskonventionen | **Metadaten-Harmonisierung:** Einheitliche Zeitstempel-Frequenzen, Messwertauflösungen und Einheiten über verschiedene Sensoren, Batches und Jahre hinweg. |
-| **Enduring (Dauerhaft)** | Revisionssichere Archivierung | **Lebenszyklus-Archivierung:** Entsprechend der Aufbewahrungsanforderung für Code und Dokumentation ([Draft §7.4]) müssen Datenkorpora über die Betriebslebensdauer des Systems plus produktbezogene Archivfristen aufbewahrt werden. |
+| **Enduring (Dauerhaft)** | Revisionssichere Archivierung | **Lebenszyklus-Archivierung ([Best Practice: GxP-Praxis]):** Entsprechend der Aufbewahrungsanforderung für Testdokumentation ähnlich anderer GMP-Dokumentation ([Draft §7.4]) müssen Datenkorpora über die Betriebslebensdauer des Systems plus produktbezogene Archivfristen aufbewahrt werden. |
 | **Available (Verfügbar)** | Einsichtnahme bei Inspektionen | **Auditierbare Verfügbarkeit:** Trainings- und Testdaten müssen für Inspektoren innerhalb angemessener Fristen vorlegbar und nachvollziehbar sein. |
 
 ### 3. Data Lineage & Die 4 statistischen Biases ([Didaktik])
@@ -67,19 +67,20 @@ Eine nachvollziehbare **Data Lineage** ist der Schlüssel, um statistische Biase
 4. **Operator Bias:** Daten stammen nur von wenigen Bedienern; andere Schichtabläufe führen zu Modellunsicherheiten.
 
 ### 4. Synthetische Daten & Labels ([Draft §5.6])
-- **Regulatorische Vorgabe ([Draft §5.6]):** Die Erzeugung synthetischer Daten oder synthetischer Labels (z. B. durch generative KI) zum Trainieren, Testen oder Evaluieren von KI-Modellen **wird nicht empfohlen** (*„is not recommended“*).
-- **Strikte Begründungspflicht ([Draft §5.6]):** Jede Verwendung synthetischer Daten muss vollumfänglich und belastbar begründet werden (*„Any use of synthetic data should be fully justified“*).
-- **GxP-Auswirkung:** Dies gilt für Trainingsdaten ebenso wie für Testdatensätze und automatisierte Ground-Truth-Labels. In der Validierung muss vorrangig auf reale, historisch oder experimentell belegte Produktionsdaten zurückgegriffen werden.
+- **Regulatorische Vorgabe ([Draft §5.6]):** Die Erzeugung von Testdaten oder Labels (z. B. durch generative KI) **wird nicht empfohlen** (*„Generation of test data or labels, e.g. by means of generative AI, is not recommended“*).
+- **Strikte Begründungspflicht ([Draft §5.6]):** Jede Verwendung hierfür erzeugter Testdaten oder Labels muss vollumfänglich und belastbar begründet werden (*„any use hereof should be fully justified“*).
+- **GxP-Auswirkung:** Der Draft beschränkt diese strikte Empfehlung explizit auf **Testdaten und Labels** (nicht generell auf Trainingsdaten, für die jedoch branchenübliche Begründungen und Bias-Analysen gelten [Best Practice]). In der Validierung muss für das finale Testen vorrangig auf reale, experimentell oder historisch belegte Produktionsdaten zurückgegriffen werden.
 
-### 5. Regulatorische Vorgaben für Testdaten ([Draft §5.1–§5.5, §3.2])
+### 5. Regulatorische Vorgaben für Testdaten ([Draft §5.1–§5.6, §3.2])
 Während der Draft keine detaillierten Vorgaben für Trainingsdaten formuliert, stellt er für **Testdatensätze** extrem strenge und präzise Anforderungen auf:
-* **Repräsentativität für den Betriebsraum ([Draft §5.1]):** Testdaten müssen repräsentativ für die beabsichtigten Betriebsbedingungen sein, einschließlich der normalen Arbeitsbereiche und der erwarteten Prozessvariabilität.
-* **Pflicht zu Edge Cases & Randfällen ([Draft §5.2]):** Testdaten müssen gezielt herausfordernde Proben, Randfälle (*Edge Cases*) und seltene Prozessbedingungen enthalten, um die Robustheit des Modells empirisch nachzuweisen.
-* **Kuration & Ausschlussgründe dokumentieren ([Draft §5.3]):** Die Auswahl und Zusammenstellung der Testdaten muss vollständig dokumentiert sein (inklusive Datenquellen, Kriterien für die Aufnahme und Begründung für ausgeschlossene Datenpunkte).
-* **Verifikation der Ground Truth durch Fach-SMEs ([Draft §5.4]):** Alle in den Testdaten genutzten Labels (*Ground Truth*) müssen von qualifizierten Domänenexperten (*Process Subject Matter Experts*) formell verifiziert und abgenommen sein.
-* **Verifikation der Datenqualitätsattribute ([Draft §5.5]):** Für den gesamten Testdatensatz müssen Richtigkeit, Vollständigkeit und Datenintegrität formal nachgewiesen werden.
+* **Auswahl & Repräsentativität ([Draft §5.1]):** Testdaten müssen repräsentativ für den gesamten Stichprobenraum (*full sample space*) des Intended Use sein und diesen erweitern. Sie müssen stratifiziert sein, alle Subgruppen einbinden und die Grenzen, die Komplexität sowie alle häufigen und seltenen Variationen innerhalb des Intended Use abbilden. Kriterien und Begründung für die Auswahl der Testdaten müssen dokumentiert werden.
+* **Ausreichende Datensatzgröße ([Draft §5.2]):** Der Testdatensatz und jede seiner Subgruppen müssen eine ausreichende Größe aufweisen (*sufficient in size*), um die definierten Testmetriken mit angemessener statistischer Konfidenz zu berechnen.
+* **Label-Verifikation mit hoher Korrektheit ([Draft §5.3]):** Die Kennzeichnung/Labeling der Testdaten muss nach einem Prozess verifiziert werden, der einen sehr hohen Grad an Korrektheit sicherstellt. Dies kann die unabhängige Verifikation durch mehrere Experten, validierte Messgeräte oder Labortests umfassen.
+* **Vorab festgelegte Vorverarbeitung ([Draft §5.4]):** Jede Vorverarbeitung der Testdaten (z. B. Transformation, Normalisierung oder Standardisierung) muss vorab festgelegt sein (*pre-specified*). Es muss begründet werden, dass sie die realen Bedingungen des Intended Use repräsentiert.
+* **Dokumentierte Bereinigung & Daten-Ausschluss ([Draft §5.5]):** Jede Bereinigung (*Cleaning*) oder jeder Ausschluss von Testdaten muss vollständig dokumentiert und stichhaltig begründet werden.
+* **Erzeugung von Testdaten oder Labels ([Draft §5.6]):** Die Erzeugung von Testdaten oder Labels (z. B. mittels generativer KI) wird nicht empfohlen und jede Nutzung muss vollumfänglich begründet werden.
 * **Relevante Subgruppen berücksichtigen ([Draft §3.2]):** Relevante Teilgruppen von Daten oder Populationen, für die das System vorgesehen ist, müssen im Intended Use identifiziert und in den Testdaten adäquat abgebildet sein.
-* **Testdaten-Isolation & Data Leakage:** Strikte Hold-Out-Isolation; Entwickler dürfen keine Testdaten für das Training oder Hyperparameter-Tuning einsehen ([Draft §6.1, §6.2]).
+* **Testdaten-Isolation & Data Leakage ([Draft §6.1, §6.2]):** Strikte Hold-Out-Isolation; Entwickler dürfen keine Testdaten für das Training oder Hyperparameter-Tuning einsehen.
 
 ### 6. Operational Data Governance & Feedback Loops
 Der Datenintegritätsfokus endet nicht mit dem Go-Live:
