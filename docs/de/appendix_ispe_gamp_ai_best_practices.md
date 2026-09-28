@@ -127,7 +127,7 @@ Einer der wichtigsten Kernsätze von GAMP 5 Second Edition lautet: **Validierung
 graph TD
     LV["🛡️ Living Validation (GAMP AI Guide)"] --> S1["1. Real-Time Dashboards<br/><i>(Laufende Überwachung von PSI, Drift-Metriken & Overrides)</i>"]
     LV --> S2["2. Gated Change Management<br/><i>(Kein Retraining ohne formale Revalidierung)</i>"]
-    LV --> S3["3. Periodic Review Audits<br/><i>(Halbjährlicher Abgleich mit der Validierungs-Baseline)</i>"]
+    LV --> S3["3. Periodic Review Audits<br/><i>(Risikobasierter Abgleich mit der Validierungs-Baseline)</i>"]
 
     style LV fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:2px

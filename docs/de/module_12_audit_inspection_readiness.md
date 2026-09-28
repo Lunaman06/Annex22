@@ -42,25 +42,26 @@ Für eine Annex-22-Inspektion kann man nicht zwei Wochen vor dem Termin hektisch
 * Wer versucht, Datenherkunft, Random Seeds, Bias-Analysen und Drift-Metriken erst kurz vor dem Audit zusammenzutragen, wird scheitern.
 * Echte Inspektionssicherheit basiert auf **gelebter täglicher Ingenieurs- und QMS-Disziplin** über den gesamten Lebenszyklus des Systems hinweg.
 
-### 2. Die Schweregrade von Mängeln (Severity Grading)
-* **Critical Finding (Kritischer Mangel):** Unmittelbares Risiko für Patientensicherheit oder Produktqualität (z.B. unkontrolliertes, dynamisch weiterlernendes Modell bei Chargenfreigabe). *Rechtsfolge:* Sofortiger Entzug bzw. Ruhen der Herstellungserlaubnis (*Suspension of Manufacturing Authorization*).
-* **Major Finding (Schwerwiegender Mangel):** Erhebliche Abweichung von GMP-Grundsätzen (z.B. Schatten-KI im Einsatz, Retraining ohne Revalidierungsbericht, fehlende Data Lineage). *Rechtsfolge:* Warning Letter; Frist von 15 bis 30 Tagen zur Vorlage eines Sanierungsplans.
-* **Minor Finding (Geringfügiger Mangel):** Einzelne formale Dokumentationsschwächen ohne direkten Einfluss auf Produktqualität; Abarbeitung über reguläres CAPA-System.
+### 2. Die Schweregrade von Mängeln im EU-GMP-Umfeld (Severity Grading)
+Im europäischen Inspektionswesen (*Compilation of Community Procedures on Inspections*) werden Mängel in drei offizielle Kategorien eingeteilt:
+* **Critical Deficiency (Kritischer Mangel):** Ein Mangel, der zu einem Arzneimittel geführt hat oder führen kann, das ein signifikantes Risiko für die Patientengesundheit darstellt, oder eine Kombination mehrerer schwerwiegender Mängel (z. B. unkontrolliertes, dynamisch online lernendes Modell in der finalen Chargenfreigabe). *Rechtsfolgen:* Ausstellung eines **Statement of Non-Compliance with GMP** (Art. 111(7) Richtlinie 2001/83/EG), Ruhen oder Entzug der Herstellungserlaubnis bzw. des GMP-Zertifikats sowie behördlich angeordnete Chargenrückrufe.
+* **Major Deficiency (Schwerwiegender Mangel):** Eine erhebliche Abweichung von den GMP-Leitlinien (z. B. Schatten-KI im Einsatz, Retraining ohne formales Change Control und Re-Qualifizierung, unzureichende Testdaten-Isolation). *Behördliche Maßnahme:* Verpflichtung zur Vorlage eines detaillierten Sanierungsplans (CAPA) innerhalb einer Frist von meist 15 bis 30 Tagen; bei FDA-Inspektionen ggf. Ausstellung eines US-spezifischen *Warning Letters*.
+* **Other Deficiency (Sonstiger Mangel – *nicht als 'Minor' bezeichnet*):** Eine Abweichung von GMP-Grundsätzen, die weder als kritisch noch als schwerwiegend eingestuft werden kann (z. B. vereinzelte redaktionelle Dokumentationsschwächen); Abarbeitung über das reguläre betriebliche CAPA-System.
 
-### 3. Die Dokumentationshierarchie (Die 3 Tiers)
+### 3. Die Dokumentationshierarchie (Die 3 Tiers) ([Didaktik])
 Behörden arbeiten sich strukturiert von der Makro- zur Mikroebene vor:
-* **Tier 1 (Organisatorische Vorgaben):** Übergreifende AI-Governance-Policy, Data-Ethics-Richtlinien, SOPs für Modellvalidierung und Change Control.
-* **Tier 2 (Systemspezifische Dokumente):** *Master AI Inventory*, Intended Use Specification (Systemgrenzen), User Requirements (URS), Validierungsplan und -bericht (mit *Metric Quad*), Model Cards.
-* **Tier 3 (Granulare technische Evidenz):** Trainingsdaten-Hashes, Code-Repositories (Git Commit), MLOps-Logs (MLflow), Random Seeds, Konfusionsmatrizen, Kalibrierungs-Plots und Inferenz-Audit-Trails.
+* **Tier 1 (Organisatorische Vorgaben):** Übergreifende AI-Governance-Policy, Data-Ethics-Richtlinien, SOPs für Modellqualifizierung und Change Control.
+* **Tier 2 (Systemspezifische Dokumente):** *Master AI Inventory*, Intended Use Specification (Systemgrenzen nach [Draft §3.1]), User Requirements (URS), Qualifizierungsplan und -bericht (mit Akzeptanzkriterien nach [Draft §4.2]), Model Cards.
+* **Tier 3 (Granulare technische Evidenz):** Trainings- und Testdaten-Hashes, Code-Repositories ([Draft §7.1, §7.4]), Konfigurations-Logs ([Draft §10.2]), Random Seeds, Konfusionsmatrizen und Inferenz-Audit-Trails.
 
-### 4. Das Master AI Inventory als erste Verteidigungslinie
-Die allererste Frage des Inspektors lautet ausnahmslos: **„Zeigen Sie mir Ihr vollständiges KI-Inventar.“**
-Jeder Eintrag muss zwingend enthalten:
+### 4. Das Master AI Inventory als QMS-Erwartung ([Best Practice: QMS-Standard])
+Die systematische Erfassung aller Algorithmen in einem zentralen **Master AI Inventory** ist eine elementare Erwartung an ein zeitgemäßes pharmazeutisches Qualitätsmanagementsystem (QMS):
+Jeder Eintrag sollte zwingend enthalten:
 1. Eindeutige System-ID und Versionsnummer
-2. Prägnante Zusammenfassung des *Intended Use*
+2. Prägnante Zusammenfassung des *Intended Use* ([Draft §3.1])
 3. Risikoklassifizierung (Kritikalität nach Annex 22 / Annex 11)
 4. Verantwortlicher Business & Technical Owner (QA / IT)
-5. Aktueller Validierungs- und Monitoring-Status
+5. Aktueller Qualifizierungs- und Monitoring-Status ([Draft §10.3, §10.4])
 
 > [!CAUTION]
 > **Praxisfall: Der Schatten-KI-Kollaps:** Ein Team startete ein Pilotprojekt zur automatischen Vor-Sortierung von Packungsbeilagen. Weil das Tool so hervorragend funktionierte, nutzte das Schichtpersonal es stillschweigend monatelang im Produktivbetrieb – ohne Wissen der QA. Während einer Routineinspektion erwähnte ein Operator das Tool beiläufig. Da das System nicht im *Master AI Inventory* gelistet war, konnten weder Validierungsdokumente noch Change-Control-Nachweise vorgelegt werden. Das Ergebnis: Ein *Major Finding* wegen Führungs- und Kontrollversagens (*Governance Failure*) und sofortiges Nutzungsverbot.
