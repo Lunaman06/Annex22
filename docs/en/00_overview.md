@@ -41,14 +41,20 @@ graph LR
 ```
 
 ### Regulatory Status & Legal Applicability:
-* **Current Status (as of 2026):** Annex 22 is currently a **Draft under final revision** by the *EMA GMDP Inspectors Working Group* and PIC/S. The public consultation closed in October 2025; formal adoption and enforcement are expected in **late 2026 / early 2027** (with a typical transition period).
-* **Factual Inspection Relevance Today:** Although not yet legally in force, regulatory authorities (EMA, FDA, national GMDP inspectors) already apply the draft’s core principles as the **"State of the Art"** benchmark during inspections under Annex 11.
+* **Current Status (as of 2026):** Annex 22 is currently a **Consultation Draft** issued by the European Commission, the EMA, and PIC/S. The public consultation closed on **October 7, 2025**. At the subsequent *EMA Multi-Stakeholder Workshop* (June 30 / July 1, 2026), stakeholder feedback and potential policy developments were discussed; re-evaluation of specific constraints (such as the exclusion of Generative AI from critical processes) is currently under review by inspectorate working groups, with no formal decision taken yet. Final publication and enforcement are expected in **late 2026 / early 2027**.
+* **Factual Inspection Relevance Today:** Although formally in draft stage, European GMDP inspectors already apply the draft's core principles as the current **"State of the Art"** benchmark during computerized systems inspections under Annex 11.
 * **The EudraLex Digital Package:** Annex 22 does not stand alone; it forms a modernized digital tripartite framework alongside the revisions to **Annex 11** (Computerised Systems) and **Chapter 4** (Documentation).
 
 ### The 3 Core Tenets:
-1. **Annex 22 Does Not Replace Annex 11:** Annex 11 remains the foundation (IQ/OQ, physical security, audit trails, disaster recovery). Annex 22 adds specific requirements for adaptive and learning algorithms.
-2. **Static Over Dynamic Models:** In critical GMP operations, only **static models (Frozen Weights)** are permitted. Continuously self-training or dynamic models are strictly prohibited for batch disposition and release decisions.
-3. **Human Over Machine (Human-in-the-Loop):** Legal and ethical accountability for product quality and patient safety rests solely with qualified personnel (e.g., the Qualified Person under EU Directive 2001/83/EC).
+1. **Annex 22 Supplements Annex 11 ([Draft §1]):** The draft explicitly positions itself as *additional guidance* to EU GMP Annex 11 (Computerised Systems). Annex 11 remains the foundation (IQ/OQ, physical controls, audit trails, cloud security). Annex 22 provides specific requirements for machine learning algorithms.
+2. **Scope: Static Models and Deterministic Output ([Draft §1]):** The draft strictly applies to static models and models with deterministic output supporting or executing critical processes in medicinal product manufacturing. Dynamic models (continuous online retraining) and models with probabilistic output are outside its scope and should not be used in critical GMP applications (*"should not be used"*).
+3. **Regulated User Accountability & Human Oversight ([Draft §2.2, §3.3, §10.5]):** The regulated user retains full responsibility for product quality, patient safety, and data integrity—including when models or components are provided by third-party suppliers ([Draft §2.2]). Human oversight is mandatory where model testing was reduced based on human decision-making ([Draft §3.3, §10.5]).
+
+### 🏷️ Project Labeling Convention (Attribution & Evidence Levels)
+To ensure rigorous distinction between statutory draft requirements and industry methodologies, this repository employs standardized labels:
+* **`[Draft §X.Y]`**: Specific regulatory requirement or statement directly derived from the official EU GMP Annex 22 Consultation Draft (July 2025).
+* **`[Best Practice: Source]`**: Industry-standard methods and established guidance with named provenance (e.g. `[Best Practice: ISPE GAMP AI Guide]`, `[Best Practice: ICH Q9 (R1)]`, or `[Best Practice: ML Practice]`).
+* **`[Didaktik]`**: Didactic frameworks, structural aids, case studies, and pedagogical metaphors (e.g. "the fence metaphor") created for this learning repository.
 
 ---
 
@@ -168,7 +174,7 @@ flowchart TD
 | # | Principle | Operational Significance for Projects |
 | :-: | :--- | :--- |
 | **1** | **No Black Box Without a Fence** | Every AI system requires an approved *Intended Use Specification* with explicit out-of-scope boundaries prior to development. |
-| **2** | **No Silent Online Learning** | Only static models with *Frozen Weights* may be deployed for critical GMP decision-making. |
+| **2** | **No Uncontrolled Retraining ([Draft §1])** | Dynamic models (continuous online retraining) and models with probabilistic outputs should not be used in critical GMP applications; critical operations are restricted to static models with frozen weights ([Draft §1]). |
 | **3** | **Treat Data Like Active Ingredients** | Training and testing data are subject to the same rigorous ALCOA+ standards as active pharmaceutical ingredients (APIs). |
 | **4** | **Enforce Active Human Challenge** | Human reviewers must independently assess events to eliminate complacency and *Automation Bias*. |
 | **5** | **Instrument Against Silent Drift** | Every AI system must feature statistical monitoring from Day 1 to detect performance degradation immediately. |
@@ -183,3 +189,23 @@ To close technical gaps and architect modern automated workflows, consult our tw
   *Architectural patterns against hallucinations, ALCOA+ citation discipline, RAG Triad metrics, prompt engineering under Change Control, and deterministic guardrails.*
 * 📘 **[Specialized Guide: ISPE GAMP® AI Guide & Industry Best Practices](appendix_ispe_gamp_ai_best_practices.md)**  
   *The dual lifecycle model, GAMP software categories for AI, QRM under ICH Q9 (R1), cloud supplier oversight, and continuous living validation.*
+
+---
+
+## 5. Primary Regulatory Sources & Reference Directory
+
+This learning repository is grounded in the following primary sources and reference frameworks:
+
+| Ref | Author / Document | Regulatory Significance & Citation |
+| :---: | :--- | :--- |
+| **Q1** | **European Commission / EMA / PIC/S:** [Draft Annex 22: Artificial Intelligence and Machine Learning in GxP Environments (July 2025)](https://health.ec.europa.eu/document/download/5f38a92d-bb8e-4264-8898-ea076e926db6_en?filename=mp_vol4_chap4_annex22_consultation_guideline_en.pdf) | **Binding Primary Source:** Official consultation draft (6 pages; public consultation ended October 7, 2025). |
+| **Q2** | **European Medicines Agency (EMA):** [GMP Multi-Stakeholder Workshop on AI Guidance Development (Annex 22)](https://www.ema.europa.eu/en/events/good-manufacturing-practice-multistakeholder-workshop-expert-contributions-artificial-intelligence-guidance-development-annex-22) | **Multi-Stakeholder Dialogue (June 30 / July 1, 2026):** Discussion of expert contributions; potential re-evaluations under review by inspectorate working groups (no formal policy decision yet). |
+| **Q3** | **European Union:** Regulation (EU) 2024/1689 (*EU AI Act*) | Horizontal EU law; the definition of "AI system" in Art. 3(1) Regulation 2024/1689 was adopted into the Annex 22 draft glossary. |
+| **Q4** | **European Commission:** EudraLex Vol. 4, *Annex 11: Computerised Systems* | Foundational baseline; Annex 22 explicitly serves as *additional guidance* ([Draft §1]). |
+| **Q5** | **European Commission:** EudraLex Vol. 4, *Chapter 4: Documentation* | Fundamental requirements for data integrity, version control, and auditable records within the EudraLex Digital Package. |
+| **Q6** | **European Union:** Directive 2001/83/EC (Community Code relating to medicinal products for human use) | Legal framework for marketing authorization holder accountability, batch certification by the Qualified Person (Art. 51), and enforcement non-compliance procedures (Art. 111(7)). |
+| **Q7** | **European Commission / EMA:** *Compilation of Community Procedures on Inspections* | Official EU deficiency categories during GMP inspections: *Critical*, *Major*, *Other Deficiency*. |
+| **Q8** | **ISPE:** *GAMP® 5: A Risk-Based Approach to Compliant GxP Computerized Systems (Second Edition, 2022)* | Global industry standard for risk-based computerized system qualification (Software Categories 1, 3, 4, 5). |
+| **Q9** | **ISPE:** *GAMP® Guide: Enabling Artificial Intelligence and Machine Learning in GxP Environments (July 2025)* | Established industry practice for dual lifecycles, living validation, and machine learning governance ([Best Practice: ISPE GAMP]). |
+| **Q10** | **US FDA:** *AI/ML-Based Software as a Medical Device Action Plan & AI in Drug Manufacturing* | Distinct US regulatory context; relevant for global operations, but not a statutory basis under EU Annex 22. |
+

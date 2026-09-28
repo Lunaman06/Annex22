@@ -52,11 +52,11 @@ graph LR
 ## 📌 Technical Summary (Key Takeaways)
 
 ### 1. Defining AI in GxP
-- **Annex 22 applies strictly to learning systems:** Statistical learning algorithms, pattern recognition, and generative architectures.
-- **Demarcation from Annex 11:** Traditional, purely rule-based or deterministic algorithms do **not** fall under Annex 22, even if vendors market them as "AI".
+- **Supplement to Annex 11 ([Draft §1]):** Annex 22 explicitly positions itself as *additional guidance* to EU GMP Annex 11 for systems supporting or executing critical steps in medicinal product manufacturing.
+- **Demarcation from Traditional Software:** Conventional, purely rule-based or deterministic algorithms remain strictly under Annex 11, even if software suppliers label them as "AI" for marketing purposes.
 - **Static vs. Dynamic Models:**
-  - **Static Models (Standard under Annex 22):** Model parameters (weights) are frozen post-validation (*Frozen Weights*). System behavior is deterministic and reproducible. Modifications require formal Change Control.
-  - **Dynamic / Continual Learning Models:** Adapt parameters in real-time during production. **Problem:** A continuously validated state cannot currently be guaranteed under GMP criteria; hence, they are prohibited for critical GMP batch disposition.
+  - **Static Models (Scope under [Draft §1]):** The draft strictly applies to static models and models with deterministic output. Model architecture and parameters are locked post-qualification (*"frozen weights"*; [Draft Glossary]). The system consistently produces the identical output for identical inputs. Any modification requires formal Change Control ([Draft §10.1]).
+  - **Dynamic / Continual Learning Models:** Continuously update their internal parameters in real-time operations. They are **not covered by the draft and should not be used in critical GMP applications** (*"should not be used"*, [Draft §1]), because a sustained validated state cannot currently be guaranteed under continuous autonomous self-modification.
 
 ### 2. Why Traditional CSV Fails for AI
 - **Classic CSV (Annex 11):** Behaves like an electronic calculator. Purely deterministic: *the same input always leads to the exact same output*. Point-in-time testing against user requirements is usually sufficient.
@@ -64,10 +64,11 @@ graph LR
 - **Data Bias:** Systematic skews in training corpora cause models to fail catastrophically on rare operational edge cases.
 - **Silent Drift:** Real-world process data gradually drifts from training distributions (*Data Drift*, *Concept Drift*). The model does not crash with an error code; it silently degrades in accuracy!
 
-### 3. Real-World Case Studies of Pharma AI Failures
-1. **Automated Visual Particle Inspection of Vials:** A novel foreign particulate type appeared on the packaging line that was absent from the training set. The model misclassified it as background reflection $\rightarrow$ Product recall and line shutdown.
-2. **NLP for Deviation Triage:** Systematically downgraded severe incidents because non-native operator jargon and abbreviations confounded model embeddings.
-3. **Predictive Maintenance on Bioreactors:** Undocumented sensor recalibration caused baseline drift $\rightarrow$ Model completely missed dual pH probe failures during live production batches.
+### 3. Illustrative Operational Scenarios for AI Failure Modes ([Didaktik])
+*The following pedagogical scenarios illustrate typical failure mechanisms in industrial practice (didactic case studies, unverified):*
+1. **Automated Visual Particle Inspection of Vials:** A novel foreign particulate type appeared on the packaging line that was absent from the training set. The model misclassified it as normal process fluctuation $\rightarrow$ Line shutdown and mandatory manual re-inspection.
+2. **NLP for Deviation Triage:** Systematically downgraded severe incidents because non-standard abbreviations and uncurated free-text confounded model embeddings.
+3. **Predictive Maintenance on Bioreactors:** Undocumented sensor replacement caused baseline drift $\rightarrow$ Model completely missed critical probe failures during live production batches.
 
 ---
 
@@ -98,7 +99,8 @@ graph TD
 
 - **Computer System Validation (CSV):** The traditional, deterministic GAMP/Annex 11 validation framework verifying software against fixed functional specifications.
 - **Emergent Behavior:** Functionality that arises statistically from training datasets rather than explicit programmatic rules.
-- **Frozen Weights:** Model parameters locked after training to ensure reproducibility in GMP operations.
+- **Static Model:** A model with permanently locked parameters post-qualification ([Draft Glossary]). Consistently delivers identical outputs for identical inputs.
+- **Dynamic Model:** A model that adapts parameters continuously in real-time operations. Excluded from the scope of the draft; should not be used in critical GMP applications ([Draft §1]).
 - **Silent Drift:** The undetected degradation of prediction quality over time caused by environmental or sensor changes.
 - **Human-in-the-Loop (HITL):** Operating model requiring human review and approval before an AI recommendation becomes legally binding.
 - **Qualified Person (QP):** Legally certified individual under EU Directive 2001/83/EC holding ultimate responsibility for batch certification and release.

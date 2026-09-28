@@ -38,9 +38,9 @@ graph LR
 
     subgraph BlackBox["⚫ Black-Box Models"]
         direction TB
-        B1["Deep Neural Networks, LLMs"]
+        B1["Deep Neural Networks, Complex Ensembles"]
         B2["Opaque: SHAP, LIME, Attention Maps"]
-        B3["Quadrupled validation effort (4x)"]
+        B3["Significantly higher qualification overhead"]
     end
 
     WhiteBox -->|Increasing model complexity & explainability demand| GrayBox
@@ -55,19 +55,19 @@ graph LR
 
 ## 📌 Technical Summary (Key Takeaways)
 
-### 1. The Proportionality Principle: Explainability Proportionate to Criticality
-Under Annex 22: **The higher the risk to product quality and patient safety, the more transparent, understandable, and verifiable the algorithmic decision must be.**
-* When an AI system recommends rejecting or releasing a medicinal batch, health authorities and the Qualified Person (QP) have a statutory right to understand the underlying causality.
-* Explanations must be communicated in the **domain language of subject matter experts** (QA, laboratory technicians, QP)—raw statistical weight matrices or tensor embeddings do not meet compliance standards.
+### 1. Explainability During Testing & Plausibility Review ([Draft §8.1, §8.2])
+Draft EU GMP Annex 22 anchors explainability primarily as a **mandatory discipline during model testing and qualification**:
+* **Explainability Methods During Testing ([Draft §8.1]):** If a model is not inherently explainable, methods to enhance explainability (e.g. feature attribution techniques such as SHAP or LIME, surrogate models, or local explanations) must be used during testing to make the model's decision-making process comprehensible.
+* **Review of Features at Test Acceptance ([Draft §8.2]):** Formal acceptance of test results must include an explicit review of the features utilized by the model to verify that they are biologically, chemically, or physically plausible and relevant to the *Intended Use*.
+* **Routine Operational Explanations ([Best Practice: ML Practice]):** Displaying SHAP values or heatmaps on every live production inference is a valuable industry best practice ([Best Practice]), though the draft itself centers requirements on testing and qualification sign-off.
 
 ### 2. Conceptual Clarification: Interpretability vs. Explainability
-* **Interpretability (Global):** The inherent human comprehensibility of the entire model architecture and parameter logic (e.g., a shallow decision tree with 5 discrete routing rules).
-* **Explainability (Local / Post-hoc):** The ability to provide an intelligible explanation for a **specific individual decision** (e.g., deviation report DEV-2026-081), identifying exactly which input features tipped the prediction.
+* **Interpretability (Global):** The inherent human comprehensibility of the entire model architecture and parameter logic (e.g., a shallow decision tree or linear regression model).
+* **Explainability (Local / Post-hoc):** The ability to provide an intelligible explanation for a specific individual decision (e.g., an anomaly alert or batch deviation classification), identifying which input features drove that prediction.
 
-### 3. The Model Spectrum and Regulatory Incentives
-Annex 22 does not prohibit complex deep neural networks or transformers, but it establishes substantial regulatory and economic hurdles:
-* **White-Box (Inherently Transparent):** For high-criticality applications (e.g., in-process batch release controls), white-box architectures (e.g., logistic regression, shallow decision trees) are almost always preferred because their mathematical logic can be verified directly during inspections.
-* **The "Black-Box Penalty":** Employing opaque models can **quadruple** validation timelines and costs, because both the underlying model and the secondary explanation pipeline itself must be fully qualified and defended.
+### 3. Model Complexity & Regulatory Implications
+* **Inherently Explainable Models ([Draft §8.1]):** Where simple, transparent models achieve comparable performance to complex black-box architectures, they significantly streamline qualification and audit defense ([Best Practice: ML Practice]).
+* **Black-Box Qualification Overhead:** Deploying deep neural networks requires additional formal evidence under [Draft §8.1, §8.2] regarding feature plausibility and the validation of post-hoc explanatory methods.
 
 ### 4. Post-Hoc Explanation Methods & GxP Pitfalls
 When complex architectures are indispensable, Annex 22 relies on post-hoc methods:
@@ -79,7 +79,7 @@ When complex architectures are indispensable, Annex 22 relies on post-hoc method
 * **Attention Heatmaps (NLP/LLMs):** Highlight which tokens received focus. Critical caveat: *Attention is not causality*—it shows associative focus, not necessarily mechanistic cause.
 
 > [!CAUTION]
-> **Industry Case Study:** A pharmaceutical manufacturer deployed global feature importance for predictive maintenance. After automated retraining runs, the top contributing features shifted erratically (e.g., pressure on Monday, temperature on Tuesday for identical mechanical wear). Operators refused to use the tool due to perceived arbitrariness. The system had to be rebuilt using stabilized permutation importance and completely revalidated.
+> **Illustrative Operational Scenario (didactic case study, unverified):** A pharmaceutical manufacturer deployed global feature importance for predictive maintenance. After automated retraining runs, the top contributing features shifted erratically (e.g., pressure on Monday, temperature on Tuesday for identical mechanical wear). Operators refused to use the tool due to perceived arbitrariness. The system had to be rebuilt using stabilized permutation importance and completely re-qualified.
 
 ### 5. Audience-Centric Explanations (Cognitive Load Management)
 Explanations must be structured across three distinct user personas:

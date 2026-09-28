@@ -60,38 +60,39 @@ flowchart TD
 ### 2. The 5-Stage Decision Funnel
 Every software component and algorithm must pass through five rigorous qualification gates:
 1. **Is it Truly AI/ML?** Only models employing statistical learning, pattern recognition, or generative synthesis fall under Annex 22. Deterministic, rule-based systems remain exclusively under **Annex 11**.
-2. **Is There a GxP Impact?** Evaluates both direct process steps (e.g., batch release, in-process testing) and **indirect dependencies** (e.g., AI shift scheduling for cleanroom staff, AI training tracking for operator qualification).
-3. **Assign Risk Tier:** Categorization into Unacceptable, High, Moderate, or Low Risk.
-4. **Evaluate Model Architecture:** Is the model static (*Frozen Weights*) or dynamic (*Online Continuous Learning*)?
-5. **Document & Register:** Entry into the legally binding *Master AI Inventory* with cross-functional sign-off.
+2. **Is There a GMP Impact?** Does it affect critical processes in medicinal product manufacturing with direct or indirect impact on patient safety, product quality, or data integrity ([Draft §1])?
+3. **Assign Risk Tier ([Didaktik]):** Classification within the 4-tier risk framework (Not Covered by Draft, High, Moderate, Low).
+4. **Evaluate Model Architecture:** Is the model static with deterministic output ([Draft §1, Glossary]) or dynamic/probabilistic?
+5. **Document & Register:** Entry into the mandatory *AI Inventory* with written scoping rationale.
 
-### 3. The 4 Risk Tiers Under Annex 22
+### 3. Didactic Risk Grid for AI Systems ([Didaktik])
+
+> *Classification Note:* The draft fundamentally distinguishes between critical GMP processes (scope of application for static models) and excluded systems (§1). The following 4-tier classification is an established industry model ([Didaktik] adapted from EU AI Act / GAMP principles):
 
 | Risk Tier | Definition & Operational Examples | Regulatory Consequences |
 | :--- | :--- | :--- |
-| **Unacceptable** | Continuously self-training online models making autonomous release decisions. | **Strictly prohibited** under Annex 22. Not permitted in GMP. |
-| **High Risk** | Static AI controlling PAT measurements, impacting Critical Quality Attributes (CQAs), or performing automated defect sorting. | Comprehensive validation, adversarial testing, continuous drift monitoring, 100% HITL oversight. |
-| **Moderate Risk** | AI acting as decision support (*Advisory / Triage*), e.g., deviation classification or trend analysis. | Streamlined test suites, mandatory human verification before actions take effect. |
-| **Low Risk** | Administrative back-office systems with zero influence on product quality, patient safety, or data integrity. | Standard corporate IT quality procedures are sufficient. |
+| **Not Covered by Draft** | Continuously self-training online models or probabilistic outputs in critical processes. | Should not be used in critical GMP applications (*"should not be used"*, [Draft §1]). |
+| **High Risk** | Static AI in critical GMP processes (PAT control, CQA impact, automated release/sorting). | Comprehensive qualification, worst-case testing, continuous monitoring ([Draft §1, §4, §10]). |
+| **Moderate Risk** | AI acting as assistive decision support (*Decision Support*), e.g. deviation triage. | Risk-proportionate qualification, defined operator responsibility in Intended Use ([Draft §3.3]). |
+| **Low Risk** | Administrative applications with zero impact on product quality, patient safety, or data integrity. | Excluded from the scope of the draft ([Draft §1]); standard corporate IT controls are sufficient. |
 
-### 4. Critical Boundary Cases from Practice
+### 4. Three Critical Boundary Cases from Practice
 
 #### Case 1: Deep Learning Visual Inspection of Vials
 - *Scenario:* AI autonomously sorts glass vials into "Pass" and "Defective". Only borderline cases are escalated to human operators.
 - *Common Fallacy:* The company classified the system as "Moderate Risk" because humans review border cases.
-- *Annex 22 Reality:* **High Risk!** The autonomous pass/fail disposition of 95%+ of units dictates criticality. Partial human fallback does not reduce system risk. Mandatory: Continuous drift monitoring and calibrated OOD safeguards.
+- *Annex 22 Reality:* **Critical Process!** Autonomous defect sorting directly impacts product quality. Partial human checking of edge cases does not eliminate system criticality. Mandatory: Full model qualification, continuous drift monitoring, and validated fallback to manual inspection ([Draft §1, §4.3, §10.3]).
 
-#### Case 2: Special Status of Generative AI (GenAI & LLMs)
-- *Regulatory Baseline:* In the **Draft Annex 22**, generative models and LLMs are explicitly excluded from autonomous GMP decisions due to stochastic variability and the hazard of **hallucinations** (plausible-sounding fabricated statements).
-- *Permitted GxP Envelope:* LLMs are permitted under strict controls as **assistive tools ("Drafting Assistants")** (e.g., synthesizing initial drafts for deviation summaries from raw LIMS data).
-- *Architectural Mandate:* Direct open-ended prompting is non-compliant. Systems must utilize a **RAG Architecture (Retrieval-Augmented Generation)** restricted to approved company SOPs with mandatory ALCOA+ citations.
-- *Detailed Guide:* Full implementation patterns (RAG Triad metrics, Prompt Governance, Guardrails) are detailed in:  
-  ➔ **[Specialized Guide: Generative AI (GenAI), LLMs & RAG in GxP](appendix_genai_rag_gxp.md)**
+#### Case 2: Status of Generative AI (GenAI & LLMs)
+- *Regulatory Baseline:* Under [Draft §1], the guideline is **not applicable to generative AI / Large Language Models (LLMs) in critical processes**. Generative AI in non-critical applications requires qualified human oversight (*Human Oversight*, [Draft §1]) due to stochastic variability and hallucination risks.
+- *Workshop Status:* At the EMA Multi-Stakeholder Workshop (June 30 / July 1, 2026), industry feedback was discussed; potential re-evaluations remain under active technical examination with no formal decision adopted yet.
+- *Permitted Operational Corridor in Practice ([Didaktik]):* LLMs are utilized in pharmaceutical practice as assistive tools (*"Drafting Assistants"*, e.g. drafting initial deviation narratives), provided every output is independently verified and signed off by qualified personnel.
+- *Architectural Best Practice ([Best Practice: ML Practice]):* RAG Architecture (Retrieval-Augmented Generation) restricting outputs to approved SOPs with audit-trailed ALCOA+ citations. Details see ➔ **[Specialized Guide: Generative AI (GenAI), LLMs & RAG in GxP](appendix_genai_rag_gxp.md)**.
 
 #### Case 3: Third-Party Cloud SaaS AI (API Black-Box)
-- *Core Principle:* **"You cannot outsource your GMP accountability."**
+- *Core Principle under [Draft §2.2]:* The regulated pharmaceutical user retains ultimate accountability for product quality, patient safety, and data integrity—even when AI systems or components are procured from external suppliers (*Suppliers*).
 - *The Hazard:* If a cloud vendor updates underlying model weights or runtime libraries unannounced, the pharmaceutical manufacturer operates an unvalidated system (*Uncontrolled Environment Drift*).
-- *Solution:* Cloud AI must be governed by binding *Quality Agreements* and SLAs prohibiting silent updates. Critical GxP calculations must have internal verification checkpoints. See also ➔ **[ISPE GAMP AI Guide & Industry Best Practices](appendix_ispe_gamp_ai_best_practices.md)**.
+- *Solution:* Cloud AI requires binding *Quality Agreements* and SLAs prohibiting unannounced model modifications ([Draft §2.2, §10.2]). Critical GxP calculations must have internal verification checkpoints. See also ➔ **[ISPE GAMP AI Guide & Industry Best Practices](appendix_ispe_gamp_ai_best_practices.md)**.
 
 ### 5. Mandatory Elements of the Master AI Inventory
 The central inventory required by auditors must document for every system:

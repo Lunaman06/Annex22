@@ -59,28 +59,44 @@ Annex 22 therefore mandates four complementary metric dimensions:
 2. **Recall (Sensitivity) vs. Precision:**
    - **Asymmetric Error Costs:** In pharmaceutical manufacturing, a *False Negative* (releasing a contaminated or defective batch as "Good") poses a direct threat to patient life. A *False Positive* (flagging a good unit as suspicious) merely incurs extra manual inspection time.
    - **Pharma Rule:** Decision thresholds must be tuned with primary emphasis on **maximizing Recall** to guarantee the detection of safety incidents.
-3. **Model Calibration (Expected Calibration Error - ECE):**
+3. **Model Calibration (Expected Calibration Error - ECE, [Best Practice]):**
    - Assesses whether the model's output confidence score accurately mirrors its empirical probability of correctness.
-   - *Risk:* An uncalibrated model that outputs 99% confidence when wrong lulls human operators into false trust (*Automation Bias*), provoking uncritical sign-offs.
+   - An uncalibrated model that outputs 99% confidence when wrong lulls human operators into false trust (*Automation Bias*).
 4. **Robustness:**
    - Evaluates system stability when sensor signals are noisy, measurements drop out, or environmental variables fluctuate within operating ranges.
 
-### 3. Pre-Sealing of Acceptance Criteria
-* **No Moving Goalposts:** Quantitative acceptance criteria (*e.g., Recall $\ge 99.5\%$, Precision $\ge 90\%$, ECE $\le 0.05$*) must be **formally approved and sealed in the Validation Plan prior to running tests on the test dataset**.
-* Post-hoc adjustment or loosening of acceptance criteria after viewing test performance represents a severe GMP violation.
+### 3. Acceptance Criteria & No Decrease in Performance ([Draft §4.2, §4.3])
+* **Pre-Approval by Process SMEs ([Draft §4.2]):** All acceptance criteria must be predefined and formally approved by qualified domain experts (*Process SMEs*) **prior to commencing acceptance testing**. Modifying or lowering criteria post-test after viewing results is unacceptable.
+* **No Performance Decrease ([Draft §4.3]):** The performance of the AI system **should result in no decrease in performance compared to the process it replaces** ([Draft §4.3]).
+* **Error Compensation ([Draft §4.3]):** If the AI system introduces higher error rates in certain areas than the previous process, this must be compensated for by superior performance in other areas, and overall performance must not decrease.
 
-### 4. Staff Independence & Blind Testing
-A vital requirement emphasized in the **PIC/S and Annex 22 draft guidance** is strict organizational separation:
-* **No Self-Auditing:** Mathematical data isolation is not enough. Personnel designing, conducting, and approving formal qualification tests (Validation Engineers / QA) must be **organizationally independent** from the data scientists who developed and trained the model.
-* **Blind Testing:** Developers must not have pre-test visibility into the specific test dataset or curated edge-case collections, preventing subconscious confirmation bias or intentional hyperparameter tuning on the test set.
+### 4. Staff Independence & Test Data Safeguards ([Draft §6.1–§6.5])
+Safeguarding test data against contamination or subconscious overfitting is a primary regulatory inspection focus:
+* **Independent Test Data ([Draft §6.1]):** System testing must be conducted with data that are completely independent of training and tuning data.
+* **No Developer Access to Test Data ([Draft §6.2]):** Personnel involved in the development and training of the AI model **must not have had access to the test data**.
+* **Access Controls, Audit Trails & No Data Copies ([Draft §6.2]):** Test datasets must be protected by technical and procedural access controls and audit trails. **No copies of test data may exist outside the secure repository**.
+* **Logging Test Data Usage ([Draft §6.3]):** Complete records must be kept indicating which test data were used, when testing took place, and the number of times test data were accessed.
+* **Prohibition of Reuse Without Risk Assessment ([Draft §6.4]):** Test datasets must not be reused for repeated testing iterations without documented justification and risk assessment to prevent unseen overfitting to the test partition.
+* **Staff Exclusion & Four-Eyes Principle ([Draft §6.5]):** Organizational measures must ensure that personnel who had access to test data do not subsequently participate in model training or validation.
+  - *Exception for Small Organizations ([Draft §6.5]):* Where strict organizational separation is not feasible due to enterprise size, a **Four-Eyes Principle** by an independent secondary reviewer must be applied. Full organizational separation between distinct teams represents the recommended industry standard ([Best Practice: ISPE GAMP]).
 
-### 5. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
+### 5. Software Code, Repositories & Lifecycle Retention ([Draft §7.1–§7.4])
+* **Version Control in Secure Repositories ([Draft §7.1]):** All software code utilized for training, testing, and operational inference must be maintained under version control in a secure repository.
+* **Traceability to Requirements ([Draft §7.2]):** Code must be documented, independently reviewable, and fully traceable to underlying requirements.
+* **Supplier & Library Risk Evaluation ([Draft §7.3]):** Third-party libraries, frameworks, and open-source dependencies must be formally identified, documented, and evaluated based on risk.
+* **Retention Duration ([Draft §7.4]):** Code, repositories, and documentation must be retained throughout the entire operational lifetime of the system.
+
+### 6. Staff Qualification, Limitations & Overrides ([Draft §9.1, §9.2])
+* **Understanding Limitations & Biases ([Draft §9.1]):** Personnel interacting with the AI system must possess appropriate qualification and training, including a thorough understanding of the model's inherent limitations and potential statistical biases.
+* **Training in System Overrides (*Override Training*, [Draft §9.2]):** Training programs must explicitly instruct operators on how and when to critically challenge system outputs and formally override them when necessary.
+
+### 7. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
 Validation must never be confined to "sunny-day" scenarios:
 * **Fault Injection Testing:** During Performance Qualification (PQ), corrupted input records, sensor noise, and signal dropouts are deliberately introduced.
 * **OOD Detection Logic:** The system must provably detect when an input vector falls outside its validated *Intended Use* domain (*Out-of-Distribution*).
-* **Graceful Degradation:** Instead of hallucinating or making unfounded predictions in unknown territory, the model must safely refuse prediction (*Safe State*) and escalate control to qualified human personnel with an auditable alert.
+* **Graceful Degradation:** Instead of making unfounded predictions in unknown territory, the model must safely refuse prediction (*Safe State*) and escalate control to qualified human personnel with an auditable alert.
 
-### 6. Evidence Traceability & Drill-Down Capability
+### 8. Evidence Traceability & Drill-Down Capability
 For health authority inspectors (EMA, FDA), structural traceability in validation documentation is paramount:
 * Auditors must be able to drill down seamlessly from executive KPI summaries in the validation report, through the confusion matrix, to the **exact raw data records in the hold-out test set**.
 * Without end-to-end provenance or if validation relies on undocumented ad-hoc scripts, the entire qualification claim is deemed compromised.

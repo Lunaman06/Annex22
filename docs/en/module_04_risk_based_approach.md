@@ -58,35 +58,46 @@ graph TD
 
 ## 📌 Technical Summary (Key Takeaways)
 
-### 1. The Proportionality Mandate
-- **The Pitfall of Flat Governance:** Attempting to validate a low-risk administrative assistant with the same bureaucratic overhead as a critical batch release model represents meaningless *Compliance Theater*.
-- **Resource Allocation:** Validation and QA engineering bandwidth is finite. Annex 22 explicitly demands that validation rigor, testing volume, and oversight intensity **scale proportionally with risk to patient safety, product quality, and data integrity**.
+### 1. The Proportionality Mandate ([Draft §2.3])
+- **Regulatory Requirement ([Draft §2.3]):** The extent of control measures, qualification, and validation must always be proportionate to the risk posed by the AI system to product quality, data integrity, and patient safety.
+- **Resource Allocation:** Validation and QA engineering bandwidth is finite. Attempting to validate low-risk assistive tools with the same bureaucratic overhead as primary release systems represents inefficient *Compliance Theater*. Control intensity must scale in a risk-based manner.
 
 ### 2. How AI Fails: Silent Degradation Instead of System Crashes
 - **Traditional Software:** Exhibits binary failure modes – the program crashes, raises an unhandled exception, or freezes execution.
 - **AI Systems:** Experience **Silent Degradation**. The algorithm does not crash; it continues to emit predictions smoothly, often accompanied by deceptively high mathematical confidence scores (*Confidence Miscalibration*).
 
 ### 3. The 5 AI-Specific Failure Modes for GxP Risk Assessments
-Standard IT risk templates fail under Annex 22 scrutiny. Inspectors expect explicit FMEA evaluations for:
+Standard IT risk templates fail under Annex 22 scrutiny. Inspectors expect explicit evaluations for:
 1. **Systematic Bias:** Training data fail to capture genuine operational variability, systematically skewing predictions.
 2. **Distribution Shift:** Environmental changes cause live input distributions to drift away from training parameters (*Data & Concept Drift*).
 3. **Adversarial & Edge Cases:** Rare, extreme, or unexpected physical inputs trigger irrational outputs.
 4. **Confidence Miscalibration:** The model outputs a 99% probability on an erroneous prediction, deceiving human operators into false trust.
 5. **Spurious Correlations:** The algorithm learns irrelevant background artifacts (e.g., classifying tablet defects based on background conveyor markings rather than actual surface cracks).
 
-### 4. Advanced Risk Dimensions: Reversibility & Cumulative Impact
-Beyond severity and probability, Annex 22 introduces two critical evaluative factors:
-* **Reversibility of Decision:**
-  - *Reversible:* AI flags an intermediate sample for manual re-testing. If wrong, the sample is simply re-analyzed.
-  - *Irreversible:* AI authorizes the injection of a sterile vial or releases an API batch into commercial distribution. Errors directly harm patients. Irreversible decisions demand the highest validation rigor.
-* **Cumulative Impact:**
-  - A tiny statistical error of 0.2% might seem negligible for single events, but across 10 million manufactured doses per year, it represents thousands of defective units reaching patients.
+### 4. Patient Impact, Reversibility & Cumulative Impact ([Didaktik])
+*This structured evaluation framework provides didactic guidance for Quality Risk Management under ICH Q9 (R1) ([Didaktik]):*
+* **Direct Patient Impact:** Release of out-of-specification drug products (highest criticality).
+* **Cumulative Impact ([Didaktik]):** A tiny residual error rate in an individual automated decision compounds across thousands of decisions per day into an unacceptable overall patient hazard.
+* **Reversibility as an Operational Lever ([Didaktik]):**
+  - *In-Process:* An error in upstream processing that can be reliably intercepted and corrected by downstream controls permits leaner control mechanisms.
+  - *Batch Release:* Erroneous commercial batch disposition is practically **irreversible** once the batch is distributed.
+* **Out-of-Distribution (OOD) Detection ([Best Practice: ML Practice]):** An integrated safety safeguard where the AI system identifies unknown data points: *"I have not seen this distribution—refusing automated decision and escalating to human supervisor."*
 
-### 5. Architectural Control: HITL vs. HOTL vs. HOOL
-Annex 22 links risk tiers directly to required human involvement:
-* **Human-in-the-Loop (HITL):** Mandatory for high-risk operations. A human must evaluate and confirm every single prediction before downstream execution.
-* **Human-on-the-Loop (HOTL):** Permitted for moderate-risk closed-loop optimization (e.g., continuous bioreactor tuning), provided hard, validated physical guardrails prevent out-of-specification excursions and allow immediate human override.
-* **Human-out-of-the-Loop (HOOL):** Strictly prohibited for critical GMP batch disposition.
+### 5. Scaling Human Oversight: HITL vs. HOTL ([Didaktik])
+
+> *Draft Wording Note:* The draft does not mandate a blanket HITL requirement for qualified models (interpretation of §1, §3.3, §10.5; confidence: Medium). However, if model testing rigor was reduced because a human makes the final decision, operator responsibility must be explicitly anchored in the Intended Use, and operator training and performance must be monitored like manual processes ([Draft §3.3]). Under [Draft §10.5], review records must be maintained; depending on criticality and test depth, this may require reviewing each individual output. Categorization into HITL/HOTL/HOOL is a didactic industry framework ([Didaktik]):
+
+| Dimension | High-Risk System (Fully Qualified vs. Operator-Assisted) | Moderate-Risk System |
+| :--- | :--- | :--- |
+| **Validation** | Comprehensive adversarial stress testing, edge-case coverage, strict acceptance criteria ([Draft §4, §8]) | Representative test sets, focus on primary operational scenarios |
+| **Monitoring** | Continuous monitoring of performance and input distributions ([Draft §10.3, §10.4]) | Risk-based review at defined periodic intervals |
+| **Human Oversight ([Didaktik])** | **Human-in-the-Loop (HITL):** Mandatory review of every output where model test rigor was reduced ([Draft §3.3, §10.5]). For fully qualified automations (e.g. vial sorting), statistical supervisory oversight and audit sampling. | **Human-on-the-Loop (HOTL):** Human monitors aggregated trends and intervenes upon alarms or anomalies. |
+
+### 6. Lessons from Illustrative Operational Scenarios ([Didaktik])
+*The following scenarios illustrate typical risks in day-to-day operations (didactic case studies, unverified):*
+- **Bioreactor pH Control (Operational Atrophy):** The manual fallback procedure existed only on paper for years. During a QA audit, operators admitted they had forgotten how to manually tune the vessel! **Remediation:** Mandatory routine fallback drills.
+- **Deviation Triage (Cascading Bias):** Erroneous AI initial triage cascades down into misdirected root-cause investigations and ineffective CAPAs across the entire quality organization.
+- **GenAI for Reporting (Cognitive Anchoring):** Eloquently drafted AI text tempts reviewers into uncritical acceptance of generated narratives. **Remediation:** Automated audit tracking of reviewer revisions and overrides.
 
 ---
 
@@ -105,14 +116,14 @@ Annex 22 links risk tiers directly to required human involvement:
 ### Absolute Must-Haves:
 - [ ] Does the risk assessment specifically evaluate the **5 AI Failure Modes** (Bias, Drift, Edge Cases, Miscalibration, Spurious Correlation)?
 - [ ] Is high validation intensity strictly concentrated on **irreversible and high-risk decisions**?
-- [ ] Are autonomous high-risk functions gated by mandatory **Human-in-the-Loop (HITL)** controls?
+- [ ] Is operator responsibility defined in the Intended Use if testing rigor was reduced ([Draft §3.3])?
 - [ ] Does the FMEA account for cumulative long-term error exposure across annual production volumes?
 - [ ] Are automated Out-of-Distribution (OOD) safeguards validated to prevent predictions on unknown operational data?
 
 ### Red Flags for Inspectors:
 - ❌ Standard IT software FMEAs used without AI-specific failure modes.
 - ❌ All AI systems in the company treated with identical, generic validation protocols (*Flat Governance*).
-- ❌ An irreversible batch release decision relying on autonomous AI without human sign-off.
+- ❌ Reduced model testing without formally designated operator responsibility in Intended Use ([Draft §3.3]).
 - ❌ Teams unable to demonstrate how they detect and mitigate *Confidence Miscalibration*.
 
 ---

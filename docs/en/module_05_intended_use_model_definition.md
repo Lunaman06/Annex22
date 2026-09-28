@@ -60,41 +60,40 @@ graph TD
 
 ## 📌 Technical Summary (Key Takeaways)
 
-### 1. The Contractual Heart of AI Compliance
-- **Not a Marketing Narrative:** The *Intended Use* is not a generic project vision; it is a **binding regulatory commitment** to health authorities.
-- **The Fence Metaphor:** The *Intended Use* erects an impassable fence:
-  - *Inside the Fence:* The validated, qualified, authority-approved operational envelope.
-  - *Outside the Fence:* The unvalidated wilderness where the algorithm must never execute autonomous judgments.
-- **Audit Impact:** The very first document an inspector requests is this specification. All downstream test plans, acceptance criteria, and monitoring thresholds depend directly upon it.
+### 1. The Regulatory Cornerstone: Intended Use & SME Ownership ([Draft §3.1])
+- **Regulatory Requirement ([Draft §3.1]):** The intended use of the AI system must be clearly defined and formally documented.
+- **Active Involvement of Process SMEs ([Draft §3.1]):** Qualified process and business domain experts (*Process Subject Matter Experts - SMEs*) must be actively engaged in defining the intended use. Definition must not be delegated exclusively to IT or Data Science.
+- **The Fence Metaphor ([Didaktik]):** The *Intended Use* erects a tightly defined boundary fence:
+  - *Inside the Fence:* The qualified, validated, authority-approved operational envelope.
+  - *Outside the Fence:* Unqualified wilderness where the algorithm must never execute autonomous judgments.
+- **Audit Impact:** The *Intended Use* is the foundational document inspected during an audit; all subsequent pre-approved acceptance criteria ([Draft §4.2]) derive directly from it.
 
-### 2. Anatomy of an Audit-Proof Intended Use Specification
-Vague language is fatal during inspections. An Annex 22 compliant specification must unambiguously detail six core dimensions:
-1. **Target Operational Process:** Specific manufacturing line, batch step, or QC assay.
-2. **Specific Model Objective:** Explicit classification, regression, or advisory task.
-3. **Exact Scope of Application:** Permitted active substances, container closure systems, dosage forms, and operating sites.
-4. **Target User Population:** Qualified operator role (e.g., Senior QA Reviewer, Qualified Person).
-5. **Operational Prerequisites:** Cleanroom environmental baselines, sensor calibration tolerances, upstream data quality.
-6. **Explicit Exclusions (*Out-of-Scope*):** Conditions where the model is strictly forbidden to predict (e.g., initial start-up line flushing, unvalidated secondary packaging).
+### 2. Anatomy of a Comprehensive Intended Use Specification
+A rigorous specification under Draft Annex 22 comprises the following core elements:
 
-### 3. The Technical Model Definition (*The Blueprint*)
-While *Intended Use* defines operational boundaries, the *Model Definition* documents the technical blueprint:
-* Algorithm family and architecture (e.g., Random Forest, ResNet-50, Gradient Boosted Trees),
-* Feature inputs, engineering pipelines, and scaling transformations,
-* Final hyperparameter configuration (learning rate, tree depth, regularization),
-* Acceptance criteria thresholds (minimum Recall, Precision, calibration limits),
-* Hardware dependencies and containerized runtime environments.
+1. **Decision Scope & Operator Role ([Draft §3.1, §3.3]):** Which decision is supported or executed by the AI? If the system provides input to a human decision and model testing rigor was reduced accordingly, the exact role and responsibility of the human operator must be documented in the Intended Use ([Draft §3.3]).
+2. **Relevant Subgroups & Populations ([Draft §3.2]):** Relevant sub-populations of data, products, packaging components, or operating conditions for which the system is intended must be explicitly identified and characterized.
+3. **Operational Context & Data Sources:** Unambiguous assignment to manufacturing lines, measurement points, sensors, sampling protocols, and data formats.
+4. **Output & Downstream Use:** Where do model predictions, alarms, or classifications flow, and how are they processed within the QMS?
+5. **Pre-Approved Acceptance Criteria ([Draft §4.2]):** Performance criteria approved by Process SMEs prior to performance testing.
+6. **Out-of-Scope Conditions ([Didaktik]):** Explicit boundary conditions under which the system must refuse automated execution and transition to a qualified safe state (*Safe State / Manual Fallback*).
 
-### 4. Real-World Case Studies: Scope Creep & Out-of-Distribution Failures
+### 3. The Technical Model Definition
+While *Intended Use* defines operational and business boundaries, the technical *Model Definition* governs the controlled artifact:
+- **Algorithm Class:** Applied statistical or machine learning methodologies.
+- **Data Lineage:** Traceability across all training, validation, and testing corpora (ALCOA+).
+- **Static Model Architecture ([Draft Glossary]):** Model weights locked post-qualification (*Frozen Weights*).
+- **Configuration Control ([Draft §10.2]):** Strict version control of all parameters, hyperparameters, and operational decision thresholds.
 
-#### Case 1: Automated Packaging Inspection Scope Creep
-- *Initial Validation:* An automated computer vision AI was validated exclusively for clear 10 ml glass injection vials.
-- *The Incident:* The packaging team introduced amber vials without submitting a formal Change Control request or updating the *Intended Use*.
-- *The Failure:* The model suffered a 40% false-pass rate because light refraction through amber glass confounded feature extraction $\rightarrow$ Defective units released; Major Inspection Finding; product recall.
+### 4. Real-World Risk: The Hazard of Scope Creep
 
-#### Case 2: Out-of-Distribution (OOD) Safety Interlock Failure
-- *Scenario:* A predictive batch yield model encountered severe raw material sensor anomalies during an equipment startup phase.
-- *Defect:* The software lacked an automated OOD interlock. Instead of halting, it generated confident predictions based on wild extrapolations.
-- *Annex 22 Mandate:* Systems must feature **automated OOD interlocks**. When inputs violate the *Intended Use* envelope, the system must automatically enter a safe state (*Graceful Degradation*) and escalate to human operators.
+> [!CAUTION]
+> **Illustrative Operational Scenario (didactic case study, unverified):** A QC laboratory qualified an automated computer vision system for stability testing on a specific blister packaging format. Over time, analysts began utilizing the tool on other blister types because it appeared to function correctly (*Scope Creep*). Finding during regulatory inspection: **Major Deficiency**, immediate decommissioning of the tool, and mandatory retrospective re-evaluation of all impacted stability studies.
+
+### 5. The Inspector's Perspective
+- **Avoid Vague Wording:** Nebulous claims like *"assists quality decision-making"* or *"optimizes production"* invite deep regulatory scrutiny.
+- **Verification on the Shop Floor:** Inspectors verify whether operational practices on the manufacturing line strictly match the approved Intended Use.
+- **Boundary Safeguards:** Automated Out-of-Distribution (OOD) safeguards ([Best Practice: ML Practice]) that intercept and block invalid inputs provide robust evidence of mature process control.
 
 ---
 

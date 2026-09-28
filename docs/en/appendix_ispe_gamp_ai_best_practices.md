@@ -128,7 +128,7 @@ A defining tenet of GAMP 5 Second Edition states: **Validation is not an event c
 graph TD
     LV["🛡️ Living Validation (GAMP AI Guide)"] --> S1["1. Real-Time Dashboards<br/><i>(Live monitoring of PSI, drift indices & human override rates)</i>"]
     LV --> S2["2. Gated Change Control<br/><i>(Zero retraining without formal revalidation)</i>"]
-    LV --> S3["3. Periodic Review Audits<br/><i>(Scheduled comparison against validation baseline)</i>"]
+    LV --> S3["3. Periodic Review Audits<br/><i>(Risk-based comparison against validation baseline)</i>"]
 
     style LV fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
@@ -147,7 +147,7 @@ graph TD
 2. **Data is Code:** Subject training datasets to the same qualification rigor as regulated software code.
 3. **Separate Lifecycles:** Maintain the data track in parallel with the software infrastructure track.
 4. **No Unchecked Learning:** Run only static models with frozen weights in core GMP production.
-5. **Staff Independence:** Ensure validation test engineers are organizationally separate from model training developers.
+5. **Staff Independence & Test Data Control ([Draft §6.2, §6.5]):** Protect test data from developer access and separate testers from training (if constrained by organization size: Four-Eyes Principle).
 6. **Multi-Metric Evaluation:** Never rely on a single accuracy metric; enforce the complete Metric Quad.
 7. **Supplier Oversight:** Formally audit cloud and COTS software providers for AI governance.
 8. **Explainability by Design:** Select the simplest model architecture capable of reliably fulfilling the intended use.

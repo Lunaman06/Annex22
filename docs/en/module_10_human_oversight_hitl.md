@@ -47,74 +47,80 @@ flowchart TD
 ## 📌 Technical Summary (Key Takeaways)
 
 ### 1. Core Principle: Zero Autonomy for Critical GMP Decisions
-Under EU GMP Annex 22, the boundary is unequivocal: **AI systems possess no legal or regulatory pharmaceutical accountability.**
-* Statutory responsibility for drug product quality and patient safety remains 100% with qualified pharmaceutical personnel (e.g., Qualified Person under Article 51 of Directive 2001/83/EC).
-* **Perfunctory Oversight:** Having a qualified expert sit before a terminal simply clicking "Approve" upon suggestion does not constitute genuine human oversight. Regulators classify this as a major compliance deficiency.
+### 1. The Core Principle: Human Accountability & Decision Support
+Under EU GMP Annex 22, the foundational tenet is established: **AI systems possess no legal or regulatory pharmaceutical accountability ([Draft §2.2]).**
+* **No Blanket HITL Requirement for Fully Qualified Models:** The draft does not impose a blanket HITL requirement for thoroughly tested models (interpretation of §1, §3.3, §10.5; confidence: Medium). A fully qualified system (e.g., automated defect rejection in automated visual inspection) may operate autonomously within its qualified boundary.
+* **Reduced Model Testing Entails Strict Operator Obligations ([Draft §3.3]):** When the AI system merely provides input to a human decision and the formal testing rigor of the model was reduced based on this final human decision, the role and responsibility of the human operator must be explicitly documented in the *Intended Use* ([Draft §3.3]).
+* **Monitoring Comparable to Manual Processes ([Draft §3.3, §9.1, §9.2]):** In such cases, operator training and operational performance must be monitored in the same manner as for a purely manual process. Personnel must be trained in understanding model limitations, biases, and override procedures ([Draft §9.1, §9.2]).
+* **Review Records & Output Checking ([Draft §10.5]):** Records of operator reviews of system outputs must be maintained. Depending on application criticality and model testing depth, this may require formal checking of each individual output.
+* **Decoupling from General Pharmaceutical Law:** Overall accountability of the marketing authorization holder and the Qualified Person (QP) derives from general EU pharmaceutical law (e.g., Directive 2001/83/EC); the Annex 22 draft provides specific technical expectations regarding the reliability of AI assistance.
 
-### 2. The Three Oversight Tiers
+### 2. The Three Oversight Tiers ([Didaktik])
 
-| Tier | Designation | Risk Level | Mechanism | GMP Regulatory Applicability |
+> *Classification Note:* The division into HITL, HOTL, and HOOL is an established industry framework ([Didaktik]) that helps conceptualize control depth. The draft itself regulates human oversight functionally through §1, §3.3, and §10.5:
+
+| Tier ([Didaktik]) | Designation | Typical Operational Context | Mechanism | GMP Regulatory Evaluation |
 | :---: | :--- | :--- | :--- | :--- |
-| **HITL** | **Human-in-the-Loop** | **High (Critical)** | A human must **review and explicitly confirm every individual AI output** before any operational or data-altering action occurs. | **Mandatory standard** for batch release, deviation classification, and OOS investigations. |
-| **HOTL** | **Human-on-the-Loop** | **Moderate** | The model operates autonomously within narrow, pre-validated operational guardrails. A human monitors operations and can intervene or emergency-stop (*override*) at any time. | Permissible for adaptive process controls (e.g., bioreactor jacket temperature), provided guardrails are validated. |
-| **HOOL** | **Human-out-of-the-Loop** | **Low / Non-GxP** | Fully automated execution without human intervention or review. | **Strictly prohibited** for any activity directly impacting product quality, safety, or GMP records. |
+| **HITL** | **Human-in-the-Loop** | Reduced model test depth ([Draft §3.3, §10.5]) or GenAI ([Draft §1]) | Human reviews and confirms the output before an operational or data-altering action takes effect. | Required where model testing rigor was reduced or for non-critical GenAI. |
+| **HOTL** | **Human-on-the-Loop** | Fully qualified process automation | Model executes processes within validated boundaries. Human monitors trends and intervenes upon deviations. | Permissible for qualified in-line automation (e.g., PAT), provided boundaries and monitoring are validated. |
+| **HOOL** | **Human-out-of-the-Loop** | Autonomous systems lacking human oversight capability | Fully automated execution without oversight capability. | For critical GMP operations, incompatible with principles of Annex 11 and Annex 22 ([Draft §1, §2.2]). |
 
 ### 3. The Automation Bias Trap (Creeping Decay of Oversight)
-The most insidious threat in steady-state operations is human cognitive fatigue:
+The most insidious threat in steady-state operations with human oversight is cognitive complacency:
 * When a system performs reliably over weeks or months, operators naturally assume the AI is "always right."
-* Vigilance declines (*Cognitive Complacency*), and personnel stop thoroughly scrutinizing warnings.
+* Vigilance declines (*Cognitive Complacency*), and personnel stop thoroughly scrutinizing warnings (*Perfunctory Review*).
 
 > [!CAUTION]
-> **Industry Case Study:** A pharmaceutical facility introduced an AI system for automated deviation triage:
+> **Illustrative Operational Scenario (didactic case study, unverified):** A pharmaceutical facility introduced an AI system for automated deviation triage:
 > - *Month 1:* Reviewers challenged and overrode the AI in **12% of cases** (*Healthy Challenge*).
 > - *Month 3:* Override rate dropped to 5%.
 > - *Month 6:* Override rate fell to **1.5%**.
 > An internal QA audit revealed that the AI had not improved; rather, reviewers had stopped thoroughly reading primary reports. Several major deviations were misclassified as minor, requiring retrospective CAPA interventions.
 
-**The Golden Inspector Rule:** An **override rate trending toward 0%** is not evidence of a flawless algorithm; it is **prima facie evidence of collapsed human oversight**.
+**The Golden Inspector Rule:** An **override rate trending toward 0%** in complex evaluative tasks is not evidence of a flawless algorithm; it is **prima facie evidence of collapsed human oversight**.
 
-### 4. Workflow Architecture Mitigating Automation Bias: The Independent-First Pattern
+### 4. Workflow Architecture Mitigating Automation Bias: The Independent-First Pattern ([Didaktik])
 User interface (UI/UX) workflows must actively protect against cognitive complacency:
 * **Anti-Pattern (Nominal Confirmation):** The interface highlights the AI recommendation ("Approve batch, confidence 98%") upfront. Reviewers subconsciously rubber-stamp the suggestion.
-* **Best Practice (Independent-First Pattern):** The reviewer evaluates the batch record and **records their initial assessment before the AI's proposal is revealed**.
+* **Best Practice (Independent-First Pattern, [Didaktik]):** The reviewer evaluates the dossier and **records their initial assessment before the AI's proposal is revealed**.
   - If both agree: Streamlined sign-off.
-  - If they diverge: The system forces documented adjudication (*Contemporaneous Audit-Trail Justification*).
-* **Confidence-Based Escalation:** If model confidence dips below a pre-validated threshold (e.g., < 95%), routine processing is blocked, automatically routing the dossier to a senior subject matter expert with diagnostic root-cause indicators.
+  - If they diverge: The system prompts documented adjudication (*Adjudication*).
+* **Confidence-Based Escalation:** If model confidence dips below a pre-validated threshold, routine processing is blocked, automatically routing the dossier to a senior subject matter expert.
 
 ### 5. What Health Authority Inspectors Expect
 During GMP audits, inspectors scrutinize the substantive nature of human oversight:
 1. **Dwell Time per Review:** If 50-page batch records are approved within 4 seconds, oversight is fictitious. Operational throughput KPIs must not incentivize hasty approvals.
-2. **Model-Specific Qualification Records:** Training files must demonstrate that operators understand the **specific failure modes, biases, and operational limits of the exact deployed model**, not just generic AI concepts.
-3. **Audit Trail of Overrides:** Every override event (or decision where an operator accepted a low-confidence prediction) must be contemporaneously recorded, justified, and readily queryable.
+2. **Staff Qualification & Training ([Draft §9.1, §9.2]):** Training records must prove that operators understand the specific limitations and failure modes of the AI model, as well as how and when to challenge and override the system (*Override Training*).
+3. **Audit Trail of Overrides ([Draft §10.5]):** Records of overrides and output reviews must be contemporaneously recorded, justified, and retrievable.
 
 ---
 
 ## 💡 Key Terminology & Concepts (Glossary)
 
-- **Human-in-the-Loop (HITL):** An oversight architecture where every algorithmic decision requires proactive human review and authorization before taking effect.
-- **Human-on-the-Loop (HOTL):** An oversight model where systems execute within pre-qualified boundaries while human operators retain real-time supervisory override authority.
+- **Human-in-the-Loop (HITL) ([Didaktik]):** Oversight architecture where algorithmic outputs require human review and sign-off before taking effect (mandatory under [Draft §3.3] if test rigor was reduced; under [Draft §1] for non-critical GenAI).
+- **Human-on-the-Loop (HOTL) ([Didaktik]):** Oversight model where systems execute within pre-qualified boundaries while human operators retain supervisory override authority.
 - **Automation Bias:** The cognitive tendency for human operators to defer uncritically to automated recommendations and disregard contradictory real-world indicators.
-- **Independent-First Pattern:** An interaction paradigm requiring humans to formulate an independent judgment prior to viewing the algorithmic prediction.
-- **Override Rate:** The statistical frequency with which human operators modify or reject AI recommendations; functions as a key health indicator for genuine oversight.
-- **Adjudication:** The formalized, auditable justification workflow triggered when human judgment conflicts with an AI recommendation.
+- **Independent-First Pattern ([Didaktik]):** An interaction paradigm requiring humans to formulate an independent judgment prior to viewing the algorithmic prediction.
+- **Override Rate ([Didaktik]):** The statistical frequency with which human operators modify or reject AI recommendations; functions as a risk-based indicator of operator vigilance.
+- **Adjudication ([Didaktik]):** The formalized, auditable justification workflow triggered when human judgment conflicts with an AI recommendation.
 
 ---
 
 ## 📋 GxP-Compliance Checklist: Human Oversight
 
 ### Absolute Must-Haves:
-- [ ] Is a mandatory **Human-in-the-Loop (HITL)** workflow established for all high-risk GxP functions?
-- [ ] Do human reviewers possess unrestricted technical authority to override model suggestions (*Override Authority*)?
-- [ ] Is the **monthly override rate systematically tracked** to detect emerging complacency or automation bias?
-- [ ] Does the UI workflow protect against rubber-stamping via blind evaluation (*Independent-First*) or confidence gates?
-- [ ] Are model-specific training records available proving operators understand known failure modes for this specific model?
-- [ ] Does the audit trail log reviewer dwell time and contemporaneous narrative justifications for overrides?
+- [ ] Is operator responsibility formally anchored in the *Intended Use* where model testing rigor was reduced ([Draft §3.3])?
+- [ ] Are operator training and operational performance monitored like manual processes ([Draft §3.3, §9.1])?
+- [ ] Has personnel been trained on how and when to override the AI system (*Override Training*, [Draft §9.2])?
+- [ ] Are records of operator reviews of system outputs maintained and retrievable ([Draft §10.5])?
+- [ ] Does the workflow architecture effectively prevent uncritical rubber-stamping (*Automation Bias*)?
+- [ ] Are system overrides and review discrepancies documented in compliant audit trails ([Draft §10.5])?
 
 ### Inspection Red Flags:
-- ❌ AI executing fully autonomous batch release or critical analytical disposition without qualified human sign-off (*HOOL*).
-- ❌ Persistent 0% override rates celebrated by leadership as proof of "model perfection."
-- ❌ Standard Operating Procedures (SOPs) incentivizing volume throughput over quality of review.
-- ❌ Operators unable to explain typical model blind spots when questioned by inspectors.
+- ❌ Reduced model testing justified by human oversight without corresponding operator SOPs or training records ([Draft §3.3]).
+- ❌ Personnel unable to explain model limitations and typical failure modes during an inspection ([Draft §9.1]).
+- ❌ Persistent 0% override rates in complex judgment workflows accepted without plausibility verification.
+- ❌ Operational throughput KPIs compelling operators into hurried, perfunctory reviews within seconds.
 
 ---
 

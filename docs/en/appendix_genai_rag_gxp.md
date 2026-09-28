@@ -10,7 +10,7 @@
 ---
 
 > **Executive Summary:**  
-> While traditional Machine Learning (Predictive AI) outputs quantitative classifications or regression scores from numerical sensor streams, Generative AI and Large Language Models (LLMs) synthesize novel text, syntax, and code. Owing to their inherently stochastic nature, the **Draft EU GMP Annex 22** strictly bars GenAI from autonomous disposition or decision-making in core GMP operations. This guide details industry best practices, architectural blueprints (RAG), and validation frameworks (RAG Triad) that enable pharmaceutical companies to safely deploy LLMs as **qualified "Drafting Assistants"** under audit-proof governance.
+> While traditional Machine Learning (Predictive AI) outputs quantitative classifications or regression scores from numerical sensor streams, Generative AI and Large Language Models (LLMs) synthesize novel text, syntax, and code. Under **Draft EU GMP Annex 22 (§1)**, the guideline is not applicable to generative AI / LLMs in critical processes; for non-critical applications, qualified human oversight (*Human Oversight*) is mandatory. This guide details industry best practices ([Best Practice: ML Practice]), architectural blueprints (RAG), and evaluation frameworks (RAG Triad) that enable pharmaceutical companies to safely deploy LLMs as **qualified "Drafting Assistants" ([Didaktik])** under audit-proof governance.
 
 ---
 
@@ -30,10 +30,12 @@ Classical MLOps pipelines (as examined in Modules 06 through 08) rely on multiva
 
 ## 2. Regulatory Stance in Draft EU GMP Annex 22
 
-The draft published in July 2025 by the European Commission, EMA, and PIC/S draws a sharp, unambiguous line:
-* **Exclusion from Core GxP Decisions:** LLMs and generative systems must **never execute autonomous batch release, product disposition, or regulatory filing approvals** (e.g., zero automated batch sign-off via LLM).
-* **Inspectorate Rationale:** The persistent hazard of undetected hallucinations, paired with the absence of deterministic mathematical transparency (*Black-Box Dilemma*), presents direct risks to medicinal product quality and patient safety.
-* **Permissible Operational Envelope:** Generative models are restricted to the role of an **assistive drafting and decision-support tool (Drafting Assistant)**, provided the technical architecture is tightly sandboxed and every output undergoes mandatory, qualified human review (*Human-in-the-Loop*).
+The draft published in July 2025 by the European Commission, EMA, and PIC/S (consultation closed October 7, 2025) establishes a clear operational scope:
+* **Scope of Application under [Draft §1]:** The draft is *not applicable* to generative AI / Large Language Models (LLMs) in critical processes. Dynamic models and models with probabilistic outputs should not be used in critical GMP applications (*"should not be used"*).
+* **Human Oversight in Non-Critical Applications ([Draft §1]):** Deploying generative AI in non-critical GxP processes is permissible, but strictly mandates qualified human oversight (*Human Oversight*).
+* **Technical Rationale:** The persistent hazard of undetected hallucinations, paired with the absence of deterministic mathematical transparency (*Black-Box Dilemma*), renders unmonitored use in critical batch disposition indefensible.
+* **Current Policy Discussion (EMA Workshop 2026):** At the EMA Multi-Stakeholder Workshop (June 30 / July 1, 2026), further industry submissions on generative AI were reviewed. Regulatory re-evaluation remains under active examination by inspectorate working groups; no formal decision to amend the draft text has been adopted yet.
+* **Permissible Operational Envelope in Practice ([Didaktik]):** Assistive drafting and decision-support tool (*Drafting Assistant*), provided the technical architecture is tightly sandboxed and every output is independently verified and signed off by qualified personnel.
 
 ---
 
