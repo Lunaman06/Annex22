@@ -21,7 +21,7 @@ flowchart TD
     Q2 -- Ja --> Q3["3. Risikoklassifizierung<br/>(Unacceptable / High / Moderate / Low)"]
     
     Q3 --> Q4{"4. Architektur-Check:<br/>Statisch oder Dynamisch?"}
-    Q4 -- Dynamisch --> REJECT["🚫 Unzulässig für kritischen GMP-Betrieb!"]
+    Q4 -- Dynamisch --> REJECT["🚫 Vom Draft nicht abgedeckt;<br/>nicht für kritische GMP-Prozesse verwenden ([Draft §1])"]
     Q4 -- Statisch --> INV["📋 Eintragung in das AI-Inventar<br/>(Verbindliche Scoping Rationale)"]
 ```
 
@@ -30,7 +30,7 @@ flowchart TD
 ## 🎯 Lernziele & Leitfragen
 1. **Was sind die Gefahren von „Over-Claiming“ und „Under-Claiming“ beim KI-Scoping?**
 2. **Wie funktioniert der 5-Stufen-Entscheidungstrichter (*Decision Funnel*)?**
-3. **Wie ist die 4-stufige Risikomatrix nach Annex 22 aufgebaut?**
+3. **Wie ist das didaktische Risikoraster aufgebaut ([Didaktik])?**
 4. **Welche Lehren ziehen wir aus den Grenzfällen (Sichtprüfung, LLM-Berichte, Cloud-SaaS)?**
 5. **Welche Pflichtelemente gehören in ein audit-festes *AI Inventory*?**
 
@@ -45,39 +45,40 @@ flowchart TD
 
 ### 2. Der 5-Stufen-Entscheidungstrichter (*Decision Funnel*)
 Jede Software und jeder Algorithmus durchläuft diese fünf Stufen:
-1. **Ist es wirklich KI?** Nur Systeme mit statistischem Lernen, Mustererkennung oder generativer KI fallen unter Annex 22. Reine regelbasierte Logik, Expertensysteme und deterministische Algorithmen bleiben rein unter **Annex 11**.
-2. **Besteht ein GMP-Einfluss?** Betrifft es direkte Prozessschritte (z.B. Chargenfreigabe, Spezifikationen) oder **indirekte Faktoren** (z.B. KI-Personalschichtplanung für Reinräume, KI-Schulungstracking für Operator-Qualifikation)?
-3. **Risikostufe zuordnen:** Zuordnung in das vierstufige Risikoraster (Unacceptable, High, Moderate, Low).
-4. **Architektur bewerten:** Ist das Modell statisch (*Frozen Weights*) oder dynamisch (*Online Learning*)?
+1. **Ist es wirklich KI?** Nur Systeme mit statistischem Lernen, Mustererkennung oder generativer KI fallen unter den AI-Begriff. Reine regelbasierte Logik, Expertensysteme und deterministische Algorithmen bleiben rein unter **Annex 11** ([Draft §1]).
+2. **Besteht ein GMP-Einfluss?** Betrifft es kritische Prozesse der Arzneimittelherstellung mit direktem oder indirektem Einfluss auf Patientensicherheit, Produktqualität oder Datenintegrität ([Draft §1])?
+3. **Risikostufe zuordnen ([Didaktik]):** Zuordnung in das vierstufige Risikoraster (Unacceptable, High, Moderate, Low).
+4. **Architektur bewerten:** Ist das Modell statisch mit deterministischem Output ([Draft §1, Glossar]) oder dynamisch/probabilistisch?
 5. **Dokumentation:** Eintragung in das verbindliche *AI Inventory* mit schriftlicher Scoping-Begründung.
 
-### 3. Die 4 Risikostufen unter Annex 22
+### 3. Didaktisches Risikoraster für KI-Systeme ([Didaktik])
+
+> *Hinweis zur Einordnung:* Der Draft unterscheidet im Kern zwischen kritischen GMP-Prozessen (Geltungsbereich für statische Modelle) und nicht abgedeckten Systemen (§1). Die folgende 4-stufige Staffelung ist ein etabliertes Industriemodell ([Didaktik] in Anlehnung an EU AI Act / GAMP):
 
 | Risikostufe | Definition & Beispiele | Regulatorische Konsequenz |
 | :--- | :--- | :--- |
-| **Unacceptable** | Kontinuierlich online lernende Modelle, die autonome Freigabeentscheidungen treffen. | **Strikter Ausschluss** unter Annex 22. Nicht zulässig. |
-| **High Risk** | Statische KI, die PAT-Messungen steuert, CQA-Relevanz hat oder autonome Gut-/Schlecht-Sortierung durchführt. | Vollumfängliche Validierung, Worst-Case-Tests, kontinuierliches Drift-Monitoring, 100% HITL. |
-| **Moderate Risk** | KI als Entscheidungshilfe (*Decision Support* / Advisory), z.B. Triage von Abweichungen. | Schlankere Test-Sets, aktive menschliche Überprüfung vor Wirksamkeit. |
-| **Low Risk** | Administrative Backoffice-Anwendungen ohne jeden Einfluss auf Produktqualität oder Patientensicherheit. | Standardmäßige IT-Good-Practices ausreichend. |
+| **Vom Draft nicht abgedeckt** | Kontinuierlich online lernende Modelle oder probabilistische Ausgaben in kritischen Prozessen. | Sollen in kritischen GMP-Anwendungen nicht verwendet werden (*„should not be used“*, [Draft §1]). |
+| **High Risk** | Statische KI in kritischen GMP-Prozessen (PAT-Steuerung, CQA-Einfluss, automatisierte Freigaben). | Vollumfängliche Qualifizierung, Worst-Case-Tests, kontinuierliches Monitoring ([Draft §1, §4, §10]). |
+| **Moderate Risk** | KI als assistive Entscheidungshilfe (*Decision Support*), z. B. Triage von Abweichungen. | Risikoproportionale Qualifizierung, definierte Operator-Verantwortung im Intended Use ([Draft §3.3]). |
+| **Low Risk** | Administrative Anwendungen ohne Einfluss auf Produktqualität, Patientensicherheit oder Datenintegrität. | Vom Scope des Drafts ausgenommen ([Draft §1]); Standard-IT-Kontrollen ausreichend. |
 
 ### 4. Drei kritische Grenzfälle aus der Praxis
 
 #### Fall 1: Deep-Learning-Sichtprüfung von Vials (Fläschchen)
 - *Situation:* KI sortiert Vials autonom in „Gut“ und „Schlecht“. Nur unsichere Grenzfälle werden einem Menschen zur Nachkontrolle vorgelegt.
 - *Fehlschluss:* Die Firma stufte das System als „Moderate Risk“ ein, weil ja ein Mensch Grenzfälle prüft.
-- *Annex-22-Realität:* **High Risk!** Die autonome Entscheidungsrate für 95%+ der Vials bestimmt das Risiko. Partielle menschliche Kontrolle senkt die Risikoklasse nicht magisch ab. Zwingend: Drift-Monitoring und definierter Fallback auf manuelle Inspektion.
+- *Annex-22-Realität:* **Kritischer Prozess!** Die autonome Sortierung betrifft direkt die Produktqualität. Eine bloße menschliche Prüfung von Grenzfällen hebt die Kritikalität des Gesamtsystems nicht auf. Zwingend: Vollständige Modellqualifizierung, Drift-Monitoring und definierter Fallback auf manuelle Inspektion ([Draft §1, §4.3, §10.3]).
 
-#### Fall 2: Der Sonderstatus von Generativer KI (GenAI & LLMs)
-- *Regulatorische Ausgangslage:* Im **Draft Annex 22** schließt die Europäische Kommission LLMs und generative Modelle für autonome, entscheidungsrelevante GMP-Tätigkeiten explizit aus. Grund sind das stochastische Antwortverhalten und das Risiko von **Halluzinationen** (überzeugend klingende, aber frei erfundene pharmazeutische Aussagen).
-- *Der zulässige GxP-Korridor:* LLMs dürfen unter strengen Auflagen als **assistierende Werkzeuge („Drafting Assistants“)** eingesetzt werden (z.B. Erstellung eines ersten Roh-Entwurfs für einen Abweichungsbericht oder Zusammenfassung von Labor-Rohdaten).
-- *Architektur-Vorgabe:* Direkte freie Prompts sind unzulässig. Zwingend gefordert ist eine **RAG-Architektur (Retrieval-Augmented Generation)**, die das Modell strikt auf freigegebene Firmen-SOPs begrenzt und jeden Satz mit auditierbaren ALCOA+-Zitaten belegt.
-- *Detail-Leitfaden:* Eine vollständige Ausarbeitung von RAG-Validierungsmetriken (Groundedness, Context Relevance), Prompt Governance und Guardrails findest du im separaten Dossier:  
-  ➔ **[Vertiefender Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**
+#### Fall 2: Der Status von Generativer KI (GenAI & LLMs)
+- *Regulatorische Ausgangslage:* Nach [Draft §1] ist der Leitfaden **nicht anwendbar auf generative KI / Large Language Models (LLMs) in kritischen Prozessen**. Generative KI in nicht-kritischen Anwendungen erfordert qualifizierte menschliche Aufsicht (*Human Oversight*, [Draft §1]). Grund sind das stochastische Antwortverhalten und das Risiko von Halluzinationen.
+- *Workshop-Status:* Auf dem EMA-Multi-Stakeholder-Workshop (Juni/Juli 2026) wurden Branchenbeiträge diskutiert; eine Neubewertung ist Gegenstand laufender Prüfungen, ein Beschluss liegt jedoch noch nicht vor.
+- *Der zulässige GxP-Korridor in der Praxis ([Didaktik]):* LLMs werden in der pharmazeutischen Praxis als assistierende Werkzeuge (*„Drafting Assistants“*) genutzt (z. B. Rohentwürfe für Abweichungsberichte), sofern jede Ausgabe nachweisbar von qualifiziertem Personal geprüft und gezeichnet wird.
+- *Architektur-Best-Practice ([Best Practice: ML-Praxis]):* RAG-Architektur (Retrieval-Augmented Generation) zur Begrenzung auf geprüfte SOPs mit ALCOA+-Zitaten. Details siehe ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
 
 #### Fall 3: Cloud-SaaS-KI von Drittanbietern (Black-Box über API)
-- *Leitsatz:* **„You cannot outsource your GMP accountability.“**
-- *Problem:* Wenn der Cloud-Anbieter im Hintergrund kontinuierliche Updates einspielt oder Bibliotheken ändert, ist das System für den Pharmahersteller nicht validierbar (*Uncontrolled Environment Drift*).
-- *Lösung:* Cloud-KI darf ausschließlich auf Basis formaler *Quality Agreements* und Service Level Agreements (SLAs) betrieben werden, die unangekündigte Modelländerungen vertraglich ausschließen. Primäre Freigabeberechnungen müssen auf intern validierten Systemen gegengeprüft werden. Siehe auch ➔ **[ISPE GAMP AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**.
+- *Leitsatz nach [Draft §2.2]:* Der regulierte pharmazeutische Anwender behält stets die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität – auch wenn KI-Systeme oder -Komponenten von externen Lieferanten (*Suppliers*) bereitgestellt werden.
+- *Problem:* Wenn der Cloud-Anbieter im Hintergrund kontinuierliche Updates einspielt oder Bibliotheken ändert, ist das System für den Pharmahersteller nicht kontrollierbar (*Uncontrolled Environment Drift*).
+- *Lösung:* Cloud-KI erfordert strenge *Quality Agreements* und Service Level Agreements (SLAs), die unangekündigte Modelländerungen vertraglich ausschließen ([Draft §2.2, §10.2]). Primäre Freigabeberechnungen müssen auf intern validierten Systemen gegengeprüft werden. Siehe auch ➔ **[ISPE GAMP AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**.
 
 ### 5. Das audit-feste „AI Inventory“
 Das Master-Verzeichnis für Inspektoren muss für jedes System zwingend enthalten:

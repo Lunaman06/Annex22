@@ -9,7 +9,7 @@
 ---
 
 > **Executive Summary:**  
-> Während klassisches Machine Learning (Predictive AI) aus Zahlenreihen oder Bildsensoren Vorhersagen trifft, erzeugen Generative KI und Large Language Models (LLMs) neuartigen Text und Code. Wegen ihrer stochastischen Natur schließt der **Draft EU GMP Annex 22** den autonomen Einsatz von GenAI bei kritischen GMP-Entscheidungen aus. Dieser Leitfaden beschreibt die industriellen Best Practices, Architekturmuster (RAG) und Validierungsmetriken (RAG Triad), mit denen LLMs dennoch audit-sicher als **„Drafting Assistants“** im GxP-Betrieb verankert werden können.
+> Während klassisches Machine Learning (Predictive AI) aus Zahlenreihen oder Bildsensoren Vorhersagen trifft, erzeugen Generative KI und Large Language Models (LLMs) neuartigen Text und Code. Gemäß **Draft EU GMP Annex 22 (§1)** ist der Leitfaden nicht anwendbar auf generative KI / LLMs in kritischen Prozessen; für nicht-kritische Anwendungen ist qualifizierte menschliche Aufsicht (*Human Oversight*) vorgeschrieben. Dieser Leitfaden beschreibt die industriellen Best Practices ([Best Practice: ML-Praxis]), Architekturmuster (RAG) und Evaluierungsmetriken (RAG Triad), mit denen LLMs audit-sicher als **„Drafting Assistants“** im GxP-Betrieb verankert werden können.
 
 ---
 
@@ -29,10 +29,12 @@ Klassische MLOps-Pipelines (wie in den Modulen 06 bis 08 beschrieben) basieren a
 
 ## 2. Der regulatorische Status im Draft EU GMP Annex 22
 
-Der im Juli 2025 von der EMA und PIC/S veröffentlichte Entwurf zieht eine sehr strikte Grenze:
-* **Ausschluss von Kernprozessen:** LLMs und generative Modelle dürfen **nicht für direkte Freigabe- oder Zulassungsentscheidungen** eingesetzt werden (z.B. keine automatische Chargenfreigabe durch LLM).
-* **Begründung der Inspektoren:** Das Risiko unbemerkter Halluzinationen und die mangelnde mathematische Nachvollziehbarkeit (*Black-Box-Problem*) gefährden unmittelbar die Produktqualität und Patientensicherheit.
-* **Erlaubter Raum:** Zulässig ist der Einsatz als **assistierendes Werkzeug (Decision Support / Drafting Assistant)**, sofern die Architektur technisch gekapselt ist und jeder Output zwingend einer qualifizierten menschlichen Prüfung (*Human-in-the-Loop*) unterliegt.
+Der im Juli 2025 von der Europäischen Kommission veröffentlichte Entwurf (Konsultationsphase bis 7. Oktober 2025) regelt den Geltungsbereich klar:
+* **Geltungsbereich nach [Draft §1]:** Der Draft ist *nicht anwendbar* auf generative KI / Large Language Models (LLMs) in kritischen Prozessen. Dynamische Modelle und Modelle mit probabilistischem Output sollen in kritischen GMP-Anwendungen nicht verwendet werden (*„should not be used“*).
+* **Menschliche Aufsicht bei nicht-kritischen Anwendungen ([Draft §1]):** Der Einsatz generativer KI in unkritischen GxP-Prozessen ist zulässig, erfordert jedoch zwingend eine qualifizierte menschliche Aufsicht (*Human Oversight*).
+* **Fachlicher Hintergrund:** Das Risiko unbemerkter Halluzinationen und die mangelnde mathematische Nachvollziehbarkeit (*Black-Box-Problem*) machen einen unkontrollierten Einsatz in kritischen Freigabeentscheidungen unverantwortbar.
+* **Aktuelle Diskussion (EMA-Workshop 2026):** Auf dem EMA-Multi-Stakeholder-Workshop im Juni/Juli 2026 wurden weiterführende Industriebeiträge zu generativer KI diskutiert. Eine behördliche Neubewertung ist Gegenstand laufender fachlicher Prüfungen; ein Beschluss zur Änderung des Draft-Textes liegt jedoch noch nicht vor.
+* **Erlaubter Raum in der Praxis ([Didaktik]):** Assistierendes Werkzeug (*Decision Support / Drafting Assistant*), sofern die Architektur technisch gekapselt ist und jeder Output nachweisbar von qualifiziertem Fachpersonal geprüft wird.
 
 ---
 

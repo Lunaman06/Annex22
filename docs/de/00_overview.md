@@ -34,14 +34,14 @@ graph LR
 ```
 
 ### Rechtlicher Status & Verbindlichkeit:
-* **Aktueller Status (Stand 2026):** Der Annex 22 ist derzeit ein **Draft (Entwurf)** unter finaler Überarbeitung durch die *EMA GMDP Inspectors Working Group* und PIC/S. Die öffentliche Konsultationsphase endete im Oktober 2025; das offizielle Inkrafttreten wird für **Ende 2026 / Anfang 2027** (inkl. Übergangsfrist) erwartet.
-* **Faktische Prüfungsrelevanz heute:** Obwohl formell noch nicht in Kraft, wenden Behörden (EMA, FDA, nationale Inspektoren) die Prinzipien des Drafts bereits heute als **„State of the Art“**-Prüfmaßstab bei Inspektionen nach Annex 11 an.
-* **Das EudraLex Digital Package:** Annex 22 steht nicht allein, sondern bildet zusammen mit der Revision von **Annex 11** (Computerised Systems) und **Kapitel 4** (Dokumentation) die moderne digitale Verfassung der europäischen Pharmaindustrie.
+* **Aktueller Status (Stand 2026):** Der Annex 22 ist derzeit ein **Draft (Konsultationsentwurf)** der Europäischen Kommission / EMA und PIC/S. Die öffentliche Konsultationsphase endete am **7. Oktober 2025**. Auf dem anschließenden *EMA Multi-Stakeholder Workshop* (30. Juni / 1. Juli 2026) wurden Rückmeldungen und Weiterentwicklungen erörtert; eine Neubewertung einzelner Restriktionen (z. B. GenAI-Ausschluss) ist Gegenstand laufender Prüfungen durch die Inspektorengruppen, ein förmlicher Änderungsbeschluss liegt jedoch noch nicht vor. Die finale Veröffentlichung wird für **Ende 2026 / Anfang 2027** erwartet.
+* **Faktische Prüfungsrelevanz heute:** Obwohl formell noch im Entwurfsstadium, orientieren sich europäische Aufsichtsbehörden und Inspektoren bereits heute an den Grundprinzipien des Drafts als aktuellem **„State of the Art“** im Rahmen von Annex-11-Inspektionen.
+* **Das EudraLex Digital Package:** Annex 22 steht nicht isoliert, sondern bildet zusammen mit der Revision von **Annex 11** (Computerised Systems) und **Kapitel 4** (Dokumentation) das modernisierte regulatorische Digitalpaket der europäischen Arzneimittelproduktion.
 
 ### Die 3 Kernbotschaften:
-1. **Annex 22 ersetzt Annex 11 nicht:** Annex 11 bleibt das Fundament (IQ/OQ, physische Kontrollen, Audit Trails, Cloud-Sicherheit). Annex 22 ergänzt spezifische Anforderungen für lernende Algorithmen.
-2. **Statisch vor Dynamisch:** Im kritischen GMP-Betrieb sind nur **statische Modelle (eingefrorene Modellgewichte / Frozen Weights)** zulässig. Sich selbst im laufenden Betrieb weitertrainierende Modelle sind für Freigabeentscheidungen ausgeschlossen.
-3. **Mensch vor Maschine (Human-in-the-Loop):** Die finale Verantwortung für Produktqualität und Patientensicherheit verbleibt ausnahmslos beim qualifizierten pharmazeutischen Personal (z.B. Qualified Person).
+1. **Annex 22 ergänzt Annex 11 ([Draft §1]):** Der Draft versteht sich explizit als ergänzende Leitlinie (*additional guidance*) zu EU GMP Annex 11 (Computerised Systems). Annex 11 bleibt das Fundament (IQ/OQ, physische Kontrollen, Audit Trails, Cloud-Sicherheit). Annex 22 regelt die spezifischen Anforderungen lernender Algorithmen.
+2. **Geltungsbereich: Statische Modelle und deterministischer Output ([Draft §1]):** Der Draft gilt ausschließlich für statische Modelle und Modelle mit deterministischem Output in kritischen GMP-Prozessen. Dynamische Modelle (kontinuierliches Online-Retraining) und Modelle mit probabilistischem Output werden vom Draft nicht abgedeckt und sollen in kritischen GMP-Anwendungen nicht verwendet werden (*„should not be used“*).
+3. **Gesamtverantwortung & Human Oversight ([Draft §2.2, §3.3, §10.5]):** Der regulierte pharmazeutische Unternehmer behält stets die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität – auch beim Einsatz externer Softwarelieferanten ([Draft §2.2]). Menschliche Aufsicht ist verbindlich geregelt, insbesondere wenn Testaufwände durch Modellassistenz reduziert wurden.
 
 ---
 
@@ -161,7 +161,7 @@ flowchart TD
 | # | Grundsatz | Konkrete Bedeutung für das Projekt |
 | :-: | :--- | :--- |
 | **1** | **Keine Black-Box ohne Zaun** | Jedes KI-System benötigt vor Beginn eine genehmigte *Intended Use Specification* mit festen Out-of-Scope-Bedingungen. |
-| **2** | **Kein stummes Weiterlernen** | Nur statische Modelle mit *Frozen Weights* dürfen für kritische GMP-Entscheidungen herangezogen werden. |
+| **2** | **Kein unkontrolliertes Weiterlernen ([Draft §1])** | Dynamische Modelle (Online-Lernen) und probabilistische Ausgaben sollen in kritischen GMP-Anwendungen nicht verwendet werden; für kritische Prozesse gelten nur statische Modelle mit Frozen Weights ([Draft §1]). |
 | **3** | **Daten wie Rohstoffe behandeln** | Trainingsdaten unterliegen denselben ALCOA+-Standards wie pharmazeutische Wirkstoffe. |
 | **4** | **Echtes Hinterfragen (Active Challenge)** | Menschliche Prüfer müssen unabhängig einstufen können, um unkritisches Abnicken (*Automation Bias*) auszuschließen. |
 | **5** | **Instrumentierung gegen Silent Drift** | Ein KI-System muss ab Tag 1 über ein statistisches Monitoring verfügen, das Leistungsabfälle sofort meldet. |

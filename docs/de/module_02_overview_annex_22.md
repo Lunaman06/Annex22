@@ -50,41 +50,40 @@ graph TD
 
 ### 1. Entstehung, EudraLex Digital Package & Rechtsstatus
 - **Das EudraLex Vol. 4 Digital Package:** Annex 22 wurde nicht isoliert veröffentlicht, sondern bildet ein zusammenhängendes Modernisierungspaket für computergestützte Systeme zusammen mit der **Revision von Annex 11** (Cloud, agile Methoden, Datenintegrität) und der **Revision von Kapitel 4** (Dokumentation).
-- **Aktueller Rechtsstatus:** Der Text ist aktuell ein **Draft (Entwurf)** von EMA und PIC/S (Konsultation bis Okt. 2025; finale Verabschiedung Ende 2026/Anfang 2027 erwartet). Er ist jedoch schon heute faktisch prüfungsrelevant, da Inspektoren ihn als Stand von Wissenschaft und Technik (*State of the Art*) ansehen.
-- **Harmonisierung:** Annex 22 ist so konzipiert, dass er nahtlos neben dem **EU AI Act**, der **DSGVO (GDPR)** und der **Medical Device Regulation (MDR)** steht, um regulatorische Widersprüche im EU-Binnenmarkt zu vermeiden.
+- **Aktueller Rechtsstatus:** Der Text ist aktuell ein **Draft (Konsultationsentwurf)** von Europäischer Kommission, EMA und PIC/S (die öffentliche Konsultationsfrist endete am **7. Oktober 2025**; eine finale Verabschiedung wird für Ende 2026/Anfang 2027 erwartet). Auf dem EMA-Multi-Stakeholder-Workshop (Juni/Juli 2026) wurden Branchenrückmeldungen diskutiert; eine etwaige Neubewertung von Vorgaben ist Gegenstand laufender fachlicher Prüfungen (kein förmlicher Beschluss). Europäische Inspektoren ziehen die Draft-Prinzipien bereits heute als Stand von Wissenschaft und Technik (*State of the Art*) im Rahmen von Annex-11-Inspektionen heran.
+- **Bezug zum EU AI Act:** Das Glossar des Drafts übernimmt die Definition von „AI system“ aus dem **EU AI Act** (Art. 3(1) VO 2024/1689).
 
 ### 2. Annex 11 vs. Annex 22 (Koexistenz statt Ersatz)
-- **Annex 22 ersetzt Annex 11 NICHT!**
+- **Annex 22 ersetzt Annex 11 NICHT ([Draft §1]):** Der Draft versteht sich explizit als ergänzende Leitlinie (*additional guidance*) zu Annex 11.
 - **Annex 11 bleibt das Fundament:** IQ/OQ-Strukturen, Audit Trails, Zugriffskontrollen, Cloud-Sicherheit und deterministische Basisvalidierung bleiben unverändert unter Annex 11.
 - **Annex 22 setzt oben auf:** Für lernende Algorithmen verlangt Annex 22 zwingend zusätzliche Disziplinen:
-  - Verbindliche *Intended Use Specification*,
-  - Strikt isolierte, unabhängige Testdatensätze (*Independent Test Sets*) mit personeller Trennung (*Staff Independence*),
-  - Risikoproportionale *Explainability*,
-  - Kontinuierliches Lebenszyklus-Monitoring gegen *Model Drift*,
-  - Lückenlose Lieferanten- und Cloud-Überwachung (*Supplier Governance*).
+  - Verbindliche *Intended Use Specification* unter Einbindung von Fach-SMEs ([Draft §3.1]),
+  - Strikt isolierte, unabhängige Testdatensätze (*Independent Test Sets*) mit Zugriffskontrollen und personeller Unabhängigkeit (*Staff Independence*, [Draft §6.2, §6.5]),
+  - Risikoproportionale *Explainability* im Rahmen des Testings ([Draft §8.1, §8.2]),
+  - Kontinuierliches Lebenszyklus-Monitoring von Performance und Input-Verteilung ([Draft §10.3, §10.4]),
+  - **Volle Verantwortung des regulierten Anwenders ([Draft §2.2]):** Der pharmazeutische Unternehmer behält die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität, auch wenn KI-Modelle oder -Komponenten von externen Lieferanten (*Suppliers*) bezogen werden.
 
 ### 3. Was ist „In Scope“ und was ist „Out of Scope“?
-- **In Scope (Reguliert):**
-  - Direkte GMP-Entscheidungen: Automatische Chargenfreigabe (*Batch Release*), Prozesskontrolle.
-  - Abweichungstriagierung (*Deviation Triage*).
-  - Indirekte GMP-Entscheidungen: KI-gestützte Peak-Integration im Qualitätskontrolllabor (QC), KI-Bedarfsprognosen, die Produktverfügbarkeit oder Haltbarkeit beeinflussen.
+- **In Scope (Reguliert nach [Draft §1]):**
+  - Kritische Anwendungen mit direktem oder indirektem Einfluss auf Patientensicherheit, Produktqualität oder Datenintegrität in der Arzneimittelherstellung.
+  - Direkte GMP-Entscheidungen: Automatische Chargenfreigabe (*Batch Release*), Inline-Prozesskontrolle (PAT).
+  - Indirekte GMP-Entscheidungen: KI-gestützte Peak-Integration im Qualitätskontrolllabor (QC), Abweichungstriagierung (*Deviation Triage*), KI-Bedarfs- oder Haltbarkeitsprognosen.
 - **Out of Scope (Nicht unter Annex 22):**
   - Reine Grundlagenforschung (*Discovery/Early Research* ohne GMP-Bezug),
-  - Administrative HR-Systeme (z.B. CV-Screening),
+  - Administrative HR-Systeme (z. B. Bewerbermanagement),
   - Konventionelle, rein regelbasierte Algorithmen (bleiben rein unter Annex 11).
 
 ### 4. Das Modell-Trio: Static, Dynamic und Generative AI
-- **Static AI (Vom Regulator stark favorisiert):**
-  - Modellgewichte werden nach der Validierung eingefroren (*Frozen Weights*).
-  - Deterministisches, reproduzierbares Verhalten über die gesamte Laufzeit. Änderungen nur über formales Change Control.
-- **Dynamic AI (Stark reglementiert / Ausgeschlossen):**
-  - Modelle, die im laufenden Betrieb aus Betriebsdaten kontinuierlich weiterlernen.
-  - *Problem:* Jede Charge könnte de facto von einem leicht veränderten Modell verarbeitet werden. Für kritische GMP-Entscheidungen praktisch ausgeschlossen; nur mit extrem hohem Governance- und Überwachungsaufwand denkbar.
-- **Generative AI & LLMs (Extreme Vorsicht):**
-  - Anfällig für stochastische Variabilität und „Halluzinationen“ (*Confabulation*).
-  - **Verboten für:** Kritische Entscheidungen wie Chargenfreigabe oder Spezifikationsfestlegungen.
-  - **Erlaubt für:** Assistive Hilfstätigkeiten (Zusammenfassen langer Dokumente, Rohentwürfe für SOPs), sofern strenge menschliche Überprüfung und finale Freigabe durch qualifiziertes Personal erfolgen.
-  - Siehe Details im ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
+- **Static AI (Geltungsbereich des Drafts, [Draft §1, Glossar]):**
+  - Modellgewichte werden nach der Qualifizierung eingefroren (*Frozen Weights*).
+  - Deterministisches, reproduzierbares Verhalten über die gesamte Laufzeit. Änderungen nur über formales Change Control ([Draft §10.1]).
+- **Dynamic AI (Vom Draft nicht abgedeckt, [Draft §1]):**
+  - Modelle, die im laufenden Betrieb kontinuierlich online weiterlernen.
+  - *Regulatorische Vorgabe:* Dynamische Modelle werden vom Geltungsbereich nicht erfasst und sollen in kritischen GMP-Anwendungen nicht verwendet werden (*„should not be used“*, [Draft §1]), da ein dauerhaft validierter Zustand (*validated state*) nicht sichergestellt werden kann.
+- **Generative AI & LLMs (Vom Draft für kritische Prozesse nicht abgedeckt, [Draft §1]):**
+  - Anfällig für stochastische Variabilität und Halluzinationen.
+  - *Regulatorische Vorgabe:* Der Draft gilt nicht für generative KI / LLMs in kritischen Prozessen. In nicht-kritischen Anwendungen ist qualifizierte menschliche Aufsicht (*Human Oversight*) vorgeschrieben ([Draft §1]).
+  - *Zulässiger Einsatzkorridor in der Praxis ([Didaktik]):* Assistive Hilfstätigkeiten (z. B. Rohentwürfe für Berichte), sofern jede Ausgabe nachweisbar qualifiziert geprüft wird. Siehe Details im ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
 
 ### 5. Das Phänomen „Automation Bias“ & Human Oversight
 - **Fallbeispiel:** Ein QA-Team nutzte NLP zur Abweichungstriagierung. Prüfer klickten Vorschläge der KI nach kurzer Zeit nur noch blind ab (*Perfunctory Review* / Rubber-Stamping).

@@ -42,11 +42,11 @@ graph LR
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Die Definition von KI in GxP
-- **Annex 22 greift nur bei lernenden Systemen:** Statistische Lernverfahren, Mustererkennung (*pattern recognition*) und generative Methoden.
-- **Abgrenzung zu Annex 11:** Herkömmliche, rein regelbasierte oder deterministische Algorithmen fallen **nicht** unter Annex 22, selbst wenn Hersteller sie im Marketing als „KI“ bezeichnen.
+- **Ergänzung zu Annex 11 ([Draft §1]):** Der Annex 22 versteht sich explizit als ergänzende Leitlinie (*additional guidance*) zu EU GMP Annex 11 für den Einsatz in kritischen GMP-Prozessen der Arzneimittelherstellung.
+- **Abgrenzung zu traditioneller Software:** Herkömmliche, rein regelbasierte oder deterministische Algorithmen fallen weiterhin rein unter Annex 11, selbst wenn Anbieter sie marketingseitig als „KI“ bezeichnen.
 - **Static vs. Dynamic Models:**
-  - **Static Models (Standard unter Annex 22):** Modellgewichte sind nach der Validierung eingefroren („frozen weights“). Das System verhält sich reproduzierbar. Änderungen erfordern formalen Change Control.
-  - **Dynamic / Continual Learning Models:** Passen ihre Parameter im laufenden Betrieb kontinuierlich an. **Problem:** Ein dauerhaft validierter Zustand (*validated state*) lässt sich nach aktuellen GMP-Kriterien kaum garantieren; daher im kritischen Betrieb nicht zulässig bzw. extrem restriktiv.
+  - **Static Models (Geltungsbereich nach [Draft §1]):** Der Draft gilt ausschließlich für statische Modelle und Modelle mit deterministischem Output. Die Modellarchitektur und Gewichte sind nach der Qualifizierung eingefroren (*„frozen weights“*; [Draft Glossar]). Das System liefert für denselben Input stets denselben Output. Änderungen erfordern formalen Change Control ([Draft §10.1]).
+  - **Dynamic / Continual Learning Models:** Passen ihre Modellparameter im laufenden Betrieb kontinuierlich an. Sie werden vom Draft **nicht abgedeckt und sollen in kritischen GMP-Anwendungen nicht verwendet werden** (*„should not be used“*, [Draft §1]), da ein dauerhaft validierter Zustand (*validated state*) unter kontinuierlicher Selbstveränderung nicht gewährleistet werden kann.
 
 ### 2. Warum die klassische Validierung (CSV) versagt
 - **Klassische CSV (Annex 11):** Verhält sich wie ein Taschenrechner. Deterministisch: *Gleiche Eingabe führt immer zur gleichen Ausgabe*. Einmaliges Testen gegen Spezifikationen reicht meist aus.
@@ -80,8 +80,8 @@ graph LR
 
 | Begriff | Definition & Annex-22-Bedeutung |
 | :--- | :--- |
-| **Static Model** | Modell mit fest fixierten Parametern nach der Validierung. Gibt für gleiche Eingaben reproduzierbare Ergebnisse aus. |
-| **Dynamic Model** | Modell, das im Produktionsbetrieb online weiterlernt. Im GxP-Umfeld extrem kritisch, da der validierte Zustand erlischt. |
+| **Static Model** | Modell mit fest fixierten Parametern nach der Validierung ([Draft Glossar]). Liefert für gleiche Eingaben reproduzierbar gleiche Ergebnisse. |
+| **Dynamic Model** | Modell, das im Produktionsbetrieb online weiterlernt. Vom Geltungsbereich des Drafts nicht abgedeckt; soll in kritischen GMP-Anwendungen nicht eingesetzt werden ([Draft §1]). |
 | **Silent Drift** | Schleichende Verschlechterung der Modellvorhersage durch veränderte Realbedingungen ohne Fehlermeldung des Systems. |
 | **Edge Cases** | Seltene oder unvorhergesehene Betriebsszenarien, die in den Trainingsdaten unterrepräsentiert sind. |
 | **Black-Box AI** | Modelle (z.B. tiefe neuronale Netze), deren interne Entscheidungsfindung für menschliche Prüfer nicht unmittelbar transparent ist. |
