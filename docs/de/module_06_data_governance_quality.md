@@ -71,13 +71,15 @@ Eine nachvollziehbare **Data Lineage** ist der Schlüssel, um statistische Biase
 - **Strikte Begründungspflicht ([Draft §5.6]):** Jede Verwendung synthetischer Daten muss vollumfänglich und belastbar begründet werden (*„Any use of synthetic data should be fully justified“*).
 - **GxP-Auswirkung:** Dies gilt für Trainingsdaten ebenso wie für Testdatensätze und automatisierte Ground-Truth-Labels. In der Validierung muss vorrangig auf reale, historisch oder experimentell belegte Produktionsdaten zurückgegriffen werden.
 
-### 5. Testdaten-Unabhängigkeit & Data Leakage
-Ein zentraler Validierungsfehler in Data-Science-Teams ist der unbedarfte **naive Random-Split (z.B. zufälliges 80/20-Verhältnis)**.
-
-* **Die Falle:** In pharmazeutischen Datensätzen hängen Datenpunkte stark zusammen (z.B. Zeitreihen aus derselben Charge oder NLP-Abweichungsberichte zu demselben Vorfall).
-* **Data Leakage:** Werden Messungen derselben Charge zufällig auf Trainings- und Testdaten verteilt, „kennt“ das Modell die Eigenschaften der Charge bereits. Die Validierungsmetriken (Precision, Recall) sind künstlich überhöht (*Scheinvalidierung*).
-* **Annex-22-Vorgabe:** Strikte **Hold-Out-Isolation**. Testdatensätze müssen auf Batch-Ebene oder Standort-Ebene stratifiziert werden und dürfen vom Modell vor der finalen OQ/PQ-Validierung niemals berührt worden sein (*Unseen Data*).
-* **Label-Integrität:** Historische Batch-Freigaben oder manuelle Sichtprüfungen enthalten oft menschliche Fehlerraten (z.B. 15% Uneinigkeit bei Grenzfällen). Die KI lernt diese Inkonsistenz ungeprüft als Ground Truth. Labels müssen daher quantifiziert und überprüft werden (z.B. via *Cohen’s Kappa* / Inter-Rater Reliability, [Best Practice]).
+### 5. Regulatorische Vorgaben für Testdaten ([Draft §5.1–§5.5, §3.2])
+Während der Draft keine detaillierten Vorgaben für Trainingsdaten formuliert, stellt er für **Testdatensätze** extrem strenge und präzise Anforderungen auf:
+* **Repräsentativität für den Betriebsraum ([Draft §5.1]):** Testdaten müssen repräsentativ für die beabsichtigten Betriebsbedingungen sein, einschließlich der normalen Arbeitsbereiche und der erwarteten Prozessvariabilität.
+* **Pflicht zu Edge Cases & Randfällen ([Draft §5.2]):** Testdaten müssen gezielt herausfordernde Proben, Randfälle (*Edge Cases*) und seltene Prozessbedingungen enthalten, um die Robustheit des Modells empirisch nachzuweisen.
+* **Kuration & Ausschlussgründe dokumentieren ([Draft §5.3]):** Die Auswahl und Zusammenstellung der Testdaten muss vollständig dokumentiert sein (inklusive Datenquellen, Kriterien für die Aufnahme und Begründung für ausgeschlossene Datenpunkte).
+* **Verifikation der Ground Truth durch Fach-SMEs ([Draft §5.4]):** Alle in den Testdaten genutzten Labels (*Ground Truth*) müssen von qualifizierten Domänenexperten (*Process Subject Matter Experts*) formell verifiziert und abgenommen sein.
+* **Verifikation der Datenqualitätsattribute ([Draft §5.5]):** Für den gesamten Testdatensatz müssen Richtigkeit, Vollständigkeit und Datenintegrität formal nachgewiesen werden.
+* **Relevante Subgruppen berücksichtigen ([Draft §3.2]):** Relevante Teilgruppen von Daten oder Populationen, für die das System vorgesehen ist, müssen im Intended Use identifiziert und in den Testdaten adäquat abgebildet sein.
+* **Testdaten-Isolation & Data Leakage:** Strikte Hold-Out-Isolation; Entwickler dürfen keine Testdaten für das Training oder Hyperparameter-Tuning einsehen ([Draft §6.1, §6.2]).
 
 ### 6. Operational Data Governance & Feedback Loops
 Der Datenintegritätsfokus endet nicht mit dem Go-Live:

@@ -146,7 +146,7 @@ graph TD
 2. **Data is Code:** Behandle Trainingsdaten mit derselben Strenge wie regulierten Programmcode.
 3. **Separate Cycles:** Führe den Datenlebenszyklus parallel zum Softwarelebenszyklus.
 4. **No Free Learning:** Betreibe im GxP-Kern nur statische Modelle mit gefrorenen Parametern.
-5. **Staff Independence:** Trenne Entwicklungsteams personell von den Validierungstestern.
+5. **Staff Independence & Test Data Control ([Draft §6.2, §6.5]):** Schütze Testdaten vor Entwicklerzugriff und trenne Tester vom Training (bei personellen Engpässen: Vier-Augen-Prinzip).
 6. **Multi-Metric Evaluation:** Verlasse dich niemals auf eine einzelne Trefferquote (Metric Quad).
 7. **Supplier Oversight:** Auditiere Cloud- und Softwareanbieter auf ihre KI-Governance.
 8. **Explainability by Design:** Wähle das einfachste Modell, das die Aufgabe sicher löst.

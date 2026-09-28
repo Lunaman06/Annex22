@@ -69,18 +69,33 @@ Das didaktische Metrik-Quartett ([Didaktik]) empfiehlt vier komplementäre Dimen
 * **Kein Performance-Rückschritt ([Draft §4.3]):** Die Leistungsfähigkeit des KI-Systems darf gegenüber dem bisherigen, manuellen oder automatisierten Prozess, den es ersetzt, **keinerlei Rückschritt darstellen** (*„should result in no decrease in performance compared to the process it replaces“*, [Draft §4.3]).
 * **Kompensation bei Fehlern ([Draft §4.3]):** Führt das KI-System in bestimmten Bereichen zu einer höheren Fehlerrate als der bisherige Prozess, muss dies durch überlegene Leistung in anderen Bereichen ausgeglichen werden, und die Gesamtleistung darf nicht sinken.
 
-### 4. Personelle Unabhängigkeit beim Testen (Staff Independence & Blind Testing)
-Ein entscheidender Punkt im **PIC/S- und Annex-22-Draft** ist die organisatorische Trennung:
-* **Keine Selbstprüfung:** Es reicht nicht aus, dass Testdaten mathematisch isoliert sind. Die Personen, die den finalen Validierungstest planen, durchführen und abnehmen (Validierungsingenieure / QA), müssen **organisatorisch unabhängig** von den Data Scientists sein, die das Modell entwickelt und trainiert haben.
-* **Blind Testing:** Die Entwickler dürfen die spezifischen Testdaten und Fehlerfälle des formalen Qualifizierungstests vorab nicht einsehen, um unbewusste Verzerrungen (*Confirmation Bias*) oder verdeckte Optimierungen auf das Test-Set auszuschließen.
+### 4. Personelle Unabhängigkeit & Testdaten-Sicherung ([Draft §6.1–§6.5])
+Der Schutz der Testdaten vor Verfälschung oder unbewusster Überanpassung ist ein zentraler Prüfschwerpunkt:
+* **Unabhängige Testdaten ([Draft §6.1]):** Das Testen des KI-Systems muss zwingend mit Daten erfolgen, die vollständig unabhängig von den Trainings- und Tuning-Daten sind.
+* **Kein Testdatenzugriff für Entwickler ([Draft §6.2]):** Personen, die an der Entwicklung und dem Training des KI-Modells beteiligt sind, **dürfen zu keinem Zeitpunkt Zugriff auf die Testdaten gehabt haben**.
+* **Zugriffskontrollen, Audit Trail & Kopierschutz ([Draft §6.2]):** Testdaten müssen durch technische und organisatorische Zugriffskontrollen sowie Audit Trails geschützt werden. Es dürfen **keine Kopien der Testdaten außerhalb des gesicherten Repositories** existieren.
+* **Protokollierung der Testdatennutzung ([Draft §6.3]):** Es müssen lückenlose Aufzeichnungen darüber geführt werden, welche Testdaten verwendet wurden, wann die Tests stattfanden und wie oft die Testdaten herangezogen wurden.
+* **Wiederverwendungsverbot ohne Risikobewertung ([Draft §6.4]):** Testdatensätze dürfen für wiederholte Testiterationen nicht ohne dokumentierte Begründung und Risikobewertung wiederverwendet werden, um ein unbemerktes Overfitting auf das Testset auszuschließen.
+* **Personelle Ausschlusskriterien & Vier-Augen-Prinzip ([Draft §6.5]):** Es muss organisatorisch sichergestellt sein, dass Personen, die Zugang zu Testdaten hatten, nachträglich nicht mehr am Modelltraining oder an der Validierung mitwirken.
+  - *Ausnahme bei kleinen Organisationen ([Draft §6.5]):* Wo eine strikte personelle Trennung aufgrund der Unternehmensgröße nicht möglich ist, muss zwingend ein **Vier-Augen-Prinzip (*Four-Eyes Principle*)** durch einen unabhängigen Zweit-Reviewer angewendet werden. Die vollständige organisatorische Trennung separater Teams gilt als empfohlene Industriepraxis ([Best Practice: ISPE GAMP]).
 
-### 5. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
-Eine Validierung darf sich nicht auf „Schönwetter-Szenarien“ (*Sunny Day Testing*) beschränken:
+### 5. Softwarecode, Repositories & Lebenszyklus-Aufbewahrung ([Draft §7.1–§7.4])
+* **Versionskontrolle in sicherem Repository ([Draft §7.1]):** Der gesamte Softwarecode für Training, Testing und Produktivbetrieb muss unter Versionskontrolle in einem gesicherten Repository geführt werden.
+* **Rückverfolgbarkeit zu Anforderungen ([Draft §7.2]):** Der Code muss dokumentiert, unabhängig überprüfbar (*reviewable*) und lückenlos auf die Anforderungen (*Requirements*) rückverfolgbar sein.
+* **Lieferanten- & Bibliotheks-Risikobewertung ([Draft §7.3]):** Drittanbieter-Bibliotheken, Frameworks und Open-Source-Abhängigkeiten müssen formal identifiziert, dokumentiert und risikobasiert bewertet werden.
+* **Aufbewahrungsdauer ([Draft §7.4]):** Code, Repositories und Dokumentation müssen über die gesamte Betriebslebensdauer des Systems aufbewahrt werden.
+
+### 6. Personalqualifikation, Grenzen & Overrides ([Draft §9.1, §9.2])
+* **Verständnis von Modellgrenzen & Biases ([Draft §9.1]):** Personal, das mit dem KI-System interagiert, muss über angemessene Qualifikationen und Schulungen verfügen. Dies schließt das Verständnis der inhärenten Grenzen (*Limitations*) und potenziellen statistischen Verzerrungen (*Biases*) des Modells ein.
+* **Schulung im Überstimmen des Systems (*Override Training*, [Draft §9.2]):** Das Schulungsprogramm muss explizit vermitteln, wie und wann die Systemausgabe fachlich zu hinterfragen (*Challenge*) und im Bedarfsfall formal zu überstimmen (*Override*) ist.
+
+### 7. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
+Eine Qualifizierung darf sich nicht auf „Schönwetter-Szenarien“ (*Sunny Day Testing*) beschränken:
 * **Fault Injection Testing:** Während der Performance Qualification (PQ) werden gezielt defekte Eingangsdaten, verfälschte Sensorwerte und Signalabbrüche simuliert.
 * **OOD-Erkennungslogik:** Das Modell muss nachweislich in der Lage sein, zu erkennen, wenn ein Datenpunkt außerhalb des spezifizierten *Intended Use* liegt (*Out-of-Distribution*).
 * **Graceful Degradation:** Statt im unbekannten Raum blind weiterzuraten, muss das System die Vorhersage sicher verweigern (*Safe State*) und die Kontrolle mit einer Alarmmeldung an den qualifizierten Menschen übergeben.
 
-### 6. Evidenz-Rückverfolgbarkeit (Drill-Down Capability)
+### 8. Evidenz-Rückverfolgbarkeit (Drill-Down Capability)
 Für Behördeninspektoren (EMA, FDA) ist die formale Struktur der Validierungsdokumentation entscheidend:
 * Ein Auditor muss in der Lage sein, ausgehend von einer Metrik im Executive Summary über die Konfusionsmatrix bis hin zu den **konkreten Rohdatenpunkten des Testsets** durchzudringen (*Drill-Down*).
 * Fehlt dieser lückenlose Nachweis oder basiert die Validierung auf undokumentierten Skripten, gilt der gesamte Validierungsnachweis als kontaminiert.
