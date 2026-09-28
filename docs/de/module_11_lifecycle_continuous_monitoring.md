@@ -72,13 +72,13 @@ Das wiederholte Anlernen (*Retraining*) eines Modells mit frischen Daten ist kei
 
 ### 4. Configuration Control: Schutz vor informellen Justierungen ([Draft §10.2])
 Häufig versuchen Betriebsteams, Fehlalarme an Maschinen durch manuelles Nachstellen von Parametern zu dämpfen:
-* **Regulatorische Vorgabe ([Draft §10.2]):** Die Konfiguration des KI-Systems, einschließlich aller Modellparameter, Hyperparameter und Entscheidungsschwellenwerte (*Thresholds*), muss unter strenger **Konfigurationskontrolle** stehen.
+* **Regulatorische Vorgabe ([Draft §10.2]):** Ein getestetes Modell muss vor dem Produktiveinsatz unter **Konfigurationskontrolle** gestellt werden, und es müssen wirksame Maßnahmen genutzt werden, um unautorisierte Änderungen zu erkennen ([Draft §10.2]). Das Einbinden von Hyperparametern und Schwellenwerten folgt anerkannter Praxis ([Best Practice: ML-Praxis]).
 * Jeder numerische Schwellenwert ist Bestandteil des qualifizierten Zustands. Unautorisierte Änderungen verletzen die Konfigurationsintegrität.
 
 ### 5. Periodische Überprüfung (Periodic Review) & Außerbetriebnahme
 * **Periodic Review ([Best Practice: ISPE GAMP]):** Der Zeitabstand für periodische Systemüberprüfungen sollte **risikobasiert festgelegt** werden (z. B. halbjährlich oder jährlich als bewährte Industriepraxis). Dabei wird die kumulierte Modellperformance mit der ursprünglichen Baseline verglichen.
 * **Validierte Monitoring-Pipelines ([Best Practice: ISPE GAMP]):** Die Software-Pipelines zur automatisierten Drift-Berechnung und Alarmierung sollten nach Annex 11 qualifiziert sein, um Fehlalarme oder unbemerkte Ausfälle der Überwachung auszuschließen.
-* **Außerbetriebnahme (Retirement, [Draft §7.4]):** Bei Stilllegung sind historische Modellversionen, Code-Repositories und Inferenz-Aufzeichnungen über die vorgeschriebene Lebenszyklusfrist aufzubewahren ([Draft §7.4]).
+* **Außerbetriebnahme (Retirement, [Best Practice: GxP-Praxis]):** Bei Stilllegung sind historische Testdokumentationen, Testdaten und Prüfprotokolle wie andere GMP-Dokumentation aufzubewahren ([Draft §7.4]); die darüber hinausgehende Archivierung von Code-Repositories über den gesamten Systemlebenszyklus folgt etablierter GxP-Praxis ([Best Practice]).
 
 ---
 

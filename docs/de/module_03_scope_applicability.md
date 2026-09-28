@@ -76,9 +76,9 @@ Jede Software und jeder Algorithmus durchläuft diese fünf Stufen:
 - *Architektur-Best-Practice ([Best Practice: ML-Praxis]):* RAG-Architektur (Retrieval-Augmented Generation) zur Begrenzung auf geprüfte SOPs mit ALCOA+-Zitaten. Details siehe ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
 
 #### Fall 3: Cloud-SaaS-KI von Drittanbietern (Black-Box über API)
-- *Leitsatz nach [Draft §2.2]:* Der regulierte pharmazeutische Anwender behält stets die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität – auch wenn KI-Systeme oder -Komponenten von externen Lieferanten (*Suppliers*) bereitgestellt werden.
+- *Lieferantendokumentation & Verantwortung ([Draft §2.2]):* Dokumentationen für Aktivitäten von Dritten oder externen Lieferanten müssen vom regulierten Betreiber beschafft und formell geprüft werden ([Draft §2.2]); die rechtliche Gesamtverantwortung für Produktqualität und Datenintegrität verbleibt nach EU-Arzneimittelrecht uneingeschränkt beim pharmazeutischen Hersteller.
 - *Problem:* Wenn der Cloud-Anbieter im Hintergrund kontinuierliche Updates einspielt oder Bibliotheken ändert, ist das System für den Pharmahersteller nicht kontrollierbar (*Uncontrolled Environment Drift*).
-- *Lösung:* Cloud-KI erfordert strenge *Quality Agreements* und Service Level Agreements (SLAs), die unangekündigte Modelländerungen vertraglich ausschließen ([Draft §2.2, §10.2]). Primäre Freigabeberechnungen müssen auf intern validierten Systemen gegengeprüft werden. Siehe auch ➔ **[ISPE GAMP AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**.
+- *Lösung:* Cloud-KI erfordert strenge *Quality Agreements* und Service Level Agreements (SLAs), die das Beschaffen und Prüfen aller relevanten Dokumentationen ([Draft §2.2]) sowie eine strikte Konfigurationskontrolle des getesteten Modells ([Draft §10.2]) zur Erkennung unautorisierter Änderungen vertraglich und technisch absichern. Primäre Freigabeberechnungen müssen auf intern validierten Systemen gegengeprüft werden. Siehe auch ➔ **[ISPE GAMP AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**.
 
 ### 5. Das audit-feste „AI Inventory“
 Das Master-Verzeichnis für Inspektoren muss für jedes System zwingend enthalten:

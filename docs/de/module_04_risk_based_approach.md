@@ -74,7 +74,7 @@ Herkömmliche IT-Risikovorlagen reichen für KI-Systeme nicht aus. Ein Inspektor
 
 ### 5. Skalierung der menschlichen Aufsicht: HITL vs. HOTL ([Didaktik])
 
-> *Hinweis zum Draft-Wortlaut:* Der Draft verlangt für getestete Modelle keine pauschale HITL (Auslegung von §1, §3.3, §10.5; Konfidenz: Mittel). Wird der Testaufwand des Modells jedoch reduziert, weil ein Mensch die finale Entscheidung trifft, muss die Operator-Verantwortung explizit im Intended Use verankert sein und Schulung sowie Operator-Leistung müssen wie bei manuellen Prozessen überwacht werden ([Draft §3.3]). Nach [Draft §10.5] sind Review-Aufzeichnungen zu führen; je nach Kritikalität und Testtiefe kann dies die Prüfung jeder einzelnen Ausgabe bedeuten. Die Einteilung in HITL/HOTL ist ein didaktisches Industriemodell ([Didaktik]):
+> *Hinweis zum Draft-Wortlaut:* Der Draft verlangt für getestete Modelle keine pauschale HITL (Auslegung von §1, §3.3, §10.5 [Auslegung]). Wird der Testaufwand des Modells jedoch reduziert, weil ein Mensch die finale Entscheidung trifft, muss die Operator-Verantwortung explizit im Intended Use verankert sein und Schulung sowie Operator-Leistung müssen wie bei manuellen Prozessen überwacht werden ([Draft §3.3]). Nach [Draft §10.5] sind Review-Aufzeichnungen zu führen; je nach Kritikalität und Testtiefe kann dies die Prüfung jeder einzelnen Ausgabe bedeuten. Die Einteilung in HITL/HOTL ist ein didaktisches Industriemodell ([Didaktik]):
 
 | Dimension | High-Risk System (Voll qualifiziert vs. Operator-Assistenz) | Moderate-Risk System |
 | :--- | :--- | :--- |

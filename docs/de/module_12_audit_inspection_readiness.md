@@ -52,7 +52,7 @@ Im europäischen Inspektionswesen (*Compilation of Community Procedures on Inspe
 Behörden arbeiten sich strukturiert von der Makro- zur Mikroebene vor:
 * **Tier 1 (Organisatorische Vorgaben):** Übergreifende AI-Governance-Policy, Data-Ethics-Richtlinien, SOPs für Modellqualifizierung und Change Control.
 * **Tier 2 (Systemspezifische Dokumente):** *Master AI Inventory*, Intended Use Specification (Systemgrenzen nach [Draft §3.1]), User Requirements (URS), Qualifizierungsplan und -bericht (mit Akzeptanzkriterien nach [Draft §4.2]), Model Cards.
-* **Tier 3 (Granulare technische Evidenz):** Trainings- und Testdaten-Hashes, Code-Repositories ([Draft §7.1, §7.4]), Konfigurations-Logs ([Draft §10.2]), Random Seeds, Konfusionsmatrizen und Inferenz-Audit-Trails.
+* **Tier 3 (Granulare technische Evidenz):** Testdokumentation und Testdaten ([Draft §7.4]), Konfigurationskontrolle des getesteten Modells ([Draft §10.2]), Code-Repositories ([Best Practice: ISPE GAMP AI Guide]), Hashes, Random Seeds, Konfusionsmatrizen und Inferenz-Audit-Trails.
 
 ### 4. Das Master AI Inventory als QMS-Erwartung ([Best Practice: QMS-Standard])
 Die systematische Erfassung aller Algorithmen in einem zentralen **Master AI Inventory** ist eine elementare Erwartung an ein zeitgemäßes pharmazeutisches Qualitätsmanagementsystem (QMS):

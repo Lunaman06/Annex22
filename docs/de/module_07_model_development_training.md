@@ -57,8 +57,8 @@ Unter **EU GMP Annex 22** kollidiert dieser Ansatz frontal mit den pharmazeutisc
 ### 2. Das statische Modell & Konfigurationskontrolle ([Draft Glossar, §10.2])
 Die fundamentale Säule für den Einsatz in kritischen Prozessen ist das **statische Modell mit eingefrorenen Parametern** ([Draft Glossar: Static model]):
 * **Definition nach [Draft Glossar]:** Ein statisches Modell verändert seine Parameter (Gewichte) nach Abschluss des Qualifizierungs- und Freigabeprozesses im Produktivbetrieb nicht mehr. Für denselben Input liefert es deterministisch denselben Output ([Draft §1]).
-* **Konfigurationskontrolle ([Draft §10.2]):** Modellparameter, Hyperparameter, Vorverarbeitungsschritte und Umgebungsfaktoren müssen unter formaler Konfigurationskontrolle stehen.
-* **Archivierung von Artefakt & Inferenzumgebung ([Best Practice: ISPE GAMP AI Guide]; Konfidenz: Mittel):**
+* **Konfigurationskontrolle ([Draft §10.2]):** Das getestete Modell muss vor dem Produktiveinsatz unter formale Konfigurationskontrolle gestellt werden, und es müssen wirksame Maßnahmen zur Erkennung unautorisierter Änderungen genutzt werden ([Draft §10.2]). Hyperparameter, Vorverarbeitungsschritte und Umgebungsfaktoren werden nach guter Praxis mitgeführt ([Best Practice: ISPE GAMP AI Guide]).
+* **Archivierung von Artefakt & Inferenzumgebung ([Best Practice: ISPE GAMP AI Guide] [Auslegung]):**
   - In der modernen ML-Praxis (insb. bei Deep Learning auf GPU-Clustern) ist ein bitgenaues Neu-Trainieren von Grund auf über Jahre hinweg oft durch Fließkomma-Nichtdeterminismen erschwert.
   - Die regulatorisch belastbarste Lösung besteht daher darin, das **fertig trainierte und qualifizierte Modell-Artefakt** (binäre Gewichtsdateien, Checkpoints mit kryptografischem Hash) zusammen mit der **vollständigen Inferenz-Laufzeitumgebung** (Container-Image, fixe Library-Versionen) revisionssicher zu archivieren ([Best Practice: ISPE GAMP AI Guide]).
   - Ergänzend werden Code (Git-Commit-Hash), Daten-Snapshots und Random Seeds versioniert, um maximale Nachvollziehbarkeit sicherzustellen.
@@ -72,11 +72,11 @@ Data-Science-Teams nutzen heute standardmäßig Cloud- und MLOps-Plattformen wie
 * Sie unterliegen damit der Qualifizierungs- und Validierungspflicht nach **EU GMP Annex 11** (Zugriffskontrollen, Audit Trails, Datensicherheit, Disaster Recovery).
 * **Lieferantenüberwachung ([Draft §2.2]):**
   * Eine einfache SOC-2- oder ISO-27001-Zertifizierung des Cloud-Anbieters reicht für GxP **nicht** aus.
-  * Der regulierte pharmazeutische Anwender behält stets die uneingeschränkte Verantwortung für Produktqualität und Datenintegrität ([Draft §2.2]). Über SLAs und Quality Agreements muss sichergestellt sein, dass Plattformänderungen nicht unkontrolliert ablaufen.
+  * Der regulierte pharmazeutische Anwender muss Dokumentationen für Aktivitäten externer Dienstleister beschaffen und formal überprüfen ([Draft §2.2]); die übergeordnete arzneimittelrechtliche Verantwortung verbleibt stets beim Hersteller. Über SLAs und Quality Agreements muss sichergestellt sein, dass Plattformänderungen nicht unkontrolliert ablaufen.
 
 ### 4. Hyperparameter-Tuning & Die goldene Validierungsregel
 Hyperparameter (z.B. Lernrate, Baumtiefe, Epochenanzahl) steuern die mathematische Konvergenz:
-* **Change Control Status:** Die final ausgewählten Hyperparameter sind Teil der Konfigurationskontrolle ([Draft §10.2]). Nachträgliches Ändern ohne formalen Change Control ist unzulässig ([Draft §10.1]).
+* **Change Control Status:** Das qualifizierte Modell steht unter Konfigurationskontrolle ([Draft §10.2]). Nachträgliches Ändern von Parametern ohne formalen Change Control und Re-Testing-Bewertung ist unzulässig ([Draft §10.1]).
 * **Die goldene Regel:** Hyperparameter dürfen **ausschließlich auf dem Validierungsdatensatz** optimiert werden – **niemals auf dem finalen Testdatensatz (Hold-out Test Set)**! Andernfalls entsteht *Data Leakage*, was zu Scheinvalidierungen führt.
 * **Dokumentierte Suchmethodik:** Die gewählten Suchintervalle und Abbruchkriterien müssen nachvollziehbar begründet werden.
 

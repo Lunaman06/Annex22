@@ -72,7 +72,7 @@ Während der *Intended Use* den fachlichen Rahmen steckt, definiert die technisc
 - **Algorithmenklasse:** Angewandte statistische oder ML-Methoden.
 - **Data Lineage:** Nachvollziehbarkeit aller Trainings- und Testkorpora.
 - **Statisches Modell ([Draft Glossar]):** Eingefrorene Modellgewichte (*Frozen Weights*) nach Freigabe.
-- **Konfigurationskontrolle ([Draft §10.2]):** Feste Versionierung aller Parameter, Hyperparameter und Grenzwerte.
+- **Konfigurationskontrolle ([Draft §10.2]):** Getestetes Modell unter Konfigurationskontrolle zur Erkennung unautorisierter Änderungen; Hyperparameter und Grenzwerte als Best Practice ([Best Practice: ML-Praxis]).
 
 ### 4. Reale Katastrophenszenarien: Die Gefahr von *Scope Creep*
 

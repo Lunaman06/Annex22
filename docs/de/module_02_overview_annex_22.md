@@ -61,7 +61,7 @@ graph TD
   - Strikt isolierte, unabhängige Testdatensätze (*Independent Test Sets*) mit Zugriffskontrollen und personeller Unabhängigkeit (*Staff Independence*, [Draft §6.2, §6.5]),
   - Risikoproportionale *Explainability* im Rahmen des Testings ([Draft §8.1, §8.2]),
   - Kontinuierliches Lebenszyklus-Monitoring von Performance und Input-Verteilung ([Draft §10.3, §10.4]),
-  - **Volle Verantwortung des regulierten Anwenders ([Draft §2.2]):** Der pharmazeutische Unternehmer behält die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität, auch wenn KI-Modelle oder -Komponenten von externen Lieferanten (*Suppliers*) bezogen werden.
+  - **Prüfung der Lieferantendokumentation durch den Betreiber ([Draft §2.2]):** Werden Aktivitäten von externen Lieferanten durchgeführt, muss die Dokumentation vom regulierten Anwender beschafft und überprüft werden ([Draft §2.2]). Die uneingeschränkte pharmazeutische und rechtliche Gesamtverantwortung verbleibt nach EU-Arzneimittelrecht stets beim pharmazeutischen Unternehmer.
 
 ### 3. Was ist „In Scope“ und was ist „Out of Scope“?
 - **In Scope (Reguliert nach [Draft §1]):**

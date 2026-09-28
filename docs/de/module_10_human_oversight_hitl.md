@@ -46,10 +46,11 @@ flowchart TD
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
 ### 1. Das Kernprinzip: Menschliche Verantwortung & Entscheidungsbegleitung
-Unter EU GMP Annex 22 gilt das Grundprinzip: **KI-Systeme besitzen keine eigenständige pharmazeutische Rechtsverantwortung ([Draft §2.2]).**
-* **Keine pauschale HITL-Pflicht für voll qualifizierte Modelle:** Der Draft verlangt für umfassend getestete Modelle keine pauschale HITL (Auslegung von §1, §3.3, §10.5; Konfidenz: Mittel). Ein voll qualifiziertes System (z. B. automatisierte Gut-/Schlecht-Aussortierung in der Sichtprüfung) darf innerhalb seines qualifizierten Rahmens automatisiert agieren.
+Unter EU GMP Annex 22 gilt das Grundprinzip: **KI-Systeme besitzen keine eigenständige Rechtsverantwortung** (die Gesamtverantwortung für Freigaben und GMP-Compliance verbleibt nach EU-Arzneimittelrecht stets beim regulierten pharmazeutischen Unternehmer; nach [Draft §2.2] muss der Anwender Dokumentationen auch bei Drittanbietern eigenverantwortlich beschaffen und überprüfen).
+* **Keine pauschale HITL-Pflicht für voll qualifizierte Modelle:** Der Draft verlangt für umfassend getestete Modelle keine pauschale HITL (Auslegung von §1, §3.3, §10.5 [Auslegung]). Ein voll qualifiziertes System (z. B. automatisierte Gut-/Schlecht-Aussortierung in der Sichtprüfung) darf innerhalb seines qualifizierten Rahmens automatisiert agieren.
 * **Reduzierter Testaufwand bedingt strikte Operator-Pflichten ([Draft §3.3]):** Wenn das KI-System lediglich Input zu einer menschlichen Entscheidung liefert und der formale Testaufwand des Modells aufgrund dieser menschlichen Letztentscheidung reduziert wurde, muss die Rolle und Verantwortung des Bedieners (*Human Operator*) explizit im *Intended Use* festgelegt werden ([Draft §3.3]).
-* **Überwachung wie bei manuellen Prozessen ([Draft §3.3, §9.1, §9.2]):** Schulung und Arbeitsleistung des Bedieners müssen in diesem Fall genauso überwacht werden wie bei einem rein manuellen Prozess. Das Personal muss in den Grenzen des Systems und im Erkennen von Fehlern geschult sein ([Draft §9.1, §9.2]).
+* **Überwachung wie bei manuellen Prozessen ([Draft §3.3]):** Schulung und Arbeitsleistung des Bedieners müssen in diesem Fall genauso überwacht werden wie bei einem rein manuellen Prozess ([Draft §3.3]). Das Personal muss in den Grenzen des Systems und im Erkennen von Fehlern geschult sein ([Draft §3.3] / [Best Practice]).
+* **Konfidenzschwellen & 'Undecided'-Routing ([Draft §9.1, §9.2]):** Prädiktive oder klassifizierende Modelle müssen geeignete Schwellenwerte besitzen; bei sehr niedrigem Konfidenzscore sollte das Modell ein Ergebnis als 'undecided' kennzeichnen ([Draft §9.2]). In diesem Fall greift unmittelbar der menschliche Reviewer, um eine verlässliche Entscheidung herbeizuführen.
 * **Review-Aufzeichnungen & Ausgabeprüfung ([Draft §10.5]):** Aufzeichnungen über die Überprüfung von Systemausgaben durch Operatoren müssen aufbewahrt werden. Abhängig von der Kritikalität der Anwendung und der Tiefe der Modelltests kann dies die schriftlich geregelte Prüfung jeder einzelnen Ausgabe erfordern.
 * **Entflechtung zum allgemeinen Arzneimittelrecht:** Die Gesamtverantwortung des Herstellers und der Sachkundigen Person (Qualified Person) ergibt sich aus dem allgemeinen EU-Arzneimittelrecht; der Annex-22-Draft ergänzt dies um die spezifischen Anforderungen an die Verlässlichkeit der KI-Unterstützung.
 
@@ -61,7 +62,7 @@ Unter EU GMP Annex 22 gilt das Grundprinzip: **KI-Systeme besitzen keine eigenst
 | :---: | :--- | :--- | :--- | :--- |
 | **HITL** | **Human-in-the-Loop** | Reduzierte Modell-Testtiefe ([Draft §3.3, §10.5]) oder GenAI ([Draft §1]) | Der Mensch prüft und zeichnet die Ausgabe, bevor eine physische oder datentechnische Aktion wirksam wird. | Erforderlich, wenn der Testaufwand des Modells reduziert wurde oder bei unkritischer GenAI. |
 | **HOTL** | **Human-on-the-Loop** | Voll qualifizierte Prozessautomatisierung | Das Modell steuert Prozesse innerhalb vorvalidierter Parameter. Der Mensch überwacht Trends und greift bei Abweichungen ein. | Zulässig für qualifizierte Inline-Regelungen (z. B. PAT), sofern Grenzen und Monitoring validiert sind. |
-| **HOOL** | **Human-out-of-the-Loop** | Autonome Systeme ohne menschliche Kontrollmöglichkeit | Vollautomatisches System ohne Überwachungsmöglichkeit. | Für kritische GMP-Prozesse unvereinbar mit den Grundsätzen von Annex 11 und Annex 22 ([Draft §1, §2.2]). |
+| **HOOL** | **Human-out-of-the-Loop** | Autonome Systeme ohne menschliche Kontrollmöglichkeit | Vollautomatisches System ohne Überwachungsmöglichkeit. | Für kritische GMP-Prozesse unvereinbar mit den Grundsätzen von Annex 11 und Annex 22 ([Draft §1; EudraLex-Gesamtverantwortung]). |
 
 ### 3. Die Automation-Bias-Falle (Creeping Decay of Oversight)
 Die größte praktische Gefahr bei Systemen mit menschlicher Letztentscheidung ist die kognitive Gewöhnung:
@@ -89,7 +90,7 @@ Um menschliche Prüfer wach und unabhängig zu halten, kann das Interaktionsdesi
 ### 5. Was Behördeninspektoren sehen wollen
 Bei Inspektionen prüfen Auditoren gezielt die Qualität der menschlichen Aufsicht:
 1. **Plausibilität der Review-Dauer:** Werden umfangreiche Chargenprotokolle in Sekundenschnelle freigegeben, ist die Aufsicht unglaubwürdig. Durchsatz-KPIs dürfen Prüfer nicht für gründliches Nachprüfen bestrafen.
-2. **Qualifikation und Training ([Draft §9.1, §9.2]):** Schulungsnachweise müssen belegen, dass das Personal die spezifischen Grenzen und Fehlermodi des KI-Modells versteht sowie weiß, wie und wann das System zu überstimmen ist (*Override*).
+2. **Qualifikation und Training ([Draft §3.3] / [Best Practice]):** Schulungsnachweise müssen belegen, dass das Personal die spezifischen Grenzen und Fehlermodi des KI-Modells versteht sowie weiß, wie und wann das System fachlich zu hinterfragen und zu überstimmen ist (*Override*).
 3. **Audit-Trail für Overrides ([Draft §10.5]):** Aufzeichnungen über Korrekturen und Überstimmungen müssen auffindbar und begründet sein.
 
 ---
@@ -109,15 +110,15 @@ Bei Inspektionen prüfen Auditoren gezielt die Qualität der menschlichen Aufsic
 
 ### Absolute Must-Haves:
 - [ ] Wurde bei Modellen mit reduzierter Testtiefe die Operator-Verantwortung explizit im *Intended Use* verankert ([Draft §3.3])?
-- [ ] Werden Schulung und Arbeitsleistung der Bediener wie bei manuellen Prozessen überwacht ([Draft §3.3, §9.1])?
-- [ ] Wurde das Personal geschult, wie und wann das KI-System zu überstimmen ist (*Override*, [Draft §9.2])?
+- [ ] Werden Schulung und Arbeitsleistung der Bediener wie bei manuellen Prozessen überwacht ([Draft §3.3])?
+- [ ] Wurde das Personal geschult, wie und wann das KI-System zu überstimmen ist (*Override*, [Best Practice: GxP-Praxis])?
 - [ ] Werden Aufzeichnungen über die Überprüfung der Systemausgaben durch Operatoren geführt und aufbewahrt ([Draft §10.5])?
 - [ ] Schützt das Workflow-Design wirksam vor unkritischem Durchklicken (*Automation Bias*)?
 - [ ] Werden Overrides und Abweichungen im Audit Trail nachvollziehbar dokumentiert ([Draft §10.5])?
 
 ### Rote Flaggen bei Inspektionen (Red Flags):
 - ❌ Der Testaufwand des Modells wurde mit Verweis auf menschliche Kontrolle reduziert, aber es existieren weder Operator-SOPs noch Schulungsnachweise ([Draft §3.3]).
-- ❌ Das Personal kann die Frage des Inspektors: *„Welche typischen Fehler macht diese KI und wie erkennen Sie diese?“* nicht beantworten ([Draft §9.1]).
+- ❌ Das Personal kann die Frage des Inspektors: *„Welche typischen Fehler macht diese KI und wie erkennen Sie diese?“* nicht beantworten ([Draft §3.3]).
 - ❌ Eine Override-Rate von dauerhaft 0% in komplexen Beurteilungsprozessen wird ohne jede Plausibilitätsprüfung hingenommen.
 - ❌ Zeitdruck oder Durchsatz-KPIs zwingen Bediener zu oberflächlichen Bestätigungen in Sekundenschnelle.
 
