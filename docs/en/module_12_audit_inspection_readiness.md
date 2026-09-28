@@ -44,16 +44,16 @@ Organizations cannot prepare for an Annex 22 inspection by scrambling to assembl
 * True inspection readiness stems from **consistently executed engineering and QMS discipline** across every day of the system lifecycle.
 
 ### 2. Regulatory Deficiency Severity Grading in the EU GMP Environment
-In European inspection practice (*Compilation of Community Procedures on Inspections*), inspection findings are classified into three official categories:
-* **Critical Deficiency:** A deficiency which has produced or leads to a significant risk of producing a medicinal product harmful to patients, or a combination of multiple major deficiencies (e.g., deploying an unvalidated, dynamically auto-retraining model for final batch release). *Legal Consequences:* Issuance of a **Statement of Non-Compliance with GMP** (Art. 111(7) Directive 2001/83/EC), suspension or revocation of manufacturing authorizations or GMP certificates, and authority-mandated batch recalls.
-* **Major Deficiency:** A significant deviation from EU GMP guidelines (e.g., shadow AI discovered in production, retraining without formal Change Control and re-qualification, inadequate test data isolation). *Regulatory Action:* Mandatory submission of a detailed corrective action plan (CAPA) typically within 15 to 30 days; during FDA inspections, issuance of a US-specific *Warning Letter*.
+In European inspection practice (*Compilation of Union Procedures on Inspections and Exchange of Information*), inspection findings are classified into three official categories:
+* **Critical Deficiency:** A deficiency which has produced or leads to a significant risk of producing a medicinal product harmful to patients, or a combination of multiple major deficiencies (e.g., deploying an unvalidated, dynamically auto-retraining model for final batch release). *Legal Consequences:* Issuance of a **Statement of Non-Compliance with GMP** (Art. 111(7) Directive 2001/83/EC) with potential subsequent regulatory actions such as suspension or restriction of the GMP certificate, manufacturing prohibitions, up to mandatory batch recalls.
+* **Major Deficiency:** A significant deviation from EU GMP guidelines (e.g., shadow AI discovered in production, retraining without formal Change Control and re-qualification, inadequate test data isolation). *Regulatory Action:* Mandatory submission of a detailed corrective action plan (CAPA) within an authority-specified timeframe; during US inspections, potentially issuance of an FDA-specific *Warning Letter*.
 * **Other Deficiency (*not designated as 'Minor'*):** A departure from GMP standards that cannot be classified as critical or major (e.g., isolated editorial documentation oversights); addressed through routine internal CAPA management.
 
 ### 3. The 3-Tier Documentation Hierarchy ([Didaktik])
 Inspectors systematically drill from policy governance down to machine-level artifacts:
 * **Tier 1 (Organizational Governance):** Corporate AI Quality Policy, Data Ethics Framework, SOPs for AI Qualification, and Change Control.
 * **Tier 2 (System-Specific Documentation):** *Master AI Inventory*, Intended Use Specification (system boundaries under [Draft §3.1]), User Requirements (URS), Qualification Plan & Report (with acceptance criteria under [Draft §4.2]), and Model Cards.
-* **Tier 3 (Granular Technical Evidence):** Training and test dataset cryptographic hashes, source code repositories ([Draft §7.1, §7.4]), configuration logs ([Draft §10.2]), fixed random seeds, confusion matrices, and persistent inference audit trails.
+* **Tier 3 (Granular Technical Evidence):** Test documentation and test datasets ([Draft §7.4]), configuration control of the tested model ([Draft §10.2]), code repositories ([Best Practice: ISPE GAMP AI Guide]), cryptographic hashes, fixed random seeds, confusion matrices, and persistent inference audit trails.
 
 ### 4. The Master AI Inventory as a QMS Expectation ([Best Practice: QMS Standard])
 The systematic registration of all algorithmic models within a central **Master AI Inventory** is a foundational expectation of a contemporary pharmaceutical Quality Management System (QMS):

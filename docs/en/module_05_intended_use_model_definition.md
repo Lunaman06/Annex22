@@ -83,7 +83,7 @@ While *Intended Use* defines operational and business boundaries, the technical 
 - **Algorithm Class:** Applied statistical or machine learning methodologies.
 - **Data Lineage:** Traceability across all training, validation, and testing corpora (ALCOA+).
 - **Static Model Architecture ([Draft Glossary]):** Model weights locked post-qualification (*Frozen Weights*).
-- **Configuration Control ([Draft §10.2]):** Strict version control of all parameters, hyperparameters, and operational decision thresholds.
+- **Configuration Control ([Draft §10.2]):** Tested model placed under configuration control to detect unauthorized changes; hyperparameters and operational decision thresholds as best practice ([Best Practice: ML Practice]).
 
 ### 4. Real-World Risk: The Hazard of Scope Creep
 

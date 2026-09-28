@@ -72,7 +72,7 @@ graph LR
 
 ---
 
-## 🏛️ The 6 Pillars of Trustworthy AI (Annex 22)
+## 🏛️ The 6 Pillars of Trustworthy AI ([Didaktik])
 
 ```mermaid
 graph TD

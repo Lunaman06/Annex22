@@ -67,28 +67,29 @@ Annex 22 therefore mandates four complementary metric dimensions:
 
 ### 3. Acceptance Criteria & No Decrease in Performance ([Draft §4.2, §4.3])
 * **Pre-Approval by Process SMEs ([Draft §4.2]):** All acceptance criteria must be predefined and formally approved by qualified domain experts (*Process SMEs*) **prior to commencing acceptance testing**. Modifying or lowering criteria post-test after viewing results is unacceptable.
-* **No Performance Decrease ([Draft §4.3]):** The performance of the AI system **should result in no decrease in performance compared to the process it replaces** ([Draft §4.3]).
-* **Error Compensation ([Draft §4.3]):** If the AI system introduces higher error rates in certain areas than the previous process, this must be compensated for by superior performance in other areas, and overall performance must not decrease.
+* **Acceptance Criteria at Least as High as Replaced Process ([Draft §4.3]):** Acceptance criteria for the model's performance should result in no decrease in performance compared to the process it replaces. Where the AI system may perform less well in certain areas, this must be compensated for by higher performance in other areas, and overall performance must not decrease.
 
 ### 4. Staff Independence & Test Data Safeguards ([Draft §6.1–§6.5])
 Safeguarding test data against contamination or subconscious overfitting is a primary regulatory inspection focus:
-* **Independent Test Data ([Draft §6.1]):** System testing must be conducted with data that are completely independent of training and tuning data.
-* **No Developer Access to Test Data ([Draft §6.2]):** Personnel involved in the development and training of the AI model **must not have had access to the test data**.
-* **Access Controls, Audit Trails & No Data Copies ([Draft §6.2]):** Test datasets must be protected by technical and procedural access controls and audit trails. **No copies of test data may exist outside the secure repository**.
+* **Independent Test Data ([Draft §6.1]):** System testing must be conducted with data that are independent, i.e. not used during development, training, or internal model validation (*validation dataset*).
+* **No Developer Access to Test Data ([Draft §6.2]):** Where test data were split from a larger dataset prior to training, personnel involved in development and training **must not have had access to the test data**.
+* **Access Controls, Audit Trails & No Data Copies ([Draft §6.2]):** Test datasets must be protected by technical and/or procedural access controls and audit trails. **No copies of test data may exist outside the secure repository**.
 * **Logging Test Data Usage ([Draft §6.3]):** Complete records must be kept indicating which test data were used, when testing took place, and the number of times test data were accessed.
-* **Prohibition of Reuse Without Risk Assessment ([Draft §6.4]):** Test datasets must not be reused for repeated testing iterations without documented justification and risk assessment to prevent unseen overfitting to the test partition.
-* **Staff Exclusion & Four-Eyes Principle ([Draft §6.5]):** Organizational measures must ensure that personnel who had access to test data do not subsequently participate in model training or validation.
-  - *Exception for Small Organizations ([Draft §6.5]):* Where strict organizational separation is not feasible due to enterprise size, a **Four-Eyes Principle** by an independent secondary reviewer must be applied. Full organizational separation between distinct teams represents the recommended industry standard ([Best Practice: ISPE GAMP]).
+* **Test Data from Physical Objects ([Draft §6.4]):** If test data are derived from physical objects (e.g. sample containers, vials, tablets), the physical objects used for testing must not have been previously used for training or internal validation of the model, unless the characteristics measured are independent.
+* **Staff Independence & Four-Eyes Principle ([Draft §6.5]):** Effective controls must be implemented to prevent personnel with test data access from participating in the training or validation of the same model.
+  - *Exception for Smaller Organizations ([Draft §6.5]):* Where complete organizational separation is not feasible, an individual with access to the test data may only participate in training/validation if working as a pair with a peer who had no test data access (Four-Eyes Principle / 4-Eyes Principle). Establishing completely separate organizational teams represents a recommended didactic structure ([Didaktik]).
 
-### 5. Software Code, Repositories & Lifecycle Retention ([Draft §7.1–§7.4])
-* **Version Control in Secure Repositories ([Draft §7.1]):** All software code utilized for training, testing, and operational inference must be maintained under version control in a secure repository.
-* **Traceability to Requirements ([Draft §7.2]):** Code must be documented, independently reviewable, and fully traceable to underlying requirements.
-* **Supplier & Library Risk Evaluation ([Draft §7.3]):** Third-party libraries, frameworks, and open-source dependencies must be formally identified, documented, and evaluated based on risk.
-* **Retention Duration ([Draft §7.4]):** Code, repositories, and documentation must be retained throughout the entire operational lifetime of the system.
+### 5. Test Execution & Test Documentation ([Draft §7.1–§7.4])
+* **Suitability for Intended Use & Generalisation ([Draft §7.1]):** Testing must ensure that the model is suitable for its intended use and is generalising well (i.e. performing satisfactorily on unseen data across the intended use envelope). This includes detecting potential overfitting or underfitting to the training data.
+* **Approved Test Plan Involving Process SMEs ([Draft §7.2]):** Prior to testing, a formal test plan must be pre-specified and approved. It must include a summary of the intended use, pre-defined metrics and acceptance criteria, references to test data, a test script detailing execution steps, and the method for metric calculation. Process SMEs must be actively involved in plan development.
+* **Deviation Management & Omissions ([Draft §7.3]):** Any deviations from the test plan, any failure to achieve acceptance criteria, and any omission of planned test data must be documented, investigated, and fully justified.
+* **Retention of Test Documentation ([Draft §7.4]):** All test documentation must be retained together with the intended use description, test data characterisation, the test data itself, and physical test objects where applicable. Documentation on access controls and audit trail records must be retained similar to other GMP documentation.
+* *Code Repositories & Traceability ([Best Practice: ISPE GAMP AI Guide]):* Maintaining all model and validation code under version control in secure repositories and assessing third-party libraries represent established industry best practices, though not explicitly regulated in the draft itself.
 
-### 6. Staff Qualification, Limitations & Overrides ([Draft §9.1, §9.2])
-* **Understanding Limitations & Biases ([Draft §9.1]):** Personnel interacting with the AI system must possess appropriate qualification and training, including a thorough understanding of the model's inherent limitations and potential statistical biases.
-* **Training in System Overrides (*Override Training*, [Draft §9.2]):** Training programs must explicitly instruct operators on how and when to critically challenge system outputs and formally override them when necessary.
+### 6. Confidence Score Logging & Threshold Setting ([Draft §9.1, §9.2])
+* **Logging Confidence Scores During Testing ([Draft §9.1]):** When testing a model for predicting or classifying data, the system should, where applicable, log the model's confidence score for each prediction or classification result.
+* **Appropriate Threshold Settings & Labeling as 'Undecided' ([Draft §9.2]):** Models used for prediction or classification should have an appropriate threshold setting to ensure predictions or classifications are only made when appropriate. If the confidence score is very low, consideration should be given to having the model label the result as 'undecided' rather than making potentially unreliable predictions or classifications.
+* *Operator Training on Limitations & Overrides ([Draft §3.3] / [Best Practice]):* Where testing effort was reduced based on human oversight, operators must be trained in model limitations and monitored like manual operators ([Draft §3.3]). Targeted override training represents established industry good practice ([Best Practice / GxP Practice]).
 
 ### 7. Boundary Condition Testing & Out-of-Distribution (OOD) Protection
 Validation must never be confined to "sunny-day" scenarios:

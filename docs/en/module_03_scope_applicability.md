@@ -15,7 +15,7 @@ language: en
 
 ---
 
-## 🧭 Core Concept: The Scoping Decision Funnel
+## 🧭 Core Concept: The Scoping Decision Funnel ([Didaktik])
 
 ```mermaid
 flowchart TD
@@ -43,8 +43,8 @@ flowchart TD
 
 ## 🎯 Learning Objectives & Guiding Questions
 1. **What are the risks of "Over-Claiming" vs. "Under-Claiming" during AI scoping?**
-2. **How does the 5-stage Decision Funnel operate?**
-3. **What is the 4-tier risk classification matrix under Annex 22?**
+2. **How does the 5-stage Decision Funnel operate ([Didaktik])?**
+3. **What is the 4-tier risk classification matrix under Annex 22 ([Didaktik])?**
 4. **What lessons emerge from critical boundary cases (automated visual inspection, LLM drafting, cloud SaaS)?**
 5. **What mandatory metadata belongs in an audit-ready Master AI Inventory?**
 
@@ -57,7 +57,7 @@ flowchart TD
 - **Under-Claiming (Under-Regulation):** Overlooking an AI tool in a GMP workflow or dismissing it as "just a pilot". **Consequence:** Guaranteed Major or Critical Finding during the next inspection.
 - **Goal:** A disciplined, defensible middle path backed by a formal *Documented Scoping Rationale*.
 
-### 2. The 5-Stage Decision Funnel
+### 2. The 5-Stage Decision Funnel ([Didaktik])
 Every software component and algorithm must pass through five rigorous qualification gates:
 1. **Is it Truly AI/ML?** Only models employing statistical learning, pattern recognition, or generative synthesis fall under Annex 22. Deterministic, rule-based systems remain exclusively under **Annex 11**.
 2. **Is There a GMP Impact?** Does it affect critical processes in medicinal product manufacturing with direct or indirect impact on patient safety, product quality, or data integrity ([Draft §1])?
@@ -90,9 +90,9 @@ Every software component and algorithm must pass through five rigorous qualifica
 - *Architectural Best Practice ([Best Practice: ML Practice]):* RAG Architecture (Retrieval-Augmented Generation) restricting outputs to approved SOPs with audit-trailed ALCOA+ citations. Details see ➔ **[Specialized Guide: Generative AI (GenAI), LLMs & RAG in GxP](appendix_genai_rag_gxp.md)**.
 
 #### Case 3: Third-Party Cloud SaaS AI (API Black-Box)
-- *Core Principle under [Draft §2.2]:* The regulated pharmaceutical user retains ultimate accountability for product quality, patient safety, and data integrity—even when AI systems or components are procured from external suppliers (*Suppliers*).
+- *Supplier Documentation & Accountability ([Draft §2.2]):* Documentation for activities performed by third-party suppliers must be obtained and reviewed by the regulated user ([Draft §2.2]); ultimate legal and pharmaceutical accountability for product quality and data integrity strictly remains with the pharmaceutical manufacturer under EU pharma law.
 - *The Hazard:* If a cloud vendor updates underlying model weights or runtime libraries unannounced, the pharmaceutical manufacturer operates an unvalidated system (*Uncontrolled Environment Drift*).
-- *Solution:* Cloud AI requires binding *Quality Agreements* and SLAs prohibiting unannounced model modifications ([Draft §2.2, §10.2]). Critical GxP calculations must have internal verification checkpoints. See also ➔ **[ISPE GAMP AI Guide & Industry Best Practices](appendix_ispe_gamp_ai_best_practices.md)**.
+- *Solution:* Cloud AI requires binding *Quality Agreements* and SLAs contractually and technically securing the procurement and review of all relevant documentation ([Draft §2.2]) as well as strict configuration control of the tested model ([Draft §10.2]) to detect unauthorized alterations. Critical GxP calculations must have internal verification checkpoints. See also ➔ **[ISPE GAMP AI Guide & Industry Best Practices](appendix_ispe_gamp_ai_best_practices.md)**.
 
 ### 5. Mandatory Elements of the Master AI Inventory
 The central inventory required by auditors must document for every system:

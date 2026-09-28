@@ -56,9 +56,9 @@ The foundational data integrity principles (Attributable, Legible, Contemporaneo
 
 | ALCOA+ Attribute | Traditional CSV Definition | Annex 22 Mandate for AI Datasets |
 | :--- | :--- | :--- |
-| **Complete** | Documents without missing pages | **No Selective Omission:** Discarding process outliers, failed batches, or marginal runs without formal statistical rationale is strictly prohibited. |
+| **Complete** | Documents without missing pages | **No Selective Omission:** Discarding process outliers, failed batches, or marginal runs without formal documentation and justification is strictly prohibited ([Draft §5.5 analogously for test data]). |
 | **Consistent** | Uniform date and naming conventions | **Metadata Harmonization:** Standardized timestamp frequencies, sensor resolutions, and physical units across heterogeneous production lines and historical years. |
-| **Enduring** | Tamper-evident archiving | **Full Lifecycle Retention:** Consistent with the code and documentation retention requirements ([Draft §7.4]), training and test corpora must be archived for the operational lifespan of the system plus product-specific retention periods. |
+| **Enduring** | Tamper-evident archiving | **Full Lifecycle Retention ([Best Practice: GxP Practice]):** Consistent with the test documentation retention requirements similar to other GMP documentation ([Draft §7.4]), training and test corpora must be archived for the operational lifespan of the system plus product-specific retention periods. |
 | **Available** | Rapid access during inspections | **Auditable Availability:** Datasets must remain auditable and retrievable for inspectors within reasonable timeframes. |
 
 ### 3. Data Lineage & The 4 Major Statistical Biases ([Didaktik])
@@ -74,19 +74,20 @@ Unbroken **Data Lineage** is the key defense against statistical biases:
 4. **Operator Bias:** Training data originate exclusively from elite senior operators. The algorithm fails when novice operators run the line.
 
 ### 4. Synthetic Data & Labels ([Draft §5.6])
-- **Regulatory Position ([Draft §5.6]):** The generation of synthetic data or synthetic labels (e.g., via generative AI) for training, testing, or evaluation of AI models **is not recommended** (*"is not recommended"*).
-- **Strict Justification Mandate ([Draft §5.6]):** Any utilization of synthetic data must be comprehensively and robustly justified (*"Any use of synthetic data should be fully justified"*).
-- **GxP Operational Impact:** This restriction applies equally to training data, test datasets, and automated ground-truth labeling. Validation must prioritize real historical, operational, or experimentally verified production data.
+- **Regulatory Position ([Draft §5.6]):** The generation of test data or labels (e.g. by means of generative AI) **is not recommended** (*"Generation of test data or labels, e.g. by means of generative AI, is not recommended"*).
+- **Strict Justification Mandate ([Draft §5.6]):** Any utilization of test data or labels generated in this manner must be comprehensively and robustly justified (*"any use hereof should be fully justified"*).
+- **GxP Operational Impact:** The draft strictly limits this recommendation to **test data and labels** (not generally to training data, which remain subject to standard bias and representativeness justifications [Best Practice]). For final testing during validation, real experimental, operational, or historical production data must take precedence.
 
-### 5. Regulatory Mandates for Test Data ([Draft §5.1–§5.5, §3.2])
+### 5. Regulatory Mandates for Test Datasets ([Draft §5.1–§5.6, §3.2])
 While the draft does not establish detailed prescriptive rules for training datasets, it imposes exceptionally rigorous requirements on **testing datasets**:
-* **Representativeness of Operating Space ([Draft §5.1]):** Test data must be representative of the intended operational envelope, covering standard operating ranges and expected process variability.
-* **Mandatory Inclusion of Edge Cases ([Draft §5.2]):** Test datasets must deliberately include challenging samples, edge cases, and rare operational conditions to prove model robustness empirically.
-* **Curation & Exclusion Rationale ([Draft §5.3]):** Curation of test data must be fully documented, including data sources, inclusion criteria, and formal technical justifications for excluded data points.
-* **Ground Truth Verification by Process SMEs ([Draft §5.4]):** All labels (*Ground Truth*) within the testing corpus must be formally verified and approved by qualified Process Subject Matter Experts.
-* **Verification of Data Quality Attributes ([Draft §5.5]):** Accuracy, completeness, and data integrity of the entire test dataset must be formally verified.
-* **Representation of Relevant Subgroups ([Draft §3.2]):** Relevant sub-populations of data or operating conditions identified in the Intended Use must be adequately sampled within the test data.
-* **Test Data Isolation & Access Controls ([Draft §6.1, §6.2]):** Strict hold-out isolation; developers must not access test datasets during training or hyperparameter tuning.
+* **Selection & Representativeness ([Draft §5.1]):** Test data should be representative of and span the full sample space of the intended use. They should be stratified, include all sub-groups, and reflect boundaries, complexity, common, and rare variations within the intended use. Criteria and justification for test data selection should be documented.
+* **Sufficient Sample Size ([Draft §5.2]):** The test data, and each of the sub-groups within the test data, should be sufficient in size to determine the pre-defined metrics with adequate confidence.
+* **Label Verification with High Degree of Correctness ([Draft §5.3]):** Labeling of test data should be verified through a process ensuring a very high degree of correctness. This may include independent verification by multiple experts, validated measuring devices, or laboratory tests.
+* **Pre-specified Pre-processing ([Draft §5.4]):** Any pre-processing of test data (e.g. transformations, normalization, standardization) should be pre-specified and justified to reflect real conditions of the intended use.
+* **Documented Cleaning & Data Exclusion ([Draft §5.5]):** Any cleaning or removal of test data should be documented and justified.
+* **Generation of Test Data or Labels ([Draft §5.6]):** Generation of test data or labels, e.g. by means of generative AI, is not recommended; any use hereof should be fully justified.
+* **Account for Relevant Subgroups ([Draft §3.2]):** Relevant sub-populations of data or operating conditions identified in the Intended Use must be adequately sampled within the test data.
+* **Test Data Isolation & Data Leakage ([Draft §6.1, §6.2]):** Strict hold-out isolation; developers must not access or inspect test datasets during training or hyperparameter tuning.
 
 ### 6. Operational Data Governance & Feedback Loops
 Data governance discipline intensifies post-deployment:

@@ -42,19 +42,20 @@ graph LR
 
 ### Regulatory Status & Legal Applicability:
 * **Current Status (as of 2026):** Annex 22 is currently a **Consultation Draft** issued by the European Commission, the EMA, and PIC/S. The public consultation closed on **October 7, 2025**. At the subsequent *EMA Multi-Stakeholder Workshop* (June 30 / July 1, 2026), stakeholder feedback and potential policy developments were discussed; re-evaluation of specific constraints (such as the exclusion of Generative AI from critical processes) is currently under review by inspectorate working groups, with no formal decision taken yet. Final publication and enforcement are expected in **late 2026 / early 2027**.
-* **Factual Inspection Relevance Today:** Although formally in draft stage, European GMDP inspectors already apply the draft's core principles as the current **"State of the Art"** benchmark during computerized systems inspections under Annex 11.
+* **Factual Relevance in Practice ([Interpretation]):** Although formally in draft stage (consultation draft), industry and regulatory practice expects audits and validation strategies to align with the core principles formulated in the draft as the authoritative "State of the Art" benchmark.
 * **The EudraLex Digital Package:** Annex 22 does not stand alone; it forms a modernized digital tripartite framework alongside the revisions to **Annex 11** (Computerised Systems) and **Chapter 4** (Documentation).
 
 ### The 3 Core Tenets:
 1. **Annex 22 Supplements Annex 11 ([Draft §1]):** The draft explicitly positions itself as *additional guidance* to EU GMP Annex 11 (Computerised Systems). Annex 11 remains the foundation (IQ/OQ, physical controls, audit trails, cloud security). Annex 22 provides specific requirements for machine learning algorithms.
 2. **Scope: Static Models and Deterministic Output ([Draft §1]):** The draft strictly applies to static models and models with deterministic output supporting or executing critical processes in medicinal product manufacturing. Dynamic models (continuous online retraining) and models with probabilistic output are outside its scope and should not be used in critical GMP applications (*"should not be used"*).
-3. **Regulated User Accountability & Human Oversight ([Draft §2.2, §3.3, §10.5]):** The regulated user retains full responsibility for product quality, patient safety, and data integrity—including when models or components are provided by third-party suppliers ([Draft §2.2]). Human oversight is mandatory where model testing was reduced based on human decision-making ([Draft §3.3, §10.5]).
+3. **Regulated User Accountability & Human Oversight ([Draft §2.2, §3.3, §10.5]):** The regulated user must obtain and review documentation for activities conducted by third-party suppliers ([Draft §2.2]); ultimate pharmaceutical and legal accountability for product quality, patient safety, and data integrity remains strictly with the manufacturer under EU pharma law. Human oversight is mandatory where model testing effort was reduced based on human decision-making ([Draft §3.3, §10.5]).
 
 ### 🏷️ Project Labeling Convention (Attribution & Evidence Levels)
 To ensure rigorous distinction between statutory draft requirements and industry methodologies, this repository employs standardized labels:
 * **`[Draft §X.Y]`**: Specific regulatory requirement or statement directly derived from the official EU GMP Annex 22 Consultation Draft (July 2025).
 * **`[Best Practice: Source]`**: Industry-standard methods and established guidance with named provenance (e.g. `[Best Practice: ISPE GAMP AI Guide]`, `[Best Practice: ICH Q9 (R1)]`, or `[Best Practice: ML Practice]`).
 * **`[Didaktik]`**: Didactic frameworks, structural aids, case studies, and pedagogical metaphors (e.g. "the fence metaphor") created for this learning repository.
+* **`[Interpretation]`**: Technical interpretation and regulatory classification of derived concepts.
 
 ---
 
@@ -194,18 +195,18 @@ To close technical gaps and architect modern automated workflows, consult our tw
 
 ## 5. Primary Regulatory Sources & Reference Directory
 
-This learning repository is grounded in the following primary sources and reference frameworks:
+This learning repository is grounded in the following primary sources and reference frameworks (Status / Retrieval Date: September 28, 2026):
 
-| Ref | Author / Document | Regulatory Significance & Citation |
-| :---: | :--- | :--- |
-| **Q1** | **European Commission / EMA / PIC/S:** [Draft Annex 22: Artificial Intelligence and Machine Learning in GxP Environments (July 2025)](https://health.ec.europa.eu/document/download/5f38a92d-bb8e-4264-8898-ea076e926db6_en?filename=mp_vol4_chap4_annex22_consultation_guideline_en.pdf) | **Binding Primary Source:** Official consultation draft (6 pages; public consultation ended October 7, 2025). |
-| **Q2** | **European Medicines Agency (EMA):** [GMP Multi-Stakeholder Workshop on AI Guidance Development (Annex 22)](https://www.ema.europa.eu/en/events/good-manufacturing-practice-multistakeholder-workshop-expert-contributions-artificial-intelligence-guidance-development-annex-22) | **Multi-Stakeholder Dialogue (June 30 / July 1, 2026):** Discussion of expert contributions; potential re-evaluations under review by inspectorate working groups (no formal policy decision yet). |
-| **Q3** | **European Union:** Regulation (EU) 2024/1689 (*EU AI Act*) | Horizontal EU law; the definition of "AI system" in Art. 3(1) Regulation 2024/1689 was adopted into the Annex 22 draft glossary. |
-| **Q4** | **European Commission:** EudraLex Vol. 4, *Annex 11: Computerised Systems* | Foundational baseline; Annex 22 explicitly serves as *additional guidance* ([Draft §1]). |
-| **Q5** | **European Commission:** EudraLex Vol. 4, *Chapter 4: Documentation* | Fundamental requirements for data integrity, version control, and auditable records within the EudraLex Digital Package. |
-| **Q6** | **European Union:** Directive 2001/83/EC (Community Code relating to medicinal products for human use) | Legal framework for marketing authorization holder accountability, batch certification by the Qualified Person (Art. 51), and enforcement non-compliance procedures (Art. 111(7)). |
-| **Q7** | **European Commission / EMA:** *Compilation of Community Procedures on Inspections* | Official EU deficiency categories during GMP inspections: *Critical*, *Major*, *Other Deficiency*. |
-| **Q8** | **ISPE:** *GAMP® 5: A Risk-Based Approach to Compliant GxP Computerized Systems (Second Edition, 2022)* | Global industry standard for risk-based computerized system qualification (Software Categories 1, 3, 4, 5). |
-| **Q9** | **ISPE:** *GAMP® Guide: Enabling Artificial Intelligence and Machine Learning in GxP Environments (July 2025)* | Established industry practice for dual lifecycles, living validation, and machine learning governance ([Best Practice: ISPE GAMP]). |
-| **Q10** | **US FDA:** *AI/ML-Based Software as a Medical Device Action Plan & AI in Drug Manufacturing* | Distinct US regulatory context; relevant for global operations, but not a statutory basis under EU Annex 22. |
+| Ref | Author / Document | Regulatory Significance & Citation | Retrieval Date |
+| :---: | :--- | :--- | :---: |
+| **Q1** | **European Commission / EMA / PIC/S:** [Annex 22: Artificial Intelligence (consultation draft)](https://health.ec.europa.eu/document/download/5f38a92d-bb8e-4264-8898-ea076e926db6_en?filename=mp_vol4_chap4_annex22_consultation_guideline_en.pdf) | **Binding Primary Source:** Official consultation draft (6 pages; public consultation ended October 7, 2025). | 2026-09-28 |
+| **Q2** | **European Medicines Agency (EMA):** [GMP Multi-Stakeholder Workshop on AI Guidance Development (Annex 22)](https://www.ema.europa.eu/en/events/good-manufacturing-practice-multistakeholder-workshop-expert-contributions-artificial-intelligence-guidance-development-annex-22) | **Multi-Stakeholder Dialogue (June 30 / July 1, 2026):** Discussion of expert contributions; potential re-evaluations under review by inspectorate working groups (no formal policy decision yet). | 2026-09-28 |
+| **Q3** | **European Union:** Regulation (EU) 2024/1689 (*EU AI Act*) | Horizontal EU law; the definition of "AI system" in Art. 3(1) Regulation 2024/1689 was adopted into the Annex 22 draft glossary. | 2026-09-28 |
+| **Q4** | **European Commission:** EudraLex Vol. 4, *Annex 11: Computerised Systems* | Foundational baseline; Annex 22 explicitly serves as *additional guidance* ([Draft §1]). | 2026-09-28 |
+| **Q5** | **European Commission:** EudraLex Vol. 4, *Chapter 4: Documentation* | Fundamental requirements for data integrity, version control, and auditable records within the EudraLex Digital Package. | 2026-09-28 |
+| **Q6** | **European Union:** Directive 2001/83/EC (Community Code relating to medicinal products for human use) | Legal framework for marketing authorization holder accountability, batch certification by the Qualified Person (Art. 51), and enforcement non-compliance procedures (Art. 111(7)). | 2026-09-28 |
+| **Q7** | **European Commission / EMA:** *Compilation of Union Procedures on Inspections and Exchange of Information* | Official EU deficiency categories during GMP inspections: *Critical*, *Major*, *Other Deficiency*. | 2026-09-28 |
+| **Q8** | **ISPE:** *GAMP® 5: A Risk-Based Approach to Compliant GxP Computerized Systems (Second Edition, 2022)* | Global industry standard for risk-based computerized system qualification (Software Categories 1, 3, 4, 5). | 2026-09-28 |
+| **Q9** | **ISPE:** *GAMP® Guide: Enabling Artificial Intelligence and Machine Learning in GxP Environments (July 2025)* | Established industry practice for dual lifecycles, living validation, and machine learning governance ([Best Practice: ISPE GAMP]). | 2026-09-28 |
+| **Q10** | **US FDA (CDER):** [Artificial Intelligence in Drug Manufacturing; Notice of Request for Information and Comments (Docket No. FDA-2023-N-0487, March 2023)](https://www.federalregister.gov/documents/2023/03/01/2023-04221/artificial-intelligence-in-drug-manufacturing-notice-of-request-for-information-and-comments) | US discussion paper and FRAME initiative on AI/ML in drug manufacturing; separate US context, not an EU statutory basis. | 2026-09-28 |
 

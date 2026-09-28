@@ -64,8 +64,8 @@ Under **EU GMP Annex 22**, this mentality clashes directly with pharmaceutical q
 ### 2. The Static Model & Configuration Control ([Draft Glossary, §10.2])
 The foundational pillar for critical GMP applications is the **static model with frozen parameters** ([Draft Glossary: Static model]):
 * **Definition under [Draft Glossary]:** A static model does not adapt its parameters (weights) in routine operation post-qualification. For the identical input, it deterministically outputs the identical prediction ([Draft §1]).
-* **Configuration Control ([Draft §10.2]):** Model parameters, hyperparameters, pre-processing transformations, and operating configurations must remain under formal configuration control.
-* **Archiving of Model Artifact & Inference Environment ([Best Practice: ISPE GAMP AI Guide]; Confidence: Medium):**
+* **Configuration Control ([Draft §10.2]):** The tested model must be placed under configuration control prior to routine operational use, and effective measures to detect unauthorized changes must be employed ([Draft §10.2]). Hyperparameters, pre-processing transformations, and operating configurations are tracked as good engineering practice ([Best Practice: ISPE GAMP AI Guide]).
+* **Archiving of Model Artifact & Inference Environment ([Best Practice: ISPE GAMP AI Guide] [Interpretation]):**
   - In modern machine learning practice (particularly deep learning on GPU clusters), bit-exact retraining from scratch across multi-year horizons is frequently challenged by floating-point non-determinism and hardware micro-architectures.
   - The most regulatorily defensible approach is therefore to archive the **fully trained and qualified model artifact** (binary weight files, checkpoints with cryptographic SHA-256 hashes) together with the **complete containerized inference runtime environment** (container image, pinned library dependencies) in an immutable archive ([Best Practice: ISPE GAMP AI Guide]).
   - Source code (Git commit hashes), dataset snapshots, and random seeds are archived complementarily to ensure comprehensive provenance.
@@ -79,11 +79,11 @@ Modern data science relies on MLOps and cloud platforms like MLflow, Weights & B
 * They must be fully qualified and validated under **EU GMP Annex 11** (access controls, audit trails, data integrity, disaster recovery).
 * **Supplier & Cloud Oversight ([Draft §2.2]):**
   - A SOC-2 or ISO-27001 certificate alone is **insufficient** for GxP compliance.
-  - The regulated user retains ultimate accountability for product quality, patient safety, and data integrity ([Draft §2.2]). Quality Agreements and SLAs must contractually guarantee that cloud providers do not deploy unannounced updates that alter pipeline behavior (*Uncontrolled Environment Drift*).
+  - The regulated user must obtain and formally review documentation for activities performed by third-party suppliers ([Draft §2.2]); ultimate pharmaceutical accountability strictly remains with the manufacturer. Quality Agreements and SLAs must contractually guarantee that cloud providers do not deploy unannounced updates that alter pipeline behavior (*Uncontrolled Environment Drift*).
 
 ### 4. Hyperparameter Discipline & The Golden Validation Rule
 Hyperparameters (learning rates, tree depths, regularization, batch sizes) govern algorithmic convergence:
-* **Configuration Control Baseline:** Selected hyperparameters are an integral part of configuration control ([Draft §10.2]). Modifications without formal Change Control are unacceptable ([Draft §10.1]).
+* **Configuration Control Baseline:** The qualified model is under configuration control ([Draft §10.2]). Modifications of parameters without formal Change Control and re-testing assessment are unacceptable ([Draft §10.1]).
 * **The Golden Rule:** Hyperparameters must be tuned **exclusively on the Validation Set – never on the Hold-Out Test Set**! Otherwise, the model is effectively exposed to the final exam questions (*Data Leakage*), invalidating the qualification.
 * **Documented Search Rationale:** Whether using Grid Search, Random Search, or Bayesian Optimization, teams must document search boundaries and stopping criteria.
 

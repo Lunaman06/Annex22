@@ -61,7 +61,7 @@ graph TD
 
 ### 1. Origins, the EudraLex Digital Package & Legal Status
 - **The EudraLex Vol. 4 Digital Package:** Annex 22 was not published in isolation; it forms a coordinated modernization package together with the **Revision of Annex 11** (cloud, agile methodologies, data governance) and the **Revision of Chapter 4** (documentation and electronic records).
-- **Current Legal Status:** The text is currently a **Consultation Draft** issued by the European Commission, EMA, and PIC/S (the public consultation period closed on **October 7, 2025**; final adoption is expected in late 2026 / early 2027). At the EMA Multi-Stakeholder Workshop (June 30 / July 1, 2026), stakeholder feedback was reviewed; potential re-evaluations remain under active technical examination by inspectorate working groups (no formal policy decision taken yet). European GMDP inspectors already apply the draft's principles as the current **"State of the Art"** benchmark during computerized systems inspections under Annex 11.
+- **Current Legal Status:** The text is currently a **Consultation Draft** issued by the European Commission, EMA, and PIC/S (the public consultation period closed on **October 7, 2025**; final adoption is expected in late 2026 / early 2027). At the EMA Multi-Stakeholder Workshop (June 30 / July 1, 2026), stakeholder feedback was reviewed; potential re-evaluations remain under active technical examination by inspectorate working groups (no formal policy decision taken yet). In regulatory and inspection practice, the foundational principles set out in the draft are expected to increasingly serve as a relevant benchmark for the state of science and technology (*State of the Art*) when assessing computerized systems ([Interpretation]).
 - **Reference to the EU AI Act:** The draft glossary adopts the definition of "AI system" directly from the **EU AI Act** (Art. 3(1) Regulation (EU) 2024/1689).
 
 ### 2. Annex 11 vs. Annex 22 (Coexistence, Not Replacement)
@@ -72,7 +72,7 @@ graph TD
   - Strictly isolated hold-out test sets with access controls and *Staff Independence* ([Draft §6.2, §6.5]),
   - Risk-proportionate *Explainability (XAI)* evaluated during testing ([Draft §8.1, §8.2]),
   - Continuous lifecycle monitoring of model performance and input distributions ([Draft §10.3, §10.4]),
-  - **Full Regulated User Responsibility ([Draft §2.2]):** The regulated user retains ultimate accountability for product quality, patient safety, and data integrity, even when AI models or components are procured from third-party suppliers.
+  - **Review of Supplier Documentation by Regulated User ([Draft §2.2]):** Where activities are performed by third-party suppliers, documentation must be obtained and reviewed by the regulated user ([Draft §2.2]). Ultimate pharmaceutical and legal accountability strictly remains with the pharmaceutical manufacturer under EU pharma law.
 
 ### 3. What is In-Scope vs. Out-of-Scope?
 - **In-Scope (Regulated under [Draft §1]):**
@@ -100,7 +100,7 @@ graph TD
 - **Illustrative Operational Scenario (didactic case study, unverified):** A QA department utilized NLP for deviation severity triage. Over time, reviewers routinely clicked "Approve" without critically reading records (*Perfunctory Review* / Rubber-Stamping).
 - **Remediation ([Didaktik]):** Redesign the review pattern! Human reviewers must perform a **blind evaluation first** before AI recommendations are revealed (*Independent-First / Active Challenge*).
 
-### 6. The 5-Stage Implementation Roadmap
+### 6. The 5-Stage Implementation Roadmap ([Didaktik])
 1. **Stage 1 (Governance):** Establish an AI governance framework within the corporate QMS (incorporating cloud and supplier oversight).
 2. **Stage 2 (Inventory):** Build a living Master AI Inventory with risk classifications.
 3. **Stage 3 (Gap Triage):** Identify and remediate validation deficits across high-risk systems.

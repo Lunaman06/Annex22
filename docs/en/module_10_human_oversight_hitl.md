@@ -46,14 +46,14 @@ flowchart TD
 
 ## 📌 Technical Summary (Key Takeaways)
 
-### 1. Core Principle: Zero Autonomy for Critical GMP Decisions
 ### 1. The Core Principle: Human Accountability & Decision Support
-Under EU GMP Annex 22, the foundational tenet is established: **AI systems possess no legal or regulatory pharmaceutical accountability ([Draft §2.2]).**
-* **No Blanket HITL Requirement for Fully Qualified Models:** The draft does not impose a blanket HITL requirement for thoroughly tested models (interpretation of §1, §3.3, §10.5; confidence: Medium). A fully qualified system (e.g., automated defect rejection in automated visual inspection) may operate autonomously within its qualified boundary.
+Under EU GMP Annex 22, the foundational tenet is established: **AI systems possess no legal accountability** (ultimate accountability for batch releases and GMP compliance strictly remains with the regulated pharmaceutical manufacturer under EU pharmaceutical law; under [Draft §2.2], the user must obtain and review documentation from third-party suppliers on their own responsibility).
+* **No Blanket HITL Requirement for Fully Qualified Models:** The draft does not impose a blanket HITL requirement for thoroughly tested models (interpretation of §1, §3.3, §10.5 [Interpretation]). A fully qualified system (e.g., automated defect rejection in automated visual inspection) may operate autonomously within its qualified boundary.
 * **Reduced Model Testing Entails Strict Operator Obligations ([Draft §3.3]):** When the AI system merely provides input to a human decision and the formal testing rigor of the model was reduced based on this final human decision, the role and responsibility of the human operator must be explicitly documented in the *Intended Use* ([Draft §3.3]).
-* **Monitoring Comparable to Manual Processes ([Draft §3.3, §9.1, §9.2]):** In such cases, operator training and operational performance must be monitored in the same manner as for a purely manual process. Personnel must be trained in understanding model limitations, biases, and override procedures ([Draft §9.1, §9.2]).
+* **Monitoring Comparable to Manual Processes ([Draft §3.3]):** In such cases, operator training and operational performance must be monitored in the same manner as for a purely manual process ([Draft §3.3]). Personnel must be trained in understanding model limitations and failure modes ([Draft §3.3] / [Best Practice]).
+* **Confidence Thresholds & 'Undecided' Routing ([Draft §9.1, §9.2]):** Predictive or classification models must possess appropriate threshold settings; if the confidence score is very low, the model should label the result as 'undecided' ([Draft §9.2]). In such events, human review is immediately triggered to ensure a reliable outcome.
 * **Review Records & Output Checking ([Draft §10.5]):** Records of operator reviews of system outputs must be maintained. Depending on application criticality and model testing depth, this may require formal checking of each individual output.
-* **Decoupling from General Pharmaceutical Law:** Overall accountability of the marketing authorization holder and the Qualified Person (QP) derives from general EU pharmaceutical law (e.g., Directive 2001/83/EC); the Annex 22 draft provides specific technical expectations regarding the reliability of AI assistance.
+* **Decoupling from General Pharmaceutical Law:** Overall accountability of the marketing authorization holder and the Qualified Person (QP) derives from general EU pharmaceutical law; the Annex 22 draft provides specific technical expectations regarding the reliability of AI assistance.
 
 ### 2. The Three Oversight Tiers ([Didaktik])
 
@@ -63,7 +63,7 @@ Under EU GMP Annex 22, the foundational tenet is established: **AI systems posse
 | :---: | :--- | :--- | :--- | :--- |
 | **HITL** | **Human-in-the-Loop** | Reduced model test depth ([Draft §3.3, §10.5]) or GenAI ([Draft §1]) | Human reviews and confirms the output before an operational or data-altering action takes effect. | Required where model testing rigor was reduced or for non-critical GenAI. |
 | **HOTL** | **Human-on-the-Loop** | Fully qualified process automation | Model executes processes within validated boundaries. Human monitors trends and intervenes upon deviations. | Permissible for qualified in-line automation (e.g., PAT), provided boundaries and monitoring are validated. |
-| **HOOL** | **Human-out-of-the-Loop** | Autonomous systems lacking human oversight capability | Fully automated execution without oversight capability. | For critical GMP operations, incompatible with principles of Annex 11 and Annex 22 ([Draft §1, §2.2]). |
+| **HOOL** | **Human-out-of-the-Loop** | Autonomous systems lacking human oversight capability | Fully automated execution without oversight capability. | For critical GMP operations, incompatible with principles of Annex 11 and Annex 22 ([Draft §1; EudraLex overarching accountability]). |
 
 ### 3. The Automation Bias Trap (Creeping Decay of Oversight)
 The most insidious threat in steady-state operations with human oversight is cognitive complacency:
@@ -90,7 +90,7 @@ User interface (UI/UX) workflows must actively protect against cognitive complac
 ### 5. What Health Authority Inspectors Expect
 During GMP audits, inspectors scrutinize the substantive nature of human oversight:
 1. **Dwell Time per Review:** If 50-page batch records are approved within 4 seconds, oversight is fictitious. Operational throughput KPIs must not incentivize hasty approvals.
-2. **Staff Qualification & Training ([Draft §9.1, §9.2]):** Training records must prove that operators understand the specific limitations and failure modes of the AI model, as well as how and when to challenge and override the system (*Override Training*).
+2. **Staff Qualification & Training ([Draft §3.3] / [Best Practice]):** Training records must prove that operators understand the specific limitations and failure modes of the AI model, as well as how and when to challenge and override the system (*Override*).
 3. **Audit Trail of Overrides ([Draft §10.5]):** Records of overrides and output reviews must be contemporaneously recorded, justified, and retrievable.
 
 ---
@@ -110,15 +110,15 @@ During GMP audits, inspectors scrutinize the substantive nature of human oversig
 
 ### Absolute Must-Haves:
 - [ ] Is operator responsibility formally anchored in the *Intended Use* where model testing rigor was reduced ([Draft §3.3])?
-- [ ] Are operator training and operational performance monitored like manual processes ([Draft §3.3, §9.1])?
-- [ ] Has personnel been trained on how and when to override the AI system (*Override Training*, [Draft §9.2])?
+- [ ] Are operator training and operational performance monitored like manual processes ([Draft §3.3])?
+- [ ] Has personnel been trained on how and when to override the AI system (*Override*, [Best Practice: GxP Practice])?
 - [ ] Are records of operator reviews of system outputs maintained and retrievable ([Draft §10.5])?
 - [ ] Does the workflow architecture effectively prevent uncritical rubber-stamping (*Automation Bias*)?
 - [ ] Are system overrides and review discrepancies documented in compliant audit trails ([Draft §10.5])?
 
 ### Inspection Red Flags:
 - ❌ Reduced model testing justified by human oversight without corresponding operator SOPs or training records ([Draft §3.3]).
-- ❌ Personnel unable to explain model limitations and typical failure modes during an inspection ([Draft §9.1]).
+- ❌ Personnel unable to explain model limitations and typical failure modes during an inspection ([Draft §3.3]).
 - ❌ Persistent 0% override rates in complex judgment workflows accepted without plausibility verification.
 - ❌ Operational throughput KPIs compelling operators into hurried, perfunctory reviews within seconds.
 

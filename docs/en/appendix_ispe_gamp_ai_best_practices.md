@@ -40,7 +40,7 @@ graph TD
 
 ---
 
-## 2. The Dual Lifecycle Model
+## 2. The Dual Lifecycle Model ([Best Practice: ISPE GAMP])
 
 The primary methodological innovation introduced in the ISPE GAMP AI Guide is the **Dual Lifecycle Model**. Traditional software follows a single linear code lifecycle. An AI system, by contrast, comprises two concurrent, tightly synchronized tracks:
 
@@ -141,7 +141,7 @@ graph TD
 
 ---
 
-## 📋 Summary: The 10 Commandments of the ISPE GAMP AI Guide
+## 📋 Summary: The 10 Commandments of the ISPE GAMP AI Guide ([Best Practice: ISPE GAMP])
 
 1. **Context of Use:** Define the patient, product, and data integrity risk before writing a single line of code.
 2. **Data is Code:** Subject training datasets to the same qualification rigor as regulated software code.

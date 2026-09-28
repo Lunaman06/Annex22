@@ -39,7 +39,7 @@ The draft published in July 2025 by the European Commission, EMA, and PIC/S (con
 
 ---
 
-## 3. GxP-Compliant Architecture: RAG-First (Retrieval-Augmented Generation)
+## 3. GxP-Compliant Architecture: RAG-First ([Best Practice: GenAI-Praxis])
 
 In a regulated GxP environment, an LLM must **never generate answers freely from its unverified pre-training parameters**. The established industry gold standard is a **RAG-First Architecture**, confining the language model strictly to a curated, pre-qualified repository of internal controlled documents:
 
@@ -85,7 +85,7 @@ flowchart TD
 
 ---
 
-## 4. Automated Validation Metrics: The "RAG Triad"
+## 4. Automated Validation Metrics: The "RAG Triad" ([Best Practice: RAG Triad / TruLens])
 
 In place of confusion matrices and accuracy metrics, GenAI validation adopts the standardized **RAG Triad Framework** (evaluated via tools such as *Ragas, TruLens, DeepEval*):
 

@@ -85,7 +85,7 @@ Standard IT risk templates fail under Annex 22 scrutiny. Inspectors expect expli
 
 ### 5. Scaling Human Oversight: HITL vs. HOTL ([Didaktik])
 
-> *Draft Wording Note:* The draft does not mandate a blanket HITL requirement for qualified models (interpretation of §1, §3.3, §10.5; confidence: Medium). However, if model testing rigor was reduced because a human makes the final decision, operator responsibility must be explicitly anchored in the Intended Use, and operator training and performance must be monitored like manual processes ([Draft §3.3]). Under [Draft §10.5], review records must be maintained; depending on criticality and test depth, this may require reviewing each individual output. Categorization into HITL/HOTL/HOOL is a didactic industry framework ([Didaktik]):
+> *Draft Wording Note:* The draft does not mandate a blanket HITL requirement for qualified models (interpretation of §1, §3.3, §10.5 [Interpretation]). However, if model testing rigor was reduced because a human makes the final decision, operator responsibility must be explicitly anchored in the Intended Use, and operator training and performance must be monitored like manual processes ([Draft §3.3]). Under [Draft §10.5], review records must be maintained; depending on criticality and test depth, this may require reviewing each individual output. Categorization into HITL/HOTL/HOOL is a didactic industry framework ([Didaktik]):
 
 | Dimension | High-Risk System (Fully Qualified vs. Operator-Assisted) | Moderate-Risk System |
 | :--- | :--- | :--- |
