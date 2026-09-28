@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 07: AI Model Development and Training](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 09: Explainability and Transparency ➔](module_09_explainability_transparency.md)**
+🌐 **[English Version](../en/module_08_validation_performance_testing.md)** &nbsp;|&nbsp; **[⬅ Modul 07: AI Model Development and Training](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 09: Explainability and Transparency ➔](module_09_explainability_transparency.md)**
 
 </div>
 
@@ -119,6 +119,6 @@ Für Behördeninspektoren (EMA, FDA) ist die formale Struktur der Validierungsdo
 
 <div align="center">
 
-**[⬅ Modul 07: AI Model Development and Training](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 09: Explainability and Transparency ➔](module_09_explainability_transparency.md)**
+🌐 **[English Version](../en/module_08_validation_performance_testing.md)** &nbsp;|&nbsp; **[⬅ Modul 07: AI Model Development and Training](module_07_model_development_training.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 09: Explainability and Transparency ➔](module_09_explainability_transparency.md)**
 
 </div>

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 08: Validation and Performance Testing ➔](module_08_validation_performance_testing.md)**
+🌐 **[English Version](../en/module_07_model_development_training.md)** &nbsp;|&nbsp; **[⬅ Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 08: Validation and Performance Testing ➔](module_08_validation_performance_testing.md)**
 
 </div>
 
@@ -122,6 +122,6 @@ Hyperparameter (z.B. Lernrate, Baumtiefe, Regularisierungsfaktoren, Epochenanzah
 
 <div align="center">
 
-**[⬅ Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 08: Validation and Performance Testing ➔](module_08_validation_performance_testing.md)**
+🌐 **[English Version](../en/module_07_model_development_training.md)** &nbsp;|&nbsp; **[⬅ Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 08: Validation and Performance Testing ➔](module_08_validation_performance_testing.md)**
 
 </div>

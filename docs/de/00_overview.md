@@ -1,5 +1,11 @@
 # EU GMP Annex 22: Leitfaden & Gesamtübersicht
 
+<div align="center">
+
+🌐 **[Switch to English Version](../en/00_overview.md)**
+
+</div>
+
 > **Executive Summary:**  
 > Dieses Dokument dient als zentrale Einführung und thematische Orientierungslandkarte. Es vermittelt das übergeordnete Verständnis für den **Draft EU GMP Annex 22** („Artificial Intelligence and Machine Learning in GxP Environments“) und führt zielgerichtet in die vertiefenden Fachmodule.
 

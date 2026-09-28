@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ GenAI & RAG Leitfaden](appendix_genai_rag_gxp.md) &nbsp;|&nbsp; [Modul 08: Validation & Testing](module_08_validation_performance_testing.md)**
+🌐 **[English Version](../en/appendix_ispe_gamp_ai_best_practices.md)** &nbsp;|&nbsp; **[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ GenAI & RAG Leitfaden](appendix_genai_rag_gxp.md) &nbsp;|&nbsp; [Modul 08: Validation & Testing](module_08_validation_performance_testing.md)**
 
 </div>
 
@@ -157,6 +157,6 @@ graph TD
 
 <div align="center">
 
-**[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ GenAI & RAG Leitfaden](appendix_genai_rag_gxp.md) &nbsp;|&nbsp; [Modul 08: Validation & Testing](module_08_validation_performance_testing.md)**
+🌐 **[English Version](../en/appendix_ispe_gamp_ai_best_practices.md)** &nbsp;|&nbsp; **[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ GenAI & RAG Leitfaden](appendix_genai_rag_gxp.md) &nbsp;|&nbsp; [Modul 08: Validation & Testing](module_08_validation_performance_testing.md)**
 
 </div>

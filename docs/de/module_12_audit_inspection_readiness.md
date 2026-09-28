@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
+🌐 **[English Version](../en/module_12_audit_inspection_readiness.md)** &nbsp;|&nbsp; **[⬅ Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
 
 </div>
 
@@ -107,6 +107,6 @@ Wenn Auditoren eine konkrete historische Modellentscheidung herausgreifen:
 
 <div align="center">
 
-**[⬅ Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
+🌐 **[English Version](../en/module_12_audit_inspection_readiness.md)** &nbsp;|&nbsp; **[⬅ Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
 
 </div>

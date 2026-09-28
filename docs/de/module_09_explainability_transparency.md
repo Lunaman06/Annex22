@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 10: Human Oversight / Human in the Loop ➔](module_10_human_oversight_hitl.md)**
+🌐 **[English Version](../en/module_09_explainability_transparency.md)** &nbsp;|&nbsp; **[⬅ Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 10: Human Oversight / Human in the Loop ➔](module_10_human_oversight_hitl.md)**
 
 </div>
 
@@ -119,6 +119,6 @@ Erklärungen müssen für drei distincte Zielgruppen aufbereitet sein:
 
 <div align="center">
 
-**[⬅ Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 10: Human Oversight / Human in the Loop ➔](module_10_human_oversight_hitl.md)**
+🌐 **[English Version](../en/module_09_explainability_transparency.md)** &nbsp;|&nbsp; **[⬅ Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 10: Human Oversight / Human in the Loop ➔](module_10_human_oversight_hitl.md)**
 
 </div>

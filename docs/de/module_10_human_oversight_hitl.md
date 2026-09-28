@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 09: Explainability and Transparency](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 11: Lifecycle Management and Continuous Monitoring ➔](module_11_lifecycle_continuous_monitoring.md)**
+🌐 **[English Version](../en/module_10_human_oversight_hitl.md)** &nbsp;|&nbsp; **[⬅ Modul 09: Explainability and Transparency](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 11: Lifecycle Management and Continuous Monitoring ➔](module_11_lifecycle_continuous_monitoring.md)**
 
 </div>
 
@@ -119,6 +119,6 @@ Bei Inspektionen prüfen Auditoren gezielt die Tiefe der menschlichen Kontrolle:
 
 <div align="center">
 
-**[⬅ Modul 09: Explainability and Transparency](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 11: Lifecycle Management and Continuous Monitoring ➔](module_11_lifecycle_continuous_monitoring.md)**
+🌐 **[English Version](../en/module_10_human_oversight_hitl.md)** &nbsp;|&nbsp; **[⬅ Modul 09: Explainability and Transparency](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 11: Lifecycle Management and Continuous Monitoring ➔](module_11_lifecycle_continuous_monitoring.md)**
 
 </div>

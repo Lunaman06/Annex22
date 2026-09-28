@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ Modul 03: Scope & Applicability](module_03_scope_applicability.md) &nbsp;|&nbsp; [ISPE GAMP AI Guide Best Practices ➔](appendix_ispe_gamp_ai_best_practices.md)**
+🌐 **[English Version](../en/appendix_genai_rag_gxp.md)** &nbsp;|&nbsp; **[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ Modul 03: Scope & Applicability](module_03_scope_applicability.md) &nbsp;|&nbsp; [ISPE GAMP AI Guide Best Practices ➔](appendix_ispe_gamp_ai_best_practices.md)**
 
 </div>
 
@@ -191,6 +191,6 @@ sequenceDiagram
 
 <div align="center">
 
-**[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ Modul 03: Scope & Applicability](module_03_scope_applicability.md) &nbsp;|&nbsp; [ISPE GAMP AI Guide Best Practices ➔](appendix_ispe_gamp_ai_best_practices.md)**
+🌐 **[English Version](../en/appendix_genai_rag_gxp.md)** &nbsp;|&nbsp; **[🏠 Zurück zur Gesamtübersicht](00_overview.md) &nbsp;|&nbsp; [⬅ Modul 03: Scope & Applicability](module_03_scope_applicability.md) &nbsp;|&nbsp; [ISPE GAMP AI Guide Best Practices ➔](appendix_ispe_gamp_ai_best_practices.md)**
 
 </div>

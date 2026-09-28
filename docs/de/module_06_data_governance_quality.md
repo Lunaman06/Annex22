@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 07: AI Model Development and Training ➔](module_07_model_development_training.md)**
+🌐 **[English Version](../en/module_06_data_governance_quality.md)** &nbsp;|&nbsp; **[⬅ Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 07: AI Model Development and Training ➔](module_07_model_development_training.md)**
 
 </div>
 
@@ -112,6 +112,6 @@ Der Datenintegritätsfokus endet nicht mit dem Go-Live:
 
 <div align="center">
 
-**[⬅ Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 07: AI Model Development and Training ➔](module_07_model_development_training.md)**
+🌐 **[English Version](../en/module_06_data_governance_quality.md)** &nbsp;|&nbsp; **[⬅ Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 07: AI Model Development and Training ➔](module_07_model_development_training.md)**
 
 </div>

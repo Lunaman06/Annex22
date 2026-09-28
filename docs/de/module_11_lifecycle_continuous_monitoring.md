@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 12: Audit and Inspection Readiness ➔](module_12_audit_inspection_readiness.md)**
+🌐 **[English Version](../en/module_11_lifecycle_continuous_monitoring.md)** &nbsp;|&nbsp; **[⬅ Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 12: Audit and Inspection Readiness ➔](module_12_audit_inspection_readiness.md)**
 
 </div>
 
@@ -113,6 +113,6 @@ Häufig versuchen Betriebsteams, lästige Fehlalarme an Maschinen durch manuelle
 
 <div align="center">
 
-**[⬅ Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 12: Audit and Inspection Readiness ➔](module_12_audit_inspection_readiness.md)**
+🌐 **[English Version](../en/module_11_lifecycle_continuous_monitoring.md)** &nbsp;|&nbsp; **[⬅ Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Modul 12: Audit and Inspection Readiness ➔](module_12_audit_inspection_readiness.md)**
 
 </div>
