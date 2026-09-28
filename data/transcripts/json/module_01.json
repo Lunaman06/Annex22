@@ -1,0 +1,1441 @@
+{
+  "module": {
+    "id": "01",
+    "slug": "01_introduction_ai_gxp",
+    "video_id": "UnDBgKPAhow",
+    "title": "Introduction to AI in GxP Environments",
+    "duration": "09:50"
+  },
+  "cues": [
+    {
+      "text": "Hey everyone and welcome to this",
+      "start": 0.0,
+      "duration": 3.76
+    },
+    {
+      "text": "explainer. If you work in pharma, QA, IT",
+      "start": 1.28,
+      "duration": 4.4
+    },
+    {
+      "text": "or validation, you already know that",
+      "start": 3.76,
+      "duration": 3.92
+    },
+    {
+      "text": "artificial intelligence is definitely no",
+      "start": 5.68,
+      "duration": 3.44
+    },
+    {
+      "text": "longer just some cool research",
+      "start": 7.68,
+      "duration": 3.6
+    },
+    {
+      "text": "curiosity, right? It is rapidly shifted",
+      "start": 9.12,
+      "duration": 4.08
+    },
+    {
+      "text": "into a highstakes operational reality in",
+      "start": 11.28,
+      "duration": 4.16
+    },
+    {
+      "text": "GMP environments. We're actually seeing",
+      "start": 13.2,
+      "duration": 3.839
+    },
+    {
+      "text": "AI applied in everything from batch",
+      "start": 15.44,
+      "duration": 2.96
+    },
+    {
+      "text": "release decisions to predictive",
+      "start": 17.039,
+      "duration": 3.201
+    },
+    {
+      "text": "maintenance. But here's the catch. The",
+      "start": 18.4,
+      "duration": 3.44
+    },
+    {
+      "text": "pace of AI deployment is completely",
+      "start": 20.24,
+      "duration": 3.36
+    },
+    {
+      "text": "outstripping our traditional Annex11",
+      "start": 21.84,
+      "duration": 3.84
+    },
+    {
+      "text": "frameworks and that is creating massive",
+      "start": 23.6,
+      "duration": 4.24
+    },
+    {
+      "text": "operational exposure. So today we're",
+      "start": 25.68,
+      "duration": 3.919
+    },
+    {
+      "text": "laying the foundation for trustworthy AI",
+      "start": 27.84,
+      "duration": 3.519
+    },
+    {
+      "text": "and regulated manufacturing and we're",
+      "start": 29.599,
+      "duration": 3.361
+    },
+    {
+      "text": "looking specifically at the paradigm",
+      "start": 31.359,
+      "duration": 3.601
+    },
+    {
+      "text": "shift required under the new annex22",
+      "start": 32.96,
+      "duration": 3.52
+    },
+    {
+      "text": "guidelines to safely operate these",
+      "start": 34.96,
+      "duration": 4.16
+    },
+    {
+      "text": "systems. Let's dive in. Okay, so here's",
+      "start": 36.48,
+      "duration": 4.56
+    },
+    {
+      "text": "our road map for today. First, we'll",
+      "start": 39.12,
+      "duration": 4.8
+    },
+    {
+      "text": "define AI in GXP. Second, we'll explore",
+      "start": 41.04,
+      "duration": 5.519
+    },
+    {
+      "text": "why traditional validation fails. Third,",
+      "start": 43.92,
+      "duration": 4.159
+    },
+    {
+      "text": "we'll look at some real world AI",
+      "start": 46.559,
+      "duration": 3.281
+    },
+    {
+      "text": "failures. Fourth, we'll cover the",
+      "start": 48.079,
+      "duration": 3.921
+    },
+    {
+      "text": "principles of trustworthy AI. And",
+      "start": 49.84,
+      "duration": 3.68
+    },
+    {
+      "text": "finally, we'll wrap up with cross",
+      "start": 52.0,
+      "duration": 4.0
+    },
+    {
+      "text": "functional governance roles. All right,",
+      "start": 53.52,
+      "duration": 5.76
+    },
+    {
+      "text": "section one, AI and GXP defined. We are",
+      "start": 56.0,
+      "duration": 5.76
+    },
+    {
+      "text": "moving beyond rule-based logic here. To",
+      "start": 59.28,
+      "duration": 4.48
+    },
+    {
+      "text": "get everyone on the exact same page, we",
+      "start": 61.76,
+      "duration": 3.52
+    },
+    {
+      "text": "really need to establish a shared",
+      "start": 63.76,
+      "duration": 4.08
+    },
+    {
+      "text": "vocabulary. Now, you might be wondering",
+      "start": 65.28,
+      "duration": 4.64
+    },
+    {
+      "text": "what exactly do we mean by AI in this",
+      "start": 67.84,
+      "duration": 4.24
+    },
+    {
+      "text": "context. Well, the definition of AI and",
+      "start": 69.92,
+      "duration": 4.879
+    },
+    {
+      "text": "GXP is highly specific. We aren't just",
+      "start": 72.08,
+      "duration": 4.8
+    },
+    {
+      "text": "talking about advanced fancy software.",
+      "start": 74.799,
+      "duration": 3.601
+    },
+    {
+      "text": "We're talking about systems that use",
+      "start": 76.88,
+      "duration": 2.879
+    },
+    {
+      "text": "statistical learning, pattern",
+      "start": 78.4,
+      "duration": 3.6
+    },
+    {
+      "text": "recognition, or generative methods. This",
+      "start": 79.759,
+      "duration": 4.161
+    },
+    {
+      "text": "is absolutely crucial to understand.",
+      "start": 82.0,
+      "duration": 4.159
+    },
+    {
+      "text": "Annex22 specifically addresses these",
+      "start": 83.92,
+      "duration": 3.76
+    },
+    {
+      "text": "learning based approaches and it",
+      "start": 86.159,
+      "duration": 3.201
+    },
+    {
+      "text": "completely excludes conventional",
+      "start": 87.68,
+      "duration": 3.84
+    },
+    {
+      "text": "rule-based or deterministic algorithms.",
+      "start": 89.36,
+      "duration": 4.0
+    },
+    {
+      "text": "So even if a vendor aggressively markets",
+      "start": 91.52,
+      "duration": 3.44
+    },
+    {
+      "text": "their software as AI, if it's",
+      "start": 93.36,
+      "duration": 3.52
+    },
+    {
+      "text": "fundamentally just deterministic logic,",
+      "start": 94.96,
+      "duration": 3.28
+    },
+    {
+      "text": "it actually doesn't fall under these",
+      "start": 96.88,
+      "duration": 4.559
+    },
+    {
+      "text": "intense new NX22 governance structures.",
+      "start": 98.24,
+      "duration": 5.28
+    },
+    {
+      "text": "So right out of the gate, you've got a",
+      "start": 101.439,
+      "duration": 4.241
+    },
+    {
+      "text": "massive design choice to make. Will your",
+      "start": 103.52,
+      "duration": 5.04
+    },
+    {
+      "text": "model be static or dynamic? A static",
+      "start": 105.68,
+      "duration": 4.799
+    },
+    {
+      "text": "model is locked after validation. It's",
+      "start": 108.56,
+      "duration": 3.36
+    },
+    {
+      "text": "going to give you deterministic outputs",
+      "start": 110.479,
+      "duration": 3.521
+    },
+    {
+      "text": "across its entire lifetime unless you",
+      "start": 111.92,
+      "duration": 4.08
+    },
+    {
+      "text": "put it through formal change control. A",
+      "start": 114.0,
+      "duration": 3.439
+    },
+    {
+      "text": "dynamic model, on the other hand,",
+      "start": 116.0,
+      "duration": 3.439
+    },
+    {
+      "text": "continuously learns. It constantly",
+      "start": 117.439,
+      "duration": 3.68
+    },
+    {
+      "text": "updates its parameters based on live",
+      "start": 119.439,
+      "duration": 4.081
+    },
+    {
+      "text": "operational data. Now, the key takeaway",
+      "start": 121.119,
+      "duration": 4.081
+    },
+    {
+      "text": "here is that static models are the",
+      "start": 123.52,
+      "duration": 4.799
+    },
+    {
+      "text": "default under NX22. Why? Because dynamic",
+      "start": 125.2,
+      "duration": 4.8
+    },
+    {
+      "text": "continuously learning models struggle",
+      "start": 128.319,
+      "duration": 4.0
+    },
+    {
+      "text": "immensely to sustain a validated state.",
+      "start": 130.0,
+      "duration": 3.599
+    },
+    {
+      "text": "And as we all know, that's a",
+      "start": 132.319,
+      "duration": 3.761
+    },
+    {
+      "text": "foundational requirement of GMP. Moving",
+      "start": 133.599,
+      "duration": 4.72
+    },
+    {
+      "text": "right along to section two, why",
+      "start": 136.08,
+      "duration": 4.72
+    },
+    {
+      "text": "traditional validation fails. This is",
+      "start": 138.319,
+      "duration": 4.401
+    },
+    {
+      "text": "the paradigm shift we really need to",
+      "start": 140.8,
+      "duration": 4.24
+    },
+    {
+      "text": "wrap our heads around. Think of",
+      "start": 142.72,
+      "duration": 4.08
+    },
+    {
+      "text": "traditional computer system validation",
+      "start": 145.04,
+      "duration": 3.6
+    },
+    {
+      "text": "under annex 111 kind of like a",
+      "start": 146.8,
+      "duration": 4.159
+    },
+    {
+      "text": "calculator. It assumes deterministic",
+      "start": 148.64,
+      "duration": 3.92
+    },
+    {
+      "text": "behavior. You put in the exact same",
+      "start": 150.959,
+      "duration": 3.521
+    },
+    {
+      "text": "inputs, you always get the exact same",
+      "start": 152.56,
+      "duration": 4.399
+    },
+    {
+      "text": "outputs. You write your specifications,",
+      "start": 154.48,
+      "duration": 4.479
+    },
+    {
+      "text": "run your test scripts, sign off once,",
+      "start": 156.959,
+      "duration": 4.56
+    },
+    {
+      "text": "and boom, you're done. But AI validation",
+      "start": 158.959,
+      "duration": 4.401
+    },
+    {
+      "text": "is a whole different ballgame. It's",
+      "start": 161.519,
+      "duration": 4.0
+    },
+    {
+      "text": "statistical. The model's logic isn't",
+      "start": 163.36,
+      "duration": 4.159
+    },
+    {
+      "text": "explicitly programmed line by line by a",
+      "start": 165.519,
+      "duration": 4.0
+    },
+    {
+      "text": "human. It actually emerges from the",
+      "start": 167.519,
+      "duration": 3.841
+    },
+    {
+      "text": "training data. It's honestly more like",
+      "start": 169.519,
+      "duration": 3.521
+    },
+    {
+      "text": "raising a child than programming a",
+      "start": 171.36,
+      "duration": 3.68
+    },
+    {
+      "text": "calculator. Because of this emergent",
+      "start": 173.04,
+      "duration": 4.24
+    },
+    {
+      "text": "logic, just testing expected inputs",
+      "start": 175.04,
+      "duration": 4.08
+    },
+    {
+      "text": "against expected outputs completely",
+      "start": 177.28,
+      "duration": 3.92
+    },
+    {
+      "text": "misses the point. You need independent",
+      "start": 179.12,
+      "duration": 3.68
+    },
+    {
+      "text": "test sets to see how the model behaves",
+      "start": 181.2,
+      "duration": 3.2
+    },
+    {
+      "text": "on data it has literally never seen",
+      "start": 182.8,
+      "duration": 3.92
+    },
+    {
+      "text": "before. And you absolutely need ongoing",
+      "start": 184.4,
+      "duration": 4.16
+    },
+    {
+      "text": "life cycle monitoring. A one-time",
+      "start": 186.72,
+      "duration": 3.599
+    },
+    {
+      "text": "validation signoff, yeah, that is",
+      "start": 188.56,
+      "duration": 4.16
+    },
+    {
+      "text": "entirely insufficient for AI. And since",
+      "start": 190.319,
+      "duration": 4.241
+    },
+    {
+      "text": "the logic literally emerges from the",
+      "start": 192.72,
+      "duration": 3.76
+    },
+    {
+      "text": "data, we have to talk about the data's",
+      "start": 194.56,
+      "duration": 4.88
+    },
+    {
+      "text": "flaws. Let's talk about bias. Bias is a",
+      "start": 196.48,
+      "duration": 5.119
+    },
+    {
+      "text": "systematic error that favors some inputs",
+      "start": 199.44,
+      "duration": 4.32
+    },
+    {
+      "text": "over others. And it almost always sneaks",
+      "start": 201.599,
+      "duration": 3.92
+    },
+    {
+      "text": "in from training data that just doesn't",
+      "start": 203.76,
+      "duration": 3.36
+    },
+    {
+      "text": "accurately represent operational",
+      "start": 205.519,
+      "duration": 4.241
+    },
+    {
+      "text": "reality. Bias is a massive concern under",
+      "start": 207.12,
+      "duration": 5.44
+    },
+    {
+      "text": "Annex22. Why? Because a model that works",
+      "start": 209.76,
+      "duration": 4.479
+    },
+    {
+      "text": "perfectly for your typical everyday",
+      "start": 212.56,
+      "duration": 3.84
+    },
+    {
+      "text": "scenarios might fail dangerously when it",
+      "start": 214.239,
+      "duration": 4.321
+    },
+    {
+      "text": "hits an edge case. and edge cases are",
+      "start": 216.4,
+      "duration": 3.919
+    },
+    {
+      "text": "exactly when you need quality oversight",
+      "start": 218.56,
+      "duration": 5.12
+    },
+    {
+      "text": "the most. Then we have drift. Drift is",
+      "start": 220.319,
+      "duration": 5.121
+    },
+    {
+      "text": "the gradual divergence between the",
+      "start": 223.68,
+      "duration": 3.6
+    },
+    {
+      "text": "conditions your model was originally",
+      "start": 225.44,
+      "duration": 3.92
+    },
+    {
+      "text": "trained on and the live operational",
+      "start": 227.28,
+      "duration": 3.84
+    },
+    {
+      "text": "conditions it's currently running in.",
+      "start": 229.36,
+      "duration": 4.0
+    },
+    {
+      "text": "This causes a silent degradation of the",
+      "start": 231.12,
+      "duration": 4.399
+    },
+    {
+      "text": "model's performance. And I mean silent.",
+      "start": 233.36,
+      "duration": 4.159
+    },
+    {
+      "text": "There's no big software crash, no",
+      "start": 235.519,
+      "duration": 4.401
+    },
+    {
+      "text": "flashing red error code. The system just",
+      "start": 237.519,
+      "duration": 4.321
+    },
+    {
+      "text": "quietly becomes less and less accurate",
+      "start": 239.92,
+      "duration": 4.239
+    },
+    {
+      "text": "over time. This is the exact reason why",
+      "start": 241.84,
+      "duration": 3.92
+    },
+    {
+      "text": "traditional release and forget",
+      "start": 244.159,
+      "duration": 4.16
+    },
+    {
+      "text": "validation completely fails for AI and",
+      "start": 245.76,
+      "duration": 4.64
+    },
+    {
+      "text": "why ongoing operational monitoring is",
+      "start": 248.319,
+      "duration": 4.56
+    },
+    {
+      "text": "just an absolute necessity. So let's",
+      "start": 250.4,
+      "duration": 4.32
+    },
+    {
+      "text": "really think about the stakes here for a",
+      "start": 252.879,
+      "duration": 4.241
+    },
+    {
+      "text": "second. What actually happens when AI",
+      "start": 254.72,
+      "duration": 4.72
+    },
+    {
+      "text": "degrades silently in a highly regulated",
+      "start": 257.12,
+      "duration": 4.399
+    },
+    {
+      "text": "environment. It's not just a minor drop",
+      "start": 259.44,
+      "duration": 4.0
+    },
+    {
+      "text": "in efficiency we're worried about. We're",
+      "start": 261.519,
+      "duration": 3.281
+    },
+    {
+      "text": "talking about the risk of releasing",
+      "start": 263.44,
+      "duration": 3.199
+    },
+    {
+      "text": "substandard products to patients,",
+      "start": 264.8,
+      "duration": 3.28
+    },
+    {
+      "text": "missing critical equipment failures",
+      "start": 266.639,
+      "duration": 3.201
+    },
+    {
+      "text": "before they happen, or wrongly",
+      "start": 268.08,
+      "duration": 3.44
+    },
+    {
+      "text": "downgrading really serious safety",
+      "start": 269.84,
+      "duration": 4.32
+    },
+    {
+      "text": "deviations. Which brings us to section",
+      "start": 271.52,
+      "duration": 5.6
+    },
+    {
+      "text": "3, realworld AI failures. Let's look at",
+      "start": 274.16,
+      "duration": 5.039
+    },
+    {
+      "text": "some highstakes lessons to really ground",
+      "start": 277.12,
+      "duration": 4.799
+    },
+    {
+      "text": "this. Let's walk through a few actual",
+      "start": 279.199,
+      "duration": 4.801
+    },
+    {
+      "text": "case studies where things went wrong. In",
+      "start": 281.919,
+      "duration": 4.401
+    },
+    {
+      "text": "one instance, a facility deployed an AI",
+      "start": 284.0,
+      "duration": 3.919
+    },
+    {
+      "text": "visual inspection system to find",
+      "start": 286.32,
+      "duration": 3.599
+    },
+    {
+      "text": "particulates in injectables. Sounds",
+      "start": 287.919,
+      "duration": 4.081
+    },
+    {
+      "text": "great, right? But a novel particulate",
+      "start": 289.919,
+      "duration": 3.761
+    },
+    {
+      "text": "appeared on the line that wasn't in the",
+      "start": 292.0,
+      "duration": 3.68
+    },
+    {
+      "text": "original training data. The AI just",
+      "start": 293.68,
+      "duration": 4.079
+    },
+    {
+      "text": "classified it as a normal variation",
+      "start": 295.68,
+      "duration": 4.079
+    },
+    {
+      "text": "which led to a massive market action and",
+      "start": 297.759,
+      "duration": 4.401
+    },
+    {
+      "text": "the complete decommissioning of the AI.",
+      "start": 299.759,
+      "duration": 4.241
+    },
+    {
+      "text": "In another case, a natural language",
+      "start": 302.16,
+      "duration": 3.44
+    },
+    {
+      "text": "processing model used for triaging",
+      "start": 304.0,
+      "duration": 3.68
+    },
+    {
+      "text": "deviations systematically downgraded",
+      "start": 305.6,
+      "duration": 4.4
+    },
+    {
+      "text": "critical events. Why? Because the",
+      "start": 307.68,
+      "duration": 4.079
+    },
+    {
+      "text": "training data had linguistic biases",
+      "start": 310.0,
+      "duration": 4.08
+    },
+    {
+      "text": "against shorthand or non-native English.",
+      "start": 311.759,
+      "duration": 4.0
+    },
+    {
+      "text": "And in a third example, predictive",
+      "start": 314.08,
+      "duration": 3.28
+    },
+    {
+      "text": "maintenance AI entirely failed to",
+      "start": 315.759,
+      "duration": 3.681
+    },
+    {
+      "text": "predict bioreactor probe failures. a",
+      "start": 317.36,
+      "duration": 3.76
+    },
+    {
+      "text": "really subtle supplier substitution had",
+      "start": 319.44,
+      "duration": 3.12
+    },
+    {
+      "text": "caused drift that the model just",
+      "start": 321.12,
+      "duration": 3.84
+    },
+    {
+      "text": "couldn't account for. These tiny lapses",
+      "start": 322.56,
+      "duration": 4.16
+    },
+    {
+      "text": "in training data or drift monitoring",
+      "start": 324.96,
+      "duration": 3.76
+    },
+    {
+      "text": "cascade incredibly fast into warning",
+      "start": 326.72,
+      "duration": 4.479
+    },
+    {
+      "text": "letters and real patient risk. Another",
+      "start": 328.72,
+      "duration": 4.56
+    },
+    {
+      "text": "major risk these failures highlight is",
+      "start": 331.199,
+      "duration": 5.521
+    },
+    {
+      "text": "the extreme danger of blackbox AI. Deep",
+      "start": 333.28,
+      "duration": 4.639
+    },
+    {
+      "text": "learning models might give you",
+      "start": 336.72,
+      "duration": 3.12
+    },
+    {
+      "text": "incredible off-the-charts predictive",
+      "start": 337.919,
+      "duration": 3.601
+    },
+    {
+      "text": "performance, but they often lack",
+      "start": 339.84,
+      "duration": 3.919
+    },
+    {
+      "text": "interpretability. Picture this. An",
+      "start": 341.52,
+      "duration": 4.0
+    },
+    {
+      "text": "inspector points to a batch record and",
+      "start": 343.759,
+      "duration": 4.401
+    },
+    {
+      "text": "asks you, \"Hey, why exactly did the AI",
+      "start": 345.52,
+      "duration": 4.32
+    },
+    {
+      "text": "release this batch?\" If you cannot",
+      "start": 348.16,
+      "duration": 3.2
+    },
+    {
+      "text": "explain the model's reasoning, you have",
+      "start": 349.84,
+      "duration": 3.6
+    },
+    {
+      "text": "a massive immediate compliance exposure",
+      "start": 351.36,
+      "duration": 4.16
+    },
+    {
+      "text": "on your hands. Uninterpretable models",
+      "start": 353.44,
+      "duration": 3.84
+    },
+    {
+      "text": "without strong documented human",
+      "start": 355.52,
+      "duration": 3.76
+    },
+    {
+      "text": "oversight simply cannot be defended in",
+      "start": 357.28,
+      "duration": 5.44
+    },
+    {
+      "text": "an audit. Period. So, how do we fix this",
+      "start": 359.28,
+      "duration": 6.08
+    },
+    {
+      "text": "operational chaos? Section four,",
+      "start": 362.72,
+      "duration": 5.28
+    },
+    {
+      "text": "principles of trustworthy AI. This is",
+      "start": 365.36,
+      "duration": 6.559
+    },
+    {
+      "text": "basically your annex22 playbook. Annex22",
+      "start": 368.0,
+      "duration": 5.759
+    },
+    {
+      "text": "relies heavily on these six",
+      "start": 371.919,
+      "duration": 4.321
+    },
+    {
+      "text": "non-negotiable operating principles.",
+      "start": 373.759,
+      "duration": 4.801
+    },
+    {
+      "text": "Number one, you must define the intended",
+      "start": 376.24,
+      "duration": 4.959
+    },
+    {
+      "text": "use precisely before any technical work",
+      "start": 378.56,
+      "duration": 5.199
+    },
+    {
+      "text": "even begins. Two, treat your training",
+      "start": 381.199,
+      "duration": 4.481
+    },
+    {
+      "text": "data with the exact same rigor as your",
+      "start": 383.759,
+      "duration": 4.801
+    },
+    {
+      "text": "critical raw materials. Three, validate",
+      "start": 385.68,
+      "duration": 4.56
+    },
+    {
+      "text": "using independent test data that the",
+      "start": 388.56,
+      "duration": 4.8
+    },
+    {
+      "text": "model has never ever seen. Four,",
+      "start": 390.24,
+      "duration": 4.56
+    },
+    {
+      "text": "maintain explanability that's",
+      "start": 393.36,
+      "duration": 3.119
+    },
+    {
+      "text": "proportionate to the criticality of the",
+      "start": 394.8,
+      "duration": 4.64
+    },
+    {
+      "text": "model. Five, implement meaningful human",
+      "start": 396.479,
+      "duration": 5.361
+    },
+    {
+      "text": "oversight. And I mean real engagement,",
+      "start": 399.44,
+      "duration": 4.96
+    },
+    {
+      "text": "not just a checkbox exercise. And six,",
+      "start": 401.84,
+      "duration": 4.72
+    },
+    {
+      "text": "continuously monitor for drift and any",
+      "start": 404.4,
+      "duration": 4.639
+    },
+    {
+      "text": "operational anomalies. And you've got to",
+      "start": 406.56,
+      "duration": 4.4
+    },
+    {
+      "text": "apply these principles strictly across",
+      "start": 409.039,
+      "duration": 4.72
+    },
+    {
+      "text": "the entire end to end AI life cycle,",
+      "start": 410.96,
+      "duration": 4.32
+    },
+    {
+      "text": "starting from data collection under",
+      "start": 413.759,
+      "duration": 3.841
+    },
+    {
+      "text": "strict QA controls, moving to training,",
+      "start": 415.28,
+      "duration": 4.16
+    },
+    {
+      "text": "validating with independent sets,",
+      "start": 417.6,
+      "duration": 3.68
+    },
+    {
+      "text": "deployment, continuous monitoring for",
+      "start": 419.44,
+      "duration": 3.68
+    },
+    {
+      "text": "drift, all the way down to formal",
+      "start": 421.28,
+      "duration": 3.759
+    },
+    {
+      "text": "retirement. You cannot just hyperfocus",
+      "start": 423.12,
+      "duration": 4.079
+    },
+    {
+      "text": "on deployment. Your validation evidence",
+      "start": 425.039,
+      "duration": 4.641
+    },
+    {
+      "text": "and quality controls have to span every",
+      "start": 427.199,
+      "duration": 4.4
+    },
+    {
+      "text": "single one of these six stages to",
+      "start": 429.68,
+      "duration": 4.48
+    },
+    {
+      "text": "actually be compliant. All right, our",
+      "start": 431.599,
+      "duration": 4.961
+    },
+    {
+      "text": "final section, section five, cross",
+      "start": 434.16,
+      "duration": 5.36
+    },
+    {
+      "text": "functional governance roles. Silos must",
+      "start": 436.56,
+      "duration": 5.44
+    },
+    {
+      "text": "fall for this to work. Let's break down",
+      "start": 439.52,
+      "duration": 4.48
+    },
+    {
+      "text": "who does what here because everyone",
+      "start": 442.0,
+      "duration": 4.16
+    },
+    {
+      "text": "holds distinct yet heavily integrated",
+      "start": 444.0,
+      "duration": 3.84
+    },
+    {
+      "text": "responsibilities. It's like a",
+      "start": 446.16,
+      "duration": 4.319
+    },
+    {
+      "text": "three-legged stool. QA owns the overall",
+      "start": 447.84,
+      "duration": 4.16
+    },
+    {
+      "text": "governance framework. They approve the",
+      "start": 450.479,
+      "duration": 3.201
+    },
+    {
+      "text": "acceptance criteria and they lead the",
+      "start": 452.0,
+      "duration": 3.84
+    },
+    {
+      "text": "regulatory inspections. validation",
+      "start": 453.68,
+      "duration": 3.68
+    },
+    {
+      "text": "specialists. They're the ones",
+      "start": 455.84,
+      "duration": 3.12
+    },
+    {
+      "text": "translating that intended use into",
+      "start": 457.36,
+      "duration": 3.679
+    },
+    {
+      "text": "testable specifications, designing those",
+      "start": 458.96,
+      "duration": 4.079
+    },
+    {
+      "text": "all-important independent test sets, and",
+      "start": 461.039,
+      "duration": 4.401
+    },
+    {
+      "text": "owning the data and model qualification.",
+      "start": 463.039,
+      "duration": 4.401
+    },
+    {
+      "text": "Meanwhile, IT and data science are busy",
+      "start": 465.44,
+      "duration": 3.759
+    },
+    {
+      "text": "building the MLOps infrastructure,",
+      "start": 467.44,
+      "duration": 3.44
+    },
+    {
+      "text": "managing the data pipelines, and holding",
+      "start": 469.199,
+      "duration": 2.72
+    },
+    {
+      "text": "ultimate technical system",
+      "start": 470.88,
+      "duration": 3.2
+    },
+    {
+      "text": "accountability. If any one of these legs",
+      "start": 471.919,
+      "duration": 4.161
+    },
+    {
+      "text": "of the stool is weak, the entire AI",
+      "start": 474.08,
+      "duration": 3.119
+    },
+    {
+      "text": "program is going to collapse under",
+      "start": 476.08,
+      "duration": 3.92
+    },
+    {
+      "text": "inspection. And a weak stool is exactly",
+      "start": 477.199,
+      "duration": 4.961
+    },
+    {
+      "text": "what leads to some incredibly common and",
+      "start": 480.0,
+      "duration": 4.319
+    },
+    {
+      "text": "frankly very expensive early adoption",
+      "start": 482.16,
+      "duration": 4.0
+    },
+    {
+      "text": "pitfalls. I really want to guide you",
+      "start": 484.319,
+      "duration": 4.72
+    },
+    {
+      "text": "away from these. Please do not treat AI",
+      "start": 486.16,
+      "duration": 5.599
+    },
+    {
+      "text": "as a conventional IT project. Do not",
+      "start": 489.039,
+      "duration": 4.56
+    },
+    {
+      "text": "ignore the quality and lineage of your",
+      "start": 491.759,
+      "duration": 3.921
+    },
+    {
+      "text": "training data. Do not deploy a model",
+      "start": 493.599,
+      "duration": 3.921
+    },
+    {
+      "text": "without drift instrumentation built in",
+      "start": 495.68,
+      "duration": 4.16
+    },
+    {
+      "text": "from day one. And absolutely avoid",
+      "start": 497.52,
+      "duration": 4.88
+    },
+    {
+      "text": "superficial checkbox human oversight.",
+      "start": 499.84,
+      "duration": 4.24
+    },
+    {
+      "text": "Trying to retrofit governance and",
+      "start": 502.4,
+      "duration": 3.6
+    },
+    {
+      "text": "oversight after a regulatory enforcement",
+      "start": 504.08,
+      "duration": 4.239
+    },
+    {
+      "text": "action is vastly more costly and painful",
+      "start": 506.0,
+      "duration": 4.08
+    },
+    {
+      "text": "than just designing it in early. The",
+      "start": 508.319,
+      "duration": 3.681
+    },
+    {
+      "text": "financial and reputational hit of an AI",
+      "start": 510.08,
+      "duration": 4.48
+    },
+    {
+      "text": "recall is just staggering. I love this",
+      "start": 512.0,
+      "duration": 3.919
+    },
+    {
+      "text": "quote because it really hits the nail on",
+      "start": 514.56,
+      "duration": 2.88
+    },
+    {
+      "text": "the head regarding the cultural shift we",
+      "start": 515.919,
+      "duration": 3.36
+    },
+    {
+      "text": "need. Data scientists historically",
+      "start": 517.44,
+      "duration": 3.519
+    },
+    {
+      "text": "optimize for predictive performance",
+      "start": 519.279,
+      "duration": 3.68
+    },
+    {
+      "text": "while GMP demands optimization for",
+      "start": 520.959,
+      "duration": 4.081
+    },
+    {
+      "text": "trustworthiness, reproducibility, and",
+      "start": 522.959,
+      "duration": 4.241
+    },
+    {
+      "text": "audit defensibility. You have to bridge",
+      "start": 525.04,
+      "duration": 4.08
+    },
+    {
+      "text": "that gap. You've got brilliant technical",
+      "start": 527.2,
+      "duration": 3.36
+    },
+    {
+      "text": "teams who want the absolute highest",
+      "start": 529.12,
+      "duration": 3.6
+    },
+    {
+      "text": "accuracy. But your quality teams need a",
+      "start": 530.56,
+      "duration": 4.0
+    },
+    {
+      "text": "system that can be trusted, reproduced,",
+      "start": 532.72,
+      "duration": 3.92
+    },
+    {
+      "text": "and defended in front of an inspector.",
+      "start": 534.56,
+      "duration": 4.16
+    },
+    {
+      "text": "So to ensure those teams can confidently",
+      "start": 536.64,
+      "duration": 4.16
+    },
+    {
+      "text": "handle an inspector's challenge, you've",
+      "start": 538.72,
+      "duration": 4.48
+    },
+    {
+      "text": "got to be proactive. Audit ready AI",
+      "start": 540.8,
+      "duration": 4.8
+    },
+    {
+      "text": "programs do not just happen by accident.",
+      "start": 543.2,
+      "duration": 4.88
+    },
+    {
+      "text": "They require a living AI inventory so",
+      "start": 545.6,
+      "duration": 4.239
+    },
+    {
+      "text": "you know exactly what models are running",
+      "start": 548.08,
+      "duration": 3.92
+    },
+    {
+      "text": "and where. They require explicit",
+      "start": 549.839,
+      "duration": 4.161
+    },
+    {
+      "text": "documented governance frameworks. And",
+      "start": 552.0,
+      "duration": 3.36
+    },
+    {
+      "text": "critically, they require crossf",
+      "start": 554.0,
+      "duration": 2.959
+    },
+    {
+      "text": "functional simulated inspection",
+      "start": 555.36,
+      "duration": 4.4
+    },
+    {
+      "text": "practice. QA, validation, and IT all",
+      "start": 556.959,
+      "duration": 4.401
+    },
+    {
+      "text": "need to get in a room together and",
+      "start": 559.76,
+      "duration": 3.68
+    },
+    {
+      "text": "practice answering complex AI challenges",
+      "start": 561.36,
+      "duration": 4.479
+    },
+    {
+      "text": "as a unified front. So, I'll leave you",
+      "start": 563.44,
+      "duration": 4.24
+    },
+    {
+      "text": "with this final provocative thought to",
+      "start": 565.839,
+      "duration": 3.68
+    },
+    {
+      "text": "mull over with your teams. Is your",
+      "start": 567.68,
+      "duration": 3.76
+    },
+    {
+      "text": "quality organization truly ready to",
+      "start": 569.519,
+      "duration": 4.161
+    },
+    {
+      "text": "govern statistical learning or are you",
+      "start": 571.44,
+      "duration": 3.519
+    },
+    {
+      "text": "still vulnerable, relying on",
+      "start": 573.68,
+      "duration": 3.279
+    },
+    {
+      "text": "deterministic mindsets for a dynamic",
+      "start": 574.959,
+      "duration": 4.241
+    },
+    {
+      "text": "AIdriven future? really think about it",
+      "start": 576.959,
+      "duration": 3.521
+    },
+    {
+      "text": "and ensure you're applying these",
+      "start": 579.2,
+      "duration": 2.8
+    },
+    {
+      "text": "principles to build a defensible,",
+      "start": 580.48,
+      "duration": 3.68
+    },
+    {
+      "text": "trustworthy AI program. Thanks so much",
+      "start": 582.0,
+      "duration": 3.68
+    },
+    {
+      "text": "for joining me on this explainer and",
+      "start": 584.16,
+      "duration": 4.76
+    },
+    {
+      "text": "keep learning.",
+      "start": 585.68,
+      "duration": 3.24
+    }
+  ]
+}

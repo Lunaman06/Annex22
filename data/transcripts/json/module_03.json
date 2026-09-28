@@ -1,0 +1,1246 @@
+{
+  "module": {
+    "id": "03",
+    "slug": "03_scope_applicability",
+    "video_id": "kNL-ZjNRDeQ",
+    "title": "Scope and Applicability of AI Systems",
+    "duration": "08:35"
+  },
+  "cues": [
+    {
+      "text": "All right. Welcome to this explainer for",
+      "start": 0.0,
+      "duration": 4.28
+    },
+    {
+      "text": "module three. We are jumping right into",
+      "start": 1.8,
+      "duration": 4.64
+    },
+    {
+      "text": "the absolute frontier of pharmaceutical",
+      "start": 4.28,
+      "duration": 4.32
+    },
+    {
+      "text": "compliance today, defining the scope of",
+      "start": 6.44,
+      "duration": 5.52
+    },
+    {
+      "text": "your AI systems under EU GMP Annex 22.",
+      "start": 8.6,
+      "duration": 5.64
+    },
+    {
+      "text": "Look, if you're in pharma QA, IT, or",
+      "start": 11.96,
+      "duration": 4.44
+    },
+    {
+      "text": "validation, you already know the drill.",
+      "start": 14.24,
+      "duration": 3.88
+    },
+    {
+      "text": "Getting your arms around what actually",
+      "start": 16.4,
+      "duration": 4.2
+    },
+    {
+      "text": "counts as AI and exactly how strictly it",
+      "start": 18.12,
+      "duration": 4.2
+    },
+    {
+      "text": "needs to be governed, well, it's pretty",
+      "start": 20.6,
+      "duration": 3.48
+    },
+    {
+      "text": "much one of the biggest challenges we're",
+      "start": 22.32,
+      "duration": 4.2
+    },
+    {
+      "text": "facing right now. So, let's get into it.",
+      "start": 24.08,
+      "duration": 4.76
+    },
+    {
+      "text": "So, here's our road map for this module.",
+      "start": 26.52,
+      "duration": 4.16
+    },
+    {
+      "text": "We're going to cover the high stakes of",
+      "start": 28.84,
+      "duration": 4.04
+    },
+    {
+      "text": "scoping, the decision funnel,",
+      "start": 30.68,
+      "duration": 4.64
+    },
+    {
+      "text": "classifying risk tiers, static versus",
+      "start": 32.88,
+      "duration": 4.76
+    },
+    {
+      "text": "dynamic models, some complex boundary",
+      "start": 35.32,
+      "duration": 4.44
+    },
+    {
+      "text": "cases, and finally, building that",
+      "start": 37.64,
+      "duration": 4.24
+    },
+    {
+      "text": "defensible inventory. Let's hit the",
+      "start": 39.76,
+      "duration": 4.8
+    },
+    {
+      "text": "road. Starting off with section one, the",
+      "start": 41.88,
+      "duration": 5.48
+    },
+    {
+      "text": "high stakes of scoping. Because, make no",
+      "start": 44.56,
+      "duration": 5.16
+    },
+    {
+      "text": "mistake, your scope decisions literally",
+      "start": 47.36,
+      "duration": 4.12
+    },
+    {
+      "text": "drive every downstream governance",
+      "start": 49.72,
+      "duration": 3.44
+    },
+    {
+      "text": "action. Think about it. If you",
+      "start": 51.48,
+      "duration": 4.0
+    },
+    {
+      "text": "defensively over claim, meaning, you",
+      "start": 53.16,
+      "duration": 4.0
+    },
+    {
+      "text": "know, you just throw every single piece",
+      "start": 55.48,
+      "duration": 3.72
+    },
+    {
+      "text": "of conventional software into the Annex",
+      "start": 57.16,
+      "duration": 4.2
+    },
+    {
+      "text": "22 bucket just to play it safe, you're",
+      "start": 59.2,
+      "duration": 3.52
+    },
+    {
+      "text": "going to absolutely paralyze your",
+      "start": 61.36,
+      "duration": 3.479
+    },
+    {
+      "text": "validation team with wasted effort. But,",
+      "start": 62.72,
+      "duration": 4.08
+    },
+    {
+      "text": "on the flip side, if you defensively",
+      "start": 64.839,
+      "duration": 4.081
+    },
+    {
+      "text": "under claim and miss some sneaky little",
+      "start": 66.8,
+      "duration": 3.84
+    },
+    {
+      "text": "AI system operating in a regulated",
+      "start": 68.92,
+      "duration": 3.92
+    },
+    {
+      "text": "space, boom, you are essentially handing",
+      "start": 70.64,
+      "duration": 4.28
+    },
+    {
+      "text": "an inspector a free finding. We really",
+      "start": 72.84,
+      "duration": 3.4
+    },
+    {
+      "text": "need to find that disciplined middle",
+      "start": 74.92,
+      "duration": 2.6
+    },
+    {
+      "text": "ground here.",
+      "start": 76.24,
+      "duration": 3.12
+    },
+    {
+      "text": "To find that middle ground, we use a",
+      "start": 77.52,
+      "duration": 3.96
+    },
+    {
+      "text": "strict decision funnel. I like to think",
+      "start": 79.36,
+      "duration": 3.92
+    },
+    {
+      "text": "of this like a bouncer at an exclusive",
+      "start": 81.48,
+      "duration": 4.4
+    },
+    {
+      "text": "club. Every piece of software, every",
+      "start": 83.28,
+      "duration": 5.08
+    },
+    {
+      "text": "algorithm, has to pass these exact five",
+      "start": 85.88,
+      "duration": 5.88
+    },
+    {
+      "text": "steps to determine its Annex 22 fate. We",
+      "start": 88.36,
+      "duration": 6.96
+    },
+    {
+      "text": "ask, is it AI? We check its GMP impact,",
+      "start": 91.76,
+      "duration": 5.84
+    },
+    {
+      "text": "classify the risk tier, analyze its",
+      "start": 95.32,
+      "duration": 5.08
+    },
+    {
+      "text": "architecture, and finally, document it.",
+      "start": 97.6,
+      "duration": 5.2
+    },
+    {
+      "text": "Which brings us to step one. Is it",
+      "start": 100.4,
+      "duration": 4.88
+    },
+    {
+      "text": "actually AI? We all know a lot of",
+      "start": 102.8,
+      "duration": 4.68
+    },
+    {
+      "text": "software vendors will just slap an AI",
+      "start": 105.28,
+      "duration": 3.92
+    },
+    {
+      "text": "label on their product to make a quick",
+      "start": 107.48,
+      "duration": 4.04
+    },
+    {
+      "text": "sale, right? But, listen, traditional",
+      "start": 109.2,
+      "duration": 4.6
+    },
+    {
+      "text": "rule-based logic, expert systems, and",
+      "start": 111.52,
+      "duration": 4.44
+    },
+    {
+      "text": "deterministic algorithms, those stay",
+      "start": 113.8,
+      "duration": 4.24
+    },
+    {
+      "text": "safely under standard Annex 11",
+      "start": 115.96,
+      "duration": 5.04
+    },
+    {
+      "text": "governance. No Annex 22 needed. It's",
+      "start": 118.04,
+      "duration": 4.96
+    },
+    {
+      "text": "only when a system actually uses",
+      "start": 121.0,
+      "duration": 3.68
+    },
+    {
+      "text": "statistical learning, pattern",
+      "start": 123.0,
+      "duration": 4.24
+    },
+    {
+      "text": "recognition, or generative AI to produce",
+      "start": 124.68,
+      "duration": 4.52
+    },
+    {
+      "text": "decisions or recommendations that it",
+      "start": 127.24,
+      "duration": 3.84
+    },
+    {
+      "text": "crosses the threshold. That's your",
+      "start": 129.2,
+      "duration": 3.0
+    },
+    {
+      "text": "trigger.",
+      "start": 131.08,
+      "duration": 3.92
+    },
+    {
+      "text": "Okay, so let's say it is true AI. We",
+      "start": 132.2,
+      "duration": 4.84
+    },
+    {
+      "text": "move to the next filter in our funnel",
+      "start": 135.0,
+      "duration": 3.959
+    },
+    {
+      "text": "and we have to ask the million-dollar",
+      "start": 137.04,
+      "duration": 4.32
+    },
+    {
+      "text": "question. Does it actually have a good",
+      "start": 138.959,
+      "duration": 5.041
+    },
+    {
+      "text": "manufacturing practice impact? Now, this",
+      "start": 141.36,
+      "duration": 4.36
+    },
+    {
+      "text": "goes way beyond just direct",
+      "start": 144.0,
+      "duration": 4.12
+    },
+    {
+      "text": "manufacturing control or batch release.",
+      "start": 145.72,
+      "duration": 4.8
+    },
+    {
+      "text": "Yes, obviously AI-supported spec setting",
+      "start": 148.12,
+      "duration": 4.64
+    },
+    {
+      "text": "or automated deviation classifications",
+      "start": 150.52,
+      "duration": 4.4
+    },
+    {
+      "text": "are clearly in scope, but you really",
+      "start": 152.76,
+      "duration": 4.48
+    },
+    {
+      "text": "have to look at indirect effects, too.",
+      "start": 154.92,
+      "duration": 4.32
+    },
+    {
+      "text": "For example, say you're using an AI",
+      "start": 157.24,
+      "duration": 3.52
+    },
+    {
+      "text": "scheduling tool that determines the",
+      "start": 159.24,
+      "duration": 3.4
+    },
+    {
+      "text": "availability of qualified personnel on",
+      "start": 160.76,
+      "duration": 4.28
+    },
+    {
+      "text": "the floor. Or an AI that optimizes",
+      "start": 162.64,
+      "duration": 4.44
+    },
+    {
+      "text": "training and affects operator competency",
+      "start": 165.04,
+      "duration": 4.28
+    },
+    {
+      "text": "tracking. Well, that indirect effect",
+      "start": 167.08,
+      "duration": 5.04
+    },
+    {
+      "text": "absolutely warrants Annex 22 scrutiny.",
+      "start": 169.32,
+      "duration": 4.4
+    },
+    {
+      "text": "Bottom line, if it touches the quality",
+      "start": 172.12,
+      "duration": 3.44
+    },
+    {
+      "text": "system, it's in.",
+      "start": 173.72,
+      "duration": 4.92
+    },
+    {
+      "text": ">> Moving to section three, classifying AI",
+      "start": 175.56,
+      "duration": 4.6
+    },
+    {
+      "text": "risk tiers.",
+      "start": 178.64,
+      "duration": 3.36
+    },
+    {
+      "text": ">> This four-tier matrix is exactly the",
+      "start": 180.16,
+      "duration": 3.72
+    },
+    {
+      "text": "mental model your QA team needs to",
+      "start": 182.0,
+      "duration": 3.56
+    },
+    {
+      "text": "adopt. At the very top, we have",
+      "start": 183.88,
+      "duration": 3.72
+    },
+    {
+      "text": "unacceptable. Things like continuously",
+      "start": 185.56,
+      "duration": 3.84
+    },
+    {
+      "text": "learning AI making autonomous batch",
+      "start": 187.6,
+      "duration": 4.32
+    },
+    {
+      "text": "release decisions. Annex 22 strictly",
+      "start": 189.4,
+      "duration": 4.32
+    },
+    {
+      "text": "absolutely excludes that. Right below",
+      "start": 191.92,
+      "duration": 3.88
+    },
+    {
+      "text": "that is high risk, like static AI",
+      "start": 193.72,
+      "duration": 3.92
+    },
+    {
+      "text": "driving process analytical technology,",
+      "start": 195.8,
+      "duration": 3.6
+    },
+    {
+      "text": "which requires full-blown validation.",
+      "start": 197.64,
+      "duration": 3.24
+    },
+    {
+      "text": "Then there's moderate risk for AI",
+      "start": 199.4,
+      "duration": 3.8
+    },
+    {
+      "text": "decision support, like deviation triage,",
+      "start": 200.88,
+      "duration": 3.92
+    },
+    {
+      "text": "but only assuming humans are actively",
+      "start": 203.2,
+      "duration": 2.96
+    },
+    {
+      "text": "reviewing the output before taking",
+      "start": 204.8,
+      "duration": 3.32
+    },
+    {
+      "text": "action. And finally, low risk handles",
+      "start": 206.16,
+      "duration": 4.0
+    },
+    {
+      "text": "all those non-GMP back office",
+      "start": 208.12,
+      "duration": 3.72
+    },
+    {
+      "text": "administrative tasks.",
+      "start": 210.16,
+      "duration": 5.079
+    },
+    {
+      "text": "Next up, step four, static versus",
+      "start": 211.84,
+      "duration": 5.16
+    },
+    {
+      "text": "dynamic models.",
+      "start": 215.239,
+      "duration": 4.161
+    },
+    {
+      "text": "So, Annex 22 heavily, heavily favors",
+      "start": 217.0,
+      "duration": 4.08
+    },
+    {
+      "text": "static models. These are models that are",
+      "start": 219.4,
+      "duration": 3.2
+    },
+    {
+      "text": "effectively frozen in time after",
+      "start": 221.08,
+      "duration": 2.92
+    },
+    {
+      "text": "validation. The outputs are",
+      "start": 222.6,
+      "duration": 3.359
+    },
+    {
+      "text": "deterministic, they're reproducible, and",
+      "start": 224.0,
+      "duration": 3.68
+    },
+    {
+      "text": "updates only ever happen by a formal",
+      "start": 225.959,
+      "duration": 3.601
+    },
+    {
+      "text": "change control. Because they are audit",
+      "start": 227.68,
+      "duration": 3.36
+    },
+    {
+      "text": "defensible across time, they're",
+      "start": 229.56,
+      "duration": 3.72
+    },
+    {
+      "text": "permitted for critical GMP processes.",
+      "start": 231.04,
+      "duration": 3.96
+    },
+    {
+      "text": "Dynamic models, on the other hand, they",
+      "start": 233.28,
+      "duration": 2.96
+    },
+    {
+      "text": "are continuously learning from",
+      "start": 235.0,
+      "duration": 2.8
+    },
+    {
+      "text": "operational data. They can literally",
+      "start": 236.24,
+      "duration": 3.56
+    },
+    {
+      "text": "drift between batches. Because they are",
+      "start": 237.8,
+      "duration": 3.96
+    },
+    {
+      "text": "so notoriously difficult to qualify and",
+      "start": 239.8,
+      "duration": 3.64
+    },
+    {
+      "text": "audit, they are heavily restricted and",
+      "start": 241.76,
+      "duration": 3.48
+    },
+    {
+      "text": "frankly outright excluded for critical",
+      "start": 243.44,
+      "duration": 3.6
+    },
+    {
+      "text": "GMP decisions without some extraordinary",
+      "start": 245.24,
+      "duration": 3.8
+    },
+    {
+      "text": "justification. And then, of course, we",
+      "start": 247.04,
+      "duration": 3.6
+    },
+    {
+      "text": "have generative AI like your large",
+      "start": 249.04,
+      "duration": 4.08
+    },
+    {
+      "text": "language models. Because gen AI can, you",
+      "start": 250.64,
+      "duration": 4.44
+    },
+    {
+      "text": "know, confidently hallucinate incorrect",
+      "start": 253.12,
+      "duration": 4.16
+    },
+    {
+      "text": "outputs, spitting out data that looks",
+      "start": 255.08,
+      "duration": 4.2
+    },
+    {
+      "text": "highly plausible but is just completely",
+      "start": 257.28,
+      "duration": 4.36
+    },
+    {
+      "text": "wrong, you absolutely cannot use it for",
+      "start": 259.28,
+      "duration": 4.04
+    },
+    {
+      "text": "critical tasks like specification",
+      "start": 261.64,
+      "duration": 4.08
+    },
+    {
+      "text": "setting. No way. However, it is",
+      "start": 263.32,
+      "duration": 4.04
+    },
+    {
+      "text": "acceptable for assistive use like",
+      "start": 265.72,
+      "duration": 3.68
+    },
+    {
+      "text": "drafting documents, just as long as a",
+      "start": 267.36,
+      "duration": 4.4
+    },
+    {
+      "text": "qualified human actively reviews and",
+      "start": 269.4,
+      "duration": 4.2
+    },
+    {
+      "text": "verifies the content before it ever",
+      "start": 271.76,
+      "duration": 4.4
+    },
+    {
+      "text": "becomes a formal GMP record.",
+      "start": 273.6,
+      "duration": 3.88
+    },
+    {
+      "text": "Let's put this into practice with",
+      "start": 276.16,
+      "duration": 3.4
+    },
+    {
+      "text": "section five, navigating complex",
+      "start": 277.48,
+      "duration": 3.72
+    },
+    {
+      "text": "boundary cases.",
+      "start": 279.56,
+      "duration": 2.96
+    },
+    {
+      "text": "In our first scenario, imagine a",
+      "start": 281.2,
+      "duration": 3.32
+    },
+    {
+      "text": "pharmaceutical filler considering a deep",
+      "start": 282.52,
+      "duration": 4.68
+    },
+    {
+      "text": "learning particulate inspection system.",
+      "start": 284.52,
+      "duration": 4.44
+    },
+    {
+      "text": "This system grades vials as clear",
+      "start": 287.2,
+      "duration": 4.28
+    },
+    {
+      "text": "passes, clear fails, or it kicks them",
+      "start": 288.96,
+      "duration": 4.76
+    },
+    {
+      "text": "out for manual human review.",
+      "start": 291.48,
+      "duration": 3.8
+    },
+    {
+      "text": "Now, initially, the filler tries to",
+      "start": 293.72,
+      "duration": 4.12
+    },
+    {
+      "text": "classify this AI as just moderate risk",
+      "start": 295.28,
+      "duration": 4.32
+    },
+    {
+      "text": "because, hey, humans are reviewing the",
+      "start": 297.84,
+      "duration": 3.68
+    },
+    {
+      "text": "borderline vials, right? Makes sense on",
+      "start": 299.6,
+      "duration": 3.04
+    },
+    {
+      "text": "paper.",
+      "start": 301.52,
+      "duration": 3.32
+    },
+    {
+      "text": "But, here is the catch. The system is",
+      "start": 302.64,
+      "duration": 3.76
+    },
+    {
+      "text": "performing final pass or fail",
+      "start": 304.84,
+      "duration": 3.48
+    },
+    {
+      "text": "classification on the vast majority of",
+      "start": 306.4,
+      "duration": 4.32
+    },
+    {
+      "text": "those vials completely autonomously. An",
+      "start": 308.32,
+      "duration": 3.92
+    },
+    {
+      "text": "inspector is going to immediately",
+      "start": 310.72,
+      "duration": 3.36
+    },
+    {
+      "text": "escalate this to high risk. The big",
+      "start": 312.24,
+      "duration": 3.88
+    },
+    {
+      "text": "lesson here is that autonomous decision",
+      "start": 314.08,
+      "duration": 4.12
+    },
+    {
+      "text": "rates dictate the rules. Just having",
+      "start": 316.12,
+      "duration": 3.92
+    },
+    {
+      "text": "partial oversight on the tricky cases",
+      "start": 318.2,
+      "duration": 3.64
+    },
+    {
+      "text": "does not magically lower your overall",
+      "start": 320.04,
+      "duration": 4.08
+    },
+    {
+      "text": "risk tier. To actually resolve this, you",
+      "start": 321.84,
+      "duration": 4.52
+    },
+    {
+      "text": "need full validation, drift monitoring,",
+      "start": 324.12,
+      "duration": 4.16
+    },
+    {
+      "text": "and an explicit fallback to fully manual",
+      "start": 326.36,
+      "duration": 4.76
+    },
+    {
+      "text": "inspection if the AI starts to drift.",
+      "start": 328.28,
+      "duration": 4.92
+    },
+    {
+      "text": "Next up, let's look at generative AI",
+      "start": 331.12,
+      "duration": 4.68
+    },
+    {
+      "text": "document drafting. Say a QA team wants",
+      "start": 333.2,
+      "duration": 4.64
+    },
+    {
+      "text": "to deploy an LLM to take some rough",
+      "start": 335.8,
+      "duration": 4.44
+    },
+    {
+      "text": "operator notes and turn them into highly",
+      "start": 337.84,
+      "duration": 4.64
+    },
+    {
+      "text": "polished deviation reports. A lot of",
+      "start": 340.24,
+      "duration": 3.84
+    },
+    {
+      "text": "teams dangerously assume this is",
+      "start": 342.48,
+      "duration": 3.72
+    },
+    {
+      "text": "automatically a low-risk application",
+      "start": 344.08,
+      "duration": 3.96
+    },
+    {
+      "text": "just because a human QA reviewer",
+      "start": 346.2,
+      "duration": 3.44
+    },
+    {
+      "text": "eventually signs off on that final",
+      "start": 348.04,
+      "duration": 4.44
+    },
+    {
+      "text": "draft. And this perfectly illustrates a",
+      "start": 349.64,
+      "duration": 4.96
+    },
+    {
+      "text": "really common trap. The issue is that",
+      "start": 352.48,
+      "duration": 4.48
+    },
+    {
+      "text": "the AI subtly shapes the framing of the",
+      "start": 354.6,
+      "duration": 4.72
+    },
+    {
+      "text": "event, the root cause hypotheses, and",
+      "start": 356.96,
+      "duration": 4.48
+    },
+    {
+      "text": "even the CAPA suggestions. If your",
+      "start": 359.32,
+      "duration": 4.12
+    },
+    {
+      "text": "humans are just passively spell-checking",
+      "start": 361.44,
+      "duration": 3.36
+    },
+    {
+      "text": "and approving these beautifully written",
+      "start": 363.44,
+      "duration": 3.6
+    },
+    {
+      "text": "drafts, you have massive moderate risk",
+      "start": 364.8,
+      "duration": 4.4
+    },
+    {
+      "text": "exposure. To keep this compliant, you",
+      "start": 367.04,
+      "duration": 3.56
+    },
+    {
+      "text": "have to prove to an inspector that your",
+      "start": 369.2,
+      "duration": 3.32
+    },
+    {
+      "text": "reviewers are trained to actively",
+      "start": 370.6,
+      "duration": 4.44
+    },
+    {
+      "text": "challenge the AI's logic. Honestly, you",
+      "start": 372.52,
+      "duration": 4.0
+    },
+    {
+      "text": "should probably be tracking metrics on",
+      "start": 375.04,
+      "duration": 3.2
+    },
+    {
+      "text": "how often the AI text is actually",
+      "start": 376.52,
+      "duration": 4.08
+    },
+    {
+      "text": "altered during that review process.",
+      "start": 378.24,
+      "duration": 4.16
+    },
+    {
+      "text": "Finally, consider the trap of using a",
+      "start": 380.6,
+      "duration": 4.8
+    },
+    {
+      "text": "third-party cloud-based AI tool. Let's",
+      "start": 382.4,
+      "duration": 5.24
+    },
+    {
+      "text": "say a lab is using a vendor's AI service",
+      "start": 385.4,
+      "duration": 5.56
+    },
+    {
+      "text": "via API for assay data analysis. In this",
+      "start": 387.64,
+      "duration": 5.68
+    },
+    {
+      "text": "case, the vendor completely controls the",
+      "start": 390.96,
+      "duration": 4.52
+    },
+    {
+      "text": "black box model, the training data, and",
+      "start": 393.32,
+      "duration": 4.2
+    },
+    {
+      "text": "the entire update cycle.",
+      "start": 395.48,
+      "duration": 3.92
+    },
+    {
+      "text": "The harsh reality here is you cannot",
+      "start": 397.52,
+      "duration": 4.48
+    },
+    {
+      "text": "outsource your GMP accountability. If",
+      "start": 399.4,
+      "duration": 4.12
+    },
+    {
+      "text": "you don't control the algorithm, and you",
+      "start": 402.0,
+      "duration": 3.28
+    },
+    {
+      "text": "literally can't validate the vendor's",
+      "start": 403.52,
+      "duration": 3.76
+    },
+    {
+      "text": "continuous background updates, you're",
+      "start": 405.28,
+      "duration": 3.6
+    },
+    {
+      "text": "accountable for behavior you cannot",
+      "start": 407.28,
+      "duration": 4.04
+    },
+    {
+      "text": "document. So, the resolution? You",
+      "start": 408.88,
+      "duration": 5.2
+    },
+    {
+      "text": "absolutely must treat this AI strictly",
+      "start": 411.32,
+      "duration": 5.04
+    },
+    {
+      "text": "as an advisory tool. You have to perform",
+      "start": 414.08,
+      "duration": 4.08
+    },
+    {
+      "text": "a duplicate analysis using your own",
+      "start": 416.36,
+      "duration": 3.88
+    },
+    {
+      "text": "in-house validated methods, and just use",
+      "start": 418.16,
+      "duration": 4.36
+    },
+    {
+      "text": "the cloud AI as a secondary check, never",
+      "start": 420.24,
+      "duration": 4.4
+    },
+    {
+      "text": "your primary decision maker.",
+      "start": 422.52,
+      "duration": 4.88
+    },
+    {
+      "text": "Which brings us to our final section,",
+      "start": 424.64,
+      "duration": 5.48
+    },
+    {
+      "text": "the defensible AI inventory.",
+      "start": 427.4,
+      "duration": 4.92
+    },
+    {
+      "text": "This inventory is a living document, and",
+      "start": 430.12,
+      "duration": 4.08
+    },
+    {
+      "text": "it has to contain these exact attributes",
+      "start": 432.32,
+      "duration": 4.36
+    },
+    {
+      "text": "for every single system. The identifier,",
+      "start": 434.2,
+      "duration": 4.64
+    },
+    {
+      "text": "its intended use, its specific risk",
+      "start": 436.68,
+      "duration": 4.56
+    },
+    {
+      "text": "tier, the system owner, its validation",
+      "start": 438.84,
+      "duration": 4.84
+    },
+    {
+      "text": "status, and probably most importantly, a",
+      "start": 441.24,
+      "duration": 4.2
+    },
+    {
+      "text": "direct link to your documented scoping",
+      "start": 443.68,
+      "duration": 2.88
+    },
+    {
+      "text": "rationale.",
+      "start": 445.44,
+      "duration": 3.0
+    },
+    {
+      "text": "This is your master index. When an",
+      "start": 446.56,
+      "duration": 3.48
+    },
+    {
+      "text": "auditor walks through the door and says,",
+      "start": 448.44,
+      "duration": 3.6
+    },
+    {
+      "text": "\"Show me your AI systems,\" this document",
+      "start": 450.04,
+      "duration": 4.52
+    },
+    {
+      "text": "is your absolute best line of defense.",
+      "start": 452.04,
+      "duration": 4.36
+    },
+    {
+      "text": "I really love this quote from the source",
+      "start": 454.56,
+      "duration": 4.24
+    },
+    {
+      "text": "material. Strong scoping discipline",
+      "start": 456.4,
+      "duration": 4.28
+    },
+    {
+      "text": "projects competence and reduces the",
+      "start": 458.8,
+      "duration": 4.2
+    },
+    {
+      "text": "inspector's incentive to probe deeper.",
+      "start": 460.68,
+      "duration": 4.28
+    },
+    {
+      "text": "An inspector will instantly sense if",
+      "start": 463.0,
+      "duration": 3.84
+    },
+    {
+      "text": "your inventory was just hastily thrown",
+      "start": 464.96,
+      "duration": 3.88
+    },
+    {
+      "text": "together or if it's outdated. But a",
+      "start": 466.84,
+      "duration": 4.52
+    },
+    {
+      "text": "meticulously documented log, especially",
+      "start": 468.84,
+      "duration": 4.44
+    },
+    {
+      "text": "one that details exactly why certain",
+      "start": 471.36,
+      "duration": 3.48
+    },
+    {
+      "text": "boundary cases were classified the way",
+      "start": 473.28,
+      "duration": 3.2
+    },
+    {
+      "text": "they were, that proves your",
+      "start": 474.84,
+      "duration": 3.84
+    },
+    {
+      "text": "organizational maturity. It shows you're",
+      "start": 476.48,
+      "duration": 3.96
+    },
+    {
+      "text": "in total control, which naturally",
+      "start": 478.68,
+      "duration": 3.76
+    },
+    {
+      "text": "reduces the inspector's urge to just dig",
+      "start": 480.44,
+      "duration": 4.16
+    },
+    {
+      "text": "endlessly into your portfolio.",
+      "start": 482.44,
+      "duration": 3.64
+    },
+    {
+      "text": "So, I'm going to leave you with this",
+      "start": 484.6,
+      "duration": 3.64
+    },
+    {
+      "text": "final thought to evaluate with your own",
+      "start": 486.08,
+      "duration": 5.44
+    },
+    {
+      "text": "IT, QA, and validation teams. Could your",
+      "start": 488.24,
+      "duration": 6.12
+    },
+    {
+      "text": "current AI inventory actually withstand",
+      "start": 491.52,
+      "duration": 5.52
+    },
+    {
+      "text": "that level of regulatory scrutiny today?",
+      "start": 494.36,
+      "duration": 4.559
+    },
+    {
+      "text": "Are you over claiming, under claiming,",
+      "start": 497.04,
+      "duration": 3.879
+    },
+    {
+      "text": "or you perfectly scoped? Take these",
+      "start": 498.919,
+      "duration": 4.0
+    },
+    {
+      "text": "concepts back to your organization, chew",
+      "start": 500.919,
+      "duration": 3.601
+    },
+    {
+      "text": "on them a bit, and we'll see you in",
+      "start": 502.919,
+      "duration": 3.561
+    },
+    {
+      "text": "module four, where we'll translate these",
+      "start": 504.52,
+      "duration": 3.72
+    },
+    {
+      "text": "risk classifications into risk",
+      "start": 506.48,
+      "duration": 3.8
+    },
+    {
+      "text": "proportionate governance and validation",
+      "start": 508.24,
+      "duration": 5.64
+    },
+    {
+      "text": "strategies. Thanks for joining me.",
+      "start": 510.28,
+      "duration": 3.6
+    }
+  ]
+}

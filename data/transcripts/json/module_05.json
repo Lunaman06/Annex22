@@ -1,0 +1,1221 @@
+{
+  "module": {
+    "id": "05",
+    "slug": "05_intended_use_model_definition",
+    "video_id": "C-mXphEyJjk",
+    "title": "Intended Use and Model Definition",
+    "duration": "08:25"
+  },
+  "cues": [
+    {
+      "text": "All right, let's get right into it.",
+      "start": 0.0,
+      "duration": 4.76
+    },
+    {
+      "text": "Welcome to our explainer on module five,",
+      "start": 1.96,
+      "duration": 5.52
+    },
+    {
+      "text": "intended use and model definition. If",
+      "start": 4.76,
+      "duration": 4.96
+    },
+    {
+      "text": "you're a QA, IT, or validation",
+      "start": 7.48,
+      "duration": 4.08
+    },
+    {
+      "text": "professional in the pharma industry, you",
+      "start": 9.72,
+      "duration": 4.12
+    },
+    {
+      "text": "are in the exact right place. Today,",
+      "start": 11.56,
+      "duration": 4.04
+    },
+    {
+      "text": "we're setting a really high-stakes tone",
+      "start": 13.84,
+      "duration": 3.24
+    },
+    {
+      "text": "because we are talking about building",
+      "start": 15.6,
+      "duration": 3.72
+    },
+    {
+      "text": "what is essentially a bulletproof AI",
+      "start": 17.08,
+      "duration": 4.64
+    },
+    {
+      "text": "contract within your organization. We",
+      "start": 19.32,
+      "duration": 3.96
+    },
+    {
+      "text": "are looking at the absolute foundation",
+      "start": 21.72,
+      "duration": 3.88
+    },
+    {
+      "text": "of every single AI system deployed under",
+      "start": 23.28,
+      "duration": 6.08
+    },
+    {
+      "text": "EU GMP Annex 22. Okay, let's dive into",
+      "start": 25.6,
+      "duration": 6.56
+    },
+    {
+      "text": "this with a critical question. What is",
+      "start": 29.36,
+      "duration": 4.88
+    },
+    {
+      "text": "the single document that dictates your",
+      "start": 32.16,
+      "duration": 4.96
+    },
+    {
+      "text": "entire compliance and inspection fate?",
+      "start": 34.24,
+      "duration": 4.84
+    },
+    {
+      "text": "Think about it. When an auditor walks",
+      "start": 37.12,
+      "duration": 3.92
+    },
+    {
+      "text": "through your doors and sits down to",
+      "start": 39.08,
+      "duration": 3.88
+    },
+    {
+      "text": "evaluate your artificial intelligence",
+      "start": 41.04,
+      "duration": 4.44
+    },
+    {
+      "text": "systems, what is the very first thing",
+      "start": 42.96,
+      "duration": 4.72
+    },
+    {
+      "text": "they are going to ask for? The answer is",
+      "start": 45.48,
+      "duration": 4.64
+    },
+    {
+      "text": "the intended use specification. And",
+      "start": 47.68,
+      "duration": 4.12
+    },
+    {
+      "text": "look, I need to be absolutely clear",
+      "start": 50.12,
+      "duration": 3.4
+    },
+    {
+      "text": "right out of the gate here. This is not",
+      "start": 51.8,
+      "duration": 3.44
+    },
+    {
+      "text": "a marketing document. It's not some",
+      "start": 53.52,
+      "duration": 3.36
+    },
+    {
+      "text": "casual project description that you",
+      "start": 55.24,
+      "duration": 4.08
+    },
+    {
+      "text": "draft in an afternoon. It is a legally",
+      "start": 56.88,
+      "duration": 4.76
+    },
+    {
+      "text": "binding regulatory commitment. It's",
+      "start": 59.32,
+      "duration": 4.44
+    },
+    {
+      "text": "literally the contractual heart of your",
+      "start": 61.64,
+      "duration": 4.4
+    },
+    {
+      "text": "AI system. Every single downstream",
+      "start": 63.76,
+      "duration": 4.2
+    },
+    {
+      "text": "governance decision hinges on whether",
+      "start": 66.04,
+      "duration": 3.68
+    },
+    {
+      "text": "your system actually satisfies this",
+      "start": 67.96,
+      "duration": 4.04
+    },
+    {
+      "text": "specific document. Here's our quick",
+      "start": 69.72,
+      "duration": 4.16
+    },
+    {
+      "text": "roadmap for the explainer today. We're",
+      "start": 72.0,
+      "duration": 3.96
+    },
+    {
+      "text": "going to cover one, the contractual",
+      "start": 73.88,
+      "duration": 5.0
+    },
+    {
+      "text": "heart. Two, the anatomy of intended use.",
+      "start": 75.96,
+      "duration": 5.76
+    },
+    {
+      "text": "Three, defining the AI model. Four,",
+      "start": 78.88,
+      "duration": 4.96
+    },
+    {
+      "text": "real-world failure scenarios. And",
+      "start": 81.72,
+      "duration": 4.2
+    },
+    {
+      "text": "finally, five, the inspector's",
+      "start": 83.84,
+      "duration": 4.24
+    },
+    {
+      "text": "perspective. Let's get going.",
+      "start": 85.92,
+      "duration": 4.32
+    },
+    {
+      "text": "Starting off with section one, the",
+      "start": 88.08,
+      "duration": 5.2
+    },
+    {
+      "text": "contractual heart. So, we are officially",
+      "start": 90.24,
+      "duration": 4.92
+    },
+    {
+      "text": "shifting gears from compliance theater",
+      "start": 93.28,
+      "duration": 4.92
+    },
+    {
+      "text": "to mature, defensible AI governance. For",
+      "start": 95.16,
+      "duration": 5.24
+    },
+    {
+      "text": "IT and validation teams tuning in, we're",
+      "start": 98.2,
+      "duration": 4.16
+    },
+    {
+      "text": "laying the actual groundwork for Annex",
+      "start": 100.4,
+      "duration": 4.4
+    },
+    {
+      "text": "22 implementation right here. Get this",
+      "start": 102.36,
+      "duration": 4.2
+    },
+    {
+      "text": "wrong and you're inviting cascading",
+      "start": 104.8,
+      "duration": 3.48
+    },
+    {
+      "text": "governance failures down the line. But",
+      "start": 106.56,
+      "duration": 3.56
+    },
+    {
+      "text": "get it right and the whole shebang falls",
+      "start": 108.28,
+      "duration": 4.04
+    },
+    {
+      "text": "into place. So, let's define exactly",
+      "start": 110.12,
+      "duration": 3.96
+    },
+    {
+      "text": "what we mean. Intended use is the",
+      "start": 112.32,
+      "duration": 3.64
+    },
+    {
+      "text": "precise, binding regulatory",
+      "start": 114.08,
+      "duration": 3.92
+    },
+    {
+      "text": "specification of what an AI system is",
+      "start": 115.96,
+      "duration": 3.92
+    },
+    {
+      "text": "authorized to do, and crucially, the",
+      "start": 118.0,
+      "duration": 3.6
+    },
+    {
+      "text": "boundary conditions outside which it",
+      "start": 119.88,
+      "duration": 3.84
+    },
+    {
+      "text": "must not operate. Think of this document",
+      "start": 121.6,
+      "duration": 4.48
+    },
+    {
+      "text": "like a tightly constructed fence. Inside",
+      "start": 123.72,
+      "duration": 4.56
+    },
+    {
+      "text": "the fence, that's your validated, safe,",
+      "start": 126.08,
+      "duration": 4.72
+    },
+    {
+      "text": "authorized operation. Outside the fence,",
+      "start": 128.28,
+      "duration": 4.56
+    },
+    {
+      "text": "that is total out-of-bounds, unvalidated",
+      "start": 130.8,
+      "duration": 3.88
+    },
+    {
+      "text": "territory where your AI absolutely",
+      "start": 132.84,
+      "duration": 4.08
+    },
+    {
+      "text": "cannot be relied upon. And this",
+      "start": 134.68,
+      "duration": 4.16
+    },
+    {
+      "text": "brilliantly illustrates the massive",
+      "start": 136.92,
+      "duration": 3.76
+    },
+    {
+      "text": "shift we're making. Under traditional",
+      "start": 138.84,
+      "duration": 3.28
+    },
+    {
+      "text": "Annex 11, we were dealing with",
+      "start": 140.68,
+      "duration": 3.24
+    },
+    {
+      "text": "deterministic software validation,",
+      "start": 142.12,
+      "duration": 5.44
+    },
+    {
+      "text": "right? Your standard URS, OQ, PQ, audit",
+      "start": 143.92,
+      "duration": 6.36
+    },
+    {
+      "text": "trails, but Annex 22 extends all of this",
+      "start": 147.56,
+      "duration": 4.36
+    },
+    {
+      "text": "because AI is just fundamentally",
+      "start": 150.28,
+      "duration": 4.92
+    },
+    {
+      "text": "different. It requires static AI models,",
+      "start": 151.92,
+      "duration": 5.48
+    },
+    {
+      "text": "a mandatory intended use definition,",
+      "start": 155.2,
+      "duration": 4.12
+    },
+    {
+      "text": "completely independent test data, and",
+      "start": 157.4,
+      "duration": 4.4
+    },
+    {
+      "text": "continuous monitoring for drift. The old",
+      "start": 159.32,
+      "duration": 4.36
+    },
+    {
+      "text": "rules are foundational, sure, but they",
+      "start": 161.8,
+      "duration": 3.8
+    },
+    {
+      "text": "are completely insufficient on their own",
+      "start": 163.68,
+      "duration": 4.32
+    },
+    {
+      "text": "for AI. Now, your validation effort is",
+      "start": 165.6,
+      "duration": 4.12
+    },
+    {
+      "text": "heavily dictated by this risk-based",
+      "start": 168.0,
+      "duration": 4.0
+    },
+    {
+      "text": "tiering. Low risk is basically your",
+      "start": 169.72,
+      "duration": 5.12
+    },
+    {
+      "text": "non-GMP back office work. Moderate risk",
+      "start": 172.0,
+      "duration": 4.959
+    },
+    {
+      "text": "involves AI making human-reviewed",
+      "start": 174.84,
+      "duration": 4.48
+    },
+    {
+      "text": "advisory suggestions. High risk? That's",
+      "start": 176.959,
+      "duration": 4.241
+    },
+    {
+      "text": "your static AI directly affecting",
+      "start": 179.32,
+      "duration": 4.12
+    },
+    {
+      "text": "product quality or batch release. But",
+      "start": 181.2,
+      "duration": 3.88
+    },
+    {
+      "text": "notice that last step at the top,",
+      "start": 183.44,
+      "duration": 3.68
+    },
+    {
+      "text": "unacceptable. Let me be unequivocally",
+      "start": 185.08,
+      "duration": 4.52
+    },
+    {
+      "text": "clear about this. Continuously learning",
+      "start": 187.12,
+      "duration": 5.96
+    },
+    {
+      "text": "AI in critical GMP processes is strictly",
+      "start": 189.6,
+      "duration": 6.8
+    },
+    {
+      "text": "100% excluded by Annex 22. Your intended",
+      "start": 193.08,
+      "duration": 5.2
+    },
+    {
+      "text": "use must explicitly prove your model is",
+      "start": 196.4,
+      "duration": 4.8
+    },
+    {
+      "text": "static and deterministic, end of story.",
+      "start": 198.28,
+      "duration": 5.239
+    },
+    {
+      "text": "Moving on to section two, anatomy of",
+      "start": 201.2,
+      "duration": 4.92
+    },
+    {
+      "text": "intended use. So, how do we actually",
+      "start": 203.519,
+      "duration": 4.121
+    },
+    {
+      "text": "write one of these bulletproof",
+      "start": 206.12,
+      "duration": 3.76
+    },
+    {
+      "text": "regulatory contracts? Well, vague",
+      "start": 207.64,
+      "duration": 4.52
+    },
+    {
+      "text": "language is literally the enemy here. It",
+      "start": 209.88,
+      "duration": 3.8
+    },
+    {
+      "text": "leads to validation teams not knowing",
+      "start": 212.16,
+      "duration": 3.44
+    },
+    {
+      "text": "how to define acceptance criteria and",
+      "start": 213.68,
+      "duration": 3.72
+    },
+    {
+      "text": "operational teams completely missing the",
+      "start": 215.6,
+      "duration": 4.32
+    },
+    {
+      "text": "mark on inappropriate AI decisions. A",
+      "start": 217.4,
+      "duration": 4.24
+    },
+    {
+      "text": "rigorous specification requires these",
+      "start": 219.92,
+      "duration": 3.96
+    },
+    {
+      "text": "exact components to avoid a total system",
+      "start": 221.64,
+      "duration": 3.24
+    },
+    {
+      "text": "failure.",
+      "start": 223.88,
+      "duration": 3.16
+    },
+    {
+      "text": "First, you need the decision scope. What",
+      "start": 224.88,
+      "duration": 3.68
+    },
+    {
+      "text": "specifically is it authorized to",
+      "start": 227.04,
+      "duration": 3.6
+    },
+    {
+      "text": "recommend or decide? Then, the",
+      "start": 228.56,
+      "duration": 4.24
+    },
+    {
+      "text": "operational context. Which specific",
+      "start": 230.64,
+      "duration": 3.8
+    },
+    {
+      "text": "production line, equipment, and product",
+      "start": 232.8,
+      "duration": 3.64
+    },
+    {
+      "text": "family are we talking about? Following",
+      "start": 234.44,
+      "duration": 3.32
+    },
+    {
+      "text": "that, you have to define the exact",
+      "start": 236.44,
+      "duration": 2.92
+    },
+    {
+      "text": "inputs and data sources feeding the",
+      "start": 237.76,
+      "duration": 3.72
+    },
+    {
+      "text": "system, plus the outputs and downstream",
+      "start": 239.36,
+      "duration": 4.28
+    },
+    {
+      "text": "use. Then, you need quantitative",
+      "start": 241.48,
+      "duration": 4.12
+    },
+    {
+      "text": "performance expectations. We're talking",
+      "start": 243.64,
+      "duration": 4.319
+    },
+    {
+      "text": "hard precision and accuracy targets. And",
+      "start": 245.6,
+      "duration": 4.52
+    },
+    {
+      "text": "finally, the out-of-scope conditions.",
+      "start": 247.959,
+      "duration": 4.121
+    },
+    {
+      "text": "The exact, defined scenarios where the",
+      "start": 250.12,
+      "duration": 4.44
+    },
+    {
+      "text": "AI must stop operating entirely. Now,",
+      "start": 252.08,
+      "duration": 4.08
+    },
+    {
+      "text": "what's really interesting here is just",
+      "start": 254.56,
+      "duration": 4.519
+    },
+    {
+      "text": "how explicit this enumeration has to be.",
+      "start": 256.16,
+      "duration": 5.6
+    },
+    {
+      "text": "Look at the deviation triage AI. Its",
+      "start": 259.079,
+      "duration": 5.161
+    },
+    {
+      "text": "scope is to suggest severity, like major",
+      "start": 261.76,
+      "duration": 4.72
+    },
+    {
+      "text": "or minor. But check out its out-of-scope",
+      "start": 264.24,
+      "duration": 4.679
+    },
+    {
+      "text": "conditions. It specifically excludes",
+      "start": 266.48,
+      "duration": 5.16
+    },
+    {
+      "text": "safety events or first-of-kind issues.",
+      "start": 268.919,
+      "duration": 5.0
+    },
+    {
+      "text": "If a safety event pops up, the AI must",
+      "start": 271.64,
+      "duration": 4.08
+    },
+    {
+      "text": "refuse to classify it and immediately",
+      "start": 273.919,
+      "duration": 3.561
+    },
+    {
+      "text": "escalate to a human.",
+      "start": 275.72,
+      "duration": 3.96
+    },
+    {
+      "text": "Or for the visual inspection AI, if the",
+      "start": 277.48,
+      "duration": 4.12
+    },
+    {
+      "text": "lighting changes or someone introduces a",
+      "start": 279.68,
+      "duration": 4.2
+    },
+    {
+      "text": "new container, it has to stop. The",
+      "start": 281.6,
+      "duration": 5.24
+    },
+    {
+      "text": "boundaries are absolute, no exceptions.",
+      "start": 283.88,
+      "duration": 4.64
+    },
+    {
+      "text": "All right, section three, defining the",
+      "start": 286.84,
+      "duration": 3.6
+    },
+    {
+      "text": "AI model. I want to shift focus",
+      "start": 288.52,
+      "duration": 3.6
+    },
+    {
+      "text": "specifically to our IT audience for a",
+      "start": 290.44,
+      "duration": 3.92
+    },
+    {
+      "text": "second. The intended use defines the",
+      "start": 292.12,
+      "duration": 4.12
+    },
+    {
+      "text": "operational boundaries, right? But how",
+      "start": 294.36,
+      "duration": 3.08
+    },
+    {
+      "text": "do we construct the technical",
+      "start": 296.24,
+      "duration": 3.24
+    },
+    {
+      "text": "boundaries? How do we prove exactly what",
+      "start": 297.44,
+      "duration": 3.8
+    },
+    {
+      "text": "artifact is making these decisions under",
+      "start": 299.48,
+      "duration": 3.68
+    },
+    {
+      "text": "the hood? Well, the model definition",
+      "start": 301.24,
+      "duration": 3.52
+    },
+    {
+      "text": "complements your intended use by",
+      "start": 303.16,
+      "duration": 3.36
+    },
+    {
+      "text": "specifying that exact technical",
+      "start": 304.76,
+      "duration": 3.48
+    },
+    {
+      "text": "artifact. You need to document the",
+      "start": 306.52,
+      "duration": 3.72
+    },
+    {
+      "text": "algorithm class. Is it a random forest",
+      "start": 308.24,
+      "duration": 3.76
+    },
+    {
+      "text": "or maybe a deep neural network? You",
+      "start": 310.24,
+      "duration": 3.28
+    },
+    {
+      "text": "absolutely must have strict training",
+      "start": 312.0,
+      "duration": 2.88
+    },
+    {
+      "text": "data lineage so the origin of the",
+      "start": 313.52,
+      "duration": 3.16
+    },
+    {
+      "text": "model's knowledge is proven. You need to",
+      "start": 314.88,
+      "duration": 3.0
+    },
+    {
+      "text": "meticulously lock down the",
+      "start": 316.68,
+      "duration": 2.76
+    },
+    {
+      "text": "hyperparameter configurations used",
+      "start": 317.88,
+      "duration": 3.72
+    },
+    {
+      "text": "during training. And most importantly,",
+      "start": 319.44,
+      "duration": 3.72
+    },
+    {
+      "text": "you need unambiguous version",
+      "start": 321.6,
+      "duration": 3.48
+    },
+    {
+      "text": "identification. Because if an inspector",
+      "start": 323.16,
+      "duration": 3.6
+    },
+    {
+      "text": "asks why a specific quality decision was",
+      "start": 325.08,
+      "duration": 3.52
+    },
+    {
+      "text": "made 3 years ago, you need to be able to",
+      "start": 326.76,
+      "duration": 4.159
+    },
+    {
+      "text": "recreate history using that exact,",
+      "start": 328.6,
+      "duration": 5.76
+    },
+    {
+      "text": "immutable model version. Section four,",
+      "start": 330.919,
+      "duration": 6.241
+    },
+    {
+      "text": "real-world failure scenarios.",
+      "start": 334.36,
+      "duration": 5.08
+    },
+    {
+      "text": "Okay, theory is great, right? But let's",
+      "start": 337.16,
+      "duration": 4.28
+    },
+    {
+      "text": "see what happens when theory actually",
+      "start": 339.44,
+      "duration": 3.92
+    },
+    {
+      "text": "meets reality. We are going to look at",
+      "start": 341.44,
+      "duration": 4.04
+    },
+    {
+      "text": "the anatomy of a failure and just how",
+      "start": 343.36,
+      "duration": 4.2
+    },
+    {
+      "text": "high-stakes these disasters can actually",
+      "start": 345.48,
+      "duration": 4.24
+    },
+    {
+      "text": "be on the floor. I want you to consider",
+      "start": 347.56,
+      "duration": 4.64
+    },
+    {
+      "text": "this scenario. What happens when an AI",
+      "start": 349.72,
+      "duration": 4.72
+    },
+    {
+      "text": "silently creeps beyond its intended",
+      "start": 352.2,
+      "duration": 4.44
+    },
+    {
+      "text": "scope? The operators get comfortable,",
+      "start": 354.44,
+      "duration": 4.0
+    },
+    {
+      "text": "the system seems to be working just",
+      "start": 356.64,
+      "duration": 3.76
+    },
+    {
+      "text": "fine, and gradually people just start",
+      "start": 358.44,
+      "duration": 3.8
+    },
+    {
+      "text": "feeding it data it was never validated",
+      "start": 360.4,
+      "duration": 3.08
+    },
+    {
+      "text": "to process.",
+      "start": 362.24,
+      "duration": 3.12
+    },
+    {
+      "text": "Well, here is a pretty shocking answer.",
+      "start": 363.48,
+      "duration": 4.04
+    },
+    {
+      "text": "In a real anonymized case study, a lab",
+      "start": 365.36,
+      "duration": 4.24
+    },
+    {
+      "text": "deployed an AI analyzer for stability",
+      "start": 367.52,
+      "duration": 4.48
+    },
+    {
+      "text": "study photos. Now, it was validated only",
+      "start": 369.6,
+      "duration": 4.56
+    },
+    {
+      "text": "for very specific container types, but",
+      "start": 372.0,
+      "duration": 4.8
+    },
+    {
+      "text": "over time, lab staff informally expanded",
+      "start": 374.16,
+      "duration": 4.52
+    },
+    {
+      "text": "it to new, completely unvalidated",
+      "start": 376.8,
+      "duration": 4.04
+    },
+    {
+      "text": "container types just because, hey, it",
+      "start": 378.68,
+      "duration": 3.96
+    },
+    {
+      "text": "seemed to work fine. An external",
+      "start": 380.84,
+      "duration": 3.88
+    },
+    {
+      "text": "inspector caught this exact gap between",
+      "start": 382.64,
+      "duration": 3.96
+    },
+    {
+      "text": "the documented intended use and the",
+      "start": 384.72,
+      "duration": 3.92
+    },
+    {
+      "text": "operational reality. It resulted in a",
+      "start": 386.6,
+      "duration": 3.92
+    },
+    {
+      "text": "massive major finding. We're talking",
+      "start": 388.64,
+      "duration": 3.96
+    },
+    {
+      "text": "huge remediation efforts and the forced",
+      "start": 390.52,
+      "duration": 4.56
+    },
+    {
+      "text": "reevaluation of all historical analyses.",
+      "start": 392.6,
+      "duration": 4.16
+    },
+    {
+      "text": "Good intentions can so easily lead to",
+      "start": 395.08,
+      "duration": 3.44
+    },
+    {
+      "text": "major inspection findings if those",
+      "start": 396.76,
+      "duration": 3.92
+    },
+    {
+      "text": "boundaries aren't strictly enforced. And",
+      "start": 398.52,
+      "duration": 4.24
+    },
+    {
+      "text": "it definitely doesn't stop there.",
+      "start": 400.68,
+      "duration": 4.08
+    },
+    {
+      "text": "Imagine a predictive maintenance AI that",
+      "start": 402.76,
+      "duration": 3.76
+    },
+    {
+      "text": "worked perfectly during normal",
+      "start": 404.76,
+      "duration": 4.0
+    },
+    {
+      "text": "operations, but just failed completely",
+      "start": 406.52,
+      "duration": 4.8
+    },
+    {
+      "text": "during a weekend power restart. Why?",
+      "start": 408.76,
+      "duration": 4.56
+    },
+    {
+      "text": "Because that specific recovery scenario",
+      "start": 411.32,
+      "duration": 4.12
+    },
+    {
+      "text": "was technically out of scope, which led",
+      "start": 413.32,
+      "duration": 3.8
+    },
+    {
+      "text": "to a probe failure and a massive",
+      "start": 415.44,
+      "duration": 4.28
+    },
+    {
+      "text": "deviation. Or, consider a multi-site",
+      "start": 417.12,
+      "duration": 4.72
+    },
+    {
+      "text": "organization where an AI had wider",
+      "start": 419.72,
+      "duration": 4.4
+    },
+    {
+      "text": "intended use boundaries at one facility",
+      "start": 421.84,
+      "duration": 3.84
+    },
+    {
+      "text": "than it did at another, triggering",
+      "start": 424.12,
+      "duration": 3.32
+    },
+    {
+      "text": "systemic audit findings across the",
+      "start": 425.68,
+      "duration": 4.04
+    },
+    {
+      "text": "entire network. This right here",
+      "start": 427.44,
+      "duration": 4.52
+    },
+    {
+      "text": "reinforces the absolute need for out of",
+      "start": 429.72,
+      "duration": 4.12
+    },
+    {
+      "text": "distribution detection logic to",
+      "start": 431.96,
+      "duration": 4.08
+    },
+    {
+      "text": "forcefully stop unvalidated AI",
+      "start": 433.84,
+      "duration": 4.48
+    },
+    {
+      "text": "operations in their tracks.",
+      "start": 436.04,
+      "duration": 4.72
+    },
+    {
+      "text": "Finally, section five, the inspector's",
+      "start": 438.32,
+      "duration": 3.96
+    },
+    {
+      "text": "perspective.",
+      "start": 440.76,
+      "duration": 3.08
+    },
+    {
+      "text": "Let's pull this all together and see how",
+      "start": 442.28,
+      "duration": 4.0
+    },
+    {
+      "text": "it builds into an actual audit scenario.",
+      "start": 443.84,
+      "duration": 3.96
+    },
+    {
+      "text": "How do the regulators view everything we",
+      "start": 446.28,
+      "duration": 2.8
+    },
+    {
+      "text": "just talked about?",
+      "start": 447.8,
+      "duration": 3.04
+    },
+    {
+      "text": "Well, they operate on this very precise",
+      "start": 449.08,
+      "duration": 4.36
+    },
+    {
+      "text": "principle. Vague intended use prompts",
+      "start": 450.84,
+      "duration": 3.92
+    },
+    {
+      "text": "deeper probing.",
+      "start": 453.44,
+      "duration": 2.76
+    },
+    {
+      "text": "If an inspector reads your intended use",
+      "start": 454.76,
+      "duration": 3.56
+    },
+    {
+      "text": "statement and sees fluffy, vague phrases",
+      "start": 456.2,
+      "duration": 4.24
+    },
+    {
+      "text": "like supports quality decisions, they",
+      "start": 458.32,
+      "duration": 3.96
+    },
+    {
+      "text": "are going to dig in aggressively.",
+      "start": 460.44,
+      "duration": 3.36
+    },
+    {
+      "text": "Precise specifications, on the other",
+      "start": 462.28,
+      "duration": 3.8
+    },
+    {
+      "text": "hand, signal organizational competence.",
+      "start": 463.8,
+      "duration": 4.16
+    },
+    {
+      "text": "They prove to the inspector instantly",
+      "start": 466.08,
+      "duration": 3.52
+    },
+    {
+      "text": "that you have a mature, firm grasp on",
+      "start": 467.96,
+      "duration": 3.28
+    },
+    {
+      "text": "your AI governance.",
+      "start": 469.6,
+      "duration": 3.0
+    },
+    {
+      "text": "Regulators are looking specifically for",
+      "start": 471.24,
+      "duration": 3.04
+    },
+    {
+      "text": "the gap between what you wrote down on",
+      "start": 472.6,
+      "duration": 3.2
+    },
+    {
+      "text": "paper and what your operators are",
+      "start": 474.28,
+      "duration": 3.44
+    },
+    {
+      "text": "actually doing out on the floor.",
+      "start": 475.8,
+      "duration": 3.6
+    },
+    {
+      "text": "So, I want to leave you with this",
+      "start": 477.72,
+      "duration": 3.88
+    },
+    {
+      "text": "crucial thought. As you look at the AI",
+      "start": 479.4,
+      "duration": 4.24
+    },
+    {
+      "text": "systems deployed, or even just planned,",
+      "start": 481.6,
+      "duration": 3.96
+    },
+    {
+      "text": "in your facility right now, ask",
+      "start": 483.64,
+      "duration": 3.76
+    },
+    {
+      "text": "yourself, will your intended use",
+      "start": 485.56,
+      "duration": 3.4
+    },
+    {
+      "text": "statement serve as a bulletproof",
+      "start": 487.4,
+      "duration": 4.24
+    },
+    {
+      "text": "defense, or will its ambiguity",
+      "start": 488.96,
+      "duration": 4.28
+    },
+    {
+      "text": "practically invite an inspector to dig",
+      "start": 491.64,
+      "duration": 4.04
+    },
+    {
+      "text": "deeper and uncover systemic gaps? The",
+      "start": 493.24,
+      "duration": 4.52
+    },
+    {
+      "text": "contractual heart of your AI system is",
+      "start": 495.68,
+      "duration": 4.16
+    },
+    {
+      "text": "entirely in your hands. Make sure it's",
+      "start": 497.76,
+      "duration": 6.0
+    },
+    {
+      "text": "constructed with absolute precision.",
+      "start": 499.84,
+      "duration": 3.92
+    }
+  ]
+}

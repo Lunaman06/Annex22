@@ -1,0 +1,1176 @@
+{
+  "module": {
+    "id": "02",
+    "slug": "02_overview_annex_22",
+    "video_id": "ZWZ0stmf374",
+    "title": "Overview of Annex 22",
+    "duration": "08:02"
+  },
+  "cues": [
+    {
+      "text": "Hey everyone. Welcome to this explainer",
+      "start": 0.0,
+      "duration": 4.56
+    },
+    {
+      "text": "covering module two, an overview of",
+      "start": 2.4,
+      "duration": 3.68
+    },
+    {
+      "text": "Annex 22.",
+      "start": 4.56,
+      "duration": 3.6
+    },
+    {
+      "text": "If you're a QA, IT, or validation",
+      "start": 6.08,
+      "duration": 3.36
+    },
+    {
+      "text": "professional working in the pharma",
+      "start": 8.16,
+      "duration": 3.24
+    },
+    {
+      "text": "space, you know exactly how incredibly",
+      "start": 9.44,
+      "duration": 4.08
+    },
+    {
+      "text": "fast things are moving right now. Today,",
+      "start": 11.4,
+      "duration": 3.92
+    },
+    {
+      "text": "we're unpacking the critical regulatory",
+      "start": 13.52,
+      "duration": 4.76
+    },
+    {
+      "text": "framework of EU GMP Annex 22. We're",
+      "start": 15.32,
+      "duration": 4.44
+    },
+    {
+      "text": "going to look at what it is, why it was",
+      "start": 18.28,
+      "duration": 3.56
+    },
+    {
+      "text": "created, its scope, and exactly what",
+      "start": 19.76,
+      "duration": 3.68
+    },
+    {
+      "text": "regulatory authorities expect when",
+      "start": 21.84,
+      "duration": 3.32
+    },
+    {
+      "text": "artificial intelligence meets regulated",
+      "start": 23.44,
+      "duration": 4.08
+    },
+    {
+      "text": "manufacturing. Let's get into it.",
+      "start": 25.16,
+      "duration": 4.2
+    },
+    {
+      "text": "So, let's just address the elephant in",
+      "start": 27.52,
+      "duration": 4.2
+    },
+    {
+      "text": "the room right off the bat, shall we?",
+      "start": 29.36,
+      "duration": 4.24
+    },
+    {
+      "text": "For decades, our industry has relied on",
+      "start": 31.72,
+      "duration": 3.48
+    },
+    {
+      "text": "traditional computerized systems",
+      "start": 33.6,
+      "duration": 3.72
+    },
+    {
+      "text": "validation. You know, testing systems",
+      "start": 35.2,
+      "duration": 3.64
+    },
+    {
+      "text": "that do exactly what they're programmed",
+      "start": 37.32,
+      "duration": 4.8
+    },
+    {
+      "text": "to do every single time. But, how do you",
+      "start": 38.84,
+      "duration": 5.4
+    },
+    {
+      "text": "validate a system that learns? A system",
+      "start": 42.12,
+      "duration": 3.96
+    },
+    {
+      "text": "that actually thinks for itself and",
+      "start": 44.24,
+      "duration": 4.76
+    },
+    {
+      "text": "adapts over time? That intense friction",
+      "start": 46.08,
+      "duration": 5.04
+    },
+    {
+      "text": "between traditional deterministic IT",
+      "start": 49.0,
+      "duration": 4.52
+    },
+    {
+      "text": "validation and modern learning-based",
+      "start": 51.12,
+      "duration": 4.6
+    },
+    {
+      "text": "algorithms has been a massive headache",
+      "start": 53.52,
+      "duration": 4.04
+    },
+    {
+      "text": "for the industry. And honestly, that is",
+      "start": 55.72,
+      "duration": 4.2
+    },
+    {
+      "text": "exactly the problem Annex 22 was created",
+      "start": 57.56,
+      "duration": 3.56
+    },
+    {
+      "text": "to solve.",
+      "start": 59.92,
+      "duration": 3.36
+    },
+    {
+      "text": "Here's our road map for this explainer.",
+      "start": 61.12,
+      "duration": 3.92
+    },
+    {
+      "text": "We're going to cover the origins and",
+      "start": 63.28,
+      "duration": 5.24
+    },
+    {
+      "text": "framework, Annex 11 versus Annex 22,",
+      "start": 65.04,
+      "duration": 5.92
+    },
+    {
+      "text": "defining scope and boundaries, static,",
+      "start": 68.52,
+      "duration": 5.04
+    },
+    {
+      "text": "dynamic, and GenAI, the core structural",
+      "start": 70.96,
+      "duration": 5.08
+    },
+    {
+      "text": "elements, and finally, an implementation",
+      "start": 73.56,
+      "duration": 5.36
+    },
+    {
+      "text": "road map. All right, section one, the",
+      "start": 76.04,
+      "duration": 5.16
+    },
+    {
+      "text": "origins and framework.",
+      "start": 78.92,
+      "duration": 4.32
+    },
+    {
+      "text": "Okay, so where did this even come from?",
+      "start": 81.2,
+      "duration": 3.84
+    },
+    {
+      "text": "Basically, AI deployment was just",
+      "start": 83.24,
+      "duration": 3.88
+    },
+    {
+      "text": "completely outpacing regulatory clarity",
+      "start": 85.04,
+      "duration": 5.24
+    },
+    {
+      "text": "from authorities like the EMA and PIC/S.",
+      "start": 87.12,
+      "duration": 5.2
+    },
+    {
+      "text": "To fix this, the drafting team actually",
+      "start": 90.28,
+      "duration": 3.92
+    },
+    {
+      "text": "looked closely at real-world machine",
+      "start": 92.32,
+      "duration": 3.44
+    },
+    {
+      "text": "learning literature. They wanted to",
+      "start": 94.2,
+      "duration": 3.64
+    },
+    {
+      "text": "align the rules with technical reality,",
+      "start": 95.76,
+      "duration": 3.88
+    },
+    {
+      "text": "rather than just imposing arbitrary",
+      "start": 97.84,
+      "duration": 4.2
+    },
+    {
+      "text": "impossible standards. Also, it's",
+      "start": 99.64,
+      "duration": 4.08
+    },
+    {
+      "text": "designed specifically to sit right",
+      "start": 102.04,
+      "duration": 4.6
+    },
+    {
+      "text": "alongside the EU AI Act, GDPR, and the",
+      "start": 103.72,
+      "duration": 4.72
+    },
+    {
+      "text": "Medical Device Regulation. The goal",
+      "start": 106.64,
+      "duration": 3.44
+    },
+    {
+      "text": "there is so organizations don't end up",
+      "start": 108.44,
+      "duration": 2.6
+    },
+    {
+      "text": "pulling their hair out over",
+      "start": 110.08,
+      "duration": 2.68
+    },
+    {
+      "text": "contradictory rules across different",
+      "start": 111.04,
+      "duration": 3.92
+    },
+    {
+      "text": "European single market regulations.",
+      "start": 112.76,
+      "duration": 4.44
+    },
+    {
+      "text": "Moving right along to section two, Annex",
+      "start": 114.96,
+      "duration": 5.04
+    },
+    {
+      "text": "11 versus Annex 22. Now, I need to make",
+      "start": 117.2,
+      "duration": 5.0
+    },
+    {
+      "text": "something absolutely clear right now.",
+      "start": 120.0,
+      "duration": 5.479
+    },
+    {
+      "text": "Annex 22 does not, I repeat, does not",
+      "start": 122.2,
+      "duration": 6.04
+    },
+    {
+      "text": "replace our old friend Annex 11. They",
+      "start": 125.479,
+      "duration": 4.92
+    },
+    {
+      "text": "work together. Annex 11 remains the",
+      "start": 128.24,
+      "duration": 3.68
+    },
+    {
+      "text": "foundation for all your computerized",
+      "start": 130.399,
+      "duration": 3.001
+    },
+    {
+      "text": "systems. We're talking your",
+      "start": 131.92,
+      "duration": 4.24
+    },
+    {
+      "text": "deterministic validation, your IQ/OQ",
+      "start": 133.4,
+      "duration": 4.6
+    },
+    {
+      "text": "structure, your audit trails. All of",
+      "start": 136.16,
+      "duration": 4.84
+    },
+    {
+      "text": "that stays. But for AI, Annex 22 adds",
+      "start": 138.0,
+      "duration": 5.12
+    },
+    {
+      "text": "some very necessary disciplines on top",
+      "start": 141.0,
+      "duration": 3.56
+    },
+    {
+      "text": "of that foundation. Things like a",
+      "start": 143.12,
+      "duration": 3.28
+    },
+    {
+      "text": "defined intended use, strictly",
+      "start": 144.56,
+      "duration": 3.12
+    },
+    {
+      "text": "independent test data sets,",
+      "start": 146.4,
+      "duration": 3.52
+    },
+    {
+      "text": "explainability, and rigorous life cycle",
+      "start": 147.68,
+      "duration": 4.96
+    },
+    {
+      "text": "monitoring to watch out for model drift.",
+      "start": 149.92,
+      "duration": 4.84
+    },
+    {
+      "text": "That brings us to section three,",
+      "start": 152.64,
+      "duration": 4.88
+    },
+    {
+      "text": "defining scope and boundaries. So,",
+      "start": 154.76,
+      "duration": 4.36
+    },
+    {
+      "text": "what's actually regulated here? There's",
+      "start": 157.52,
+      "duration": 3.08
+    },
+    {
+      "text": "some really interesting nuance in what's",
+      "start": 159.12,
+      "duration": 4.28
+    },
+    {
+      "text": "considered in scope. Batch release,",
+      "start": 160.6,
+      "duration": 4.84
+    },
+    {
+      "text": "obviously in scope. But get this,",
+      "start": 163.4,
+      "duration": 4.64
+    },
+    {
+      "text": "deviation triage is in scope, too.",
+      "start": 165.44,
+      "duration": 4.48
+    },
+    {
+      "text": "Even indirect AI decisions are heavily",
+      "start": 168.04,
+      "duration": 4.52
+    },
+    {
+      "text": "scrutinized if they touch GMP records.",
+      "start": 169.92,
+      "duration": 4.76
+    },
+    {
+      "text": "So, if a lab uses AI for chromatographic",
+      "start": 172.56,
+      "duration": 3.84
+    },
+    {
+      "text": "peak integration, or the supply chain",
+      "start": 174.68,
+      "duration": 3.279
+    },
+    {
+      "text": "uses it for demand forecasting that",
+      "start": 176.4,
+      "duration": 3.64
+    },
+    {
+      "text": "affects product availability, yep, that",
+      "start": 177.959,
+      "duration": 4.28
+    },
+    {
+      "text": "is in scope. On the flip side, pure",
+      "start": 180.04,
+      "duration": 4.52
+    },
+    {
+      "text": "research, standard HR resume screening,",
+      "start": 182.239,
+      "duration": 3.641
+    },
+    {
+      "text": "and your conventional rule-based",
+      "start": 184.56,
+      "duration": 3.28
+    },
+    {
+      "text": "algorithms, those fall safely out of",
+      "start": 185.88,
+      "duration": 3.0
+    },
+    {
+      "text": "scope.",
+      "start": 187.84,
+      "duration": 2.679
+    },
+    {
+      "text": "You know, the really crucial concept",
+      "start": 188.88,
+      "duration": 3.0
+    },
+    {
+      "text": "bridging all of this together is",
+      "start": 190.519,
+      "duration": 4.281
+    },
+    {
+      "text": "intended use. Under Annex 22, this isn't",
+      "start": 191.88,
+      "duration": 5.2
+    },
+    {
+      "text": "just a casual high-level description,",
+      "start": 194.8,
+      "duration": 3.96
+    },
+    {
+      "text": "it's literally the contractual heart of",
+      "start": 197.08,
+      "duration": 3.56
+    },
+    {
+      "text": "the system. It defines exactly what",
+      "start": 198.76,
+      "duration": 4.0
+    },
+    {
+      "text": "decisions the AI is allowed to make, and",
+      "start": 200.64,
+      "duration": 3.76
+    },
+    {
+      "text": "just as importantly, the boundaries",
+      "start": 202.76,
+      "duration": 3.56
+    },
+    {
+      "text": "where it must not operate. Vague scope",
+      "start": 204.4,
+      "duration": 3.6
+    },
+    {
+      "text": "statements here, they are a massive",
+      "start": 206.32,
+      "duration": 3.199
+    },
+    {
+      "text": "predictor of downstream governance",
+      "start": 208.0,
+      "duration": 3.08
+    },
+    {
+      "text": "issues and audit findings. If your",
+      "start": 209.519,
+      "duration": 3.081
+    },
+    {
+      "text": "intended use isn't crystal-clear from",
+      "start": 211.08,
+      "duration": 3.4
+    },
+    {
+      "text": "day one, it becomes nearly impossible to",
+      "start": 212.6,
+      "duration": 3.56
+    },
+    {
+      "text": "establish validation metrics that'll",
+      "start": 214.48,
+      "duration": 3.92
+    },
+    {
+      "text": "actually hold up under inspection.",
+      "start": 216.16,
+      "duration": 4.44
+    },
+    {
+      "text": "All right, let's jump into section four,",
+      "start": 218.4,
+      "duration": 5.6
+    },
+    {
+      "text": "static, dynamic, and GenAI. We've all",
+      "start": 220.6,
+      "duration": 5.24
+    },
+    {
+      "text": "heard those vendor pitches, right? Our",
+      "start": 224.0,
+      "duration": 5.28
+    },
+    {
+      "text": "dynamic AI learns and adapts like magic.",
+      "start": 225.84,
+      "duration": 5.399
+    },
+    {
+      "text": "Well, without a proper audit trail, that",
+      "start": 229.28,
+      "duration": 4.88
+    },
+    {
+      "text": "magic is an inspector's worst nightmare.",
+      "start": 231.239,
+      "duration": 6.441
+    },
+    {
+      "text": "Annex 22 heavily, heavily favors static",
+      "start": 234.16,
+      "duration": 6.28
+    },
+    {
+      "text": "AI for critical GMP processes.",
+      "start": 237.68,
+      "duration": 4.28
+    },
+    {
+      "text": "Static models are frozen after",
+      "start": 240.44,
+      "duration": 3.52
+    },
+    {
+      "text": "validation. They give reproducible",
+      "start": 241.96,
+      "duration": 4.28
+    },
+    {
+      "text": "outputs, and they are audit defensible",
+      "start": 243.96,
+      "duration": 3.84
+    },
+    {
+      "text": "across time.",
+      "start": 246.24,
+      "duration": 3.32
+    },
+    {
+      "text": "Dynamic AI, on the other hand, the stuff",
+      "start": 247.8,
+      "duration": 3.0
+    },
+    {
+      "text": "that learns continuously from",
+      "start": 249.56,
+      "duration": 4.16
+    },
+    {
+      "text": "operational data, is highly restricted.",
+      "start": 250.8,
+      "duration": 4.32
+    },
+    {
+      "text": "Because think about it, every",
+      "start": 253.72,
+      "duration": 3.519
+    },
+    {
+      "text": "operational batch could theoretically be",
+      "start": 255.12,
+      "duration": 4.6
+    },
+    {
+      "text": "processed by a slightly different model.",
+      "start": 257.239,
+      "duration": 5.201
+    },
+    {
+      "text": "If you truly need dynamic AI, Annex 22",
+      "start": 259.72,
+      "duration": 4.68
+    },
+    {
+      "text": "imposes massive governance burdens,",
+      "start": 262.44,
+      "duration": 3.68
+    },
+    {
+      "text": "continuous statistical monitoring, and",
+      "start": 264.4,
+      "duration": 4.519
+    },
+    {
+      "text": "very explicit human oversight. And then",
+      "start": 266.12,
+      "duration": 4.6
+    },
+    {
+      "text": "there's generative AI, your large",
+      "start": 268.919,
+      "duration": 4.241
+    },
+    {
+      "text": "language models. Annex 22 handles these",
+      "start": 270.72,
+      "duration": 5.24
+    },
+    {
+      "text": "with extreme caution. Why? Because their",
+      "start": 273.16,
+      "duration": 4.48
+    },
+    {
+      "text": "outputs are inherently variable, and",
+      "start": 275.96,
+      "duration": 3.64
+    },
+    {
+      "text": "frankly, they're prone to confabulation,",
+      "start": 277.64,
+      "duration": 3.96
+    },
+    {
+      "text": "or hallucinating facts.",
+      "start": 279.6,
+      "duration": 3.4
+    },
+    {
+      "text": "Because of this, generative AI",
+      "start": 281.6,
+      "duration": 3.04
+    },
+    {
+      "text": "absolutely cannot be trusted for",
+      "start": 283.0,
+      "duration": 3.48
+    },
+    {
+      "text": "critical decisions like batch release or",
+      "start": 284.64,
+      "duration": 4.2
+    },
+    {
+      "text": "specification setting. However, for",
+      "start": 286.48,
+      "duration": 4.32
+    },
+    {
+      "text": "non-critical assistive tasks, like",
+      "start": 288.84,
+      "duration": 3.64
+    },
+    {
+      "text": "summarizing long documents or helping",
+      "start": 290.8,
+      "duration": 3.48
+    },
+    {
+      "text": "draft up an SOP, it's totally",
+      "start": 292.48,
+      "duration": 3.52
+    },
+    {
+      "text": "acceptable, provided the human oversight",
+      "start": 294.28,
+      "duration": 3.52
+    },
+    {
+      "text": "is rigid and the final decisions are",
+      "start": 296.0,
+      "duration": 3.96
+    },
+    {
+      "text": "always made by qualified personnel.",
+      "start": 297.8,
+      "duration": 5.0
+    },
+    {
+      "text": "Section five, core structural elements.",
+      "start": 299.96,
+      "duration": 4.84
+    },
+    {
+      "text": "So, how do we actually build compliance?",
+      "start": 302.8,
+      "duration": 3.44
+    },
+    {
+      "text": "It comes down to these core structural",
+      "start": 304.8,
+      "duration": 4.16
+    },
+    {
+      "text": "pillars. First, risk management, which",
+      "start": 306.24,
+      "duration": 5.12
+    },
+    {
+      "text": "integrates directly with ICHQ9 to",
+      "start": 308.96,
+      "duration": 4.48
+    },
+    {
+      "text": "dictate your validation effort.",
+      "start": 311.36,
+      "duration": 3.48
+    },
+    {
+      "text": "Then data governance, meaning you're",
+      "start": 313.44,
+      "duration": 3.56
+    },
+    {
+      "text": "applying your standard ALCOA+ principles",
+      "start": 314.84,
+      "duration": 3.56
+    },
+    {
+      "text": "to both your training and your test",
+      "start": 317.0,
+      "duration": 2.4
+    },
+    {
+      "text": "data.",
+      "start": 318.4,
+      "duration": 3.44
+    },
+    {
+      "text": "A massive point here is validation. You",
+      "start": 319.4,
+      "duration": 4.36
+    },
+    {
+      "text": "need strict isolation of your test data",
+      "start": 321.84,
+      "duration": 3.64
+    },
+    {
+      "text": "from your training data. Any data",
+      "start": 323.76,
+      "duration": 3.32
+    },
+    {
+      "text": "leakage there will completely invalidate",
+      "start": 325.48,
+      "duration": 3.6
+    },
+    {
+      "text": "your performance metrics.",
+      "start": 327.08,
+      "duration": 3.8
+    },
+    {
+      "text": "Rounding it out, we need explainability",
+      "start": 329.08,
+      "duration": 3.56
+    },
+    {
+      "text": "that's proportionate to the risk, human",
+      "start": 330.88,
+      "duration": 3.28
+    },
+    {
+      "text": "oversight with genuine override",
+      "start": 332.64,
+      "duration": 3.88
+    },
+    {
+      "text": "authority, and life cycle management to",
+      "start": 334.16,
+      "duration": 4.2
+    },
+    {
+      "text": "continuously monitor for that dreaded",
+      "start": 336.52,
+      "duration": 3.12
+    },
+    {
+      "text": "model drift.",
+      "start": 338.36,
+      "duration": 2.559
+    },
+    {
+      "text": "To see what happens when those pillars",
+      "start": 339.64,
+      "duration": 3.32
+    },
+    {
+      "text": "crumble, let's look at a real-world case",
+      "start": 340.919,
+      "duration": 3.041
+    },
+    {
+      "text": "study.",
+      "start": 342.96,
+      "duration": 2.36
+    },
+    {
+      "text": "A packaging line deployed a deep",
+      "start": 343.96,
+      "duration": 2.76
+    },
+    {
+      "text": "learning visual inspection system for",
+      "start": 345.32,
+      "duration": 3.44
+    },
+    {
+      "text": "their labels. Technically speaking, it",
+      "start": 346.72,
+      "duration": 4.0
+    },
+    {
+      "text": "was a massive success, but during an",
+      "start": 348.76,
+      "duration": 3.52
+    },
+    {
+      "text": "internal audit they found incomplete",
+      "start": 350.72,
+      "duration": 3.6
+    },
+    {
+      "text": "documentation of training data lineage,",
+      "start": 352.28,
+      "duration": 4.08
+    },
+    {
+      "text": "zero intended use boundary conditions,",
+      "start": 354.32,
+      "duration": 4.36
+    },
+    {
+      "text": "and absolutely no drift monitoring. They",
+      "start": 356.36,
+      "duration": 3.48
+    },
+    {
+      "text": "had to spend three full months",
+      "start": 358.68,
+      "duration": 2.52
+    },
+    {
+      "text": "remediating it before an external",
+      "start": 359.84,
+      "duration": 3.2
+    },
+    {
+      "text": "inspection. It just proves that even a",
+      "start": 361.2,
+      "duration": 3.96
+    },
+    {
+      "text": "technically perfect AI fails completely",
+      "start": 363.04,
+      "duration": 4.2
+    },
+    {
+      "text": "without strict Annex 22 documentation",
+      "start": 365.16,
+      "duration": 4.28
+    },
+    {
+      "text": "discipline. And speaking of discipline,",
+      "start": 367.24,
+      "duration": 3.8
+    },
+    {
+      "text": "here's a fascinating look at human",
+      "start": 369.44,
+      "duration": 4.24
+    },
+    {
+      "text": "oversight in action. A multi-site QA",
+      "start": 371.04,
+      "duration": 5.4
+    },
+    {
+      "text": "team deployed a natural language AI to",
+      "start": 373.68,
+      "duration": 5.32
+    },
+    {
+      "text": "help triage deviations. Initially, the",
+      "start": 376.44,
+      "duration": 4.28
+    },
+    {
+      "text": "human reviewer would just look at the AI",
+      "start": 379.0,
+      "duration": 3.68
+    },
+    {
+      "text": "suggestion and hit approve, but audit",
+      "start": 380.72,
+      "duration": 3.32
+    },
+    {
+      "text": "showed that the reviewers were just",
+      "start": 382.68,
+      "duration": 3.36
+    },
+    {
+      "text": "blindly confirming the AI suggestions",
+      "start": 384.04,
+      "duration": 4.08
+    },
+    {
+      "text": "without truly verifying them. That's a",
+      "start": 386.04,
+      "duration": 3.96
+    },
+    {
+      "text": "super dangerous phenomenon known as",
+      "start": 388.12,
+      "duration": 3.72
+    },
+    {
+      "text": "automation bias. They actually had to",
+      "start": 390.0,
+      "duration": 3.56
+    },
+    {
+      "text": "completely redesign the workflow so",
+      "start": 391.84,
+      "duration": 4.24
+    },
+    {
+      "text": "humans classify independently first and",
+      "start": 393.56,
+      "duration": 4.96
+    },
+    {
+      "text": "only then get to see the AI suggestion.",
+      "start": 396.08,
+      "duration": 4.08
+    },
+    {
+      "text": "Perfunctory human review just gives",
+      "start": 398.52,
+      "duration": 3.84
+    },
+    {
+      "text": "false comfort and it is a shockingly",
+      "start": 400.16,
+      "duration": 4.96
+    },
+    {
+      "text": "weak audit defense. Finally, section",
+      "start": 402.36,
+      "duration": 5.68
+    },
+    {
+      "text": "six, the implementation roadmap.",
+      "start": 405.12,
+      "duration": 4.92
+    },
+    {
+      "text": "Let's transition from the theory into",
+      "start": 408.04,
+      "duration": 4.4
+    },
+    {
+      "text": "actionable practice. Here are the five",
+      "start": 410.04,
+      "duration": 4.52
+    },
+    {
+      "text": "stages to get you started right now.",
+      "start": 412.44,
+      "duration": 4.6
+    },
+    {
+      "text": "Stage one, establish an AI governance",
+      "start": 414.56,
+      "duration": 4.28
+    },
+    {
+      "text": "framework right inside your existing",
+      "start": 417.04,
+      "duration": 4.12
+    },
+    {
+      "text": "quality system. Stage two, build an",
+      "start": 418.84,
+      "duration": 4.88
+    },
+    {
+      "text": "actual inventory of your AI with clear",
+      "start": 421.16,
+      "duration": 4.68
+    },
+    {
+      "text": "criticality classifications. Stage",
+      "start": 423.72,
+      "duration": 4.36
+    },
+    {
+      "text": "three, triage and address those highest",
+      "start": 425.84,
+      "duration": 4.96
+    },
+    {
+      "text": "risk validation gaps first. Stage four,",
+      "start": 428.08,
+      "duration": 4.8
+    },
+    {
+      "text": "develop cross-functional fluency between",
+      "start": 430.8,
+      "duration": 5.24
+    },
+    {
+      "text": "IT and QA. Honestly, silos between those",
+      "start": 432.88,
+      "duration": 5.28
+    },
+    {
+      "text": "two teams will create glaring inspection",
+      "start": 436.04,
+      "duration": 4.64
+    },
+    {
+      "text": "gaps. And stage five, establish those",
+      "start": 438.16,
+      "duration": 4.16
+    },
+    {
+      "text": "lifecycle disciplines for long-term",
+      "start": 440.68,
+      "duration": 3.6
+    },
+    {
+      "text": "governance. The really great news here",
+      "start": 442.32,
+      "duration": 4.52
+    },
+    {
+      "text": "is that Annex 22 mastery builds directly",
+      "start": 444.28,
+      "duration": 4.72
+    },
+    {
+      "text": "on your existing GMP maturity. You do",
+      "start": 446.84,
+      "duration": 4.64
+    },
+    {
+      "text": "not have to start from scratch. I want",
+      "start": 449.0,
+      "duration": 4.48
+    },
+    {
+      "text": "to leave you with a bit of a provocative",
+      "start": 451.48,
+      "duration": 4.64
+    },
+    {
+      "text": "thought to take back to your IT, QA, and",
+      "start": 453.48,
+      "duration": 5.24
+    },
+    {
+      "text": "validation teams. Your new AI models",
+      "start": 456.12,
+      "duration": 4.92
+    },
+    {
+      "text": "might be absolutely state-of-the-art,",
+      "start": 458.72,
+      "duration": 4.96
+    },
+    {
+      "text": "but is your governance? Without a strict",
+      "start": 461.04,
+      "duration": 4.6
+    },
+    {
+      "text": "intended use, isolated test data, and",
+      "start": 463.68,
+      "duration": 4.16
+    },
+    {
+      "text": "continuous monitoring, what hidden drift",
+      "start": 465.64,
+      "duration": 3.2
+    },
+    {
+      "text": "is happening in your critical",
+      "start": 467.84,
+      "duration": 3.64
+    },
+    {
+      "text": "manufacturing processes right now? It is",
+      "start": 468.84,
+      "duration": 3.92
+    },
+    {
+      "text": "definitely time to rethink the",
+      "start": 471.48,
+      "duration": 3.04
+    },
+    {
+      "text": "operational readiness of your current",
+      "start": 472.76,
+      "duration": 3.88
+    },
+    {
+      "text": "systems. Thanks so much for joining me",
+      "start": 474.52,
+      "duration": 3.6
+    },
+    {
+      "text": "on this explainer, and I'll catch you in",
+      "start": 476.64,
+      "duration": 4.08
+    },
+    {
+      "text": "the next one.",
+      "start": 478.12,
+      "duration": 2.6
+    }
+  ]
+}

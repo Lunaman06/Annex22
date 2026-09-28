@@ -1,0 +1,1546 @@
+{
+  "module": {
+    "id": "04",
+    "slug": "04_risk_based_approach",
+    "video_id": "6ZpznHuwpjg",
+    "title": "Risk Based Approach to AI",
+    "duration": "10:12"
+  },
+  "cues": [
+    {
+      "text": "All right, let's jump right into this",
+      "start": 0.0,
+      "duration": 4.48
+    },
+    {
+      "text": "explain and unpack exactly why treating",
+      "start": 1.92,
+      "duration": 5.2
+    },
+    {
+      "text": "every single AI system with uniform deep",
+      "start": 4.48,
+      "duration": 5.12
+    },
+    {
+      "text": "validation is well, it's actually a",
+      "start": 7.12,
+      "duration": 4.68
+    },
+    {
+      "text": "massive compliance risk. Look, if you're",
+      "start": 9.6,
+      "duration": 5.0
+    },
+    {
+      "text": "in Pharma QA, IT or validation, you've",
+      "start": 11.8,
+      "duration": 4.4
+    },
+    {
+      "text": "probably spent your entire career",
+      "start": 14.6,
+      "duration": 3.56
+    },
+    {
+      "text": "applying standard validation frameworks",
+      "start": 16.2,
+      "duration": 4.56
+    },
+    {
+      "text": "to traditional software and that worked.",
+      "start": 18.16,
+      "duration": 4.8
+    },
+    {
+      "text": "But under Annex 22, the rules for",
+      "start": 20.76,
+      "duration": 3.64
+    },
+    {
+      "text": "artificial intelligence are",
+      "start": 22.96,
+      "duration": 3.24
+    },
+    {
+      "text": "fundamentally different. Today, we're",
+      "start": 24.4,
+      "duration": 4.16
+    },
+    {
+      "text": "zeroing in on module four, which is all",
+      "start": 26.2,
+      "duration": 4.36
+    },
+    {
+      "text": "about taking a risk-based approach to",
+      "start": 28.56,
+      "duration": 3.6
+    },
+    {
+      "text": "AI. We're going to see why a",
+      "start": 30.56,
+      "duration": 3.6
+    },
+    {
+      "text": "one-size-fits-all strategy isn't just a",
+      "start": 32.16,
+      "duration": 3.72
+    },
+    {
+      "text": "waste of your time, but it's actively",
+      "start": 34.16,
+      "duration": 3.44
+    },
+    {
+      "text": "dangerous to patient safety and your",
+      "start": 35.88,
+      "duration": 3.32
+    },
+    {
+      "text": "regulatory standing.",
+      "start": 37.6,
+      "duration": 3.8
+    },
+    {
+      "text": "We have a really packed agenda today.",
+      "start": 39.2,
+      "duration": 3.56
+    },
+    {
+      "text": "We're covering the proportionality",
+      "start": 41.4,
+      "duration": 3.52
+    },
+    {
+      "text": "mandate, looking at how AI fails",
+      "start": 42.76,
+      "duration": 4.72
+    },
+    {
+      "text": "differently, patient impact, the actual",
+      "start": 44.92,
+      "duration": 4.36
+    },
+    {
+      "text": "risk assessment methodology, how to",
+      "start": 47.48,
+      "duration": 3.84
+    },
+    {
+      "text": "scale your governance and finally, we'll",
+      "start": 49.28,
+      "duration": 3.76
+    },
+    {
+      "text": "hit some real-world case studies so you",
+      "start": 51.32,
+      "duration": 4.16
+    },
+    {
+      "text": "can see exactly how this plays out. So",
+      "start": 53.04,
+      "duration": 3.52
+    },
+    {
+      "text": "first up, let's look at the",
+      "start": 55.48,
+      "duration": 3.8
+    },
+    {
+      "text": "proportionality mandate. The absolutely",
+      "start": 56.56,
+      "duration": 4.36
+    },
+    {
+      "text": "crucial point here is that flat",
+      "start": 59.28,
+      "duration": 3.0
+    },
+    {
+      "text": "governance, treating everything the",
+      "start": 60.92,
+      "duration": 3.56
+    },
+    {
+      "text": "same, not only burns through your finite",
+      "start": 62.28,
+      "duration": 4.36
+    },
+    {
+      "text": "team capacity, it dangerously starves",
+      "start": 64.48,
+      "duration": 3.84
+    },
+    {
+      "text": "your most critical AI systems of the",
+      "start": 66.64,
+      "duration": 4.04
+    },
+    {
+      "text": "focus they desperately need. Annex 22",
+      "start": 68.32,
+      "duration": 3.92
+    },
+    {
+      "text": "explicitly mandates risk-based",
+      "start": 70.68,
+      "duration": 3.72
+    },
+    {
+      "text": "proportionality. Your validation effort,",
+      "start": 72.24,
+      "duration": 3.68
+    },
+    {
+      "text": "the intensity of your monitoring, the",
+      "start": 74.4,
+      "duration": 3.2
+    },
+    {
+      "text": "depth of your oversight, all of it",
+      "start": 75.92,
+      "duration": 3.36
+    },
+    {
+      "text": "literally has to scale linearly with the",
+      "start": 77.6,
+      "duration": 3.28
+    },
+    {
+      "text": "patient and process risk of each",
+      "start": 79.28,
+      "duration": 3.52
+    },
+    {
+      "text": "specific application. Because think",
+      "start": 80.88,
+      "duration": 3.8
+    },
+    {
+      "text": "about it. If you try to validate a basic",
+      "start": 82.8,
+      "duration": 3.52
+    },
+    {
+      "text": "back office administrative AI with the",
+      "start": 84.68,
+      "duration": 3.56
+    },
+    {
+      "text": "exact same rigor as an AI making batch",
+      "start": 86.32,
+      "duration": 3.2
+    },
+    {
+      "text": "release decisions, you're just",
+      "start": 88.24,
+      "duration": 2.8
+    },
+    {
+      "text": "practicing compliance theater. You",
+      "start": 89.52,
+      "duration": 3.56
+    },
+    {
+      "text": "spread your QA resources way too thin",
+      "start": 91.04,
+      "duration": 3.32
+    },
+    {
+      "text": "and you leave those truly high-risk",
+      "start": 93.08,
+      "duration": 2.76
+    },
+    {
+      "text": "systems totally vulnerable during an",
+      "start": 94.36,
+      "duration": 4.4
+    },
+    {
+      "text": "inspection. Okay, moving on to section",
+      "start": 95.84,
+      "duration": 6.44
+    },
+    {
+      "text": "two, how AI actually fails differently.",
+      "start": 98.76,
+      "duration": 5.44
+    },
+    {
+      "text": "What's really fascinating here and kind",
+      "start": 102.28,
+      "duration": 3.88
+    },
+    {
+      "text": "of scary is that learning-based systems",
+      "start": 104.2,
+      "duration": 4.76
+    },
+    {
+      "text": "don't just crash, they silently degrade.",
+      "start": 106.16,
+      "duration": 4.64
+    },
+    {
+      "text": "With traditional software, a failure is",
+      "start": 108.96,
+      "duration": 4.08
+    },
+    {
+      "text": "usually a binary crash, right? You get",
+      "start": 110.8,
+      "duration": 4.72
+    },
+    {
+      "text": "an immediate obvious error message. AI",
+      "start": 113.04,
+      "duration": 4.64
+    },
+    {
+      "text": "is entirely different. It degrades",
+      "start": 115.52,
+      "duration": 3.96
+    },
+    {
+      "text": "gradually over time.",
+      "start": 117.68,
+      "duration": 3.56
+    },
+    {
+      "text": "If your operational data starts drifting",
+      "start": 119.48,
+      "duration": 2.96
+    },
+    {
+      "text": "away from the data the model was",
+      "start": 121.24,
+      "duration": 3.08
+    },
+    {
+      "text": "originally trained on, the AI is going",
+      "start": 122.44,
+      "duration": 3.92
+    },
+    {
+      "text": "to just keep spitting out answers. And",
+      "start": 124.32,
+      "duration": 4.0
+    },
+    {
+      "text": "the worst part? It'll often do so with",
+      "start": 126.36,
+      "duration": 4.0
+    },
+    {
+      "text": "total confidence. It's a silent",
+      "start": 128.32,
+      "duration": 3.36
+    },
+    {
+      "text": "performance degradation that you might",
+      "start": 130.36,
+      "duration": 2.76
+    },
+    {
+      "text": "not even catch until there's already a",
+      "start": 131.68,
+      "duration": 3.64
+    },
+    {
+      "text": "severe impact on product quality.",
+      "start": 133.12,
+      "duration": 3.76
+    },
+    {
+      "text": "So, when we build out our risk",
+      "start": 135.32,
+      "duration": 4.16
+    },
+    {
+      "text": "assessments, these five AI-specific",
+      "start": 136.88,
+      "duration": 4.24
+    },
+    {
+      "text": "failure modes have to be explicitly",
+      "start": 139.48,
+      "duration": 4.52
+    },
+    {
+      "text": "addressed. Generic IT failure categories",
+      "start": 141.12,
+      "duration": 4.839
+    },
+    {
+      "text": "simply won't survive inspector scrutiny",
+      "start": 144.0,
+      "duration": 3.32
+    },
+    {
+      "text": "anymore. You can't just pull up a",
+      "start": 145.959,
+      "duration": 3.241
+    },
+    {
+      "text": "standard IT template. You've got to",
+      "start": 147.32,
+      "duration": 4.08
+    },
+    {
+      "text": "specifically look for systematic bias,",
+      "start": 149.2,
+      "duration": 3.64
+    },
+    {
+      "text": "like where training data limitations",
+      "start": 151.4,
+      "duration": 3.4
+    },
+    {
+      "text": "cause unsafe outputs. You have to",
+      "start": 152.84,
+      "duration": 3.92
+    },
+    {
+      "text": "account for distribution shift, where",
+      "start": 154.8,
+      "duration": 4.04
+    },
+    {
+      "text": "the real-world data changes over time.",
+      "start": 156.76,
+      "duration": 4.36
+    },
+    {
+      "text": "You need to test for adversarial inputs,",
+      "start": 158.84,
+      "duration": 3.84
+    },
+    {
+      "text": "those weird edge cases the model",
+      "start": 161.12,
+      "duration": 3.16
+    },
+    {
+      "text": "literally wasn't trained for. You've got",
+      "start": 162.68,
+      "duration": 2.76
+    },
+    {
+      "text": "to watch out for confidence",
+      "start": 164.28,
+      "duration": 2.76
+    },
+    {
+      "text": "miscalibration, where the model is",
+      "start": 165.44,
+      "duration": 3.48
+    },
+    {
+      "text": "highly confident but totally completely",
+      "start": 167.04,
+      "duration": 3.52
+    },
+    {
+      "text": "wrong. And finally, spurious",
+      "start": 168.92,
+      "duration": 3.0
+    },
+    {
+      "text": "correlations where the model learns an",
+      "start": 170.56,
+      "duration": 2.68
+    },
+    {
+      "text": "association that isn't actually",
+      "start": 171.92,
+      "duration": 3.039
+    },
+    {
+      "text": "causation, which makes it incredibly",
+      "start": 173.24,
+      "duration": 3.719
+    },
+    {
+      "text": "brittle out in the real world.",
+      "start": 174.959,
+      "duration": 4.521
+    },
+    {
+      "text": "Next up, section three, patient impact",
+      "start": 176.959,
+      "duration": 4.0
+    },
+    {
+      "text": "and criticality.",
+      "start": 179.48,
+      "duration": 3.16
+    },
+    {
+      "text": "You have to evaluate the operational",
+      "start": 180.959,
+      "duration": 3.681
+    },
+    {
+      "text": "consequence of the worst credible AI",
+      "start": 182.64,
+      "duration": 3.64
+    },
+    {
+      "text": "failure across these specific",
+      "start": 184.64,
+      "duration": 4.16
+    },
+    {
+      "text": "dimensions. And keep in mind, Annex 22",
+      "start": 186.28,
+      "duration": 4.959
+    },
+    {
+      "text": "strictly excludes continuously learning",
+      "start": 188.8,
+      "duration": 5.12
+    },
+    {
+      "text": "AI in critical GMP processes. So,",
+      "start": 191.239,
+      "duration": 4.441
+    },
+    {
+      "text": "patient impact is our true North Star",
+      "start": 193.92,
+      "duration": 3.76
+    },
+    {
+      "text": "here. We have direct impact, which",
+      "start": 195.68,
+      "duration": 3.48
+    },
+    {
+      "text": "obviously drives our highest risk",
+      "start": 197.68,
+      "duration": 3.76
+    },
+    {
+      "text": "classifications. Think AI errors that",
+      "start": 199.16,
+      "duration": 4.079
+    },
+    {
+      "text": "literally cause a substandard product to",
+      "start": 201.44,
+      "duration": 3.799
+    },
+    {
+      "text": "be released. Then we have indirect",
+      "start": 203.239,
+      "duration": 3.841
+    },
+    {
+      "text": "impact, things like delays in release or",
+      "start": 205.239,
+      "duration": 4.161
+    },
+    {
+      "text": "market supply. And crucially, don't miss",
+      "start": 207.08,
+      "duration": 4.8
+    },
+    {
+      "text": "this one, we have cumulative impact. A",
+      "start": 209.4,
+      "duration": 4.44
+    },
+    {
+      "text": "tiny little risk on a single decision",
+      "start": 211.88,
+      "duration": 3.68
+    },
+    {
+      "text": "might seem totally fine, but multiply",
+      "start": 213.84,
+      "duration": 3.48
+    },
+    {
+      "text": "that by thousands of automated decisions",
+      "start": 215.56,
+      "duration": 3.84
+    },
+    {
+      "text": "a day, the aggregate risk to patient",
+      "start": 217.32,
+      "duration": 4.28
+    },
+    {
+      "text": "safety suddenly becomes massive.",
+      "start": 219.4,
+      "duration": 4.839
+    },
+    {
+      "text": "Now, reversibility is a massive lever in",
+      "start": 221.6,
+      "duration": 4.8
+    },
+    {
+      "text": "your risk assessment. If an AI makes a",
+      "start": 224.239,
+      "duration": 3.921
+    },
+    {
+      "text": "mistake during, say, in-process",
+      "start": 226.4,
+      "duration": 3.559
+    },
+    {
+      "text": "manufacturing, but it can be easily",
+      "start": 228.16,
+      "duration": 3.52
+    },
+    {
+      "text": "caught and corrected within the same",
+      "start": 229.959,
+      "duration": 4.001
+    },
+    {
+      "text": "batch, your governance can realistically",
+      "start": 231.68,
+      "duration": 4.56
+    },
+    {
+      "text": "be a bit lighter. But, batch release",
+      "start": 233.96,
+      "duration": 4.76
+    },
+    {
+      "text": "decisions, yeah, those are almost always",
+      "start": 236.24,
+      "duration": 4.0
+    },
+    {
+      "text": "irreversible once the product hits",
+      "start": 238.72,
+      "duration": 3.48
+    },
+    {
+      "text": "distribution. And that's exactly why",
+      "start": 240.24,
+      "duration": 3.72
+    },
+    {
+      "text": "deliberate investments in features like",
+      "start": 242.2,
+      "duration": 3.6
+    },
+    {
+      "text": "out of distribution detection are game",
+      "start": 243.96,
+      "duration": 4.28
+    },
+    {
+      "text": "changers. If the AI can essentially flag",
+      "start": 245.8,
+      "duration": 4.28
+    },
+    {
+      "text": "its own uncertainty and say, \"Hey, I",
+      "start": 248.24,
+      "duration": 3.6
+    },
+    {
+      "text": "haven't seen this before, a human needs",
+      "start": 250.08,
+      "duration": 3.28
+    },
+    {
+      "text": "to look at this.\" your effective",
+      "start": 251.84,
+      "duration": 4.399
+    },
+    {
+      "text": "residual risk drops significantly.",
+      "start": 253.36,
+      "duration": 4.28
+    },
+    {
+      "text": "All right, let's get into the practical",
+      "start": 256.239,
+      "duration": 3.801
+    },
+    {
+      "text": "stuff. Section four, risk assessment",
+      "start": 257.64,
+      "duration": 5.2
+    },
+    {
+      "text": "methodology. This six-step process is",
+      "start": 260.04,
+      "duration": 4.879
+    },
+    {
+      "text": "what ensures you actually build an audit",
+      "start": 262.84,
+      "duration": 3.84
+    },
+    {
+      "text": "defensible cross-functional risk",
+      "start": 264.919,
+      "duration": 3.601
+    },
+    {
+      "text": "assessment record. This becomes the",
+      "start": 266.68,
+      "duration": 3.4
+    },
+    {
+      "text": "backbone for literally all your",
+      "start": 268.52,
+      "duration": 3.56
+    },
+    {
+      "text": "subsequent governance decisions.",
+      "start": 270.08,
+      "duration": 4.0
+    },
+    {
+      "text": "Step one, define the intended use",
+      "start": 272.08,
+      "duration": 3.2
+    },
+    {
+      "text": "precisely.",
+      "start": 274.08,
+      "duration": 3.68
+    },
+    {
+      "text": "Step two, identify those AI specific",
+      "start": 275.28,
+      "duration": 4.2
+    },
+    {
+      "text": "failure modes we just talked about, the",
+      "start": 277.76,
+      "duration": 4.36
+    },
+    {
+      "text": "drift, the bias, the whole shebang.",
+      "start": 279.48,
+      "duration": 4.8
+    },
+    {
+      "text": "Step three, assess the severity, looking",
+      "start": 282.12,
+      "duration": 4.2
+    },
+    {
+      "text": "at patient, regulatory, and operational",
+      "start": 284.28,
+      "duration": 3.4
+    },
+    {
+      "text": "consequences.",
+      "start": 286.32,
+      "duration": 3.84
+    },
+    {
+      "text": "Step four, estimate likelihood. Now,",
+      "start": 287.68,
+      "duration": 4.64
+    },
+    {
+      "text": "this is tough for novel AI, so always",
+      "start": 290.16,
+      "duration": 3.72
+    },
+    {
+      "text": "start with conservative estimates based",
+      "start": 292.32,
+      "duration": 3.64
+    },
+    {
+      "text": "on operational drift potential. Step",
+      "start": 293.88,
+      "duration": 4.36
+    },
+    {
+      "text": "five, assess detectability. Honestly,",
+      "start": 295.96,
+      "duration": 4.32
+    },
+    {
+      "text": "ask yourself, how fast would we actually",
+      "start": 298.24,
+      "duration": 4.0
+    },
+    {
+      "text": "notice a silent degradation? And",
+      "start": 300.28,
+      "duration": 4.24
+    },
+    {
+      "text": "finally, step six, synthesize all this",
+      "start": 302.24,
+      "duration": 4.36
+    },
+    {
+      "text": "into an overall risk classification,",
+      "start": 304.52,
+      "duration": 4.84
+    },
+    {
+      "text": "unacceptable, high, moderate, or low,",
+      "start": 306.6,
+      "duration": 5.28
+    },
+    {
+      "text": "with a very clear, explicit rationale.",
+      "start": 309.36,
+      "duration": 5.12
+    },
+    {
+      "text": "Section five, scaling your governance",
+      "start": 311.88,
+      "duration": 4.96
+    },
+    {
+      "text": "based on that risk. Take a second to",
+      "start": 314.48,
+      "duration": 4.64
+    },
+    {
+      "text": "look at this. Notice how the validation,",
+      "start": 316.84,
+      "duration": 4.4
+    },
+    {
+      "text": "monitoring, and oversight scale linearly",
+      "start": 319.12,
+      "duration": 4.04
+    },
+    {
+      "text": "here. Your governance depth must be",
+      "start": 321.24,
+      "duration": 3.8
+    },
+    {
+      "text": "explicitly linked to your identified",
+      "start": 323.16,
+      "duration": 3.88
+    },
+    {
+      "text": "risk tier. For a high-risk system,",
+      "start": 325.04,
+      "duration": 3.8
+    },
+    {
+      "text": "validation means deep adversarial",
+      "start": 327.04,
+      "duration": 3.8
+    },
+    {
+      "text": "testing, boundary case evidence, strict",
+      "start": 328.84,
+      "duration": 4.24
+    },
+    {
+      "text": "acceptance criteria. Monitoring has to",
+      "start": 330.84,
+      "duration": 4.28
+    },
+    {
+      "text": "be real time with statistical drift",
+      "start": 333.08,
+      "duration": 3.92
+    },
+    {
+      "text": "detection. And oversight? You need a",
+      "start": 335.12,
+      "duration": 3.68
+    },
+    {
+      "text": "human in the loop, meaning a person",
+      "start": 337.0,
+      "duration": 3.96
+    },
+    {
+      "text": "reviews every single output before any",
+      "start": 338.8,
+      "duration": 4.36
+    },
+    {
+      "text": "action is taken. Now, contrast that with",
+      "start": 340.96,
+      "duration": 4.4
+    },
+    {
+      "text": "a moderate risk system. Validation can",
+      "start": 343.16,
+      "duration": 4.16
+    },
+    {
+      "text": "use smaller test sets, monitoring might",
+      "start": 345.36,
+      "duration": 3.56
+    },
+    {
+      "text": "just be scheduled intervals like maybe",
+      "start": 347.32,
+      "duration": 3.76
+    },
+    {
+      "text": "daily or per batch, and oversight can",
+      "start": 348.92,
+      "duration": 4.24
+    },
+    {
+      "text": "shift to human on the loop where humans",
+      "start": 351.08,
+      "duration": 3.28
+    },
+    {
+      "text": "are just monitoring aggregate",
+      "start": 353.16,
+      "duration": 3.04
+    },
+    {
+      "text": "performance and retain the authority to",
+      "start": 354.36,
+      "duration": 3.56
+    },
+    {
+      "text": "override, but they aren't reviewing",
+      "start": 356.2,
+      "duration": 4.0
+    },
+    {
+      "text": "every single individual decision.",
+      "start": 357.92,
+      "duration": 5.04
+    },
+    {
+      "text": "Okay, section six. Let's look at some",
+      "start": 360.2,
+      "duration": 4.92
+    },
+    {
+      "text": "real-world case studies to really anchor",
+      "start": 362.96,
+      "duration": 3.28
+    },
+    {
+      "text": "this.",
+      "start": 365.12,
+      "duration": 3.8
+    },
+    {
+      "text": "Case study one. We have a bioreactor pH",
+      "start": 366.24,
+      "duration": 5.08
+    },
+    {
+      "text": "control AI. It's optimizing set points",
+      "start": 368.92,
+      "duration": 4.24
+    },
+    {
+      "text": "to maximize yield while maintaining",
+      "start": 371.32,
+      "duration": 4.04
+    },
+    {
+      "text": "quality. And because they left the old",
+      "start": 373.16,
+      "duration": 4.32
+    },
+    {
+      "text": "traditional PID controller in place as a",
+      "start": 375.36,
+      "duration": 4.24
+    },
+    {
+      "text": "manual fallback, the initial assessment",
+      "start": 377.48,
+      "duration": 3.92
+    },
+    {
+      "text": "was that the AI was just a refinement",
+      "start": 379.6,
+      "duration": 4.48
+    },
+    {
+      "text": "layer. Everyone thought, \"Hey, textbook",
+      "start": 381.4,
+      "duration": 4.56
+    },
+    {
+      "text": "moderate risk scenario.\"",
+      "start": 384.08,
+      "duration": 3.76
+    },
+    {
+      "text": "But there's a hidden dangerous secret",
+      "start": 385.96,
+      "duration": 4.44
+    },
+    {
+      "text": "here regarding operational dependence.",
+      "start": 387.84,
+      "duration": 4.28
+    },
+    {
+      "text": "Here's what actually happened. A",
+      "start": 390.4,
+      "duration": 4.24
+    },
+    {
+      "text": "fallback existing on paper is entirely",
+      "start": 392.12,
+      "duration": 3.96
+    },
+    {
+      "text": "different from a fallback that is",
+      "start": 394.64,
+      "duration": 4.2
+    },
+    {
+      "text": "actively exercised by your operators.",
+      "start": 396.08,
+      "duration": 5.36
+    },
+    {
+      "text": "Over time, the AI worked so incredibly",
+      "start": 398.84,
+      "duration": 4.52
+    },
+    {
+      "text": "well that the operators completely",
+      "start": 401.44,
+      "duration": 4.04
+    },
+    {
+      "text": "learned to rely on it. Their manual",
+      "start": 403.36,
+      "duration": 4.64
+    },
+    {
+      "text": "skills to use that old PID controller",
+      "start": 405.48,
+      "duration": 5.08
+    },
+    {
+      "text": "just atrophied from disuse. When QA",
+      "start": 408.0,
+      "duration": 4.36
+    },
+    {
+      "text": "finally caught this, the system had to",
+      "start": 410.56,
+      "duration": 4.0
+    },
+    {
+      "text": "be instantly reclassified as high risk,",
+      "start": 412.36,
+      "duration": 3.559
+    },
+    {
+      "text": "and they had to mandate quarterly",
+      "start": 414.56,
+      "duration": 3.4
+    },
+    {
+      "text": "fallback exercises just to maintain",
+      "start": 415.919,
+      "duration": 4.161
+    },
+    {
+      "text": "manual operator competency. You",
+      "start": 417.96,
+      "duration": 4.04
+    },
+    {
+      "text": "absolutely must assess the practical",
+      "start": 420.08,
+      "duration": 3.68
+    },
+    {
+      "text": "evolution of how your team depends on",
+      "start": 422.0,
+      "duration": 3.88
+    },
+    {
+      "text": "the system. Let's look at case study",
+      "start": 423.76,
+      "duration": 3.96
+    },
+    {
+      "text": "two. We've got a natural language",
+      "start": 425.88,
+      "duration": 4.52
+    },
+    {
+      "text": "processing AI, an NLP, looking at",
+      "start": 427.72,
+      "duration": 4.76
+    },
+    {
+      "text": "deviations and suggesting investigation",
+      "start": 430.4,
+      "duration": 4.36
+    },
+    {
+      "text": "depth and kappa prioritization.",
+      "start": 432.48,
+      "duration": 3.92
+    },
+    {
+      "text": "A human reviewer approves every single",
+      "start": 434.76,
+      "duration": 4.159
+    },
+    {
+      "text": "suggestion. So, initially the team",
+      "start": 436.4,
+      "duration": 4.4
+    },
+    {
+      "text": "thought, \"Well, a human signs off, so",
+      "start": 438.919,
+      "duration": 3.361
+    },
+    {
+      "text": "this is moderate or even low risk,",
+      "start": 440.8,
+      "duration": 3.4
+    },
+    {
+      "text": "right?\" It's super tempting to think",
+      "start": 442.28,
+      "duration": 4.639
+    },
+    {
+      "text": "human oversight cures all ills. Let's",
+      "start": 444.2,
+      "duration": 4.16
+    },
+    {
+      "text": "see what happens when that system is",
+      "start": 446.919,
+      "duration": 2.561
+    },
+    {
+      "text": "biased.",
+      "start": 448.36,
+      "duration": 2.76
+    },
+    {
+      "text": "This perfectly demonstrates how",
+      "start": 449.48,
+      "duration": 3.88
+    },
+    {
+      "text": "bias-driven failure modes cascade",
+      "start": 451.12,
+      "duration": 3.88
+    },
+    {
+      "text": "completely invisibly through your",
+      "start": 453.36,
+      "duration": 4.2
+    },
+    {
+      "text": "processes, multiplying consequences far",
+      "start": 455.0,
+      "duration": 4.04
+    },
+    {
+      "text": "beyond what you'd put in a simple",
+      "start": 457.56,
+      "duration": 4.08
+    },
+    {
+      "text": "matrix. The A mode analysis revealed",
+      "start": 459.04,
+      "duration": 4.64
+    },
+    {
+      "text": "that if the AI had a bias, it could",
+      "start": 461.64,
+      "duration": 3.92
+    },
+    {
+      "text": "systematically downplay critical quality",
+      "start": 463.68,
+      "duration": 4.0
+    },
+    {
+      "text": "events. And because downstream Kappa",
+      "start": 465.56,
+      "duration": 3.92
+    },
+    {
+      "text": "effectiveness and root cause analysis",
+      "start": 467.68,
+      "duration": 3.68
+    },
+    {
+      "text": "entirely depend on that very first",
+      "start": 469.48,
+      "duration": 4.84
+    },
+    {
+      "text": "severity triage, an AI bias right there",
+      "start": 471.36,
+      "duration": 5.64
+    },
+    {
+      "text": "corrupts your entire quality system. It",
+      "start": 474.32,
+      "duration": 4.36
+    },
+    {
+      "text": "had to be bumped up to high risk,",
+      "start": 477.0,
+      "duration": 3.68
+    },
+    {
+      "text": "demanding explicit ongoing reviewer",
+      "start": 478.68,
+      "duration": 3.96
+    },
+    {
+      "text": "training so humans would actively",
+      "start": 480.68,
+      "duration": 3.48
+    },
+    {
+      "text": "challenge the AI when it tried to",
+      "start": 482.64,
+      "duration": 3.36
+    },
+    {
+      "text": "downgrade a severity.",
+      "start": 484.16,
+      "duration": 4.36
+    },
+    {
+      "text": "Final case study. A QA team decides to",
+      "start": 486.0,
+      "duration": 4.68
+    },
+    {
+      "text": "use generative AI like a large language",
+      "start": 488.52,
+      "duration": 4.04
+    },
+    {
+      "text": "model to draft routine deviation",
+      "start": 490.68,
+      "duration": 4.08
+    },
+    {
+      "text": "reports. A qualified human reviewer",
+      "start": 492.56,
+      "duration": 3.84
+    },
+    {
+      "text": "reads and approves the entire report",
+      "start": 494.76,
+      "duration": 3.64
+    },
+    {
+      "text": "before it's finalized. Sounds completely",
+      "start": 496.4,
+      "duration": 3.88
+    },
+    {
+      "text": "harmless, doesn't it? Lots of teams",
+      "start": 498.4,
+      "duration": 3.24
+    },
+    {
+      "text": "would look at this and wonder if Annex",
+      "start": 500.28,
+      "duration": 3.12
+    },
+    {
+      "text": "22 even applies to something this",
+      "start": 501.64,
+      "duration": 3.84
+    },
+    {
+      "text": "administrative. But generative AI",
+      "start": 503.4,
+      "duration": 4.12
+    },
+    {
+      "text": "introduces a very unique psychological",
+      "start": 505.48,
+      "duration": 4.24
+    },
+    {
+      "text": "failure mode. It's called cognitive",
+      "start": 507.52,
+      "duration": 4.2
+    },
+    {
+      "text": "anchoring. Basically, the beautifully",
+      "start": 509.72,
+      "duration": 4.28
+    },
+    {
+      "text": "written, highly confident AI text",
+      "start": 511.72,
+      "duration": 3.64
+    },
+    {
+      "text": "actually shapes the reviewer's",
+      "start": 514.0,
+      "duration": 3.8
+    },
+    {
+      "text": "cognition. They unconsciously stop doing",
+      "start": 515.36,
+      "duration": 4.6
+    },
+    {
+      "text": "independent root cause analysis and just",
+      "start": 517.8,
+      "duration": 4.08
+    },
+    {
+      "text": "kind of go, \"Yep, looks good to me.\"",
+      "start": 519.96,
+      "duration": 4.0
+    },
+    {
+      "text": "agreeing with the AI's narrative.",
+      "start": 521.88,
+      "duration": 3.76
+    },
+    {
+      "text": "Automation bias will quickly turn your",
+      "start": 523.96,
+      "duration": 3.24
+    },
+    {
+      "text": "human in the loop into a blind rubber",
+      "start": 525.64,
+      "duration": 3.72
+    },
+    {
+      "text": "stamp. To fix this, they had to",
+      "start": 527.2,
+      "duration": 4.24
+    },
+    {
+      "text": "implement moderate risk controls. This",
+      "start": 529.36,
+      "duration": 4.24
+    },
+    {
+      "text": "included automated change tracking so QA",
+      "start": 531.44,
+      "duration": 4.04
+    },
+    {
+      "text": "management could see exactly how much of",
+      "start": 533.6,
+      "duration": 4.32
+    },
+    {
+      "text": "the AI draft the human actually edited,",
+      "start": 535.48,
+      "duration": 3.88
+    },
+    {
+      "text": "verifying that real review was",
+      "start": 537.92,
+      "duration": 2.48
+    },
+    {
+      "text": "happening.",
+      "start": 539.36,
+      "duration": 2.84
+    },
+    {
+      "text": "As we wrap up this explainer, I really",
+      "start": 540.4,
+      "duration": 3.04
+    },
+    {
+      "text": "want to leave you with this direct",
+      "start": 542.2,
+      "duration": 2.52
+    },
+    {
+      "text": "perspective from the inspectors",
+      "start": 543.44,
+      "duration": 3.56
+    },
+    {
+      "text": "themselves. If you treat all your AI the",
+      "start": 544.72,
+      "duration": 4.48
+    },
+    {
+      "text": "same, you are failing the Annex 22",
+      "start": 547.0,
+      "duration": 4.56
+    },
+    {
+      "text": "mandate. Inspectors are explicitly",
+      "start": 549.2,
+      "duration": 4.52
+    },
+    {
+      "text": "looking for a documented risk-based",
+      "start": 551.56,
+      "duration": 4.12
+    },
+    {
+      "text": "approach. They want you to articulate",
+      "start": 553.72,
+      "duration": 3.68
+    },
+    {
+      "text": "exactly why you chose a certain",
+      "start": 555.68,
+      "duration": 3.88
+    },
+    {
+      "text": "validation depth. And they expect to see",
+      "start": 557.4,
+      "duration": 4.32
+    },
+    {
+      "text": "real cross-functional engagement from",
+      "start": 559.56,
+      "duration": 4.72
+    },
+    {
+      "text": "IT, data science, and QA working",
+      "start": 561.72,
+      "duration": 3.6
+    },
+    {
+      "text": "together.",
+      "start": 564.28,
+      "duration": 3.24
+    },
+    {
+      "text": "If they walk in and see generic IT risk",
+      "start": 565.32,
+      "duration": 3.84
+    },
+    {
+      "text": "templates that don't even mention terms",
+      "start": 567.52,
+      "duration": 4.24
+    },
+    {
+      "text": "like drift or bias, or if they see flat",
+      "start": 569.16,
+      "duration": 4.48
+    },
+    {
+      "text": "governance across the board, that is an",
+      "start": 571.76,
+      "duration": 4.68
+    },
+    {
+      "text": "immediate glaring red flag. So take this",
+      "start": 573.64,
+      "duration": 4.4
+    },
+    {
+      "text": "framework, evaluate your own",
+      "start": 576.44,
+      "duration": 3.6
+    },
+    {
+      "text": "cross-functional risk records, and",
+      "start": 578.04,
+      "duration": 3.68
+    },
+    {
+      "text": "honestly ask yourself, is your",
+      "start": 580.04,
+      "duration": 3.6
+    },
+    {
+      "text": "governance truly proportional or is it",
+      "start": 581.72,
+      "duration": 4.32
+    },
+    {
+      "text": "just compliance theater? Mature AI",
+      "start": 583.64,
+      "duration": 4.68
+    },
+    {
+      "text": "governance protects its team capacity by",
+      "start": 586.04,
+      "duration": 4.12
+    },
+    {
+      "text": "focusing depth where it actually matters",
+      "start": 588.32,
+      "duration": 4.64
+    },
+    {
+      "text": "most. Pull up your AI inventory today.",
+      "start": 590.16,
+      "duration": 4.24
+    },
+    {
+      "text": "Are you starving your highest risk",
+      "start": 592.96,
+      "duration": 2.84
+    },
+    {
+      "text": "systems of the attention they need",
+      "start": 594.4,
+      "duration": 2.48
+    },
+    {
+      "text": "because you're wasting time on",
+      "start": 595.8,
+      "duration": 3.16
+    },
+    {
+      "text": "one-size-fits-all compliance? Are you",
+      "start": 596.88,
+      "duration": 4.32
+    },
+    {
+      "text": "adequately protecting patient safety or",
+      "start": 598.96,
+      "duration": 4.16
+    },
+    {
+      "text": "are you just ticking boxes? Think about",
+      "start": 601.2,
+      "duration": 3.4
+    },
+    {
+      "text": "it. Thanks for joining me on this",
+      "start": 603.12,
+      "duration": 3.28
+    },
+    {
+      "text": "explainer and I'll catch you in the next",
+      "start": 604.6,
+      "duration": 3.28
+    },
+    {
+      "text": "one where we tackle intended use",
+      "start": 606.4,
+      "duration": 4.32
+    },
+    {
+      "text": "definitions.",
+      "start": 607.88,
+      "duration": 2.84
+    }
+  ]
+}
