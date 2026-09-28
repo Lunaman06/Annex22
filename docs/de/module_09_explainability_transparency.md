@@ -78,7 +78,7 @@ Wenn komplexe Modelle unumgänglich sind, greift Annex 22 auf Post-hoc-Methoden 
 * **Attention Heatmaps (für NLP/LLMs):** Zeigen, welche Textpassagen Aufmerksamkeit erregten. Wichtig: *Attention ist keine Kausalität* – sie zeigt Korrelation, nicht zwingend den logischen Grund.
 
 > [!CAUTION]
-> **Praxisfall:** Ein Pharmaunternehmen nutzte globale Feature Importances für ein Predictive-Maintenance-System. Bei jedem automatischen Re-Training veränderten sich die wichtigsten Einflussfaktoren drastisch (montags war es die Temperatur, dienstags der Druck bei identischem Maschinenzustand). Das Bedienpersonal verweigerte die Nutzung des Systems vollständig wegen wahrgenommener Beliebigkeit. Das System musste auf stabilere Permutation Importance umgestellt und neu validiert werden.
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Pharmaunternehmen nutzte globale Feature Importances für ein Predictive-Maintenance-System. Bei jedem automatischen Re-Training veränderten sich die wichtigsten Einflussfaktoren drastisch (montags war es die Temperatur, dienstags der Druck bei identischem Maschinenzustand). Das Bedienpersonal verweigerte die Nutzung des Systems vollständig wegen wahrgenommener Beliebigkeit. Das System musste auf stabilere Permutation Importance umgestellt und neu qualifiziert werden.
 
 ### 5. Zielgruppenorientierte Bereitstellung (Cognitive Load Management)
 Erklärungen müssen für drei distincte Zielgruppen aufbereitet sein:

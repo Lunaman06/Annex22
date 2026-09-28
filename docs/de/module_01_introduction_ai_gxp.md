@@ -54,10 +54,11 @@ graph LR
 - **Bias:** Systematische Fehler in den Trainingsdaten führen dazu, dass seltene Randfälle (*Edge Cases*) im Realbetrieb katastrophal fehlschlagen.
 - **Silent Drift:** Datenverteilungen im Betrieb weichen schleichend von den Trainingsdaten ab (*Data Drift*, *Concept Drift*). Das System stürzt nicht ab, sondern verliert leise an Genauigkeit – ohne Fehlermeldung!
 
-### 3. Reale Fallbeispiele für KI-Fehler im Pharma-Umfeld
-1. **Visuelle Partikelinspektion bei Injektionspräparaten:** Ein neuer Partikeltyp tauchte auf der Linie auf, der nicht in den Trainingsdaten war. Die KI klassifizierte ihn fälschlicherweise als normale Fluktuation $\rightarrow$ Rückruf und Stilllegung des Systems.
-2. **NLP zur Abweichungstriagierung (Deviations):** Systematische Herabstufung kritischer Vorfälle, da nicht-muttersprachliche englische Formulierungen oder Kürzel das Modell verzerrten.
-3. **Predictive Maintenance bei Bioreaktoren:** Ein unbemerkter Lieferantenwechsel bei Sensoren führte zu Sensor-Drift $\rightarrow$ Modell verpasste den Ausfall der Sonden komplett.
+### 3. Illustrative Praxisszenarien für KI-Fehlermodi ([Didaktik])
+*Die folgenden didaktischen Szenarien illustrieren typische Fehlermechanismen in der industriellen Praxis (didaktische Fallbeispiele, nicht belegt):*
+1. **Visuelle Partikelinspektion bei Injektionspräparaten:** Ein neuer Partikeltyp tauchte auf der Linie auf, der nicht in den Trainingsdaten war. Die KI klassifizierte ihn fälschlicherweise als normale Fluktuation $\rightarrow$ Stilllegung des Systems und manuelle Nachkontrolle.
+2. **NLP zur Abweichungstriagierung (Deviations):** Systematische Herabstufung kritischer Vorfälle, da unübliche Abkürzungen oder nicht-standardisierte Freitexte das Sprachmodell verzerrten.
+3. **Predictive Maintenance bei Bioreaktoren:** Ein unbemerkter Sensorwechsel führte zu Sensor-Drift $\rightarrow$ das Modell verpasste den Ausfall kritischer Messsonden.
 
 ### 4. Die 6 Säulen für „Trustworthy AI“ (Annex 22 Playbook)
 1. **Intended Use Definition:** Präzise Festlegung des Verwendungszwecks vor Beginn der technischen Entwicklung.

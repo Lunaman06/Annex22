@@ -64,7 +64,7 @@ Jeder Eintrag sollte zwingend enthalten:
 5. Aktueller Qualifizierungs- und Monitoring-Status ([Draft §10.3, §10.4])
 
 > [!CAUTION]
-> **Praxisfall: Der Schatten-KI-Kollaps:** Ein Team startete ein Pilotprojekt zur automatischen Vor-Sortierung von Packungsbeilagen. Weil das Tool so hervorragend funktionierte, nutzte das Schichtpersonal es stillschweigend monatelang im Produktivbetrieb – ohne Wissen der QA. Während einer Routineinspektion erwähnte ein Operator das Tool beiläufig. Da das System nicht im *Master AI Inventory* gelistet war, konnten weder Validierungsdokumente noch Change-Control-Nachweise vorgelegt werden. Das Ergebnis: Ein *Major Finding* wegen Führungs- und Kontrollversagens (*Governance Failure*) und sofortiges Nutzungsverbot.
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt) – Der Schatten-KI-Kollaps:** Ein Team startete ein Pilotprojekt zur automatischen Vor-Sortierung von Packungsbeilagen. Weil das Tool funktionierte, nutzte das Schichtpersonal es monatelang im Produktivbetrieb – ohne Wissen der QA. Während einer Routineinspektion erwähnte ein Operator das Tool beiläufig. Da das System nicht im *Master AI Inventory* gelistet war, konnten weder Qualifizierungsdokumente noch Change-Control-Nachweise vorgelegt werden. Das Ergebnis: Eine schwerwiegende Mängelrüge (*Major Deficiency*) wegen Führungs- und Kontrollversagens und sofortiger Nutzungsstopp.
 
 ### 5. Verhalten im Audit-Raum (Surviving the Audit Room)
 Wenn Auditoren eine konkrete historische Modellentscheidung herausgreifen:

@@ -86,8 +86,8 @@ graph TD
   - *Zulässiger Einsatzkorridor in der Praxis ([Didaktik]):* Assistive Hilfstätigkeiten (z. B. Rohentwürfe für Berichte), sofern jede Ausgabe nachweisbar qualifiziert geprüft wird. Siehe Details im ➔ **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**.
 
 ### 5. Das Phänomen „Automation Bias“ & Human Oversight
-- **Fallbeispiel:** Ein QA-Team nutzte NLP zur Abweichungstriagierung. Prüfer klickten Vorschläge der KI nach kurzer Zeit nur noch blind ab (*Perfunctory Review* / Rubber-Stamping).
-- **Lösung:** Neugestaltung des Workflows! Der Mensch muss die Abweichung **zuerst unabhängig einstufen**, bevor die KI-Empfehlung eingeblendet wird (*Active Challenge*).
+- **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein QA-Team nutzte NLP zur Abweichungstriagierung. Prüfer klickten Vorschläge der KI nach kurzer Zeit nur noch blind ab (*Perfunctory Review* / Rubber-Stamping).
+- **Lösung ([Didaktik]):** Neugestaltung des Workflows! Der Mensch stuft die Abweichung **zuerst unabhängig ein**, bevor die KI-Empfehlung eingeblendet wird (*Active Challenge*).
 
 ### 6. Die 5-stufige Implementierungs-Roadmap
 1. **Stage 1 (Governance):** Etablierung eines KI-Governance-Frameworks im bestehenden QMS (inkl. Cloud & Supplier Oversight).

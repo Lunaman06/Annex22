@@ -82,10 +82,11 @@ Herkömmliche IT-Risikovorlagen reichen für KI-Systeme nicht aus. Ein Inspektor
 | **Monitoring** | Kontinuierliches Monitoring von Performance und Input-Verteilung ([Draft §10.3, §10.4]) | Risikobasierte Überprüfung in definierten Intervallen |
 | **Menschliche Aufsicht ([Didaktik])** | **Human-in-the-Loop (HITL):** Bei reduzierter Modell-Testtiefe Prüfung jeder Ausgabe zwingend ([Draft §3.3, §10.5]). Bei voll qualifizierter Automatisierung (z. B. Vial-Sortierung) Überwachung und Stichproben. | **Human-on-the-Loop (HOTL):** Mensch überwacht aggregierte Trends und greift bei Alarmen oder Anomalien ein. |
 
-### 6. Lehren aus realen Fallbeispielen
-- **Bioreaktor-pH-Steuerung (Operational Atrophy):** Der manuelle Fallback-Regler existierte jahrelang nur auf dem Papier. Als QA dies prüfte, stellte sich heraus: Die Operatoren hatten verlernt, den Kessel manuell zu steuern! **Lösung:** Pflicht zu regelmäßigen manuellen Notfallübungen (*Fallback Drills*).
+### 6. Lehren aus illustrativen Praxisszenarien ([Didaktik])
+*Die folgenden Szenarien veranschaulichen typische Risiken der betrieblichen Praxis (didaktische Fallbeispiele, nicht belegt):*
+- **Bioreaktor-pH-Steuerung (Operational Atrophy):** Der manuelle Fallback existierte jahrelang nur auf dem Papier. Als QA dies prüfte, stellte sich heraus: Die Operatoren hatten verlernt, den Kessel manuell zu steuern! **Lösung:** Pflicht zu regelmäßigen manuellen Notfallübungen (*Fallback Drills*).
 - **Abweichungs-Triage (Cascading Bias):** Eine fehlerhafte Ersteinstufung durch KI verfälscht die Ursachenanalyse und CAPA-Wirksamkeit der gesamten Qualitätsorganisation.
-- **GenAI für Berichte (Cognitive Anchoring):** Eloquent formulierte KI-Texte verleiten Menschen dazu, dem Narrativ unkritisch zu glauben. **Lösung:** Automatisches Audit-Tracking von Korrekturen durch den Reviewer.
+- **GenAI für Berichte (Cognitive Anchoring):** Vorformulierte KI-Texte verleiten Menschen dazu, dem Narrativ unkritisch zu folgen. **Lösung:** Audit-Tracking von Korrekturen durch den Reviewer.
 
 ---
 
