@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_10_human_oversight_hitl.md)**
+**[⬅ Vorheriges Modul](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_10_human_oversight_hitl.md)**
 
 </div>
 
@@ -37,6 +37,6 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_10_human_oversight_hitl.md)**
+**[⬅ Vorheriges Modul](module_08_validation_performance_testing.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_10_human_oversight_hitl.md)**
 
 </div>

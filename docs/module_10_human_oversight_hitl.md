@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_11_lifecycle_continuous_monitoring.md)**
+**[⬅ Vorheriges Modul](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_11_lifecycle_continuous_monitoring.md)**
 
 </div>
 
@@ -37,6 +37,6 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_11_lifecycle_continuous_monitoring.md)**
+**[⬅ Vorheriges Modul](module_09_explainability_transparency.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_11_lifecycle_continuous_monitoring.md)**
 
 </div>

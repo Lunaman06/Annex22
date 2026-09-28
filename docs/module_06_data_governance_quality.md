@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_07_model_development_training.md)**
+**[⬅ Vorheriges Modul](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_07_model_development_training.md)**
 
 </div>
 
@@ -37,6 +37,6 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_07_model_development_training.md)**
+**[⬅ Vorheriges Modul](module_05_intended_use_model_definition.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_07_model_development_training.md)**
 
 </div>

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_12_audit_inspection_readiness.md)**
+**[⬅ Vorheriges Modul](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_12_audit_inspection_readiness.md)**
 
 </div>
 
@@ -37,6 +37,6 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_12_audit_inspection_readiness.md)**
+**[⬅ Vorheriges Modul](module_10_human_oversight_hitl.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md) &nbsp;|&nbsp; [Nächstes Modul ➔](module_12_audit_inspection_readiness.md)**
 
 </div>

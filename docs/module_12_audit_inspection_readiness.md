@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)**
+**[⬅ Vorheriges Modul](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
 
 </div>
 
@@ -37,6 +37,6 @@
 
 <div align="center">
 
-**[⬅ Vorheriges Modul](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](annex22_regulatory_framework.md)**
+**[⬅ Vorheriges Modul](module_11_lifecycle_continuous_monitoring.md) &nbsp;|&nbsp; [🏠 Inhaltsverzeichnis](00_overview.md)**
 
 </div>

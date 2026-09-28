@@ -8,7 +8,7 @@ Ein strukturiertes Wissens- und Qualifizierungs-Repository zum **Draft EU GMP An
 ---
 
 ## 📚 Curriculum & Modulübersicht
-*Das zentrale Wissens- und Prozess-Framework findest du in ➔ **[docs/annex22_regulatory_framework.md](docs/annex22_regulatory_framework.md)**.*
+*Das zentrale Wissens- und Prozess-Framework findest du in ➔ **[docs/00_overview.md](docs/00_overview.md)**.*
 
 | # | Modul / Thema | Kernfokus | Status |
 | :-: | :--- | :--- | :---: |
@@ -40,7 +40,7 @@ Annex22/
 │   ├── json/                                  # Rohdaten mit Timestamps
 │   └── markdown/                              # Lesbare Transkripte mit Zeitmarkern
 └── docs/                                      # Zentraler Wissenshub
-    ├── annex22_regulatory_framework.md        # Master-Framework & Prozesslandkarte
+    ├── 00_overview.md        # Master-Framework & Prozesslandkarte
     ├── module_01_introduction_ai_gxp.md       # Modul 01: Einführung & 6 Säulen
     ├── module_02_overview_annex_22.md          # Modul 02: Koexistenz mit Annex 11
     ├── module_03_scope_applicability.md       # Modul 03: Decision Funnel & Risikostufen
@@ -74,4 +74,4 @@ Du kannst den KI-Assistenten jederzeit bitten:
 ---
 
 ## 🏛️ Regulatorischer Hintergrund
-Siehe auch [docs/annex22_regulatory_framework.md](docs/annex22_regulatory_framework.md) für die Einordnung von Annex 22 im Verhältnis zu **Annex 11**, dem **EU AI Act** und **GAMP 5**.
+Siehe auch [docs/00_overview.md](docs/00_overview.md) für die Einordnung von Annex 22 im Verhältnis zu **Annex 11**, dem **EU AI Act** und **GAMP 5**.

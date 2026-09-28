@@ -17,7 +17,7 @@ Die Wissensbasis basiert auf dem 12-teiligen Kurs:
 2. **Zentraler Wissenshub unter `docs/`:**
    - Jedes Modul besitzt eine eigenständige Datei `docs/module_XX_<slug>.md` mit:
      - Zusammenfassung, Leitfragen, GxP-Checkliste, Glossar und persönlichen Notizen.
-   - `docs/annex22_regulatory_framework.md` dient als Master-Framework und verlinkt auf alle Einzelmodule.
+   - `docs/00_overview.md` dient als Master-Framework und verlinkt auf alle Einzelmodule.
    - Begleitmaterialien, Grafiken oder Templates können in einem separaten Ordner (z.B. `assets/`) abgelegt und von `docs/` aus referenziert werden.
 3. **Quellentreue:**
    - Aussagen müssen auf den Transkripten (`data/transcripts/markdown/`) und der tatsächlichen EU GMP Annex 22 Draft Guideline basieren.
@@ -40,7 +40,7 @@ Annex22/
 │       ├── json/                      # Rohdaten mit Timecodes & Metadaten
 │       └── markdown/                  # Lesbare Texttranskripte mit Zeitmarkern
 └── docs/                              # Zentraler Wissenshub
-    ├── annex22_regulatory_framework.md # Master-Framework & Prozesslandkarte
+    ├── 00_overview.md # Master-Framework & Prozesslandkarte
     ├── module_01_introduction_ai_gxp.md
     ├── module_02_overview_annex_22.md
     ├── module_03_scope_applicability.md
