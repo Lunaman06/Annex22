@@ -15,16 +15,44 @@ class Annex22App {
     this.checklistState = JSON.parse(localStorage.getItem('annex22_checklists') || '{}');
     this.searchEngine = new SearchEngine();
 
+    // Diagram Modal Pan & Zoom State
+    this.diagZoom = 1.0;
+    this.diagPan = { x: 0, y: 0 };
+    this.isPanningDiag = false;
+    this.panStart = { x: 0, y: 0 };
+
+    // Simulator State
+    this.initSimulatorState();
+
     this.initTheme();
     this.initMermaid();
     this.renderShell();
+    this.initDiagramModal();
     this.bindEvents();
     this.navigate(this.currentModuleId, false);
+  }
+
+  initSimulatorState() {
+    this.simState = {
+      step: 1, // 1: Idea & Intended Use, 2: Technical Guardrails, 3: Validation Blueprint
+      projectName: '',
+      intendedUse: '',
+      processArea: 'batch_release',
+      modelType: 'predictive_ml',
+      learningType: 'static',
+      autonomyLevel: 'hitl',
+      dataSource: 'internal_gxp',
+      apiKey: localStorage.getItem('gemini_api_key') || '',
+      modelChoice: 'gemma-27b',
+      isEvaluating: false,
+      blueprint: null
+    };
   }
 
   getInitialRoute() {
     const hash = window.location.hash.replace('#', '');
     if (hash === 'checklist_master') return 'checklist_master';
+    if (hash === 'simulator') return 'simulator';
     const found = MODULE_REGISTRY.find(m => m.id === hash);
     return found ? found.id : '00_overview';
   }
@@ -44,9 +72,56 @@ class Annex22App {
   initMermaid() {
     mermaid.initialize({
       startOnLoad: false,
-      theme: this.theme === 'dark' ? 'dark' : 'default',
-      securityLevel: 'loose',
-      fontFamily: 'Inter, sans-serif'
+      theme: 'base',
+      themeVariables: this.theme === 'dark' ? {
+        darkMode: true,
+        background: '#101624',
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#6366f1',
+        lineColor: '#38bdf8',
+        secondaryColor: '#182235',
+        tertiaryColor: '#0f172a',
+        fontFamily: 'Inter, Outfit, sans-serif',
+        fontSize: '15px',
+        mainBkg: '#1e293b',
+        nodeBorder: '#818cf8',
+        clusterBkg: '#0b1120',
+        clusterBorder: '#334155'
+      } : {
+        darkMode: false,
+        background: '#ffffff',
+        primaryColor: '#f1f5f9',
+        primaryTextColor: '#0f172a',
+        primaryBorderColor: '#4f46e5',
+        lineColor: '#0284c7',
+        secondaryColor: '#f8fafc',
+        tertiaryColor: '#e2e8f0',
+        fontFamily: 'Inter, Outfit, sans-serif',
+        fontSize: '15px',
+        mainBkg: '#ffffff',
+        nodeBorder: '#6366f1',
+        clusterBkg: '#f8fafc',
+        clusterBorder: '#cbd5e1'
+      },
+      flowchart: {
+        htmlLabels: true,
+        curve: 'basis',
+        rankSpacing: 60,
+        nodeSpacing: 45,
+        padding: 20
+      },
+      sequence: {
+        diagramMarginX: 50,
+        diagramMarginY: 30,
+        actorMargin: 50,
+        width: 150,
+        height: 65,
+        boxMargin: 10,
+        boxTextMargin: 5,
+        noteMargin: 10,
+        messageMargin: 35
+      }
     });
   }
 
@@ -90,9 +165,14 @@ class Annex22App {
         </button>
 
         <div class="header-right">
+          <button class="header-btn primary" id="simulatorNavBtn" data-route="simulator">
+            <i data-lucide="flask-conical"></i>
+            <span>${this.lang === 'de' ? 'AI Project Simulator' : 'AI Project Simulator'}</span>
+          </button>
+
           <button class="header-btn" id="masterChecklistBtn" data-route="checklist_master">
             <i data-lucide="clipboard-check"></i>
-            <span>${this.lang === 'de' ? 'Audit-Checklisten' : 'Audit Checklists'}</span>
+            <span>${this.lang === 'de' ? 'Lern-Checklisten' : 'Study Checklists'}</span>
           </button>
 
           <div class="lang-switch">
@@ -125,32 +205,165 @@ class Annex22App {
           <div class="search-results-list" id="searchResultsList"></div>
         </div>
       </div>
+
+      <!-- Fullscreen Diagram Lightbox Modal -->
+      <div class="diagram-modal-backdrop" id="diagramModal">
+        <div class="diagram-modal-toolbar">
+          <div class="diagram-modal-title">
+            <i data-lucide="git-branch"></i>
+            <span id="diagramModalTitle">${this.lang === 'de' ? 'Prozess- & Architektur-Diagramm' : 'Process & Architecture Diagram'}</span>
+          </div>
+          <div class="diagram-modal-controls">
+            <button class="diagram-ctrl-btn" id="diagZoomOutBtn" title="Zoom Out (−)">−</button>
+            <span class="diagram-zoom-level" id="diagZoomLevel">100%</span>
+            <button class="diagram-ctrl-btn" id="diagZoomInBtn" title="Zoom In (+)">+</button>
+            <button class="diagram-ctrl-btn" id="diagResetBtn" title="Reset Zoom">↺</button>
+            <button class="diagram-ctrl-btn" id="diagCloseBtn" title="Schließen (Esc)" style="margin-left:0.5rem; color:var(--brand-rose);">✕</button>
+          </div>
+        </div>
+        <div class="diagram-modal-canvas" id="diagramCanvas">
+          <div class="diagram-modal-content" id="diagramContent"></div>
+        </div>
+      </div>
     `;
 
     createIcons({ icons });
     this.renderSidebar();
   }
 
+  initDiagramModal() {
+    const modal = document.getElementById('diagramModal');
+    const content = document.getElementById('diagramContent');
+    const canvas = document.getElementById('diagramCanvas');
+    const zoomLevelEl = document.getElementById('diagZoomLevel');
+
+    const updateTransform = () => {
+      if (!content) return;
+      content.style.transform = `translate(${this.diagPan.x}px, ${this.diagPan.y}px) scale(${this.diagZoom})`;
+      if (zoomLevelEl) zoomLevelEl.textContent = `${Math.round(this.diagZoom * 100)}%`;
+    };
+
+    const resetTransform = () => {
+      this.diagZoom = 1.0;
+      this.diagPan = { x: 0, y: 0 };
+      updateTransform();
+    };
+
+    document.getElementById('diagZoomInBtn')?.addEventListener('click', () => {
+      this.diagZoom = Math.min(3.5, this.diagZoom + 0.25);
+      updateTransform();
+    });
+
+    document.getElementById('diagZoomOutBtn')?.addEventListener('click', () => {
+      this.diagZoom = Math.max(0.3, this.diagZoom - 0.25);
+      updateTransform();
+    });
+
+    document.getElementById('diagResetBtn')?.addEventListener('click', resetTransform);
+
+    const closeModal = () => {
+      modal?.classList.remove('open');
+      if (content) content.innerHTML = '';
+      resetTransform();
+    };
+
+    document.getElementById('diagCloseBtn')?.addEventListener('click', closeModal);
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === canvas) closeModal();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    canvas?.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY * -0.0015;
+      this.diagZoom = Math.min(3.5, Math.max(0.3, this.diagZoom + delta));
+      updateTransform();
+    }, { passive: false });
+
+    canvas?.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      this.isPanningDiag = true;
+      this.panStart = { x: e.clientX - this.diagPan.x, y: e.clientY - this.diagPan.y };
+      canvas.classList.add('panning');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!this.isPanningDiag) return;
+      this.diagPan.x = e.clientX - this.panStart.x;
+      this.diagPan.y = e.clientY - this.panStart.y;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (this.isPanningDiag) {
+        this.isPanningDiag = false;
+        canvas?.classList.remove('panning');
+      }
+    });
+  }
+
+  openDiagramModal(svgElement) {
+    const modal = document.getElementById('diagramModal');
+    const content = document.getElementById('diagramContent');
+    if (!modal || !content || !svgElement) return;
+
+    content.innerHTML = '';
+    const clonedSvg = svgElement.cloneNode(true);
+    clonedSvg.removeAttribute('width');
+    clonedSvg.removeAttribute('height');
+    clonedSvg.style.width = '100%';
+    clonedSvg.style.height = 'auto';
+    content.appendChild(clonedSvg);
+
+    this.diagZoom = 1.0;
+    this.diagPan = { x: 0, y: 0 };
+    content.style.transform = `translate(0px, 0px) scale(1)`;
+    const zoomLevelEl = document.getElementById('diagZoomLevel');
+    if (zoomLevelEl) zoomLevelEl.textContent = '100%';
+
+    modal.classList.add('open');
+  }
+
   renderSidebar() {
     const sidebarEl = document.getElementById('siteSidebar');
     if (!sidebarEl) return;
 
-    // Calculate site-wide checklist completion
     const stats = this.getGlobalChecklistStats();
 
     let navHtml = `
+      <!-- Simulator Link Card -->
+      <div class="sidebar-progress-card" style="border-left:3px solid var(--brand-cyan);">
+        <div class="progress-header">
+          <span class="progress-title">${this.lang === 'de' ? 'AI Project Simulator' : 'AI Project Simulator'}</span>
+          <span class="nav-item-badge" style="background:var(--brand-cyan-glow); color:var(--brand-cyan); font-weight:700;">NEU / BETA</span>
+        </div>
+        <p style="font-size:0.775rem; color:var(--text-muted); line-height:1.4;">
+          ${this.lang === 'de' ? 'Spiele deine Projekt-Idee durch und generiere einen Validierungs-Blueprint.' : 'Simulate your AI project idea and generate a customized validation blueprint.'}
+        </p>
+        <button class="header-btn primary" style="width:100%; justify-content:center; padding:0.4rem;" data-route="simulator">
+          <i data-lucide="flask-conical"></i>
+          <span>${this.lang === 'de' ? 'Simulator starten ➔' : 'Start Simulator ➔'}</span>
+        </button>
+      </div>
+
       <!-- Global Compliance Progress Card -->
       <div class="sidebar-progress-card">
         <div class="progress-header">
-          <span class="progress-title">${this.lang === 'de' ? 'Compliance Status' : 'Compliance Status'}</span>
+          <span class="progress-title">${this.lang === 'de' ? 'Lernkontroll-Status' : 'Study Progress'}</span>
           <span class="progress-percentage">${stats.percentage}%</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" style="width: ${stats.percentage}%;"></div>
         </div>
         <div class="progress-subtext">
-          <span>${stats.completed}/${stats.total} ${this.lang === 'de' ? 'Kriterien erfüllt' : 'items checked'}</span>
-          <a href="#checklist_master" data-route="checklist_master" class="spa-link" style="font-size:0.75rem;">${this.lang === 'de' ? 'Audit-Report ➔' : 'Audit Report ➔'}</a>
+          <span>${stats.completed}/${stats.total} ${this.lang === 'de' ? 'Fragen gelernt' : 'items studied'}</span>
+          <a href="#checklist_master" data-route="checklist_master" class="spa-link" style="font-size:0.75rem;">${this.lang === 'de' ? 'Alle anzeigen ➔' : 'View all ➔'}</a>
         </div>
       </div>
 
@@ -163,7 +376,6 @@ class Annex22App {
       </div>
     `;
 
-    // Render Phases & Modules
     PHASES.forEach(phase => {
       navHtml += `<div class="nav-group">
         <div class="nav-group-title">${phase.title[this.lang]}</div>`;
@@ -215,10 +427,8 @@ class Annex22App {
       window.location.hash = moduleId;
     }
 
-    // Close mobile sidebar if open
     document.getElementById('siteSidebar')?.classList.remove('mobile-open');
 
-    // Update active nav styling
     document.querySelectorAll('.nav-item').forEach(el => {
       el.classList.toggle('active', el.dataset.route === moduleId);
     });
@@ -230,6 +440,11 @@ class Annex22App {
   renderContent() {
     const wrapper = document.getElementById('contentWrapper');
     if (!wrapper) return;
+
+    if (this.currentModuleId === 'simulator') {
+      this.renderSimulatorView(wrapper);
+      return;
+    }
 
     if (this.currentModuleId === 'checklist_master') {
       this.renderMasterChecklistView(wrapper);
@@ -247,7 +462,6 @@ class Annex22App {
   renderOverviewHomeView(container) {
     const raw = getDocContent('00_overview', this.lang);
     const parsed = parseModuleMarkdown(raw, '00_overview', this.lang);
-
     const stats = this.getGlobalChecklistStats();
 
     container.innerHTML = `
@@ -260,6 +474,17 @@ class Annex22App {
         <h1 class="hero-title">${this.lang === 'de' ? 'EU GMP Annex 22: Künstliche Intelligenz in der Pharma-Produktion' : 'EU GMP Annex 22: Artificial Intelligence in GxP Manufacturing'}</h1>
         <p class="hero-subtitle">${this.lang === 'de' ? 'Das interaktive Wissens- und Compliance-Portal für regulatorische Sicherheit, MLOps-Validierung und Inspektionsbereitschaft.' : 'The interactive compliance and learning portal for regulatory rigor, MLOps validation, and audit readiness.'}</p>
 
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <button class="header-btn primary" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="simulator">
+            <i data-lucide="flask-conical"></i>
+            <span>${this.lang === 'de' ? '🧪 Eigenes KI-Projekt simulieren' : '🧪 Simulate your AI Project'}</span>
+          </button>
+          <button class="header-btn" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="module_01_introduction_ai_gxp">
+            <i data-lucide="book-open"></i>
+            <span>${this.lang === 'de' ? 'Modul 01 aufschlagen' : 'Start with Module 01'}</span>
+          </button>
+        </div>
+
         <div class="hero-stats-grid">
           <div class="hero-stat-card">
             <span class="hero-stat-value">12 + 2</span>
@@ -267,7 +492,7 @@ class Annex22App {
           </div>
           <div class="hero-stat-card">
             <span class="hero-stat-value">${stats.completed} / ${stats.total}</span>
-            <span class="hero-stat-label">${this.lang === 'de' ? 'Audit-Kriterien verifiziert' : 'GxP Audit Items Verified'}</span>
+            <span class="hero-stat-label">${this.lang === 'de' ? 'Lernkriterien absolviert' : 'Learning Criteria Completed'}</span>
           </div>
           <div class="hero-stat-card">
             <span class="hero-stat-value">100%</span>
@@ -394,7 +619,6 @@ class Annex22App {
     const raw = getDocContent(moduleId, this.lang);
     const parsed = parseModuleMarkdown(raw, moduleId, this.lang);
 
-    // Prev / Next Navigation IDs
     const currentIndex = MODULE_REGISTRY.findIndex(m => m.id === moduleId);
     const prevMod = currentIndex > 0 ? MODULE_REGISTRY[currentIndex - 1] : null;
     const nextMod = currentIndex < MODULE_REGISTRY.length - 1 ? MODULE_REGISTRY[currentIndex + 1] : null;
@@ -440,10 +664,738 @@ class Annex22App {
     this.initMermaidDiagrams();
     this.bindCheckboxes(container);
 
-    // Bind Print Button
     document.getElementById('printModuleBtn')?.addEventListener('click', () => {
       window.print();
     });
+  }
+
+  renderSimulatorView(container) {
+    const s = this.simState;
+
+    container.innerHTML = `
+      <div class="simulator-view">
+        <div class="module-header">
+          <div class="module-meta-bar">
+            <span class="module-phase-badge" style="background:var(--brand-cyan-glow); color:var(--brand-cyan); border-color:var(--brand-cyan);">
+              ${this.lang === 'de' ? '🧪 Interaktiver Annex 22 Simulator (Beta)' : '🧪 Interactive Annex 22 Simulator (Beta)'}
+            </span>
+            <div class="checklist-action-btns">
+              ${s.step === 3 ? `
+                <button class="header-btn" id="simNewRunBtn">
+                  <i data-lucide="rotate-ccw"></i>
+                  <span>${this.lang === 'de' ? 'Neue Simulation' : 'New Simulation'}</span>
+                </button>
+                <button class="header-btn primary" id="simExportReportBtn">
+                  <i data-lucide="download"></i>
+                  <span>${this.lang === 'de' ? 'Blueprint herunterladen' : 'Download Blueprint'}</span>
+                </button>
+              ` : ''}
+            </div>
+          </div>
+          <h1 class="module-main-title">${this.lang === 'de' ? 'AI Project & Qualification Simulator' : 'AI Project & Qualification Simulator'}</h1>
+          <p class="module-subtitle">
+            ${this.lang === 'de' 
+              ? 'Spiele dein KI-Projekt durch: Definiere Intended Use & Technologie, identifiziere regulatorische Stolpersteine und erhalte einen maßgeschneiderten Annex 22 Validierungs-Blueprint.' 
+              : 'Test your AI project idea: Define intended use & architecture, identify compliance pitfalls, and receive a tailored Annex 22 validation blueprint.'}
+          </p>
+        </div>
+
+        <!-- Stepper Navigation -->
+        <div class="simulator-stepper">
+          <div class="sim-step-item ${s.step === 1 ? 'active' : ''} ${s.step > 1 ? 'completed' : ''}">
+            <div class="sim-step-number">${s.step > 1 ? '✓' : '1'}</div>
+            <div class="sim-step-title">${this.lang === 'de' ? 'Schritt 1: Projekt-Idee & Intended Use' : 'Step 1: Idea & Intended Use'}</div>
+          </div>
+          <div class="sim-step-line"></div>
+          <div class="sim-step-item ${s.step === 2 ? 'active' : ''} ${s.step > 2 ? 'completed' : ''}">
+            <div class="sim-step-number">${s.step > 2 ? '✓' : '2'}</div>
+            <div class="sim-step-title">${this.lang === 'de' ? 'Schritt 2: Architektonische Leitplanken' : 'Step 2: Technical Guardrails'}</div>
+          </div>
+          <div class="sim-step-line"></div>
+          <div class="sim-step-item ${s.step === 3 ? 'active' : ''}">
+            <div class="sim-step-number">3</div>
+            <div class="sim-step-title">${this.lang === 'de' ? 'Schritt 3: Validierungs-Blueprint' : 'Step 3: Validation Blueprint'}</div>
+          </div>
+        </div>
+
+        <!-- Dynamic Step Content -->
+        ${s.step === 1 ? this.renderSimStep1() : ''}
+        ${s.step === 2 ? this.renderSimStep2() : ''}
+        ${s.step === 3 ? this.renderSimStep3() : ''}
+      </div>
+    `;
+
+    createIcons({ icons });
+    this.bindSimulatorEvents(container);
+  }
+
+  renderSimStep1() {
+    const s = this.simState;
+    return `
+      <div class="simulator-form-card">
+        <div>
+          <h2 style="font-family:var(--font-heading); font-size:1.4rem; margin-bottom:0.25rem;">
+            ${this.lang === 'de' ? '1. Beschreibe deine KI-Projektidee' : '1. Define your AI Project Concept'}
+          </h2>
+          <p style="font-size:0.875rem; color:var(--text-muted);">
+            ${this.lang === 'de' ? 'Oder wähle ein pharmazeutisches Praxisbeispiel zum sofortigen Testen:' : 'Or pick an industry preset to test immediately:'}
+          </p>
+          <div class="presets-container">
+            <span style="font-size:0.75rem; color:var(--text-faint); font-weight:600;">PRESETS:</span>
+            <button class="preset-chip-btn" data-preset="vision">🔍 Optische Vial-Inspektion (Parenteralia)</button>
+            <button class="preset-chip-btn" data-preset="genai">🤖 GenAI RAG Drafting Assistant (SOPs)</button>
+            <button class="preset-chip-btn" data-preset="dynamic_risk">⚠️ Selbstlernender Bioreaktor (Risk Test)</button>
+          </div>
+        </div>
+
+        <div class="sim-form-group">
+          <label class="sim-label">${this.lang === 'de' ? 'Name des KI-Systems / Projekttitel:' : 'System Name / Project Title:'}</label>
+          <input type="text" class="sim-input" id="simProjectName" value="${s.projectName}" placeholder="${this.lang === 'de' ? 'z.B. AI-Vision Inspection Line 4' : 'e.g. AI-Vision Inspection Line 4'}" />
+        </div>
+
+        <div class="sim-form-group">
+          <label class="sim-label">
+            ${this.lang === 'de' ? 'Intended Use (Zweckbestimmung & pharmazeutischer Einsatzort):' : 'Intended Use & Operational Boundary:'}
+          </label>
+          <span class="sim-label-desc">
+            ${this.lang === 'de' 
+              ? 'Beschreibe kurz, welche Aufgabe das Modell übernimmt, welche Eingangsdaten genutzt werden und welche Entscheidung davon abhängt:' 
+              : 'Describe what task the model performs, what data feeds it, and what decisions depend on it:'}
+          </span>
+          <textarea class="sim-textarea" id="simIntendedUse" placeholder="${this.lang === 'de' ? 'z.B. Das Modell klassifiziert während des Füllvorgangs Kamerabilder auf Partikelverunreinigung und schleust defekte Vials aus...' : 'e.g. The model classifies camera inspection feeds for particulate contamination and triggers rejection gates...'}">${s.intendedUse}</textarea>
+        </div>
+
+        <div class="sim-form-group">
+          <label class="sim-label">${this.lang === 'de' ? 'Pharmazeutischer Prozessbereich:' : 'GxP Process Domain:'}</label>
+          <div class="option-cards-grid">
+            <div class="option-card-radio ${s.processArea === 'batch_release' ? 'selected' : ''}" data-field="processArea" data-val="batch_release">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Chargenfreigabe & Disposition' : 'Batch Release & Disposition'}</span>
+                <span class="opt-card-tag" style="color:var(--brand-rose);">KRITISCH</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Direkter Einfluss auf Freigabe von Fertigarzneimitteln (QP-Verantwortung).' : 'Direct impact on final product release (QP statutory responsibility).'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.processArea === 'in_process' ? 'selected' : ''}" data-field="processArea" data-val="in_process">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'In-Process-Control (IPC)' : 'In-Process Control (IPC)'}</span>
+                <span class="opt-card-tag" style="color:var(--brand-amber);">HOCH</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Online-Prüfung während Produktion (Tablettenpressung, Inspektion, Fermentation).' : 'Inline inspection during active production.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.processArea === 'oos_investigation' ? 'selected' : ''}" data-field="processArea" data-val="oos_investigation">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Abweichungen & Labordaten' : 'Deviations & Lab Triage'}</span>
+                <span class="opt-card-tag">MITTEL</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Klassifizierung von Abweichungsberichten, OOS-Triage oder SOP-Assistenz.' : 'Deviation triage, OOS investigation, or SOP assistance.'}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-actions-footer">
+          <div></div>
+          <button class="header-btn primary" id="simStep1NextBtn">
+            <span>${this.lang === 'de' ? 'Weiter zu Schritt 2 (Leitplanken) ➔' : 'Proceed to Step 2 (Guardrails) ➔'}</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  renderSimStep2() {
+    const s = this.simState;
+    return `
+      <div class="simulator-form-card">
+        <div>
+          <h2 style="font-family:var(--font-heading); font-size:1.4rem; margin-bottom:0.25rem;">
+            ${this.lang === 'de' ? '2. Architektonische Leitplanken & Risikoklassen' : '2. Architectural Guardrails & Risk Tiering'}
+          </h2>
+          <p style="font-size:0.875rem; color:var(--text-muted);">
+            ${this.lang === 'de' ? 'Wähle die technische Architektur und den geplanten Betriebsmodus nach Annex 22:' : 'Select technical architecture and operational mode under Annex 22:'}
+          </p>
+        </div>
+
+        <!-- Model Nature (Static vs Dynamic) -->
+        <div class="sim-form-group">
+          <label class="sim-label">
+            ${this.lang === 'de' ? 'A. Lernmodus des Modells (Static vs. Dynamic Learning):' : 'A. Model Learning Modality:'}
+          </label>
+          <div class="option-cards-grid">
+            <div class="option-card-radio ${s.learningType === 'static' ? 'selected' : ''}" data-field="learningType" data-val="static">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Statisches Modell (Frozen Weights)' : 'Static Model (Frozen Weights)'}</span>
+                <span class="opt-card-tag" style="color:var(--brand-emerald);">GMP-KONFORM</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Modellgewichte sind nach Validierung eingefroren. Retraining erfolgt offline unter Change Control.' : 'Weights frozen post-validation. Retraining conducted offline under formal Change Control.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.learningType === 'dynamic' ? 'selected-danger' : ''}" data-field="learningType" data-val="dynamic">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Dynamisch / Kontinuierlich lernend' : 'Dynamic / Online Re-training'}</span>
+                <span class="opt-card-tag" style="color:var(--brand-rose); font-weight:700;">🚨 RED FLAG</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Modell trainiert sich im laufenden GMP-Betrieb kontinuierlich an neuen Daten selbst weiter.' : 'Model automatically retrains in production without offline revalidation.'}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model Architecture -->
+        <div class="sim-form-group">
+          <label class="sim-label">
+            ${this.lang === 'de' ? 'B. Modell-Architektur:' : 'B. Algorithmic Architecture:'}
+          </label>
+          <div class="option-cards-grid">
+            <div class="option-card-radio ${s.modelType === 'predictive_ml' ? 'selected' : ''}" data-field="modelType" data-val="predictive_ml">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Klassisches Predictive ML / Tabular' : 'Predictive ML / Tabular'}</span>
+                <span class="opt-card-tag">METRIC QUAD</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Gradient Boosting, Random Forests, multivariate Prozessdaten.' : 'Tree ensembles, regression, multivariate sensor telemetry.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.modelType === 'vision_defect' ? 'selected' : ''}" data-field="modelType" data-val="vision_defect">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Computer Vision / Defekterkennung' : 'Computer Vision Inspection'}</span>
+                <span class="opt-card-tag">CNN / DEEP</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Optische Kamerabild-Analyse (Tabletten, Vials, Siegelnähte).' : 'Image processing for defects, fill-height, particle inspection.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.modelType === 'genai_rag' ? 'selected' : ''}" data-field="modelType" data-val="genai_rag">
+              <div class="opt-card-header">
+                <span class="opt-card-title">${this.lang === 'de' ? 'Generative KI / LLM mit RAG' : 'Generative AI / LLM with RAG'}</span>
+                <span class="opt-card-tag">RAG TRIAD</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Textgenerierung, SOP-Abfragen, Entwurfserstellung für QA.' : 'Text synthesis, document search, drafting assistants.'}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Human Oversight -->
+        <div class="sim-form-group">
+          <label class="sim-label">
+            ${this.lang === 'de' ? 'C. Autonomiegrad & Menschliche Aufsicht:' : 'C. Autonomy Tier & Human Oversight:'}
+          </label>
+          <div class="option-cards-grid">
+            <div class="option-card-radio ${s.autonomyLevel === 'hitl' ? 'selected' : ''}" data-field="autonomyLevel" data-val="hitl">
+              <div class="opt-card-header">
+                <span class="opt-card-title">Human-in-the-Loop (HITL)</span>
+                <span class="opt-card-tag" style="color:var(--brand-emerald);">STANDARD</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Mensch prüft und genehmigt jede einzelne Vorhersage vor Ausführung.' : 'Human reviews and authorizes every single individual inference.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.autonomyLevel === 'hotl' ? 'selected' : ''}" data-field="autonomyLevel" data-val="hotl">
+              <div class="opt-card-header">
+                <span class="opt-card-title">Human-on-the-Loop (HOTL)</span>
+                <span class="opt-card-tag">LEITWARTE</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Autonom innerhalb enger Guardrails; Mensch kann per Not-Aus eingreifen.' : 'Autonomous within tight guardrails; human has supervisory override.'}</p>
+            </div>
+
+            <div class="option-card-radio ${s.autonomyLevel === 'hool' ? 'selected-danger' : ''}" data-field="autonomyLevel" data-val="hool">
+              <div class="opt-card-header">
+                <span class="opt-card-title">Human-out-of-the-Loop (HOOL)</span>
+                <span class="opt-card-tag" style="color:var(--brand-rose);">HOCHRISIKO</span>
+              </div>
+              <p class="opt-card-desc">${this.lang === 'de' ? 'Vollautomatisch ohne menschliche Kontrolle. Im GMP-Kern verboten!' : 'Fully automated with zero human review. Prohibited for critical GMP!'}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Gemini / Gemma API Integration -->
+        <div class="sim-form-group" style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <label class="sim-label" style="font-size:0.95rem;">
+              <i data-lucide="sparkles" style="color:var(--brand-cyan);"></i>
+              <span>${this.lang === 'de' ? 'KI-Audit-Engine (Gemini API für Gemma 27B / Gemini 1.5):' : 'AI Audit Engine (Gemini API for Gemma 27B / Gemini 1.5):'}</span>
+            </label>
+            <span class="opt-card-tag">${s.apiKey ? 'API KEY GESPEICHERT' : 'OFFLINE-EXPERTEN-MODUS'}</span>
+          </div>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
+            ${this.lang === 'de' 
+              ? 'Optional: Trage deinen Gemini API-Key ein, um die Analyse über Gemma 27B / Gemini laufen zu lassen. Ohne Key nutzt der Simulator unsere integrierte deterministische Annex-22-Experten-Regelengine!' 
+              : 'Optional: Enter your Gemini API key to evaluate with Gemma 27B / Gemini. Without a key, the simulator uses our built-in Annex 22 expert rule engine!'}
+          </p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <input type="password" class="sim-input" id="simApiKeyInput" value="${s.apiKey}" placeholder="AIzaSy... (Gemini API Key)" style="flex:1; min-width:240px;" />
+            <select class="sim-input" id="simModelChoice" style="width:180px;">
+              <option value="gemma-27b" ${s.modelChoice === 'gemma-27b' ? 'selected' : ''}>Gemma 2 27B IT</option>
+              <option value="gemini-1.5-flash" ${s.modelChoice === 'gemini-1.5-flash' ? 'selected' : ''}>Gemini 1.5 Flash</option>
+              <option value="gemini-1.5-pro" ${s.modelChoice === 'gemini-1.5-pro' ? 'selected' : ''}>Gemini 1.5 Pro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sim-actions-footer">
+          <button class="header-btn" id="simStep2BackBtn">
+            <span>⬅ ${this.lang === 'de' ? 'Zurück zu Schritt 1' : 'Back to Step 1'}</span>
+          </button>
+          <button class="header-btn primary" id="simRunEvaluationBtn">
+            <i data-lucide="sparkles"></i>
+            <span>${this.lang === 'de' ? '🚀 Annex 22 Blueprint generieren' : '🚀 Generate Annex 22 Blueprint'}</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  renderSimStep3() {
+    const s = this.simState;
+    if (s.isEvaluating) {
+      return `
+        <div class="simulator-form-card" style="text-align:center; padding:5rem 2rem;">
+          <div style="font-size:3rem; margin-bottom:1rem; animation: pulse 1.5s infinite;">🧪</div>
+          <h2 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem;">
+            ${this.lang === 'de' ? 'Analysiere Projekt-Idee gegen EU GMP Annex 22...' : 'Analyzing Project Concept against EU GMP Annex 22...'}
+          </h2>
+          <p style="color:var(--text-muted); max-width:480px; margin:0 auto;">
+            ${this.lang === 'de' 
+              ? 'Prüfe Geltungsbereich, Lernmodus, Intended Use, Metric Quad und Audit-Readiness Kriterien...' 
+              : 'Evaluating scope, learning modality, metric quad, and inspection readiness criteria...'}
+          </p>
+        </div>
+      `;
+    }
+
+    const bp = s.blueprint;
+    if (!bp) return `<div>Kein Blueprint vorhanden</div>`;
+
+    const statusBadgeClass = bp.verdict === 'REJECT' ? 'status-badge-red' : (bp.verdict === 'CONDITIONAL' ? 'status-badge-yellow' : 'status-badge-green');
+    const statusText = bp.verdict === 'REJECT' 
+      ? '🚨 RED FLAG: NICHT GMP-KONFORM (BLOCKER VORHANDEN)' 
+      : (bp.verdict === 'CONDITIONAL' ? '⚠️ KONDITIONELL QUALIFIZIERBAR (AUFLAGEN ZU ERFÜLLEN)' : '🟢 QUALIFIZIERUNGSFÄHIG (IN ÜBEREINSTIMMUNG MIT ANNEX 22 DRAFT)');
+
+    return `
+      <div class="blueprint-card">
+        <div class="blueprint-header">
+          <div>
+            <div style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-faint); margin-bottom:0.25rem;">
+              ANNEX 22 QUALIFICATION BLUEPRINT • ${new Date().toLocaleDateString()}
+            </div>
+            <h2 style="font-family:var(--font-heading); font-size:1.85rem; font-weight:800;">
+              ${s.projectName || 'Unbenanntes KI-System'}
+            </h2>
+            <div style="font-size:0.9rem; color:var(--brand-cyan); margin-top:0.2rem;">
+              Einsatzbereich: ${s.processArea} | Architektur: ${s.modelType} | Modus: ${s.learningType} | Aufsicht: ${s.autonomyLevel}
+            </div>
+          </div>
+          <div class="blueprint-status-badge ${statusBadgeClass}">
+            ${statusText}
+          </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="blueprint-section">
+          <h3 class="blueprint-sec-title">
+            <i data-lucide="file-text"></i>
+            <span>${this.lang === 'de' ? 'Executive Assessment & Behörden-Perspektive' : 'Executive Assessment & Inspector Perspective'}</span>
+          </h3>
+          <p style="font-size:0.95rem; line-height:1.6; color:var(--text-main); background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-md); border-left:4px solid ${bp.verdict === 'REJECT' ? 'var(--brand-rose)' : 'var(--brand-primary)'};">
+            ${bp.summary}
+          </p>
+        </div>
+
+        <!-- Red Flags & Blockers (if any) -->
+        ${bp.redFlags.length > 0 ? `
+          <div class="blueprint-section">
+            <h3 class="blueprint-sec-title" style="color:var(--brand-rose);">
+              <i data-lucide="alert-octagon"></i>
+              <span>${this.lang === 'de' ? 'Identifizierte Red Flags & regulatorische Showstopper' : 'Identified Red Flags & Regulatory Blockers'}</span>
+            </h3>
+            <div class="blueprint-list">
+              ${bp.redFlags.map(rf => `
+                <div class="blueprint-item" style="border-left:3px solid var(--brand-rose);">
+                  <div class="bp-item-head">
+                    <span class="bp-item-title" style="color:var(--brand-rose);">${rf.title}</span>
+                    <span class="opt-card-tag">${rf.reference}</span>
+                  </div>
+                  <p class="bp-item-desc">${rf.description}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Mandatory Validation Deliverables -->
+        <div class="blueprint-section">
+          <h3 class="blueprint-sec-title" style="color:var(--brand-cyan);">
+            <i data-lucide="check-circle-2"></i>
+            <span>${this.lang === 'de' ? 'Zwingende Validierungs-Dokumente & CSV-Artefakte' : 'Mandatory Validation Deliverables'}</span>
+          </h3>
+          <div class="blueprint-list">
+            ${bp.deliverables.map(d => `
+              <div class="blueprint-item">
+                <div class="bp-item-head">
+                  <span class="bp-item-title">${d.name}</span>
+                  <span class="opt-card-tag">${d.tier}</span>
+                </div>
+                <p class="bp-item-desc">${d.requirements}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Testing & Metric Requirements -->
+        <div class="blueprint-section">
+          <h3 class="blueprint-sec-title">
+            <i data-lucide="activity"></i>
+            <span>${this.lang === 'de' ? 'Prüf- und Metrik-Vorgaben nach Annex 22' : 'Testing & Metric Requirements'}</span>
+          </h3>
+          <div class="blueprint-list">
+            ${bp.testingRequirements.map(t => `
+              <div class="blueprint-item">
+                <div class="bp-item-head">
+                  <span class="bp-item-title" style="color:var(--brand-emerald);">${t.metric}</span>
+                  <span class="opt-card-tag">${t.purpose}</span>
+                </div>
+                <p class="bp-item-desc">${t.details}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Typical Inspector Questions -->
+        <div class="blueprint-section">
+          <h3 class="blueprint-sec-title">
+            <i data-lucide="help-circle"></i>
+            <span>${this.lang === 'de' ? 'Mögliche Fragen von Behörden-Prüfern (Mock Inspection Prep)' : 'Probable Inspector Questions'}</span>
+          </h3>
+          <div class="blueprint-list">
+            ${bp.auditQuestions.map((q, idx) => `
+              <div class="blueprint-item">
+                <div class="bp-item-head">
+                  <span class="bp-item-title" style="color:var(--text-main);">Frage ${idx + 1}: ${q.question}</span>
+                </div>
+                <p class="bp-item-desc" style="color:var(--brand-cyan);"><strong>Empfohlene Verteidigung:</strong> ${q.recommendedAnswer}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  bindSimulatorEvents(container) {
+    // Preset buttons
+    container.querySelectorAll('.preset-chip-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const preset = e.target.dataset.preset;
+        this.applySimPreset(preset);
+        this.renderSimulatorView(container);
+      });
+    });
+
+    // Step 1 Inputs
+    const nameInput = document.getElementById('simProjectName');
+    nameInput?.addEventListener('input', (e) => {
+      this.simState.projectName = e.target.value;
+    });
+
+    const intendedInput = document.getElementById('simIntendedUse');
+    intendedInput?.addEventListener('input', (e) => {
+      this.simState.intendedUse = e.target.value;
+    });
+
+    // Option cards selection
+    container.querySelectorAll('.option-card-radio').forEach(card => {
+      card.addEventListener('click', () => {
+        const field = card.dataset.field;
+        const val = card.dataset.val;
+        this.simState[field] = val;
+        this.renderSimulatorView(container);
+      });
+    });
+
+    // Step 1 Next
+    document.getElementById('simStep1NextBtn')?.addEventListener('click', () => {
+      if (!this.simState.intendedUse || this.simState.intendedUse.trim().length < 5) {
+        alert(this.lang === 'de' ? 'Bitte gib eine kurze Beschreibung des Intended Use ein.' : 'Please enter a brief intended use description.');
+        return;
+      }
+      this.simState.step = 2;
+      this.renderSimulatorView(container);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Step 2 Back
+    document.getElementById('simStep2BackBtn')?.addEventListener('click', () => {
+      this.simState.step = 1;
+      this.renderSimulatorView(container);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Step 2 API Key
+    const apiKeyInput = document.getElementById('simApiKeyInput');
+    apiKeyInput?.addEventListener('input', (e) => {
+      this.simState.apiKey = e.target.value.trim();
+      localStorage.setItem('gemini_api_key', this.simState.apiKey);
+    });
+
+    const modelChoiceInput = document.getElementById('simModelChoice');
+    modelChoiceInput?.addEventListener('change', (e) => {
+      this.simState.modelChoice = e.target.value;
+    });
+
+    // Run Evaluation
+    document.getElementById('simRunEvaluationBtn')?.addEventListener('click', () => {
+      this.runSimulatorEvaluation();
+    });
+
+    // Step 3 Actions
+    document.getElementById('simNewRunBtn')?.addEventListener('click', () => {
+      this.simState.step = 1;
+      this.simState.blueprint = null;
+      this.renderSimulatorView(container);
+    });
+
+    document.getElementById('simExportReportBtn')?.addEventListener('click', () => {
+      this.exportBlueprintMarkdown();
+    });
+  }
+
+  applySimPreset(presetKey) {
+    if (presetKey === 'vision') {
+      this.simState.projectName = 'Automatisierte optische Vial-Inspektion (Parenteralia)';
+      this.simState.intendedUse = 'KI-gestützte Erkennung von Partikeln und Glasdefekten bei der Sterilabfüllung in Echtzeit an der Hochgeschwindigkeitslinie.';
+      this.simState.processArea = 'in_process';
+      this.simState.modelType = 'vision_defect';
+      this.simState.learningType = 'static';
+      this.simState.autonomyLevel = 'hitl';
+    } else if (presetKey === 'genai') {
+      this.simState.projectName = 'SOP & Deviation Drafting Assistant mit RAG';
+      this.simState.intendedUse = 'Erstellung von vorformulierten Abweichungsberichten basierend auf freigegebenen SOPs und historischen LIMS-Daten zur Beschleunigung der QA-Triage.';
+      this.simState.processArea = 'oos_investigation';
+      this.simState.modelType = 'genai_rag';
+      this.simState.learningType = 'static';
+      this.simState.autonomyLevel = 'hitl';
+    } else if (presetKey === 'dynamic_risk') {
+      this.simState.projectName = 'Kontinuierliche Bioprozess-Regelung (Selbstlernend)';
+      this.simState.intendedUse = 'Das Modell passt Fütterungsraten im Bioreaktor dynamisch an und trainiert sich im laufenden Batchbetrieb kontinuierlich an neuen Fermentationsdaten selbst weiter.';
+      this.simState.processArea = 'in_process';
+      this.simState.modelType = 'predictive_ml';
+      this.simState.learningType = 'dynamic';
+      this.simState.autonomyLevel = 'hotl';
+    }
+  }
+
+  async runSimulatorEvaluation() {
+    this.simState.isEvaluating = true;
+    this.renderSimulatorView(document.getElementById('contentWrapper'));
+
+    if (this.simState.apiKey && this.simState.apiKey.trim().length > 5) {
+      try {
+        const result = await this.callGeminiAPI();
+        this.simState.blueprint = result;
+      } catch (err) {
+        console.warn('Gemini API call failed, using expert engine:', err);
+        this.simState.blueprint = this.generateExpertBlueprint();
+      }
+    } else {
+      await new Promise(r => setTimeout(r, 650));
+      this.simState.blueprint = this.generateExpertBlueprint();
+    }
+
+    this.simState.isEvaluating = false;
+    this.simState.step = 3;
+    this.renderSimulatorView(document.getElementById('contentWrapper'));
+
+    if (this.simState.blueprint.verdict !== 'REJECT') {
+      confetti({ particleCount: 70, spread: 60, origin: { y: 0.5 } });
+    }
+  }
+
+  generateExpertBlueprint() {
+    const s = this.simState;
+    const redFlags = [];
+    const deliverables = [];
+    const testingRequirements = [];
+    const auditQuestions = [];
+    let verdict = 'VALIDATION_READY';
+
+    // 1. Check Dynamic Learning
+    if (s.learningType === 'dynamic') {
+      verdict = 'REJECT';
+      redFlags.push({
+        title: 'Verstoß gegen das Verbot dynamisch selbstlernender Modelle',
+        reference: 'EU GMP Annex 22 (Modul 03 / Modul 07)',
+        description: 'Der Entwurf von Annex 22 schließt Modelle, die sich im GMP-Routinebetrieb selbstständig weitertrainieren, kategorisch aus. Das Modell muss mit fest gefrorenen Parametern (Frozen Weights) betrieben werden. Retrainings erfordern eine isolierte Offline-Umgebung und einen formalen Revalidierungsbericht.'
+      });
+    }
+
+    // 2. Check HOOL on critical tasks
+    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process')) {
+      verdict = 'REJECT';
+      redFlags.push({
+        title: 'Unzulässige Vollautonomie (HOOL) bei qualitätskritischen Entscheidungen',
+        reference: 'EU GMP Annex 22 (Modul 10) & Art. 51 Richtlinie 2001/83/EG',
+        description: 'KI-Systeme besitzen keine pharmazeutische Rechtsverantwortung. Vollautomatische Chargenfreigaben ohne qualifizierte menschliche Prüfung verstoßen gegen europäisches Arzneimittelrecht. Es muss zwingend ein Human-in-the-Loop (HITL) Workflow implementiert sein.'
+      });
+    }
+
+    // 3. GenAI Checks
+    if (s.modelType === 'genai_rag') {
+      if (verdict !== 'REJECT') verdict = 'CONDITIONAL';
+      deliverables.push({
+        name: 'RAG-First Architektur-Spezifikation & Guardrail-Protokoll',
+        tier: 'Tier 2 (System)',
+        requirements: 'Nachweis, dass das LLM strikt auf freigegebene interne Dokumente beschränkt ist (kein freies Internet). Eingangs-Filter (Prompt Injection / PII) und Ausgangs-Guardrails (Schema Enforcement).'
+      });
+      deliverables.push({
+        name: 'Prompt Governance & Golden Regression Testsuite',
+        tier: 'Tier 3 (Technisch)',
+        requirements: 'Prompts müssen als validierter Source Code in Git versioniert sein. Automatisierte Testsuite mit mind. 100 verifizierten Standardfragen zum Erkennen von Provider-Backend-Updates.'
+      });
+      testingRequirements.push({
+        metric: 'RAG Triad: Groundedness / Faithfulness = 1.0',
+        purpose: 'Halluzinations-Prävention',
+        details: 'Jede generierte Behauptung muss zu 100% mathematisch aus den abgerufenen Kontext-SOPs belegbar sein. ALCOA+-Zitierpflicht (Dokument-ID, Version, Absatz).'
+      });
+      auditQuestions.push({
+        question: 'Wie stellen Sie sicher, dass Ihr Cloud-Sprachmodell keine erfundenen pharmazeutischen Fakten (Halluzinationen) in den Bericht übernimmt?',
+        recommendedAnswer: 'Durch unsere validierte RAG-Triad-Pipeline und den Groundedness-Filter. Sinkt die Faktentreue unter 1.0, verweigert das System die Ausgabe. Zudem fungiert das Tool rein als Drafting Assistant mit zwingender QP-Prüfung.'
+      });
+    } else {
+      // Predictive ML / Vision Deliverables
+      deliverables.push({
+        name: 'Model Definition & Intended Use Specification',
+        tier: 'Tier 2 (System)',
+        requirements: 'Formale Festlegung der Systemgrenzen, Eingangs-Sensorparameter und Out-of-Distribution (OOD) Erkennungslogik.'
+      });
+      deliverables.push({
+        name: 'Unabhängiger Validierungsplan & Metric Quad Bericht',
+        tier: 'Tier 2 (Qualifizierung)',
+        requirements: 'Durchführung der OQ/PQ durch personell unabhängige Tester (Staff Independence) auf einem unverbrauchten Hold-out Testdatensatz.'
+      });
+      testingRequirements.push({
+        metric: 'Recall (Sensitivität) ≥ 99.5% (Pre-Sealed)',
+        purpose: 'Schutz vor False Negatives',
+        details: 'Asymmetrische Fehlerkosten: Eine defekte Einheit darf niemals unentdeckt bleiben. Akzeptanzkriterien müssen vor Testdurchführung versiegelt werden.'
+      });
+      testingRequirements.push({
+        metric: 'Expected Calibration Error (ECE) ≤ 0.05',
+        purpose: 'Schutz vor Automation Bias',
+        details: 'Verhindert, dass das Modell bei Fehlentscheidungen fälschlich hohe Konfidenzen anzeigt und das Bedienpersonal täuscht.'
+      });
+      auditQuestions.push({
+        question: 'Waren die Ingenieure, die den finalen Validierungstest durchgeführt haben, unabhängig vom Entwicklungsteam?',
+        recommendedAnswer: 'Ja, gemäß PIC/S- und Annex-22-Vorgaben wurde die Qualifizierung auf dem versiegelten Hold-out-Set von unabhängigen Validierungsingenieuren der QA abgenommen (Staff Independence).'
+      });
+    }
+
+    deliverables.push({
+      name: 'Master AI Inventory Eintrag & SOP Change Control',
+      tier: 'Tier 1 (Governance)',
+      requirements: 'Eintragung im verbindlichen KI-Inventar zur Vermeidung von Schatten-KI. Festlegung statistischer Drift-Schwellenwerte (PSI > 0.2).'
+    });
+
+    const summary = verdict === 'REJECT'
+      ? `Die aktuelle Konfiguration enthält fundamentale Verstöße gegen den Draft EU GMP Annex 22 (siehe Red Flags unten). Ein System mit dynamischem Weiterlernen oder ohne menschliche Freigabeinstanz ist im GxP-Betrieb nicht zulassungsfähig. Vor der Validierungsplanung müssen Architektur und Betriebsmodus zwingend angepasst werden.`
+      : (verdict === 'CONDITIONAL'
+        ? `Das Projekt ist grundsätzlich qualifizierungsfähig, unterliegt jedoch als Generative-KI-System strengen Auflagen. Es darf ausschließlich als "Drafting Assistant" unter RAG-Architektur agieren. Eine autonome Dokumentenübernahme ist ausgeschlossen.`
+        : `Das geplante System erfüllt die architektonischen Kernvorgaben von Annex 22 (statisches Modell, Human-in-the-Loop, definierte Systemgrenzen). Das Qualifizierungsteam kann die Validierungsplanung auf Basis des Metric Quad und unabhängiger Hold-out-Sets initiieren.`);
+
+    return {
+      verdict,
+      summary,
+      redFlags,
+      deliverables,
+      testingRequirements,
+      auditQuestions
+    };
+  }
+
+  async callGeminiAPI() {
+    const s = this.simState;
+    const modelEndpoint = s.modelChoice === 'gemini-1.5-pro' ? 'gemini-1.5-pro' : 'gemini-1.5-flash';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelEndpoint}:generateContent?key=${s.apiKey}`;
+
+    const prompt = `Du bist ein führender Inspektor der Europäischen Arzneimittel-Agentur (EMA) und PIC/S für den Draft EU GMP Annex 22.
+Analysiere folgende pharmazeutische KI-Projektidee:
+- Projektname: ${s.projectName}
+- Intended Use: ${s.intendedUse}
+- Prozessbereich: ${s.processArea}
+- Modell-Architektur: ${s.modelType}
+- Lernmodus: ${s.learningType}
+- Autonomie-Level: ${s.autonomyLevel}
+
+Erstelle ein strenges, inspektionsfestes Compliance-Dossier im JSON-Format mit folgenden Schlüsseln:
+{
+  "verdict": "REJECT" | "CONDITIONAL" | "VALIDATION_READY",
+  "summary": "Prägnante 3-Satz-Zusammenfassung aus Behördensicht",
+  "redFlags": [
+    { "title": "Titel", "reference": "Annex 22 Modul X", "description": "Erklärung" }
+  ],
+  "deliverables": [
+    { "name": "Dokumentenname", "tier": "Tier 1/2/3", "requirements": "Spezifische Anforderung" }
+  ],
+  "testingRequirements": [
+    { "metric": "Metrik", "purpose": "Zweck", "details": "Akzeptanzgrenzen" }
+  ],
+  "auditQuestions": [
+    { "question": "Typische Prüferfrage", "recommendedAnswer": "Audit-feste Verteidigung" }
+  ]
+}
+Antworte NUR mit reinem JSON ohne Markdown-Ticks.`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.1 }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Gemini API Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
+    text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+    return JSON.parse(text);
+  }
+
+  exportBlueprintMarkdown() {
+    const s = this.simState;
+    const bp = s.blueprint;
+    if (!bp) return;
+
+    let md = `# Annex 22 AI Qualification Blueprint\n\n`;
+    md += `**Project:** ${s.projectName || 'AI System'}\n`;
+    md += `**Date:** ${new Date().toLocaleDateString()}\n`;
+    md += `**Status:** ${bp.verdict}\n\n`;
+    md += `## Intended Use\n${s.intendedUse}\n\n`;
+    md += `## Executive Assessment\n${bp.summary}\n\n`;
+
+    if (bp.redFlags.length > 0) {
+      md += `## 🚨 Red Flags & Blockers\n`;
+      bp.redFlags.forEach(rf => {
+        md += `- **${rf.title}** (${rf.reference}): ${rf.description}\n`;
+      });
+      md += `\n`;
+    }
+
+    md += `## Mandatory Validation Deliverables\n`;
+    bp.deliverables.forEach(d => {
+      md += `### ${d.name} (${d.tier})\n${d.requirements}\n\n`;
+    });
+
+    md += `## Testing & Metric Requirements\n`;
+    bp.testingRequirements.forEach(t => {
+      md += `- **${t.metric}** [${t.purpose}]: ${t.details}\n`;
+    });
+
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Annex22_Blueprint_${(s.projectName || 'project').replace(/\s+/g, '_')}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   renderMasterChecklistView(container) {
@@ -467,7 +1419,7 @@ class Annex22App {
       <div class="master-checklist-view">
         <div class="module-header">
           <div class="module-meta-bar">
-            <span class="module-phase-badge">${this.lang === 'de' ? 'Master Audit Dashboard' : 'Master Audit Dashboard'}</span>
+            <span class="module-phase-badge">${this.lang === 'de' ? 'Curriculum Lernkontrolle' : 'Curriculum Study Tracker'}</span>
             <div class="checklist-action-btns">
               <button class="header-btn primary" id="exportAuditJsonBtn">
                 <i data-lucide="download"></i>
@@ -483,24 +1435,26 @@ class Annex22App {
               </button>
             </div>
           </div>
-          <h1 class="module-main-title">${this.lang === 'de' ? 'GxP-Compliance Gesamtprüfbericht' : 'Comprehensive GxP Compliance Audit'}</h1>
-          <p class="module-subtitle">${this.lang === 'de' ? 'Verfolgen, verifizieren und exportieren Sie alle regulatorischen Anforderungen über alle 15 Module hinweg.' : 'Track, verify, and export regulatory compliance items across all 15 modules.'}</p>
+          <h1 class="module-main-title">${this.lang === 'de' ? 'Annex 22 Lern- und Kontrollfragen' : 'Annex 22 Study & Review Questions'}</h1>
+          <p class="module-subtitle">
+            ${this.lang === 'de' 
+              ? 'Didaktische Lernkontrolle zum Durcharbeiten des 12-teiligen Kurses. Für konkrete System-Qualifizierungen nutze bitte den AI Project Simulator.' 
+              : 'Didactic study tracker to review the 12 modules. For specific system qualification, please use the AI Project Simulator.'}
+          </p>
         </div>
 
-        <!-- Controls Bar -->
         <div class="checklist-controls-bar">
           <div class="filter-pills">
             <button class="filter-pill active" data-filter="all">${this.lang === 'de' ? 'Alle Kriterien' : 'All Items'} (${stats.total})</button>
             <button class="filter-pill" data-filter="pending">${this.lang === 'de' ? 'Offen' : 'Pending'} (${stats.total - stats.completed})</button>
-            <button class="filter-pill" data-filter="completed">${this.lang === 'de' ? 'Erfüllt' : 'Completed'} (${stats.completed})</button>
+            <button class="filter-pill" data-filter="completed">${this.lang === 'de' ? 'Gelernt' : 'Completed'} (${stats.completed})</button>
           </div>
 
           <div style="font-weight:600; font-size:0.9rem;">
-            ${this.lang === 'de' ? 'Gesamtfortschritt:' : 'Overall Progress:'} <span style="color:var(--brand-emerald);">${stats.percentage}%</span>
+            ${this.lang === 'de' ? 'Lernfortschritt:' : 'Study Progress:'} <span style="color:var(--brand-emerald);">${stats.percentage}%</span>
           </div>
         </div>
 
-        <!-- Checklists grouped by Module -->
         <div class="all-checklists-container" id="allChecklistsContainer">
           ${allChecklists.map(group => `
             <div class="module-checklist-group" style="margin-bottom:2.5rem;" data-module-group="${group.module.id}">
@@ -531,7 +1485,6 @@ class Annex22App {
     createIcons({ icons });
     this.bindCheckboxes(container);
 
-    // Bind Filter Pills
     container.querySelectorAll('.filter-pill').forEach(pill => {
       pill.addEventListener('click', (e) => {
         container.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
@@ -549,17 +1502,14 @@ class Annex22App {
       });
     });
 
-    // Export JSON
     document.getElementById('exportAuditJsonBtn')?.addEventListener('click', () => {
       this.exportAuditJSON();
     });
 
-    // Export Markdown
     document.getElementById('exportAuditMdBtn')?.addEventListener('click', () => {
       this.exportAuditMarkdown();
     });
 
-    // Reset Checklist
     document.getElementById('resetChecklistBtn')?.addEventListener('click', () => {
       if (confirm(this.lang === 'de' ? 'Möchten Sie wirklich alle Häkchen zurücksetzen?' : 'Are you sure you want to reset all checklist items?')) {
         this.checklistState = {};
@@ -572,7 +1522,6 @@ class Annex22App {
 
   bindCheckboxes(container) {
     container.querySelectorAll('.gxp-checkbox').forEach(cb => {
-      // Sync initial state
       const key = cb.dataset.key;
       if (this.checklistState[key]) {
         cb.checked = true;
@@ -597,7 +1546,6 @@ class Annex22App {
         localStorage.setItem('annex22_checklists', JSON.stringify(this.checklistState));
         this.renderSidebar();
 
-        // Check if all items in current view are completed
         const viewCheckboxes = container.querySelectorAll('.gxp-checkbox');
         const checkedCount = container.querySelectorAll('.gxp-checkbox:checked').length;
         if (checkedCount === viewCheckboxes.length && viewCheckboxes.length > 0 && checked) {
@@ -616,6 +1564,23 @@ class Annex22App {
       try {
         mermaid.run({
           nodes: document.querySelectorAll('pre.mermaid')
+        }).then(() => {
+          document.querySelectorAll('.mermaid-wrapper').forEach(wrapper => {
+            const svg = wrapper.querySelector('svg');
+            const btn = wrapper.querySelector('button[data-action="fullscreen"]');
+            const viewport = wrapper.querySelector('.mermaid-viewport');
+
+            const handleOpen = () => {
+              if (svg) this.openDiagramModal(svg);
+            };
+
+            btn?.addEventListener('click', (e) => {
+              e.stopPropagation();
+              handleOpen();
+            });
+
+            viewport?.addEventListener('click', handleOpen);
+          });
         });
       } catch (err) {
         console.warn('Mermaid rendering notice:', err);
@@ -636,16 +1601,16 @@ class Annex22App {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Annex22_Audit_Report_${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `Annex22_Study_Progress_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
 
   exportAuditMarkdown() {
     const stats = this.getGlobalChecklistStats();
-    let md = `# EU GMP Annex 22 - Compliance Audit Report\n\n`;
+    let md = `# EU GMP Annex 22 - Study & Review Report\n\n`;
     md += `**Date:** ${new Date().toLocaleDateString()}\n`;
-    md += `**Compliance Score:** ${stats.percentage}% (${stats.completed}/${stats.total} criteria verified)\n\n`;
+    md += `**Study Progress:** ${stats.percentage}% (${stats.completed}/${stats.total} criteria verified)\n\n`;
     md += `---\n\n`;
 
     MODULE_REGISTRY.forEach(mod => {
@@ -667,30 +1632,26 @@ class Annex22App {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Annex22_Audit_Report_${new Date().toISOString().slice(0, 10)}.md`;
+    a.download = `Annex22_Study_Report_${new Date().toISOString().slice(0, 10)}.md`;
     a.click();
     URL.revokeObjectURL(url);
   }
 
   bindEvents() {
-    // Mobile Sidebar Toggle
     document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
       document.getElementById('siteSidebar')?.classList.toggle('mobile-open');
     });
 
-    // Theme Toggle
     document.getElementById('themeToggleBtn')?.addEventListener('click', () => {
       this.toggleTheme();
     });
 
-    // Language Toggle
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         this.setLanguage(e.target.dataset.lang);
       });
     });
 
-    // Route links delegation
     document.addEventListener('click', (e) => {
       const target = e.target.closest('[data-route]');
       if (target) {
@@ -699,7 +1660,6 @@ class Annex22App {
         this.navigate(route);
       }
 
-      // Handle markdown internal SPA links
       const spaLink = e.target.closest('a[data-module]');
       if (spaLink) {
         e.preventDefault();
@@ -708,7 +1668,6 @@ class Annex22App {
       }
     });
 
-    // Hashchange listener for browser back/forward
     window.addEventListener('hashchange', () => {
       const route = this.getInitialRoute();
       if (route !== this.currentModuleId) {
@@ -716,7 +1675,6 @@ class Annex22App {
       }
     });
 
-    // Search modal open/close
     const searchModal = document.getElementById('searchModal');
     const searchInput = document.getElementById('searchInput');
 
@@ -748,7 +1706,6 @@ class Annex22App {
       }
     });
 
-    // Search input live querying
     searchInput?.addEventListener('input', (e) => {
       const query = e.target.value;
       const results = this.searchEngine.search(query, this.lang);
@@ -783,7 +1740,6 @@ class Annex22App {
   }
 }
 
-// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   new Annex22App();
 });

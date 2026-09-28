@@ -978,17 +978,24 @@ html[data-theme="light"] .markdown-body strong {
 /* ==========================================================================
    Mermaid Diagrams
    ========================================================================== */
+/* ==========================================================================
+   Mermaid Diagrams & Fullscreen Lightbox
+   ========================================================================== */
 .mermaid-wrapper {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin: 2rem 0;
-  overflow-x: auto;
+  padding: 1.25rem 1.5rem;
+  margin: 2.25rem 0;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.mermaid-wrapper:hover {
+  border-color: var(--border-active);
 }
 
 .mermaid-actions {
@@ -996,29 +1003,194 @@ html[data-theme="light"] .markdown-body strong {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 1rem;
 }
 
 .mermaid-label {
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
   font-family: var(--font-mono);
+  font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-faint);
+  letter-spacing: 0.05em;
+  color: var(--brand-cyan);
 }
 
-.mermaid-zoom-btn {
+.mermaid-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
   cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.mermaid-action-btn:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 0 12px var(--brand-primary-glow);
+}
+
+.mermaid-viewport {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  cursor: zoom-in;
 }
 
 .mermaid {
   max-width: 100%;
+  min-width: 320px;
 }
+
+/* Mermaid SVG High-Contrast Overrides */
+.mermaid svg {
+  height: auto !important;
+  font-family: var(--font-body) !important;
+}
+
+.mermaid svg text {
+  font-family: var(--font-body) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+}
+
+.mermaid svg .node rect,
+.mermaid svg .node circle,
+.mermaid svg .node polygon,
+.mermaid svg .node path {
+  rx: 8px !important;
+  ry: 8px !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid svg .edgeLabel {
+  background-color: var(--bg-surface-elevated) !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  color: var(--text-main) !important;
+}
+
+/* Fullscreen Diagram Lightbox Modal */
+.diagram-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 13, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.diagram-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.diagram-modal-toolbar {
+  height: 60px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(16, 22, 36, 0.85);
+  backdrop-filter: blur(16px);
+}
+
+.diagram-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.diagram-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diagram-ctrl-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: var(--transition-fast);
+}
+
+.diagram-ctrl-btn:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-active);
+}
+
+.diagram-zoom-level {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brand-cyan);
+  padding: 0 0.5rem;
+  min-width: 55px;
+  text-align: center;
+}
+
+.diagram-modal-canvas {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+}
+
+.diagram-modal-canvas.panning {
+  cursor: grabbing;
+}
+
+.diagram-modal-content {
+  transform-origin: center center;
+  transition: transform 0.05s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-modal-content svg {
+  max-width: none !important;
+  max-height: none !important;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+}
+
 
 /* ==========================================================================
    GitHub Alerts / Callout Boxes
@@ -1393,3 +1565,339 @@ html[data-theme="light"] .markdown-body strong {
     font-size: 1.85rem;
   }
 }
+
+/* ==========================================================================
+   Annex 22 AI Project & Qualification Simulator Styles
+   ========================================================================== */
+.simulator-view {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.simulator-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.sim-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0.5;
+  transition: var(--transition-fast);
+}
+
+.sim-step-item.active {
+  opacity: 1;
+}
+
+.sim-step-item.completed {
+  opacity: 0.85;
+}
+
+.sim-step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.sim-step-item.active .sim-step-number {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 0 10px var(--brand-primary-glow);
+}
+
+.sim-step-item.completed .sim-step-number {
+  background: var(--brand-emerald);
+  border-color: var(--brand-emerald);
+  color: #fff;
+}
+
+.sim-step-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sim-step-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+  min-width: 20px;
+}
+
+.simulator-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.sim-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sim-label {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sim-label-desc {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.sim-input, .sim-textarea {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.sim-input:focus, .sim-textarea:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 12px var(--brand-primary-glow);
+}
+
+.sim-textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.presets-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.preset-chip-btn {
+  background: var(--bg-surface-elevated);
+  border: 1px dashed var(--border-active);
+  color: var(--brand-cyan);
+  font-size: 0.775rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.preset-chip-btn:hover {
+  background: var(--brand-cyan-glow);
+  color: #fff;
+  border-style: solid;
+}
+
+/* Radio Option Cards Grid */
+.option-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.option-card-radio {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+}
+
+.option-card-radio:hover {
+  border-color: var(--border-active);
+  background: var(--bg-surface-hover);
+}
+
+.option-card-radio.selected {
+  border-color: var(--brand-primary);
+  background: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 15px var(--brand-primary-glow);
+}
+
+.option-card-radio.selected-danger {
+  border-color: var(--brand-rose);
+  background: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
+.opt-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opt-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.opt-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.opt-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--bg-surface);
+  color: var(--text-faint);
+}
+
+.sim-actions-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.5rem;
+}
+
+/* Blueprint Result Report */
+.blueprint-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blueprint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.5rem;
+}
+
+.blueprint-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+
+.status-badge-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid var(--brand-emerald);
+}
+
+.status-badge-yellow {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid var(--brand-amber);
+}
+
+.status-badge-red {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border: 1px solid var(--brand-rose);
+}
+
+.blueprint-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.blueprint-sec-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blueprint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.blueprint-item {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bp-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bp-item-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--brand-cyan);
+}
+
+.bp-item-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+

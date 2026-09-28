@@ -53,12 +53,23 @@ export function parseModuleMarkdown(rawMarkdown, moduleId, lang = 'de') {
   // Code blocks: intercept mermaid diagrams
   renderer.code = ({ text, lang: codeLang }) => {
     if (codeLang === 'mermaid') {
-      return `<div class="mermaid-wrapper">
+      const diagramId = `diag_${Math.random().toString(36).substring(2, 9)}`;
+      return `<div class="mermaid-wrapper" data-diagram-id="${diagramId}">
         <div class="mermaid-actions">
-          <span class="mermaid-label">Diagram</span>
-          <button class="mermaid-zoom-btn" data-action="reset-zoom" title="Reset diagram">Reset View</button>
+          <span class="mermaid-label">
+            <i data-lucide="git-branch"></i>
+            <span>${lang === 'de' ? 'Prozess- & Architektur-Diagramm' : 'Process & Architecture Diagram'}</span>
+          </span>
+          <div class="mermaid-action-buttons">
+            <button class="mermaid-action-btn" data-action="fullscreen" data-target="${diagramId}" title="${lang === 'de' ? 'Vollbild & Zoom öffnen' : 'Open Fullscreen & Zoom'}">
+              <i data-lucide="maximize-2"></i>
+              <span>${lang === 'de' ? '🔍 Großansicht & Zoom' : '🔍 Fullscreen & Zoom'}</span>
+            </button>
+          </div>
         </div>
-        <pre class="mermaid">${text}</pre>
+        <div class="mermaid-viewport" id="${diagramId}">
+          <pre class="mermaid">${text}</pre>
+        </div>
       </div>`;
     }
 
