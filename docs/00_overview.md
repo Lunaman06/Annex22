@@ -25,77 +25,102 @@ graph LR
 
 ---
 
-## 2. Die Gesamtprozess-Landkarte (AI Lifecycle)
+## 2. Gesamtprozess-Landkarte & Modul-Wegweiser
 
-Der Lebenszyklus eines GxP-konformen KI-Systems gliedert sich in sechs klar definierte Meilensteine:
+Die folgende Landkarte verbindet das regulatorische Fundament direkt mit den operativen Phasen des AI/ML Lifecycles und dient als zentraler Navigator durch alle 12 Fachmodule:
 
 ```mermaid
 flowchart TD
-    M1["1. Intended Use Definition<br/>(Zweck & Systemgrenzen festlegen)"] --> M2["2. Data Governance<br/>(Trainings- & Testdaten nach ALCOA+)"]
-    M2 --> M3["3. Modellentwicklung<br/>(Fixierung der Hyperparameter & Frozen Weights)"]
-    M3 --> M4["4. Unabhängige Validierung<br/>(Adversarial Testing mit ungesehenen Daten)"]
-    M4 --> M5["5. Produktivbetrieb & OOD-Schutz<br/>(Automatische Blockade unzulässiger Eingaben)"]
-    M5 --> M6["6. Kontinuierliches Drift-Monitoring<br/>(Statistische Alarmierung & Change Control)"]
+    subgraph S0["🧭 Einstieg & Regulatorisches Fundament"]
+        M01["Modul 01: Intro to AI in GxP<br/><i>(CSV-Grenzen, Fallstudien & 6 Trust-Säulen)</i>"]
+        M02["Modul 02: Overview Annex 22<br/><i>(Harmonisierung mit Annex 11 & 5-Stufen-Roadmap)</i>"]
+        M03["Modul 03: Scope & Applicability<br/><i>(5-Stufen-Entscheidungstrichter & Risikoklassen)</i>"]
+        M01 --> M02 --> M03
+    end
 
-    style M1 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style M2 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style M3 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style M4 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style M5 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style M6 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    subgraph S1["Phase I: Spezifikation & Risikomanagement"]
+        M04["Modul 04: Risk-Based Approach<br/><i>(Proportionalität, 5 Fehlermodi & Kritikalität)</i>"]
+        M05["Modul 05: Intended Use & Boundaries<br/><i>(Systemgrenzen, 'Zaun-Metapher' & Lineage)</i>"]
+        M04 --> M05
+    end
+
+    subgraph S2["Phase II: Daten-Governance & Modellentwicklung"]
+        M06["Modul 06: Data Governance & Quality<br/><i>(ALCOA+ für Daten, Split-Integrität & Bias)</i>"]
+        M07["Modul 07: Model Development & Training<br/><i>(Algorithmenwahl, Frozen Weights & Versionierung)</i>"]
+        M06 --> M07
+    end
+
+    subgraph S3["Phase III: Validierung & Erklärbarkeit"]
+        M08["Modul 08: Validation & Performance Testing<br/><i>(Adversarial Testing, Metriken & GAMP-Mapping)</i>"]
+        M09["Modul 09: Explainability & Transparency<br/><i>(XAI, Vermeidung von Black-Boxes & Audit-Fähigkeit)</i>"]
+        M08 --> M09
+    end
+
+    subgraph S4["Phase IV: GxP-Betrieb, Human Oversight & Überwachung"]
+        M10["Modul 10: Human Oversight (HITL)<br/><i>(Active Challenge, Override & QP-Verantwortung)</i>"]
+        M11["Modul 11: Continuous Monitoring<br/><i>(Früherkennung von Silent Drift & Retraining)</i>"]
+        M12["Modul 12: Audit & Inspection Readiness<br/><i>(EMA/FDA-Inspektionssimulation & Rote Flaggen)</i>"]
+        M10 --> M11 --> M12
+    end
+
+    S0 ==> S1
+    S1 ==> S2
+    S2 ==> S3
+    S3 ==> S4
+
+    style S0 fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style S1 fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
+    style S2 fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
+    style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:2px
+    style S4 fill:#fff7ed,stroke:#f97316,stroke-width:2px
 ```
 
 ---
 
-## 3. Die 4 Themensäulen & Modul-Wegweiser
+### Direkte Navigation durch die Lifecycle-Phasen
 
-Alle Details, Praxisfälle, mathematischen Fehlermodi und Checklisten sind in den jeweiligen Fachmodulen ausgearbeitet:
-
-### 🏛️ Säule 1: Grundlagen, Einordnung & Scope
+#### 🧭 Einstieg & Regulatorisches Fundament
 *Welche Systeme fallen unter Annex 22 und wie grenzen wir uns sauber ab?*
 - **[Modul 01: Introduction to AI in GxP Environments](module_01_introduction_ai_gxp.md)**  
-  *Warum klassische CSV versagt, reale Pharma-Fallstudien und die 6 Säulen für Trustworthy AI.*
+  *Warum klassische CSV für KI versagt, reale Pharma-Fallstudien und die 6 Säulen für Trustworthy AI.*
 - **[Modul 02: Overview of Annex 22](module_02_overview_annex_22.md)**  
-  *Das Zusammenspiel mit Annex 11, Schutz vor Automation Bias und die 5-stufige Roadmap.*
+  *Das Zusammenspiel mit Annex 11, Schutz vor Automation Bias und die 5-stufige Umsetzungs-Roadmap.*
 - **[Modul 03: Scope and Applicability of AI Systems](module_03_scope_applicability.md)**  
-  *Der 5-Stufen-Entscheidungstrichter (Decision Funnel), die 4 Risikostufen und das AI-Inventar.*
+  *Der 5-Stufen-Entscheidungstrichter (Decision Funnel), die 4 Risikostufen und das verbindliche AI-Inventar.*
 
----
-
-### ⚖️ Säule 2: Risikobasierter Ansatz & Spezifikation
-*Wie tief müssen wir validieren und wo ziehen wir die unverrückbaren Grenzen?*
+#### ⚖️ Phase I: Spezifikation & Risikobewertung
+*Wie tief müssen wir validieren und wo ziehen wir die unverrückbaren Systemgrenzen?*
 - **[Modul 04: Risk Based Approach to AI](module_04_risk_based_approach.md)**  
-  *Proportionalitätsgebot, Silent Degradation, die 5 KI-Fehlermodi und HITL vs. HOTL.*
+  *Proportionalitätsgebot, Silent Degradation, die 5 KI-spezifischen Fehlermodi und HITL vs. HOTL.*
 - **[Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md)**  
   *Das vertragliche Herzstück: Die Zaun-Metapher, Scope Creep und technische Model Lineage.*
 
----
-
-### 🔬 Säule 3: Daten, Entwicklung & Validierung
-*Wie stellen wir sicher, dass das Modell robust und nachvollziehbar arbeitet?*
+#### 🔬 Phase II: Daten-Governance & Modellentwicklung
+*Wie stellen wir sicher, dass Daten und Algorithmus von Grund auf GxP-konform sind?*
 - **[Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md)**  
-  *ALCOA+ für Trainingsdaten, Data Lineage und strikte Trennung von Testdatensätzen.*
+  *ALCOA+ für Trainingsdaten, Data Lineage und strikte Trennung von Testdatensätzen (Split-Integrität).*
 - **[Modul 07: AI Model Development and Training](module_07_model_development_training.md)**  
-  *Algorithmenauswahl, Feature Engineering und unveränderliche Modellversionierung.*
+  *Algorithmenauswahl, Feature Engineering und unveränderliche Modellversionierung (Frozen Weights).*
+
+#### 🧪 Phase III: Validierung & Erklärbarkeit
+*Wie beweisen wir Robustheit gegen unerwartete Eingaben und machen Entscheidungen transparent?*
 - **[Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md)**  
-  *Adversarial Testing, Performance-Metriken (Precision, Recall) und GAMP-Mapping.*
+  *Adversarial Testing, Performance-Metriken (Precision, Recall, ROC-AUC) und GAMP-Mapping.*
 - **[Modul 09: Explainability and Transparency](module_09_explainability_transparency.md)**  
-  *Explainable AI (XAI), Vermeidung von Black-Boxes und inspektionsfeste Transparenz.*
+  *Explainable AI (XAI), Vermeidung von Black-Boxes und inspektionsfeste Transparenz für Auditoren.*
 
----
-
-### 🛡️ Säule 4: Menschliche Aufsicht, Betrieb & Inspektion
-*Wie bleibt das System über Jahre hinweg im validierten Zustand?*
+#### 🛡️ Phase IV: GxP-Betrieb, Human Oversight & Überwachung
+*Wie bleibt das System über Jahre hinweg im validierten Zustand und inspections-ready?*
 - **[Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md)**  
   *Aktives Challenge-Design, Übersteuerungsbefugnis (Override) und Qualifikation von Personal & QP.*
 - **[Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md)**  
-  *Früherkennung von Data- & Concept-Drift, Alarmschwellen und kontrolliertes Retraining.*
+  *Früherkennung von Data- & Concept-Drift, Alarmschwellen und kontrolliertes Retraining via Change Control.*
 - **[Modul 12: Audit and Inspection Readiness](module_12_audit_inspection_readiness.md)**  
   *Inspektionssimulationen, Verteidigung vor Behörden (EMA/FDA) und typische Rote Flaggen.*
 
 ---
 
-## 4. Die goldenen Regeln für die Praxis (Executive Rules)
+## 3. Die goldenen Regeln für die Praxis (Executive Rules)
 
 | # | Grundsatz | Konkrete Bedeutung für das Projekt |
 | :-: | :--- | :--- |
