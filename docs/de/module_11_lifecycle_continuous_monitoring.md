@@ -49,36 +49,36 @@ In der traditionellen CSV (Annex 11) galt: Ein qualifiziertes System verharrt im
 * Sensorabnutzung, neue Zulieferer, veränderte Rohstoffqualitäten oder saisonale Klimaschwankungen im Reinraum führen zu einer schleichenden Entkopplung zwischen Trainingsdaten und Produktionsrealität (*Silent Degradation*).
 * Validierung unter Annex 22 ist daher ein **dynamischer, kontinuierlicher Prozess**, der eng mit dem betrieblichen Abweichungs- (Deviation) und CAPA-System verzahnt sein muss.
 
-### 2. Die drei Dimensionen des KI-Drifts
-Annex 22 unterscheidet drei spezifische Bedrohungen für den validierten Zustand:
+### 2. Lebenszyklus-Monitoring im Draft: Performance- & Input-Drift ([Draft §10.3, §10.4])
+Der Draft EU GMP Annex 22 unterscheidet im operativen Betrieb primär zwei verbindliche Überwachungsstränge:
 
-| Drift-Kategorie | Definition | Pharma-Beispiel | Erkennungsmethode |
+| Überwachungsstrang | Regulatorische Fundstelle | Fokus & Pharma-Beispiel | Typische Methode |
 | :--- | :--- | :--- | :--- |
-| **Data Drift (Covariate Shift)** | Die statistische Verteilung der Eingangsparameter ($P(X)$) verschiebt sich, die Beziehung zum Output bleibt gleich. | Ein Temperatursensor wird neu kalibriert und misst systematisch 0,3°C höher; ein neuer Lieferant liefert Hilfsstoff mit abweichender Korngrößenverteilung. | Multivariate statistische Tests (z.B. Kolmogorov-Smirnov-Test, Population Stability Index - PSI). |
-| **Concept Drift** | Die fundamentale Beziehung zwischen Eingaben und Zielgröße ($P(Y \mid X)$) ändert sich. Dieselben Eingangswerte bedeuten nun ein anderes Qualitätsergebnis. | Veränderung der chemischen Reaktionskinetik nach Modifikation des Rührwerks. Das Modell meldet „Prozess optimal“, obwohl die Viskosität unbemerkt absinkt. | **Gefährlichster Drift:** Nur durch regelmäßigen Abgleich mit verlässlichen Referenz-Laboranalysen (*Ground Truth Sampling*) erkennbar. |
-| **Performance Drift** | Der messbare Rückgang der Modellgüte (z.B. Sinken des Recalls von 99,5% auf 96%). | Erhöhte Fehlerrate bei der visuellen Tablettenprüfung; gehäufte manuelle Korrekturen durch Bediener. | Laufende Auswertung von Konfusionsmatrizen und Widerspruchsraten (*Override Rates*). |
+| **Input-Drift (Input Sample Space)** | **[Draft §10.4]** | Überwachung der Eingangsdatenverteilung. Bsp.: Ein Sensor driftet um 0,3°C; ein neuer Hilfsstofflieferant verändert die Partikelgrößenverteilung. | Univariate statistische Tests pro Merkmal (z. B. Kolmogorov-Smirnov-Test, Population Stability Index - PSI; PSI > 0,2 als Faustregel für signifikanten Shift [Best Practice: ML-Praxis]) oder multivariate Abstandsmaße. |
+| **Performance-Monitoring** | **[Draft §10.3]** | Kontinuierliche Überwachung der Modellgüte. Bsp.: Anstieg der Fehlerrate bei der Tabletteninspektion; Auswertung von Bediener-Reviews ([Draft §10.5]). | Laufende Verfolgung von Trefferquoten, Konfusionsmatrizen und qualifizierten Stichprobenkontrollen. |
+| **Concept Drift ([Best Practice: ML-Praxis])** | *Industrie-Erweiterung ([Best Practice])* | Verschiebung der Kausalbeziehung zwischen Input und Zielgröße ($P(Y \mid X)$). Bsp.: Neue Rührwerkgeometrie verändert die Reaktionskinetik bei gleichen Prozesswerten. | Periodischer Abgleich mit verlässlichen Referenzanalysen (Offline-Laboranalytik, Ground Truth Sampling). |
 
 > [!CAUTION]
-> **Praxisfall:** Ein Pharmahersteller nutzte ein KI-System zur vorausschauenden Wartung von Bioreaktor-Sonden. In Monat 1 wechselte der Rohstofflieferant für das Nährmedium. Das Medium verhielt sich mikrobiologisch minimal anders, was zu einem schleichenden Concept Drift führte. In Monat 4 fielen zwei Sonden während laufender Produktionschargen unbemerkt aus, weil die zu grob eingestellten Alarmschwellen nicht ansprangen. Der Schaden: Zwei verworfene Chargen und eine massive behördliche Mängelrüge.
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Pharmahersteller nutzte ein KI-System zur vorausschauenden Wartung von Bioreaktor-Sonden. In Monat 1 wechselte der Rohstofflieferant für das Nährmedium. Das Medium verhielt sich mikrobiologisch minimal anders, was zu einem schleichenden Drift führte. In Monat 4 fielen zwei Sonden während laufender Produktionschargen unbemerkt aus, weil die Alarmschwellen nicht passten. Der Schaden: Zwei verworfene Chargen und eine behördliche Mängelrüge.
 
-### 3. Change Control & Der Re-Training-Zyklus
-Das wiederholte Anlernen (*Retraining*) eines Modells mit frischen Betriebsdaten ist keine routinemäßige IT-Wartung, sondern ein **schwerwiegendes pharmazeutisches Qualitätsereignis**:
+### 3. Change Control & Der Re-Training-Zyklus ([Draft §10.1])
+Das wiederholte Anlernen (*Retraining*) eines Modells mit frischen Daten ist keine rein technische Wartung, sondern ein formaler **Change Control Prozess ([Draft §10.1])**:
 * **Die 4 Phasen des GxP-Retrainings:**
-  1. **Trigger:** Erreichen eines definierten Zeitintervalls oder statistischer Drift-Alarm.
-  2. **Retraining:** Modelltraining in der isolierten Entwicklungsumgebung unter kontrollierten Bedingungen.
-  3. **Formale Revalidierung:** Vollständige statistische Überprüfung auf einem neuen, unabhängigen Hold-out-Testdatensatz nach dem *Metric Quad* (F1, Recall, Calibration, Robustness).
-  4. **Deployment & Release:** Freigabe durch QA und kontrollierter Austausch des Modells im Produktivbetrieb.
-* **Das Verbot unkontrollierter Patches:** Ein Einspielen neu trainierter Gewichte ohne vorherigen Revalidierungsbericht führt zum **sofortigen Erlöschen der GMP-Betriebserlaubnis**.
+  1. **Trigger:** Erreichen eines risikobasierten Intervalls oder statistischer Drift-Alarm ([Draft §10.3, §10.4]).
+  2. **Retraining:** Modelltraining in der kontrollierten Entwicklungsumgebung.
+  3. **Formale Re-Qualifizierung:** Vollständige statistische Überprüfung auf einem neuen, unabhängigen Testdatensatz gegen die genehmigten Akzeptanzkriterien ([Draft §4.2, §4.3, §6]).
+  4. **Deployment & Release:** Freigabe durch QA und kontrollierter Austausch des Modellartefakts im Produktivbetrieb.
+* **Verbot unkontrollierter Änderungen ([Draft §10.1]):** Das Einspielen neu trainierter Parameter ohne formales Change Control und Freigabeprotokoll stellt einen schwerwiegenden GMP-Verstoß dar.
 
-### 4. Configuration Drift: Die Gefahr informeller Justierungen
-Häufig versuchen Betriebsteams, lästige Fehlalarme an Maschinen durch manuelles Verstellen von Schwellenwerten (*Thresholds*) oder Konfidenzgrenzen zu unterbinden:
-* Jeder numerische Entscheidungsschwellenwert ist **Bestandteil des validierten Zustands**.
-* Jede Änderung ohne formales Änderungsverfahren (*Change Control*) stellt einen illegalen Betriebszustand dar (*Operating an Unvalidated System*).
+### 4. Configuration Control: Schutz vor informellen Justierungen ([Draft §10.2])
+Häufig versuchen Betriebsteams, Fehlalarme an Maschinen durch manuelles Nachstellen von Parametern zu dämpfen:
+* **Regulatorische Vorgabe ([Draft §10.2]):** Die Konfiguration des KI-Systems, einschließlich aller Modellparameter, Hyperparameter und Entscheidungsschwellenwerte (*Thresholds*), muss unter strenger **Konfigurationskontrolle** stehen.
+* Jeder numerische Schwellenwert ist Bestandteil des qualifizierten Zustands. Unautorisierte Änderungen verletzen die Konfigurationsintegrität.
 
-### 5. Periodische Überprüfung (Periodic Review) & Außerbetriebnahme (Retirement)
-* **Periodic Review:** Für kritische GxP-Systeme müssen mindestens halbjährlich oder jährlich übergeordnete Makro-Reviews stattfinden. Dabei wird die aktuelle Modellperformance mit der ursprünglichen Validierungs-Baseline verglichen, um kumulative schleichende Trends aufzudecken.
-* **Validierte Monitoring-Pipelines:** Die Software-Pipelines, die den Drift berechnen und Alarme auslösen, müssen selbst nach **Annex 11 als GxP-System qualifiziert** sein. Eine unvalidierte Überwachung ist rechtlich wertlos.
-* **Safe Retirement:** Bei Außerbetriebnahme müssen historische Modellversionen, Trainingsdaten und Inferenz-Logs revisionssicher archiviert werden. Zudem muss geprüft werden, ob historische Chargenentscheidungen im Lichte des neuen Nachfolgemodells retrospektiv neu bewertet werden müssen.
+### 5. Periodische Überprüfung (Periodic Review) & Außerbetriebnahme
+* **Periodic Review ([Best Practice: ISPE GAMP]):** Der Zeitabstand für periodische Systemüberprüfungen sollte **risikobasiert festgelegt** werden (z. B. halbjährlich oder jährlich als bewährte Industriepraxis). Dabei wird die kumulierte Modellperformance mit der ursprünglichen Baseline verglichen.
+* **Validierte Monitoring-Pipelines ([Best Practice: ISPE GAMP]):** Die Software-Pipelines zur automatisierten Drift-Berechnung und Alarmierung sollten nach Annex 11 qualifiziert sein, um Fehlalarme oder unbemerkte Ausfälle der Überwachung auszuschließen.
+* **Außerbetriebnahme (Retirement, [Draft §7.4]):** Bei Stilllegung sind historische Modellversionen, Code-Repositories und Inferenz-Aufzeichnungen über die vorgeschriebene Lebenszyklusfrist aufzubewahren ([Draft §7.4]).
 
 ---
 

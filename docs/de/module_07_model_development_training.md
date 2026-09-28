@@ -54,38 +54,37 @@ Unter **EU GMP Annex 22** kollidiert dieser Ansatz frontal mit den pharmazeutisc
 * **Zielgröße:** Optimiert wird nicht auf einen einmaligen Benchmark-Rekord, sondern auf **langfristige Zuverlässigkeit (Trustworthiness), Robustheit an Entscheidungsgrenzen und Audit-Fähigkeit**.
 * Ein nachträgliches „Drüberstülpen“ von GxP-Disziplin über explorativen Entwicklungs-Code ist extrem teuer und scheitert in Inspektionen fast ausnahmslos.
 
-### 2. Das Gebot der absoluten Reproduzierbarkeit (Reproducibility Mandate)
-Die fundamentale Säule von Annex 22 ist die **deterministische Reproduzierbarkeit**:
-> **Definition:** Bei exakt denselben Trainingsdaten, demselben Code und derselben Konfiguration muss exakt dasselbe Modell mit denselben Parametern (Gewichten) und Vorhersagen entstehen.
-
-Tritt später im Routinebetrieb eine Qualitätsabweichung (*OOS/Deviation*) oder eine Kundenreklamation auf, muss das pharmazeutische Unternehmen in der Lage sein, die Entstehung des historischen Modells bitgenau zu rekonstruieren:
-* **Code:** Festgehalten über unveränderliche Git-Commit-Hashes.
-* **Daten:** Revisionssicher archiviert über Datenversionierungs-Tools (z.B. DVC-Hashes).
-* **Laufzeitumgebung:** Gepinnt bis auf die Betriebssystem- und Sub-Library-Ebene (Container-Images wie Docker, `requirements.txt` mit festen Versionen).
-* **Zufallssaatgüter (Random Seeds):** Da viele Optimierungs- und Initialisierungsalgorithmen pseudozufällig arbeiten, müssen alle **Random Seeds zwingend explizit im Code fixiert** und dokumentiert werden.
+### 2. Das statische Modell & Konfigurationskontrolle ([Draft Glossar, §10.2])
+Die fundamentale Säule für den Einsatz in kritischen Prozessen ist das **statische Modell mit eingefrorenen Parametern** ([Draft Glossar: Static model]):
+* **Definition nach [Draft Glossar]:** Ein statisches Modell verändert seine Parameter (Gewichte) nach Abschluss des Qualifizierungs- und Freigabeprozesses im Produktivbetrieb nicht mehr. Für denselben Input liefert es deterministisch denselben Output ([Draft §1]).
+* **Konfigurationskontrolle ([Draft §10.2]):** Modellparameter, Hyperparameter, Vorverarbeitungsschritte und Umgebungsfaktoren müssen unter formaler Konfigurationskontrolle stehen.
+* **Archivierung von Artefakt & Inferenzumgebung ([Best Practice: ISPE GAMP AI Guide]; Konfidenz: Mittel):**
+  - In der modernen ML-Praxis (insb. bei Deep Learning auf GPU-Clustern) ist ein bitgenaues Neu-Trainieren von Grund auf über Jahre hinweg oft durch Fließkomma-Nichtdeterminismen erschwert.
+  - Die regulatorisch belastbarste Lösung besteht daher darin, das **fertig trainierte und qualifizierte Modell-Artefakt** (binäre Gewichtsdateien, Checkpoints mit kryptografischem Hash) zusammen mit der **vollständigen Inferenz-Laufzeitumgebung** (Container-Image, fixe Library-Versionen) revisionssicher zu archivieren ([Best Practice: ISPE GAMP AI Guide]).
+  - Ergänzend werden Code (Git-Commit-Hash), Daten-Snapshots und Random Seeds versioniert, um maximale Nachvollziehbarkeit sicherzustellen.
 
 > [!CAUTION]
-> **Praxisfall:** Ein Unternehmen konnte im Rahmen einer Reklamationsuntersuchung die Entscheidung eines Modells für eine bestimmte Charge nicht aufklären, da Software-Bibliotheken zwischenzeitlich aktualisiert worden waren und die Random Seeds nicht protokolliert wurden. Die Unfähigkeit, das Modell historisch nachzubauen, führte zu einer schweren behördlichen Mängelrüge (*Major Inspection Finding*).
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Unternehmen konnte im Rahmen einer Reklamationsuntersuchung die Entscheidung eines Modells für eine bestimmte Charge nicht aufklären, da Software-Bibliotheken zwischenzeitlich aktualisiert worden waren und weder das Modell-Artefakt noch die Umgebung fixiert waren. Die Unfähigkeit zur Rekonstruktion führte zu einer schweren behördlichen Mängelrüge (*Major Inspection Finding*).
 
-### 3. MLOps & Cloud-Plattformen als validierungspflichtige GxP-Infrastruktur (Vendor Oversight)
+### 3. MLOps & Cloud-Plattformen als validierungspflichtige GxP-Infrastruktur ([Draft §2.2, Annex 11])
 Data-Science-Teams nutzen heute standardmäßig Cloud- und MLOps-Plattformen wie MLflow, Weights & Biases, DVC, AWS SageMaker oder Azure ML.
 * **Regulatorische Konsequenz:** Werden diese Tools zur Entwicklung, Protokollierung oder Versionierung von Modellen genutzt, die pharmazeutische Entscheidungen beeinflussen, gelten sie als **Computerised Systems**.
-* Sie unterliegen damit vollumfänglich der Qualifizierungs- und Validierungspflicht nach **EU GMP Annex 11** (Zugriffskontrollen, Audit Trails, Datensicherheit, Desaster Recovery).
-* **Lieferantenüberwachung (Cloud & Third-Party Vendor Oversight):**
+* Sie unterliegen damit der Qualifizierungs- und Validierungspflicht nach **EU GMP Annex 11** (Zugriffskontrollen, Audit Trails, Datensicherheit, Disaster Recovery).
+* **Lieferantenüberwachung ([Draft §2.2]):**
   * Eine einfache SOC-2- oder ISO-27001-Zertifizierung des Cloud-Anbieters reicht für GxP **nicht** aus.
-  * Das pharmazeutische Unternehmen bleibt vollumfänglich verantwortlich (*Regulated User Accountability*). Es muss über Service Level Agreements (SLAs) und Quality Agreements vertraglich sicherstellen, dass Cloud-Updates nicht unangekündigt Pipeline-Abhängigkeiten oder Rechenkerne verändern (*Uncontrolled Environment Drift*).
+  * Der regulierte pharmazeutische Anwender behält stets die uneingeschränkte Verantwortung für Produktqualität und Datenintegrität ([Draft §2.2]). Über SLAs und Quality Agreements muss sichergestellt sein, dass Plattformänderungen nicht unkontrolliert ablaufen.
 
 ### 4. Hyperparameter-Tuning & Die goldene Validierungsregel
-Hyperparameter (z.B. Lernrate, Baumtiefe, Regularisierungsfaktoren, Epochenanzahl) steuern die mathematische Konvergenz des Modells:
-* **Change Control Status:** Die final ausgewählten Hyperparameter sind fester Bestandteil der formalen Modell-Spezifikation. Nachträgliches Ändern ohne formalen Change-Control-Prozess ist ein GMP-Verstoß.
-* **Die goldene Regel:** Hyperparameter dürfen **ausschließlich auf dem Validierungsdatensatz** optimiert werden – **niemals auf dem finalen Testdatensatz (Hold-out Test Set)**! Andernfalls „lernt das Modell die Prüfungsfragen der Abschlussprüfung“ (*Data Leakage*), was zu Scheinvalidierungen führt.
-* **Dokumentierte Suchmethodik:** Ob Grid Search, Random Search oder Bayesian Optimization: Der Entwickler muss die gewählten Suchintervalle und die Abbruchkriterien schriftlich begründen. „Ich habe diesen Wert genommen, weil er sich richtig anfühlte“ wird von Inspektoren sofort verworfen.
+Hyperparameter (z.B. Lernrate, Baumtiefe, Epochenanzahl) steuern die mathematische Konvergenz:
+* **Change Control Status:** Die final ausgewählten Hyperparameter sind Teil der Konfigurationskontrolle ([Draft §10.2]). Nachträgliches Ändern ohne formalen Change Control ist unzulässig ([Draft §10.1]).
+* **Die goldene Regel:** Hyperparameter dürfen **ausschließlich auf dem Validierungsdatensatz** optimiert werden – **niemals auf dem finalen Testdatensatz (Hold-out Test Set)**! Andernfalls entsteht *Data Leakage*, was zu Scheinvalidierungen führt.
+* **Dokumentierte Suchmethodik:** Die gewählten Suchintervalle und Abbruchkriterien müssen nachvollziehbar begründet werden.
 
-### 5. Modellkalibrierung & Model Cards
-* **Calibration vs. Accuracy:** Ein Modell kann zu 85% akkurat sein, aber bei Vorhersagen eine Konfidenz von 99,9% ausgeben. Diese **Überkonfidenz (Overconfidence)** ist im GMP-Umfeld lebensgefährlich, weil sie menschliche Prüfer dazu verleitet, fehlerhafte Vorhersagen ungeprüft durchzuwinken (*Automation Bias*). Modelle müssen daher kalibriert werden (z.B. via Platt Scaling oder Isotonic Regression).
-* **Model Cards als Goldstandard:** Zur Standardisierung der Dokumentation fordert die Best Practice den Einsatz von **Model Cards**. Dieses standardisierte Dokument fasst zusammen:
-  - *Intended Use* und autorisierte Einsatzgrenzen,
-  - Trainingsdaten-Zusammensetzung und Version,
+### 5. Modellkalibrierung & Model Cards ([Didaktik] / [ML-Praxis])
+* **Calibration vs. Accuracy:** Ein Modell kann zu 85% akkurat sein, aber bei Vorhersagen eine Konfidenz von 99,9% ausgeben. Diese **Überkonfidenz (Overconfidence)** verleitet Bediener zu unkritischem Akzeptieren (*Automation Bias*). Modelle sollten daher auf Verlässlichkeit ihrer Konfidenzscores kalibriert werden.
+* **Model Cards ([Didaktik] / [ML-Praxis]):** Zur strukturierten Dokumentation empfiehlt die ML-Praxis den Einsatz von **Model Cards** (analog zu einem technischen Datenblatt):
+  - *Intended Use* und autorisierte Einsatzgrenzen ([Draft §3.1]),
+  - Trainings- und Testdaten-Zusammensetzung und Version,
   - Performance- und Kalibrierungsmetriken,
   - Bekannte Limitierungen, systematische Schwächen und Out-of-Scope-Bedingungen.
 

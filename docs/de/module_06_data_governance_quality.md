@@ -44,37 +44,42 @@ Im klassischen Software-Engineering (Annex 11) diktiert der programmierte Code d
 * **Analogie:** Daten sind nicht bloß Treibstoff, sondern das *Substrat* – der aktive Wirkstoff (API) der KI.
 * **Konsequenz:** Ist das Substrat durch selektives Weglassen, unsaubere Transformationen oder Label-Fehler kontaminiert, ist der Output der KI unweigerlich toxisch (*Garbage In, Toxic Output Out*). Datenaufbereitung ist daher unter Annex 22 eine **hochgradig regulierte pharmazeutische Kerntätigkeit**.
 
-### 2. ALCOA+ für KI-Systeme (Die Annex-22-Evolution)
-Die klassischen Datenintegritätsprinzipien (Attributable, Legible, Contemporaneous, Original, Accurate) bleiben bestehen, werden aber für AI-Modelle um zwingende Dimensionen erweitert:
+### 2. ALCOA+ für Trainingsdaten ([Best Practice: ISPE GAMP / GxP-Praxis])
+*Hinweis zum Draft-Umfang: Der Draft EU GMP Annex 22 fokussiert primär auf Testdaten (§5.1–§5.6 und §6). Die Übertragung der ALCOA+-Kriterien auf vorgelagerte Trainingsdaten ist eine anerkannte Industrie-Best-Practice ([Best Practice]):*
 
-| ALCOA+ Attribut | Klassische CSV-Bedeutung | Spezifische Annex-22-Anforderung für KI |
+| ALCOA+ Attribut | Klassische CSV-Bedeutung | Spezifische AI-Bedeutung ([Best Practice]) |
 | :--- | :--- | :--- |
-| **Complete (Vollständig)** | Dokumente ohne fehlende Seiten | **Keine selektive Selektion:** Verwerfen von Prozessausreißern, fehlerhaften Batches oder Randwerten ohne formale Dokumentation und statistische Begründung ist strikt unzulässig. |
+| **Complete (Vollständig)** | Dokumente ohne fehlende Seiten | **Keine unbegründete Selektion:** Verwerfen von Prozessausreißern, fehlerhaften Batches oder Randwerten ohne formale Dokumentation und Begründung ist unzulässig ([Draft §5.2 analog für Testdaten]). |
 | **Consistent (Konsistent)** | Einheitliche Datums- & Namenskonventionen | **Metadaten-Harmonisierung:** Einheitliche Zeitstempel-Frequenzen, Messwertauflösungen und Einheiten über verschiedene Sensoren, Batches und Jahre hinweg. |
-| **Enduring (Dauerhaft)** | Revisionssichere Archivierung | **Lebenszyklus-Archivierung:** Der exakte Trainings- und Testkorpus muss über die gesamte Lebensdauer des Modells plus die Aufbewahrungsfrist der damit freigegebenen Arzneimittelchargen revisionssicher aufbewahrt werden. |
-| **Available (Verfügbar)** | Einsichtnahme bei Inspektionen | **Instant Retrieval trotz Datenvolumen:** Auch Multiterabyte-Trainingsdaten müssen für Inspektoren innerhalb realistischer Fristen auditierbar vorgelegt werden können. |
+| **Enduring (Dauerhaft)** | Revisionssichere Archivierung | **Lebenszyklus-Archivierung:** Entsprechend der Aufbewahrungsanforderung für Code und Dokumentation ([Draft §7.4]) müssen Datenkorpora über die Betriebslebensdauer des Systems plus produktbezogene Archivfristen aufbewahrt werden. |
+| **Available (Verfügbar)** | Einsichtnahme bei Inspektionen | **Auditierbare Verfügbarkeit:** Trainings- und Testdaten müssen für Inspektoren innerhalb angemessener Fristen vorlegbar und nachvollziehbar sein. |
 
-### 3. Data Lineage & Die 4 statistischen Biases
+### 3. Data Lineage & Die 4 statistischen Biases ([Didaktik])
 Wenn Auditoren nach der Herkunft der Trainingsdaten fragen, darf keine Rekonstruktionslücke existieren. 
 
 > [!CAUTION]
-> **Praxisfall:** Ein Pharmahersteller nutzte historische Daten aus 2 Jahren für ein KI-Chargenbewertungssystem. Bei einer behördlichen Inspektion konnte die exakte Zuordnung einzelner Messpunkte zu den Ursprungs-Batches und Vorverarbeitungsschritten nicht nachgewiesen werden. Die Folge: Schwerwiegende Mängelrüge (*Major Finding*), temporäre Aussetzung des Systems und 6 Monate aufwendige Sanierungsarbeiten (*Remediation*).
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Pharmahersteller nutzte historische Daten aus 2 Jahren für ein KI-Chargenbewertungssystem. Bei einer behördlichen Inspektion konnte die exakte Zuordnung einzelner Messpunkte zu den Ursprungs-Batches und Vorverarbeitungsschritten nicht nachgewiesen werden. Die Folge: Schwerwiegende Mängelrüge (*Major Finding*), temporäre Aussetzung des Systems und 6 Monate aufwendige Sanierungsarbeiten (*Remediation*).
 
-Eine lückenlose **Data Lineage** (z.B. implementiert über Tools wie Apache Atlas oder DataHub) ist das einzige Mittel, um die **vier großen statistischen Biases** aufzudecken:
-1. **Sampling Bias:** Der Datensatz spiegelt nicht die tatsächliche Prozessvarianz der Routineproduktion wider (z.B. nur Gut-Chargen im Training).
+Eine nachvollziehbare **Data Lineage** ist der Schlüssel, um statistische Biases zu identifizieren:
+1. **Sampling Bias:** Der Datensatz spiegelt nicht die tatsächliche Prozessvarianz der Routineproduktion wider (z.B. nur Gut-Chargen im Training; vgl. Untergruppen nach [Draft §3.2]).
 2. **Time Bias:** Daten wurden während atypischer Zeiträume erhoben (z.B. kurz nach einem Rohstofflieferanten-Wechsel, saisonale Schwankungen oder Wartungszyklen).
-3. **Site Bias:** Übergewichtung von Daten aus modernen Leuchtturm-Werken. Kleinere Produktionsstätten mit älteren Anlagen werden überfahren und produzieren im Feld Fehlalarme oder unbemerkte Qualitätsmängel.
-4. **Operator Bias:** Daten stammen ausschließlich von hochqualifizierten Senior-Operatoren. Wenn Schicht-Neulinge an der Linie arbeiten, versagt das Modell.
+3. **Site Bias:** Übergewichtung von Daten aus modernen Werken; ältere Anlagen mit höherem Rauschen werden nicht abgebildet.
+4. **Operator Bias:** Daten stammen nur von wenigen Bedienern; andere Schichtabläufe führen zu Modellunsicherheiten.
 
-### 4. Testdaten-Unabhängigkeit & Data Leakage
+### 4. Synthetische Daten & Labels ([Draft §5.6])
+- **Regulatorische Vorgabe ([Draft §5.6]):** Die Erzeugung synthetischer Daten oder synthetischer Labels (z. B. durch generative KI) zum Trainieren, Testen oder Evaluieren von KI-Modellen **wird nicht empfohlen** (*„is not recommended“*).
+- **Strikte Begründungspflicht ([Draft §5.6]):** Jede Verwendung synthetischer Daten muss vollumfänglich und belastbar begründet werden (*„Any use of synthetic data should be fully justified“*).
+- **GxP-Auswirkung:** Dies gilt für Trainingsdaten ebenso wie für Testdatensätze und automatisierte Ground-Truth-Labels. In der Validierung muss vorrangig auf reale, historisch oder experimentell belegte Produktionsdaten zurückgegriffen werden.
+
+### 5. Testdaten-Unabhängigkeit & Data Leakage
 Ein zentraler Validierungsfehler in Data-Science-Teams ist der unbedarfte **naive Random-Split (z.B. zufälliges 80/20-Verhältnis)**.
 
 * **Die Falle:** In pharmazeutischen Datensätzen hängen Datenpunkte stark zusammen (z.B. Zeitreihen aus derselben Charge oder NLP-Abweichungsberichte zu demselben Vorfall).
 * **Data Leakage:** Werden Messungen derselben Charge zufällig auf Trainings- und Testdaten verteilt, „kennt“ das Modell die Eigenschaften der Charge bereits. Die Validierungsmetriken (Precision, Recall) sind künstlich überhöht (*Scheinvalidierung*).
 * **Annex-22-Vorgabe:** Strikte **Hold-Out-Isolation**. Testdatensätze müssen auf Batch-Ebene oder Standort-Ebene stratifiziert werden und dürfen vom Modell vor der finalen OQ/PQ-Validierung niemals berührt worden sein (*Unseen Data*).
-* **Label-Integrität:** Historische Batch-Freigaben oder manuelle Sichtprüfungen enthalten oft menschliche Fehlerraten (z.B. 15% Uneinigkeit bei Grenzfällen). Die KI lernt diese Inkonsistenz ungeprüft als Ground Truth. Labels müssen daher quantifiziert und überprüft werden (z.B. via *Cohen’s Kappa* / Inter-Rater Reliability).
+* **Label-Integrität:** Historische Batch-Freigaben oder manuelle Sichtprüfungen enthalten oft menschliche Fehlerraten (z.B. 15% Uneinigkeit bei Grenzfällen). Die KI lernt diese Inkonsistenz ungeprüft als Ground Truth. Labels müssen daher quantifiziert und überprüft werden (z.B. via *Cohen’s Kappa* / Inter-Rater Reliability, [Best Practice]).
 
-### 5. Operational Data Governance & Feedback Loops
+### 6. Operational Data Governance & Feedback Loops
 Der Datenintegritätsfokus endet nicht mit dem Go-Live:
 * **GMP Record Status:** Jeder Inferenzaufruf in der Produktion (Inputdaten, errechnete Vorhersage, Konfidenzscore, Zeitstempel, Operator-ID) ist ein **offizieller GMP-Datensatz** nach Annex 11 / Annex 22.
 * **Gefahr von Model Collapse (Feedback Loops):** Wenn Modellvorhersagen später unmarkiert in historische Datenbanken zurückfließen und für das nächste Retraining verwendet werden, trainiert die KI auf ihren eigenen Hypothesen. Die statistische Varianz bricht zusammen, Fehler verstärken sich selbstverstärkend (*Echo-Chamber-Effekt*).

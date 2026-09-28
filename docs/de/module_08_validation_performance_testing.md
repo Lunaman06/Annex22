@@ -50,23 +50,24 @@ KI-Systeme verarbeiten jedoch multivariat und stochastisch:
 * Die Frage lautet nicht mehr nur: *„Macht das System genau das, was programmiert wurde?“*, sondern: **„Verhält sich das Modell über alle repräsentativen und extremen Betriebszustände hinweg statistisch stabil und zuverlässig?“**
 * **Lebenszyklus-Pflicht:** Validierung unter Annex 22 ist kein einmaliges Zertifikat vor dem Go-Live, sondern ein Zustand, der kontinuierlich gegen Leistungsabfall verteidigt werden muss. Jede Anpassung von Datenquellen, Vorverarbeitungsschritten oder Parametern triggert eine Revalidierungspflicht.
 
-### 2. Das Validierungs-Metrik-Quartett (The Metric Quad)
-Ein Inspektionsbericht, der lediglich eine globale Trefferquote (*Accuracy = 95%*) ausweist, gilt im GxP-Umfeld als **unzulänglich und nicht audit-fest**. Bei unbalancierten pharmazeutischen Daten (z.B. 99,8% Gut-Chargen und 0,2% Defekt-Chargen) hätte ein Modell, das stur immer „Gut“ rät, eine Genauigkeit von 99,8% – wäre aber für die Patientensicherheit fatal.
+### 2. Das Validierungs-Metrik-Quartett (The Metric Quad) ([Didaktik])
+Ein Inspektionsbericht, der lediglich eine globale Trefferquote (*Accuracy = 95%*) ausweist, gilt im GxP-Umfeld als **unzulänglich**. Bei unbalancierten pharmazeutischen Daten (z.B. 99,8% Gut-Chargen und 0,2% Defekt-Chargen) hätte ein Modell, das stur immer „Gut“ rät, eine Trefferquote von 99,8% – wäre aber für die Patientensicherheit fatal.
 
-Annex 22 verlangt daher vier komplementäre Dimensionen:
-1. **F1-Score / Balanced Accuracy:** Harmonisches Mittel aus Precision und Recall, das Klassen-Ungleichgewichte mathematisch neutralisiert.
+Das didaktische Metrik-Quartett ([Didaktik]) empfiehlt vier komplementäre Dimensionen:
+1. **F1-Score / Balanced Accuracy:** Harmonisches Mittel aus Precision und Recall, das Klassen-Ungleichgewichte neutralisiert.
 2. **Recall (Sensitivität) vs. Precision:**
-   - **Asymmetrische Fehlerkosten:** Im Pharmabereich ist ein *False Negative* (eine kontaminierte oder defekte Charge wird als „Gut“ freigegeben) potenziell lebensbedrohlich. Ein *False Positive* (eine gute Charge wird fälschlich als verdächtig markiert) kostet lediglich zusätzliche manuelle Laborprüfzeit.
-   - **Pharma-Regel:** Schwellenwerte (*Decision Thresholds*) werden primär auf **maximalen Recall** ausgelegt, um Sicherheitsvorfälle garantiert abzufangen.
-3. **Modell-Kalibrierung (Expected Calibration Error - ECE):**
+   - **Asymmetrische Fehlerkosten:** Im Pharmabereich ist ein *False Negative* (eine kontaminierte Charge wird fälschlich als „Gut“ freigegeben) potenziell lebensbedrohlich. Ein *False Positive* kostet manuelle Nachprüfzeit.
+   - Schwellenwerte (*Decision Thresholds*) werden primär auf **hohen Recall** ausgelegt, um Sicherheitsvorfälle zuverlässig abzufangen.
+3. **Modell-Kalibrierung (Expected Calibration Error - ECE, [Best Practice]):**
    - Gibt an, ob der ausgegebene Konfidenzscore der tatsächlichen Eintrittswahrscheinlichkeit entspricht.
-   - *Gefahr:* Ein unkalibriertes Modell, das bei Fehlentscheidungen 99% Konfidenz vorgaukelt, wiegt das Bedienpersonal in falscher Sicherheit und provoziert grobe Fehlfreigaben (*Automation Bias*).
+   - Ein unkalibriertes Modell, das bei Fehlentscheidungen 99% Konfidenz ausgibt, wiegt Personal in falscher Sicherheit (*Automation Bias*).
 4. **Robustheit (Robustness):**
-   - Überprüfung, wie das Modell reagiert, wenn Sensorwerte verrauscht sind, Messlücken auftreten oder Umgebungsbedingungen schwanken.
+   - Überprüfung des Modellverhaltens bei Sensorrauschen, Messwertlücken und Signalschwankungen.
 
-### 3. Einfrieren der Akzeptanzkriterien (Pre-Sealing Mandate)
-* **Kein Verschieben der Torpfosten:** Alle quantitativen Akzeptanzkriterien (z.B. *Recall $\ge 99,5\%$, Precision $\ge 90\%$, ECE $\le 0,05$*) müssen **vor der Durchführung der Tests auf dem Testdatensatz formal im Validierungsplan genehmigt und versiegelt werden**.
-* Wer Kriterien nachträglich lockert, nachdem die Testdaten ausgewertet wurden, begeht eine schwerwiegende GMP-Verletzung.
+### 3. Akzeptanzkriterien & Kein Rückschritt gegenüber dem bisherigen Prozess ([Draft §4.2, §4.3])
+* **Vorabgenehmigung durch Prozess-SME ([Draft §4.2]):** Alle Akzeptanzkriterien müssen **vor Beginn der Akzeptanzprüfung** vordefiniert und vom fachlich zuständigen Domänenexperten (*Process SME*) formell genehmigt sein. Ein nachträgliches Anpassen von Kriterien nach Sichtung der Testergebnisse ist unzulässig.
+* **Kein Performance-Rückschritt ([Draft §4.3]):** Die Leistungsfähigkeit des KI-Systems darf gegenüber dem bisherigen, manuellen oder automatisierten Prozess, den es ersetzt, **keinerlei Rückschritt darstellen** (*„should result in no decrease in performance compared to the process it replaces“*, [Draft §4.3]).
+* **Kompensation bei Fehlern ([Draft §4.3]):** Führt das KI-System in bestimmten Bereichen zu einer höheren Fehlerrate als der bisherige Prozess, muss dies durch überlegene Leistung in anderen Bereichen ausgeglichen werden, und die Gesamtleistung darf nicht sinken.
 
 ### 4. Personelle Unabhängigkeit beim Testen (Staff Independence & Blind Testing)
 Ein entscheidender Punkt im **PIC/S- und Annex-22-Draft** ist die organisatorische Trennung:

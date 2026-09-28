@@ -37,9 +37,9 @@ graph LR
 
     subgraph BlackBox["⚫ Black-Box-Modelle"]
         direction TB
-        B1["Deep Neural Networks, LLMs"]
+        B1["Deep Neural Networks, komplexe Ensembles"]
         B2["Opak: SHAP, LIME, Attention Maps"]
-        B3["Vervielfachter Validierungsaufwand (4x)"]
+        B3["Deutlich erhöhter Qualifizierungsaufwand"]
     end
 
     WhiteBox -->|Steigende Modellkomplexität & Erklärbarkeitsanforderung| GrayBox
@@ -54,19 +54,19 @@ graph LR
 
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
-### 1. Das Proportionalitätsgebot: Explainability proportionate to Criticality
-Unter Annex 22 gilt: **Je höher das Risiko für Produktqualität und Patientensicherheit, desto transparenter und nachvollziehbarer muss die Entscheidung sein.**
-* Wenn eine KI eine Arzneimittelcharge ablehnt oder freigibt, haben Behörden und die Qualified Person (QP) das gesetzliche Recht, die Kausalität zu verstehen.
-* Die Erklärung muss in der **Fachsprache der Domänenexperten** (Qualitätssicherung, Laborantin, QP) formuliert sein – statistische Rohvektoren oder Tensor-Matrizen genügen den gesetzlichen Vorgaben nicht.
+### 1. Erklärbarkeit beim Testen & Plausibilitäts-Review ([Draft §8.1, §8.2])
+Der Draft EU GMP Annex 22 verankert Erklärbarkeit primär als **Pflichtdisziplin im Rahmen der Modellprüfung**:
+* **Methoden zur Erklärbarkeit beim Testen ([Draft §8.1]):** Ist ein Modell nicht inhärent verständlich (*not inherently explainable*), müssen Methoden zur Erklärbarkeit (z. B. Feature-Attributionsmethoden wie SHAP/LIME, Ersatzmodelle oder lokale Erklärungen) beim Testen herangezogen werden, um den Entscheidungsprozess des Modells nachvollziehbar zu machen.
+* **Review der Features bei der Testabnahme ([Draft §8.2]):** Die formale Abnahme der Testergebnisse muss zwingend eine Überprüfung der vom Modell genutzten Merkmale (*Features*) umfassen. Es ist nachzuweisen, dass diese biologisch, chemisch oder physikalisch plausibel und für den *Intended Use* relevant sind.
+* **Erklärungen im Routinebetrieb ([Best Practice: ML-Praxis]):** Eine dauerhafte Anzeige von SHAP-Werten oder Heatmaps bei jeder einzelnen Produktionsinferenz ist eine wertvolle Industrie-Best-Practice ([Best Practice]), im Draft selbst jedoch auf die Testphase und Freigabeprüfung fokussiert.
 
 ### 2. Begriffliche Abgrenzung: Interpretierbarkeit vs. Erklärbarkeit
-* **Interpretability (Global):** Die inhärente Verständlichkeit der gesamten mathematischen Modellstruktur (z.B. ein Entscheidungsbaum mit 5 klaren Verzweigungsregeln).
-* **Explainability (Lokal / Post-hoc):** Die Fähigkeit, für einen **konkreten Einzelfall** (z.B. Abweichungsmeldung DEV-2026-081) exakt darzulegen, welche Eingangsparameter den Ausschlag für genau diese Vorhersage gegeben haben.
+* **Interpretability (Global):** Die inhärente Verständlichkeit der gesamten mathematischen Modellstruktur (z.B. ein Entscheidungsbaum mit wenigen Verzweigungsregeln oder lineare Modelle).
+* **Explainability (Lokal / Post-hoc):** Die Fähigkeit, für einen konkreten Fall (z. B. eine Anomalie oder Fehlchargen-Meldung) darzulegen, welche Eingangsmerkmale ausschlaggebend für die Vorhersage waren.
 
-### 3. Das Modell-Spektrum und der regulatorische Anreiz
-Annex 22 verbietet komplexe Deep-Learning- oder Transformer-Modelle nicht, setzt jedoch massive ökonomische und regulatorische Hürden:
-* **White-Box (Inhärent transparent):** Für hochkritische Anwendungen (z.B. In-Process-Kontrollen) ist ein White-Box-Modell (z.B. logistische Regression, flache Entscheidungsbäume) fast immer die überlegene Wahl, da die mathematische Herleitung direkt im Audit vorgelegt werden kann.
-* **Black-Box-Penalty:** Der Einsatz von undurchsichtigen neuronalen Netzen kann die Validierungsdauer und -kosten **vervierfachen**, da nicht nur das Modell selbst, sondern auch die Erklärbarkeits-Pipeline vollumfänglich validiert werden muss.
+### 3. Modellkomplexität & regulatorische Konsequenzen
+* **Inhärent erklärbare Modelle ([Draft §8.1]):** Wo einfache, transparente Modelle (z. B. logistische Regression oder flache Entscheidungsbäume) dieselbe Performance wie komplexe Black-Box-Modelle erreichen, vereinfachen sie den Qualifizierungs- und Audit-Aufwand erheblich ([Best Practice: ML-Praxis]).
+* **Black-Box-Qualifizierungsaufwand:** Der Einsatz tiefer neuronaler Netze erfordert gemäß [Draft §8.1, §8.2] zusätzliche Nachweise zur Plausibilität der Merkmale und den Einsatz valider Post-hoc-Verfahren.
 
 ### 4. Post-hoc-Erklärungsmethoden & Ihre Fallstricke
 Wenn komplexe Modelle unumgänglich sind, greift Annex 22 auf Post-hoc-Methoden zurück:
