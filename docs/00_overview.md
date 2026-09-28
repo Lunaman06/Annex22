@@ -65,7 +65,7 @@ flowchart TD
     end
 
     subgraph S3["Phase III: Validierung & Erklärbarkeit"]
-        M08["Modul 08: Validation & Performance Testing<br/><i>(Adversarial Testing, Metriken & GAMP-Mapping)</i>"]
+        M08["Modul 08: Validation & Performance Testing<br/><i>(Adversarial Testing, Metriken & Staff Independence)</i>"]
         M09["Modul 09: Explainability & Transparency<br/><i>(XAI, Vermeidung von Black-Boxes & Audit-Fähigkeit)</i>"]
         M08 --> M09
     end
@@ -77,16 +77,25 @@ flowchart TD
         M10 --> M11 --> M12
     end
 
+    subgraph SA["📖 Spezial-Leitfäden (Industrie-Best-Practices)"]
+        APP_GEN["🤖 Spezial-Leitfaden: GenAI, LLMs & RAG<br/><i>(RAG Triad, Guardrails & Drafting Assistant)</i>"]
+        APP_GAMP["📘 ISPE GAMP® AI Guide (Juli 2025)<br/><i>(Duales V-Modell, Software-Kategorien & Living Validation)</i>"]
+    end
+
     S0 ==> S1
     S1 ==> S2
     S2 ==> S3
     S3 ==> S4
+
+    M03 -. Sonderstatus .-> APP_GEN
+    S3 -. Methodik & QRM .-> APP_GAMP
 
     style S0 fill:#f8fafc,stroke:#64748b,stroke-width:2px
     style S1 fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style S2 fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
     style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:2px
     style S4 fill:#fff7ed,stroke:#f97316,stroke-width:2px
+    style SA fill:#fdf4ff,stroke:#c026d3,stroke-width:2px
 ```
 
 ---
@@ -114,12 +123,12 @@ flowchart TD
 - **[Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md)**  
   *ALCOA+ für Trainingsdaten, Data Lineage und strikte Trennung von Testdatensätzen (Split-Integrität).*
 - **[Modul 07: AI Model Development and Training](module_07_model_development_training.md)**  
-  *Algorithmenauswahl, Feature Engineering und unveränderliche Modellversionierung (Frozen Weights).*
+  *Algorithmenauswahl, Feature Engineering, Cloud-Oversight und unveränderliche Modellversionierung (Frozen Weights).*
 
 #### 🧪 Phase III: Validierung & Erklärbarkeit
 *Wie beweisen wir Robustheit gegen unerwartete Eingaben und machen Entscheidungen transparent?*
 - **[Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md)**  
-  *Adversarial Testing, Performance-Metriken (Precision, Recall, ROC-AUC) und GAMP-Mapping.*
+  *Adversarial Testing, Performance-Metriken (Metric Quad), personelle Unabhängigkeit (Staff Independence) und GAMP-Mapping.*
 - **[Modul 09: Explainability and Transparency](module_09_explainability_transparency.md)**  
   *Explainable AI (XAI), Vermeidung von Black-Boxes und inspektionsfeste Transparenz für Auditoren.*
 
@@ -131,6 +140,13 @@ flowchart TD
   *Früherkennung von Data- & Concept-Drift, Alarmschwellen und kontrolliertes Retraining via Change Control.*
 - **[Modul 12: Audit and Inspection Readiness](module_12_audit_inspection_readiness.md)**  
   *Inspektionssimulationen, Verteidigung vor Behörden (EMA/FDA) und typische Rote Flaggen.*
+
+#### 📖 Spezial-Dossiers & Etablierte Industrie-Standards (Anhänge)
+*Vertiefende Best Practices für moderne Automatisierungen und Lebenszyklus-Methodik:*
+- 🤖 **[Leitfaden: Generative KI (GenAI), LLMs & RAG im GxP-Umfeld](appendix_genai_rag_gxp.md)**  
+  *Sonderstatus unter Annex 22, RAG-Architektur, ALCOA+-Zitierpflicht, das Metrik-Trio der „RAG Triad“ (Groundedness, Context Relevance, Answer Relevance), Prompt Governance als Code und deterministische Guardrails.*
+- 📘 **[Leitfaden: ISPE GAMP® AI Guide & Etablierte Industrie-Best-Practices](appendix_ispe_gamp_ai_best_practices.md)**  
+  *Das duale Lebenszyklus-Modell (Software- vs. Daten-Zyklus), GAMP-Kategorisierung für KI (Cat 1 bis Cat 5), Quality Risk Management nach ICH Q9 (R1), Cloud/Supplier Oversight und Living Validation.*
 
 ---
 
