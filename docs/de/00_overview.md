@@ -43,6 +43,12 @@ graph LR
 2. **Geltungsbereich: Statische Modelle und deterministischer Output ([Draft §1]):** Der Draft gilt ausschließlich für statische Modelle und Modelle mit deterministischem Output in kritischen GMP-Prozessen. Dynamische Modelle (kontinuierliches Online-Retraining) und Modelle mit probabilistischem Output werden vom Draft nicht abgedeckt und sollen in kritischen GMP-Anwendungen nicht verwendet werden (*„should not be used“*).
 3. **Gesamtverantwortung & Human Oversight ([Draft §2.2, §3.3, §10.5]):** Der regulierte pharmazeutische Unternehmer behält stets die uneingeschränkte Verantwortung für Produktqualität, Patientensicherheit und Datenintegrität – auch beim Einsatz externer Softwarelieferanten ([Draft §2.2]). Menschliche Aufsicht ist verbindlich geregelt, insbesondere wenn Testaufwände durch Modellassistenz reduziert wurden.
 
+### 🏷️ Kennzeichnungskonvention im Projekt (Attribution & Evidenzstufen)
+Zur eindeutigen Trennung zwischen behördlichen Vorgaben und Industriepraxis gilt in allen Modulen:
+* **`[Draft §X.Y]`**: Konkrete regulatorische Anforderung oder Aussage aus dem offiziellen Konsultationsentwurf EU GMP Annex 22 (Juli 2025) mit exakter Fundstelle.
+* **`[Best Practice: Quelle]`**: Anerkannte Methoden und Industriestandards mit benannter Quelle (z. B. `[Best Practice: ISPE GAMP AI Guide]`, `[Best Practice: ICH Q9 (R1)]` oder `[Best Practice: ML-Praxis]`).
+* **`[Didaktik]`**: Didaktische Modelle, Strukturierungshilfen, Analogien (z. B. „Zaun-Metapher“) und illustrative Fallbeispiele dieses Lernprojekts.
+
 ---
 
 ## 2. Gesamtprozess-Landkarte & Modul-Wegweiser

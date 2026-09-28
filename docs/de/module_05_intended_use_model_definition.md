@@ -49,44 +49,40 @@ graph TD
 
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
-### 1. Das vertragliche Herzstück (*The Contractual Heart*)
-- **Kein Marketingtext:** Der *Intended Use* ist kein unverbindliches Projektdokument, sondern eine **rechtlich bindende regulatorische Verpflichtung**.
-- **Die Metapher des Zauns:** Der *Intended Use* bildet einen eng gesteckten Zaun.
-  - *Innerhalb des Zauns:* Validierter, sicherer, behördlich autorisierter Betriebsbereich.
-  - *Außerhalb des Zauns:* Nicht validiertes Niemandsland, in dem das Modell keinesfalls Entscheidungen treffen darf.
-- **Konsequenz für das Audit:** Was ein Inspektor als erstes sehen will, ist diese Spezifikation. Jede spätere Validierungsmetrik und Teststrategie hängt direkt davon ab.
+### 1. Das regulatorische Herzstück: Intended Use & SME-Verantwortung ([Draft §3.1])
+- **Regulatorische Vorgabe ([Draft §3.1]):** Der Verwendungszweck (*Intended Use*) des KI-Systems muss klar definiert und formal dokumentiert sein.
+- **Aktive Einbindung von Prozess-SMEs ([Draft §3.1]):** Fachlich zuständige Prozess- und Domänenexperten (*Process Subject Matter Experts - SMEs*) müssen aktiv in die Definition des Intended Use eingebunden werden. Die Festlegung darf nicht isoliert der IT oder Data Science überlassen werden.
+- **Die Metapher des Zauns ([Didaktik]):** Der *Intended Use* bildet einen eng gesteckten Zaun:
+  - *Innerhalb des Zauns:* Qualifizierter, sicherer, behördlich autorisierter Betriebsbereich.
+  - *Außerhalb des Zauns:* Nicht qualifiziertes Niemandsland, in dem das Modell keinesfalls Entscheidungen treffen darf.
+- **Konsequenz für das Audit:** Der *Intended Use* ist das allererste Prüfdokument im Audit; alle nachfolgenden Akzeptanzkriterien ([Draft §4.2]) leiten sich direkt daraus ab.
 
-### 2. Die Anatomie einer wasserdichten *Intended Use Specification*
-Eine vage Sprache ist der größte Feind bei Audits. Eine vollständige Spezifikation nach Annex 22 muss zwingend folgende 6 Elemente enthalten:
+### 2. Die Anatomie einer vollständigen *Intended Use Specification*
+Eine präzise Spezifikation nach dem Draft Annex 22 umfasst folgende Kernbestandteile:
 
-1. **Decision Scope (Entscheidungsumfang):** Welche exakte Entscheidung oder Empfehlung darf die KI aussprechen (z.B. Einstufung einer Abweichung in *Minor* vs. *Major*)?
-2. **Operational Context (Betriebskontext):** Genaue Zuordnung zu Produktionslinie, Anlagennummer, Produktfamilie und Darreichungsform.
-3. **Input Data Sources:** Exakte Definition aller Sensoren, Datenformate, Auflösungen und Schnittstellen, die das System speisen.
-4. **Output & Downstream Use:** Wohin fließt die Ausgabe und wer verarbeitet sie weiter?
-5. **Quantitative Performance Expectations:** Harte, messbare Zielwerte für Genauigkeit, Sensitivität, Spezifität (*Precision / Recall*).
-6. **Out-of-Scope Conditions (Ausschlusskriterien):** Präzise Definition jener Bedingungen, bei denen die KI **sofort stoppen und die Entscheidung verweigern muss**.
-
-> **Praxisbeispiel für Out-of-Scope-Grenzen:**
-> - Eine Abweichungs-KI darf Routine-Abweichungen triagieren, schließt aber personelle Sicherheitsvorfälle (*Safety Events*) oder neuartige Erstauftretungen (*First-of-Kind Issues*) kategorisch aus. Taucht ein solches Ereignis auf, verweigert die KI die Klassifikation und schaltet auf manuelle Bearbeitung um.
+1. **Entscheidungsumfang & Rolle des Bedieners ([Draft §3.1, §3.3]):** Welche Entscheidung unterstützt oder trifft die KI? Liefert das System lediglich Input zu einer menschlichen Entscheidung und wurde der Testaufwand reduziert, gehört die genaue Rolle und Verantwortung des Bedieners zwingend in den Intended Use ([Draft §3.3]).
+2. **Relevante Subgruppen & Populationen ([Draft §3.2]):** Relevante Teilgruppen von Daten, Produkten, Packmitteln oder Betriebsbedingungen, für die das System vorgesehen ist, müssen explizit identifiziert und beschrieben sein.
+3. **Betriebskontext & Datenquellen:** Genaue Zuordnung zu Produktionslinien, Messstellen, Sensoren und Datenformaten.
+4. **Output & Downstream Use:** Wohin fließen Vorhersagen, Alarme oder Klassifikationen und wie werden sie im QMS verarbeitet?
+5. **Akzeptanzkriterien vor Testbeginn ([Draft §4.2]):** Vorab durch Prozess-SMEs genehmigte Zielwerte für die Modellleistung.
+6. **Out-of-Scope Conditions ([Didaktik]):** Eindeutige Kriterien, bei denen das System den Betrieb verweigern und an qualifiziertes Personal übergeben muss (*Safe State*).
 
 ### 3. Die technische Modell-Definition (*Model Definition*)
-Während der *Intended Use* den operativen Rahmen definiert, legt die *Model Definition* das exakte technische Artefakt fest (Kernaufgabe der IT / Data Science):
-- **Algorithmenklasse:** Welcher Typ wird eingesetzt (z.B. Random Forest, CNN, Gradient Boosting)?
-- **Data Lineage:** Lückenlose Rückverfolgbarkeit aller Trainings-, Validierungs- und Testdaten (ALCOA+).
-- **Hyperparameter-Lock:** Feste Fixierung aller Trainings- und Modellparameter (*Frozen Weights*).
-- **Eindeutige Modellversion:** Eine unveränderliche (*immutable*) Versionskennung (z.B. Git-Commit-Hash + Model Registry ID).
-  - *Audit-Anforderung:* Ein Betrieb muss in der Lage sein, eine vor drei Jahren getroffene Chargenentscheidung mit genau diesem damaligen Modellzustand exakt zu reproduzieren!
+Während der *Intended Use* den fachlichen Rahmen steckt, definiert die technische Modell-Definition das kontrollierte Artefakt:
+- **Algorithmenklasse:** Angewandte statistische oder ML-Methoden.
+- **Data Lineage:** Nachvollziehbarkeit aller Trainings- und Testkorpora.
+- **Statisches Modell ([Draft Glossar]):** Eingefrorene Modellgewichte (*Frozen Weights*) nach Freigabe.
+- **Konfigurationskontrolle ([Draft §10.2]):** Feste Versionierung aller Parameter, Hyperparameter und Grenzwerte.
 
 ### 4. Reale Katastrophenszenarien: Die Gefahr von *Scope Creep*
-- **Der Fall der Stabilitätsfotos:** Ein Labor validierte ein KI-Bildanalysesystem für Stabilitätsprüfungen an einer spezifischen Blisterart. Mit der Zeit nutzten Labormitarbeiter die KI „auf gut Glück“ auch für andere Packmitteltypen, weil es ja augenscheinlich funktionierte (*Scope Creep*).
-  - *Ergebnis bei Inspektion:* Schwerer Mangel (*Major Finding*), Stilllegung des Systems und Zwang zur Neubewertung aller historischen Studien!
-- **Wiederanlauf nach Stromausfall:** Eine Predictive-Maintenance-KI versagte nach einem Werksstillstand am Wochenende, weil der Anfahrprozess nicht im *Intended Use* definiert und validiert war $\rightarrow$ Ausfall kritischer Sonden.
-- **Multi-Site-Diskrepanz:** Gleiche Software an zwei Standorten mit unterschiedlichen betrieblichen Einsatzgrenzen führte zu systemischen Abweichungen im Qualitätsnetzwerk.
+
+> [!CAUTION]
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Labor qualifizierte ein KI-Bildanalysesystem für Stabilitätsprüfungen an einer spezifischen Blisterart. Mit der Zeit nutzten Labormitarbeiter die KI auch für andere Packmitteltypen, weil es augenscheinlich funktionierte (*Scope Creep*). Ergebnis bei Inspektion: Schwerwiegender Mangel (*Major Deficiency*), Stilllegung des Systems und Zwang zur retrospektiven Neubewertung aller betroffenen Studien.
 
 ### 5. Die Inspektorenperspektive
-- **Vage Formulierungen als Einladung zum Graben:** Phrasen wie *„unterstützt Qualitätsentscheidungen“* oder *„optimiert den Prozess“* signalisieren dem Inspektor sofort mangelnde Beherrschung.
-- **Die Schere zwischen Papier und Realität:** Inspektoren suchen gezielt nach der Lücke zwischen dem, was im Dokument steht, und dem, was Bediener an der Linie tatsächlich tun.
-- **Sicherheitsanker:** Ein technisch implementierter Algorithmus zur Erkennung von Grenzüberschreitungen (*Out-of-Distribution Detection*), der unzulässige Eingaben hart blockiert, ist der beste Beweis für Reife.
+- **Vage Formulierungen vermeiden:** Floskeln wie *„unterstützt Qualitätsentscheidungen“* laden Inspektoren zum tieferen Nachbohren ein.
+- **Soll-Ist-Abgleich an der Linie:** Inspektoren prüfen, ob die praktische Bedienung an der Linie exakt den Vorgaben des genehmigten Intended Use entspricht.
+- **Schutz vor Bereichsüberschreitung:** Technisch implementierte Sperren gegen unzulässige Eingaben (*Out-of-Distribution Detection*, [Best Practice: ML-Praxis]) belegen gelebte Risikobeherrschung.
 
 ---
 
