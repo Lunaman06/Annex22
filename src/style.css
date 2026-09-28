@@ -1901,3 +1901,303 @@ html[data-theme="light"] .markdown-body strong {
   line-height: 1.45;
 }
 
+/* ==========================================================================
+   22Annex.ai Dual-Mode Toggle & Chat Co-Auditor Styles
+   ========================================================================== */
+.sim-mode-toggle-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+}
+
+.sim-mode-toggle-group {
+  display: flex;
+  gap: 0.4rem;
+  background: var(--bg-surface-elevated);
+  padding: 0.3rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+}
+
+.sim-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.sim-mode-btn:hover {
+  color: var(--text-main);
+}
+
+.sim-mode-btn.active {
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 0 12px var(--brand-primary-glow);
+}
+
+.sim-mode-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Chat Layout */
+.sim-chat-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .sim-chat-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sim-chat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+}
+
+.sim-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1rem;
+}
+
+.sim-chat-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--brand-emerald);
+}
+
+.sim-chat-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-emerald);
+  box-shadow: 0 0 8px var(--brand-emerald);
+}
+
+.sim-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 0.5rem;
+}
+
+.sim-chat-msg {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 90%;
+}
+
+.sim-chat-msg.auditor {
+  align-self: flex-start;
+}
+
+.sim-chat-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.sim-chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.sim-chat-msg.auditor .sim-chat-avatar {
+  background: var(--brand-primary-glow);
+  color: var(--brand-cyan);
+  border: 1px solid var(--brand-cyan);
+}
+
+.sim-chat-msg.user .sim-chat-avatar {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+.sim-chat-bubble {
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.sim-chat-msg.auditor .sim-chat-bubble {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.sim-chat-msg.user .sim-chat-bubble {
+  background: var(--brand-primary);
+  color: #fff;
+  border-top-right-radius: 2px;
+}
+
+.sim-chat-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 0 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.5rem;
+}
+
+.sim-chip-btn {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.775rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.sim-chip-btn:hover {
+  color: var(--brand-cyan);
+  border-color: var(--brand-cyan);
+  background: var(--brand-cyan-glow);
+}
+
+.sim-chat-input-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sim-chat-input {
+  flex: 1;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1.15rem;
+  color: var(--text-main);
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.sim-chat-input:focus {
+  border-color: var(--brand-primary);
+}
+
+/* Sidebar Live Inspector */
+.sim-live-inspector {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sim-score-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.sim-score-number {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sim-score-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.sim-score-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.4s ease;
+}
+
+.sim-inspector-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.825rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.sim-inspector-row:last-child {
+  border-bottom: none;
+}
+
+.sim-inspector-label {
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  font-weight: 600;
+}
+
+.sim-inspector-val {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.sim-redflag-banner {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid var(--brand-rose);
+  color: #fb7185;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.825rem;
+  line-height: 1.45;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+

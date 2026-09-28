@@ -35,6 +35,7 @@ class Annex22App {
   initSimulatorState() {
     this.simState = {
       step: 1, // 1: Idea & Intended Use, 2: Technical Guardrails, 3: Validation Blueprint
+      mode: 'cards', // 'cards' | 'chat'
       projectName: '',
       intendedUse: '',
       processArea: 'batch_release',
@@ -45,7 +46,16 @@ class Annex22App {
       apiKey: localStorage.getItem('gemini_api_key') || '',
       modelChoice: 'gemma-27b',
       isEvaluating: false,
-      blueprint: null
+      blueprint: null,
+      chatMessages: [
+        {
+          sender: 'auditor',
+          text: this.lang === 'de'
+            ? 'Willkommen bei **22Annex.ai**! Ich bin dein regulatorischer Co-Auditor für den EU GMP Annex 22.\n\nErzähle mir kurz: Welches pharmazeutische KI-Projekt planst du und welchen Prozess soll das System unterstützen?'
+            : 'Welcome to **22Annex.ai**! I am your regulatory co-auditor for EU GMP Annex 22.\n\nTell me briefly: What pharmaceutical AI project are you planning and which process should it support?',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }
+      ]
     };
   }
 
@@ -677,7 +687,7 @@ class Annex22App {
         <div class="module-header">
           <div class="module-meta-bar">
             <span class="module-phase-badge" style="background:var(--brand-cyan-glow); color:var(--brand-cyan); border-color:var(--brand-cyan);">
-              ${this.lang === 'de' ? '🧪 Interaktiver Annex 22 Simulator (Beta)' : '🧪 Interactive Annex 22 Simulator (Beta)'}
+              ${this.lang === 'de' ? '🧪 22Annex.ai Simulator & Co-Auditor' : '🧪 22Annex.ai Simulator & Co-Auditor'}
             </span>
             <div class="checklist-action-btns">
               ${s.step === 3 ? `
@@ -718,15 +728,239 @@ class Annex22App {
           </div>
         </div>
 
-        <!-- Dynamic Step Content -->
-        ${s.step === 1 ? this.renderSimStep1() : ''}
-        ${s.step === 2 ? this.renderSimStep2() : ''}
-        ${s.step === 3 ? this.renderSimStep3() : ''}
+        <!-- Dual-Mode Toggle Bar (Active during Step 1 & 2) -->
+        ${s.step < 3 ? `
+          <div class="sim-mode-toggle-bar">
+            <div class="sim-mode-toggle-group">
+              <button class="sim-mode-btn ${s.mode === 'cards' ? 'active' : ''}" id="simModeCardsBtn" data-sim-mode="cards">
+                <i data-lucide="layout-grid"></i>
+                <span>${this.lang === 'de' ? '📋 Geführte Frage-Karten' : '📋 Guided Question Cards'}</span>
+              </button>
+              <button class="sim-mode-btn ${s.mode === 'chat' ? 'active' : ''}" id="simModeChatBtn" data-sim-mode="chat">
+                <i data-lucide="message-square"></i>
+                <span>${this.lang === 'de' ? '💬 Dialog Co-Auditor' : '💬 Dialogue Co-Auditor'}</span>
+              </button>
+            </div>
+            <div class="sim-mode-hint">
+              ${s.mode === 'cards' 
+                ? (this.lang === 'de' ? 'Strukturierter Kriterienkatalog mit Auswahlfeldern' : 'Structured branching criteria catalog') 
+                : (this.lang === 'de' ? 'Interaktives Sparring-Gespräch mit Live-Compliance-Inspektor' : 'Interactive audit interview with live compliance inspector')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Dynamic Step or Chat Content -->
+        ${s.step === 3 
+          ? this.renderSimStep3() 
+          : (s.mode === 'chat' 
+              ? this.renderSimChatView() 
+              : (s.step === 1 ? this.renderSimStep1() : this.renderSimStep2())
+            )
+        }
       </div>
     `;
 
     createIcons({ icons });
     this.bindSimulatorEvents(container);
+  }
+
+  formatChatMarkdown(text) {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n/g, '<br/>');
+  }
+
+  calculateLiveScore() {
+    const s = this.simState;
+    let score = 100;
+    const penalties = [];
+    const flags = [];
+
+    if (s.learningType === 'dynamic') {
+      score -= 35;
+      penalties.push({
+        label: this.lang === 'de' ? 'Dynamisches Selbstlernen im GMP-Betrieb' : 'Dynamic self-learning in GMP',
+        deduction: -35,
+        citation: '[Draft §1]'
+      });
+      flags.push({
+        title: this.lang === 'de' ? 'Kritisches Finding: Dynamisches Selbstlernen' : 'Critical Finding: Dynamic Continuous Learning',
+        ref: 'EU GMP Annex 22 [Draft §1]',
+        desc: this.lang === 'de' 
+          ? 'Kontinuierliches Nachtrainieren im GMP-Routinebetrieb ist nicht zulässig („should not be used“). Es drohen unkontrollierter Modell-Drift und Verlust des validierten Zustands. Lösung: Frozen Weights mit kontrolliertem Offline-Retraining unter Change Control.'
+          : 'Continuous self-learning in GMP routine operation is not permitted. Risk of uncontrolled drift and invalid state. Remediation: Frozen weights with offline retraining under change control.'
+      });
+    }
+
+    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process')) {
+      score -= 30;
+      penalties.push({
+        label: this.lang === 'de' ? 'Vollautonomie bei qualitätskritischer Freigabe' : 'Full autonomy on critical release',
+        deduction: -30,
+        citation: '[Draft §3, §9.2]'
+      });
+      flags.push({
+        title: this.lang === 'de' ? 'Kritisches Finding: Unzulässige Vollautonomie (HOOL)' : 'Critical Finding: Unsupervised Autonomy (HOOL)',
+        ref: 'EU GMP Annex 22 [Draft §3, §9.2] & Art. 51 2001/83/EG',
+        desc: this.lang === 'de'
+          ? 'Qualitätskritische Entscheidungen und Chargenfreigaben dürfen nicht vollständig an KI delegiert werden. Ein Human-in-the-Loop mit dokumentierter Override-Befugnis ist zwingend erforderlich.'
+          : 'Quality-critical decisions and batch release must not be fully delegated to AI without qualified human oversight.'
+      });
+    }
+
+    if (s.dataSource === 'public_cloud') {
+      score -= 15;
+      penalties.push({
+        label: this.lang === 'de' ? 'Unverifizierte Public Cloud Daten / IP-Risiko' : 'Public cloud / unverified data source',
+        deduction: -15,
+        citation: '[Draft §5, §6]'
+      });
+    }
+
+    if (s.modelType === 'genai_rag') {
+      score -= 10;
+      penalties.push({
+        label: this.lang === 'de' ? 'GenAI Stochastik & Halluzinationsrisiko' : 'GenAI stochasticity & hallucination risk',
+        deduction: -10,
+        citation: '[Draft §8, GAMP Guide 2025]'
+      });
+    }
+
+    score = Math.max(10, Math.min(100, score));
+    return { score, penalties, flags };
+  }
+
+  renderSimChatView() {
+    const s = this.simState;
+    const { score, penalties, flags } = this.calculateLiveScore();
+
+    const scoreColor = score >= 80 ? 'var(--brand-emerald)' : (score >= 50 ? 'var(--brand-amber)' : 'var(--brand-rose)');
+    const scoreRating = score >= 80 
+      ? (this.lang === 'de' ? '🟢 Hohe Validierungsreife' : '🟢 High Validation Readiness')
+      : (score >= 50 
+          ? (this.lang === 'de' ? '🟡 Konditionell qualifizierbar' : '🟡 Conditional / Gaps Present')
+          : (this.lang === 'de' ? '🔴 Kritische Risiken / Showstopper' : '🔴 Critical Risks / Showstoppers'));
+
+    return `
+      <div class="sim-chat-layout">
+        <!-- Chat Column -->
+        <div class="sim-chat-card">
+          <div class="sim-chat-header">
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <div class="sim-chat-avatar" style="background:var(--brand-primary-glow); color:var(--brand-cyan); border:1px solid var(--brand-cyan);">
+                <i data-lucide="bot"></i>
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:0.95rem; color:var(--text-main);">22Annex.ai Co-Auditor</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">EU GMP Annex 22 Sparring-Partner</div>
+              </div>
+            </div>
+            <div class="sim-chat-status">
+              <span class="sim-chat-status-dot"></span>
+              <span>${this.lang === 'de' ? 'Online • Aktiv' : 'Online • Active'}</span>
+            </div>
+          </div>
+
+          <div class="sim-chat-messages" id="simChatMsgContainer">
+            ${s.chatMessages.map(msg => `
+              <div class="sim-chat-msg ${msg.sender}">
+                <div class="sim-chat-avatar">
+                  ${msg.sender === 'auditor' ? '🤖' : '👤'}
+                </div>
+                <div class="sim-chat-bubble">
+                  ${this.formatChatMarkdown(msg.text)}
+                  <div style="font-size:0.65rem; opacity:0.6; margin-top:0.35rem; text-align:right;">${msg.time || ''}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Quick Suggestion Chips -->
+          <div class="sim-chat-quick-actions">
+            <span style="font-size:0.75rem; color:var(--text-faint); width:100%; font-weight:600; margin-bottom:0.15rem;">
+              ${this.lang === 'de' ? '💡 Schnellauswahl / Vorschläge:' : '💡 Quick Suggestions:'}
+            </span>
+            <button class="sim-chip-btn" data-chat-quick="vision">🔍 Optische Vial-Inspektion (Parenteralia)</button>
+            <button class="sim-chip-btn" data-chat-quick="genai">🤖 GenAI SOP Drafting</button>
+            <button class="sim-chip-btn" data-chat-quick="freeze">❄️ Frozen Weights einsetzen</button>
+            <button class="sim-chip-btn" data-chat-quick="dynamic">🔄 Dynamisches Selbstlernen testen</button>
+            <button class="sim-chip-btn" data-chat-quick="hitl">👤 Human-in-the-Loop aktivieren</button>
+          </div>
+
+          <!-- Input Bar -->
+          <form class="sim-chat-input-bar" id="simChatForm">
+            <input type="text" class="sim-chat-input" id="simChatInput" placeholder="${this.lang === 'de' ? 'Beschreibe dein Projekt oder beantworte die Frage...' : 'Describe your project or answer the question...'}" />
+            <button type="submit" class="header-btn primary" style="padding:0.6rem 1.15rem; border-radius:var(--radius-pill);">
+              <i data-lucide="send"></i>
+              <span>${this.lang === 'de' ? 'Senden' : 'Send'}</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Live Inspector Sidebar -->
+        <div class="sim-live-inspector">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:700; font-family:var(--font-heading); font-size:1.05rem; display:flex; align-items:center; gap:0.4rem;">
+              <i data-lucide="shield-check" style="color:var(--brand-cyan);"></i>
+              <span>Live Compliance Inspector</span>
+            </div>
+            <span class="opt-card-tag">22Annex.ai</span>
+          </div>
+
+          <!-- Live Score Card -->
+          <div class="sim-score-card">
+            <div class="sim-inspector-label">${this.lang === 'de' ? 'Echtzeit-Readiness Score' : 'Real-time Readiness Score'}</div>
+            <div class="sim-score-number" style="color:${scoreColor};">${score}%</div>
+            <div class="sim-score-bar-bg">
+              <div class="sim-score-bar-fill" style="width:${score}%; background:${scoreColor};"></div>
+            </div>
+            <div style="font-size:0.8rem; font-weight:600; color:${scoreColor};">${scoreRating}</div>
+          </div>
+
+          ${flags.length > 0 ? `
+            <div class="sim-redflag-banner">
+              <i data-lucide="alert-triangle" style="flex-shrink:0; color:var(--brand-rose); width:18px; height:18px;"></i>
+              <div>
+                <strong>${flags[0].title}</strong>
+                <div style="font-size:0.75rem; margin-top:0.2rem; opacity:0.9;">${flags[0].desc}</div>
+              </div>
+            </div>
+          ` : ''}
+
+          <!-- Detected Parameters -->
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <div class="sim-inspector-row">
+              <span class="sim-inspector-label">${this.lang === 'de' ? 'Projekt-Titel' : 'Project Title'}</span>
+              <span class="sim-inspector-val">${s.projectName || (this.lang === 'de' ? 'Noch nicht erfasst' : 'Not specified')}</span>
+            </div>
+            <div class="sim-inspector-row">
+              <span class="sim-inspector-label">${this.lang === 'de' ? 'Einsatzbereich' : 'Process Area'}</span>
+              <span class="sim-inspector-val">${s.processArea}</span>
+            </div>
+            <div class="sim-inspector-row">
+              <span class="sim-inspector-label">${this.lang === 'de' ? 'Modell & Architektur' : 'Model & Architecture'}</span>
+              <span class="sim-inspector-val">${s.modelType} (${s.learningType === 'static' ? '❄️ Frozen Weights' : '⚠️ Dynamic Learning'})</span>
+            </div>
+            <div class="sim-inspector-row">
+              <span class="sim-inspector-label">${this.lang === 'de' ? 'Menschliche Aufsicht' : 'Human Oversight'}</span>
+              <span class="sim-inspector-val">${s.autonomyLevel === 'hitl' ? '👤 Human-in-the-Loop' : '⚡ Autonom (HOOL)'}</span>
+            </div>
+          </div>
+
+          <!-- Direct Run Action -->
+          <button class="header-btn primary" id="simChatRunEvalBtn" style="width:100%; justify-content:center; padding:0.75rem; margin-top:0.5rem;">
+            <i data-lucide="sparkles"></i>
+            <span>${this.lang === 'de' ? 'Validierungs-Blueprint berechnen ➔' : 'Generate Validation Blueprint ➔'}</span>
+          </button>
+          
+          <div style="font-size:0.75rem; color:var(--text-faint); text-align:center;">
+            ${this.lang === 'de' ? 'Tipp: Du kannst oben jederzeit zu den Frage-Karten umschalten.' : 'Tip: You can switch to Guided Cards at any time.'}
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   renderSimStep1() {
@@ -987,6 +1221,34 @@ class Annex22App {
           </div>
         </div>
 
+        <!-- Compliance Readiness Score & Penalty Summary -->
+        <div class="sim-score-card" style="text-align:left; padding:1.25rem 1.5rem; background:var(--bg-surface-elevated); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <span class="sim-inspector-label">${this.lang === 'de' ? 'Gesamt-Compliance Readiness Score' : 'Overall Compliance Readiness Score'}</span>
+              <div style="display:flex; align-items:baseline; gap:0.6rem; margin-top:0.25rem;">
+                <span class="sim-score-number" style="color:${bp.score >= 80 ? 'var(--brand-emerald)' : (bp.score >= 50 ? 'var(--brand-amber)' : 'var(--brand-rose)')};">
+                  ${bp.score || 75}%
+                </span>
+                <span style="font-weight:600; color:var(--text-muted); font-size:0.95rem;">
+                  ${bp.score >= 80 ? (this.lang === 'de' ? '• Hohe Reife / Validierungsfähig' : '• High Readiness') : (bp.score >= 50 ? (this.lang === 'de' ? '• Konditionell / Auflagen zu erfüllen' : '• Conditional / Remediations Required') : (this.lang === 'de' ? '• Kritisches Risiko / Showstopper vorhanden' : '• Critical Risk / Showstoppers Present'))}
+                </span>
+              </div>
+            </div>
+            ${bp.penalties && bp.penalties.length > 0 ? `
+              <div style="background:var(--bg-surface); padding:0.6rem 1rem; border-radius:var(--radius-sm); border:1px solid var(--brand-rose); font-size:0.8rem;">
+                <span style="color:var(--brand-rose); font-weight:700;">Abzüge (${bp.penalties.reduce((a, p) => a + p.deduction, 0)} Pkt.):</span>
+                <div style="color:var(--text-muted); margin-top:0.2rem;">
+                  ${bp.penalties.map(p => `${p.label} (${p.deduction} Pkt. ${p.citation})`).join(' • ')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+          <div class="sim-score-bar-bg" style="margin-top:0.85rem;">
+            <div class="sim-score-bar-fill" style="width:${bp.score || 75}%; background:${bp.score >= 80 ? 'var(--brand-emerald)' : (bp.score >= 50 ? 'var(--brand-amber)' : 'var(--brand-rose)')};"></div>
+          </div>
+        </div>
+
         <!-- Executive Summary -->
         <div class="blueprint-section">
           <h3 class="blueprint-sec-title">
@@ -1079,6 +1341,56 @@ class Annex22App {
   }
 
   bindSimulatorEvents(container) {
+    // Dual-Mode Toggle
+    document.getElementById('simModeCardsBtn')?.addEventListener('click', () => {
+      this.simState.mode = 'cards';
+      this.renderSimulatorView(container);
+    });
+
+    document.getElementById('simModeChatBtn')?.addEventListener('click', () => {
+      this.simState.mode = 'chat';
+      this.renderSimulatorView(container);
+      setTimeout(() => {
+        const msgBox = document.getElementById('simChatMsgContainer');
+        if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+      }, 50);
+    });
+
+    // Chat Quick Actions
+    container.querySelectorAll('[data-chat-quick]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.chatQuick;
+        if (action === 'vision') {
+          this.handleChatInput(this.lang === 'de' ? 'Wir planen eine optische In-Line-Kamerainspektion (Vision AI) von Vials auf Partikel und Glasrisse bei der Abfüllung.' : 'We are planning in-line computer vision inspection of vials for particles and cracks.', container);
+        } else if (action === 'genai') {
+          this.handleChatInput(this.lang === 'de' ? 'Wir möchten einen GenAI / RAG-Assistenten für SOP-Recherchen und Formulierungshilfe bei Deviation Investigations nutzen.' : 'We want to use a GenAI RAG assistant for SOP drafting and deviation investigation.', container);
+        } else if (action === 'freeze') {
+          this.handleChatInput(this.lang === 'de' ? 'Wir setzen auf Frozen Weights. Das Modell wird im laufenden GMP-Betrieb nicht verändert.' : 'We use frozen weights. The model will not retrain during GMP operations.', container);
+        } else if (action === 'dynamic') {
+          this.handleChatInput(this.lang === 'de' ? 'Wir möchten testen, was passiert, wenn das Modell kontinuierlich online im Batchbetrieb weiterlernt.' : 'We want to test continuous online self-learning during batch production.', container);
+        } else if (action === 'hitl') {
+          this.handleChatInput(this.lang === 'de' ? 'Ein geschulter Mitarbeiter prüft jede Modell-Entscheidung und hat volle Override-Befugnis (Human-in-the-Loop).' : 'A trained operator verifies every decision with full override authority (Human-in-the-Loop).', container);
+        }
+      });
+    });
+
+    // Chat Form Submit
+    const chatForm = document.getElementById('simChatForm');
+    chatForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('simChatInput');
+      if (input && input.value.trim()) {
+        const val = input.value.trim();
+        input.value = '';
+        this.handleChatInput(val, container);
+      }
+    });
+
+    // Chat Run Evaluation Button
+    document.getElementById('simChatRunEvalBtn')?.addEventListener('click', () => {
+      this.runSimulatorEvaluation();
+    });
+
     // Preset buttons
     container.querySelectorAll('.preset-chip-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -1156,6 +1468,89 @@ class Annex22App {
     });
   }
 
+  handleChatInput(userText, container) {
+    if (!userText || !userText.trim()) return;
+    const cleanText = userText.trim();
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // 1. Add User message
+    this.simState.chatMessages.push({
+      sender: 'user',
+      text: cleanText,
+      time
+    });
+
+    // 2. Parse text and adapt state
+    const lower = cleanText.toLowerCase();
+
+    if (lower.includes('vial') || lower.includes('partikel') || lower.includes('optisch') || lower.includes('kamera') || lower.includes('vision') || lower.includes('parenteralia')) {
+      this.simState.projectName = this.simState.projectName || 'AI-Vision Inspektion Parenteralia';
+      this.simState.intendedUse = cleanText;
+      this.simState.processArea = 'in_process';
+      this.simState.modelType = 'vision_defect';
+    } else if (lower.includes('genai') || lower.includes('sop') || lower.includes('rag') || lower.includes('llm') || lower.includes('abweichung') || lower.includes('deviation')) {
+      this.simState.projectName = this.simState.projectName || 'GenAI SOP & Deviation Drafting Assistant';
+      this.simState.intendedUse = cleanText;
+      this.simState.processArea = 'oos_investigation';
+      this.simState.modelType = 'genai_rag';
+    } else if (lower.includes('bioreaktor') || lower.includes('ferment') || lower.includes('sensor') || lower.includes('ausbeute')) {
+      this.simState.projectName = this.simState.projectName || 'Bioprozess-Monitoring & Soft-Sensor';
+      this.simState.intendedUse = cleanText;
+      this.simState.processArea = 'in_process';
+      this.simState.modelType = 'predictive_ml';
+    }
+
+    if (lower.includes('freeze') || lower.includes('statisch') || lower.includes('fest') || lower.includes('eingefroren')) {
+      this.simState.learningType = 'static';
+    } else if (lower.includes('dynamisch') || lower.includes('kontinuierlich') || lower.includes('selbstlern') || lower.includes('online')) {
+      this.simState.learningType = 'dynamic';
+    }
+
+    if (lower.includes('hitl') || lower.includes('mensch') || lower.includes('loop') || lower.includes('override') || lower.includes('freigabe')) {
+      this.simState.autonomyLevel = 'hitl';
+    } else if (lower.includes('autonom') || lower.includes('hool') || lower.includes('vollautomat')) {
+      this.simState.autonomyLevel = 'hool';
+    }
+
+    // 3. Formulate Co-Auditor response
+    let auditorReply = '';
+    const s = this.simState;
+
+    if (lower.includes('dynamisch') || lower.includes('kontinuierlich') || lower.includes('selbstlern')) {
+      auditorReply = this.lang === 'de'
+        ? `⚠️ **Wichtiger regulatorischer Hinweis nach Annex 22 [Draft §1]:**\nKontinuierliches Selbstlernen im GMP-Routinebetrieb führt zu unkontrollierbarem Concept-Drift und Verlust des validierten Zustands. Die EMA schließt das für kritische Prozesse faktisch aus („should not be used“). Ich habe dafür **-35 Punkte** im Readiness Score abgezogen.\n\n👉 *Praxis-Empfehlung:* Nutze im Betrieb **Frozen Weights** und führe Nachtrainings nur offline in einer qualifizierten MLOps-Pipeline mit formeller Revalidierung durch.\n\nWie sieht euer Plan für die **menschliche Aufsicht (Human Oversight nach Draft §3)** aus? Behält ein Mitarbeiter die Freigabehoheit?`
+        : `⚠️ **Regulatory Warning [Draft §1]:**\nContinuous self-learning in GMP operations leads to uncontrolled drift and loss of the validated state. EMA explicitly excludes this for critical applications. A penalty of **-35 points** was applied.\n\n👉 *Remediation:* Deploy with **Frozen Weights** and retrain only offline under formal change control.\n\nWhat is your plan for **Human Oversight (Draft §3)**?`;
+    } else if (lower.includes('freeze') || lower.includes('statisch') || lower.includes('fest')) {
+      auditorReply = this.lang === 'de'
+        ? `✅ **Hervorragend [Draft §1 & Modul 07]:**\nDie Verwendung von festen Gewichten (*Frozen Weights*) ist die Grundvoraussetzung für Deterministik und Reproduzierbarkeit nach GxP.\n\nNächste Frage: **Wer hat die Letztentscheidung (Human Oversight nach Draft §3 & §9.2)?** Ist ein Human-in-the-Loop (HITL) mit dokumentierter Override-Befugnis vorgesehen?`
+        : `✅ **Great [Draft §1]:** Using frozen weights ensures determinism and repeatability in GxP.\n\nNext: What is your **Human Oversight strategy (Draft §3 & §9.2)**?`;
+    } else if (lower.includes('hitl') || lower.includes('mensch') || lower.includes('loop')) {
+      auditorReply = this.lang === 'de'
+        ? `✅ **Sehr gut [Draft §3, §9.2 & Art. 51 2001/83/EG]:**\nHuman-in-the-Loop (HITL) stellt sicher, dass die pharmazeutische Verantwortung beim qualifizierten Fachpersonal bleibt. Wichtig: Eure SOPs müssen ein spezifisches *Override-Training* vorschreiben, um Automation Bias vorzubeugen!\n\nDie zentralen Leitplanken sind nun erfasst. Klicke rechts auf **'Validierungs-Blueprint berechnen'**, um das vollständige Dossier zu generieren.`
+        : `✅ **Approved [Draft §3 & §9.2]:** Human-in-the-Loop ensures legal accountability remains with qualified personnel.\n\nYou can now generate your validation blueprint!`;
+    } else if (lower.includes('autonom') || lower.includes('hool')) {
+      auditorReply = this.lang === 'de'
+        ? `⚠️ **Kritisches Finding [Draft §3 & Art. 51 2001/83/EG]:**\nVollautonome Entscheidungen ohne menschliche Prüf- und Überstimmungsinstanz sind für qualitätskritische Prozesse unzulässig! Dafür wurden **-30 Punkte** abgezogen.\n\nEmpfehlung: Auf HITL umstellen oder mindestens eine Vier-Augen-Freigabe implementieren.`
+        : `⚠️ **Critical Finding [Draft §3]:** Unsupervised autonomy is prohibited for quality-critical processes. -30 points penalty applied.`;
+    } else {
+      auditorReply = this.lang === 'de'
+        ? `Verstanden! Für **${s.projectName || 'dein Projekt'}** müssen wir die architektonischen Schutzmaßnahmen nach Annex 22 prüfen:\n\n**Wie soll das Modell im GMP-Betrieb arbeiten?**\nWird es mit festen Parametern betrieben (**Frozen Weights**) oder ist ein **kontinuierliches Weitertrainieren zur Laufzeit** geplant?`
+        : `Understood! For **${s.projectName || 'your project'}**, we must verify Annex 22 guardrails:\n\nWill the model operate with **Frozen Weights** or is **continuous learning** planned?`;
+    }
+
+    this.simState.chatMessages.push({
+      sender: 'auditor',
+      text: auditorReply,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+
+    this.renderSimulatorView(container);
+    setTimeout(() => {
+      const msgBox = document.getElementById('simChatMsgContainer');
+      if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+    }, 50);
+  }
+
   applySimPreset(presetKey) {
     if (presetKey === 'vision') {
       this.simState.projectName = 'Automatisierte optische Vial-Inspektion (Parenteralia)';
@@ -1209,28 +1604,27 @@ class Annex22App {
 
   generateExpertBlueprint() {
     const s = this.simState;
-    const redFlags = [];
+    const { score, penalties, flags } = this.calculateLiveScore();
+    const redFlags = [...flags];
     const deliverables = [];
     const testingRequirements = [];
     const auditQuestions = [];
-    let verdict = 'VALIDATION_READY';
+    let verdict = score >= 80 ? 'VALIDATION_READY' : (score >= 50 ? 'CONDITIONAL' : 'REJECT');
 
     // 1. Check Dynamic Learning
-    if (s.learningType === 'dynamic') {
-      verdict = 'REJECT';
+    if (s.learningType === 'dynamic' && !redFlags.some(f => f.title.includes('Dynamisches'))) {
       redFlags.push({
         title: 'Verstoß gegen das Verbot dynamisch selbstlernender Modelle',
-        reference: 'EU GMP Annex 22 (Modul 03 / Modul 07)',
+        reference: 'EU GMP Annex 22 [Draft §1] (Modul 03 / Modul 07)',
         description: 'Der Entwurf von Annex 22 schließt Modelle, die sich im GMP-Routinebetrieb selbstständig weitertrainieren, kategorisch aus. Das Modell muss mit fest gefrorenen Parametern (Frozen Weights) betrieben werden. Retrainings erfordern eine isolierte Offline-Umgebung und einen formalen Revalidierungsbericht.'
       });
     }
 
     // 2. Check HOOL on critical tasks
-    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process')) {
-      verdict = 'REJECT';
+    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process') && !redFlags.some(f => f.title.includes('Vollautonomie'))) {
       redFlags.push({
         title: 'Unzulässige Vollautonomie (HOOL) bei qualitätskritischen Entscheidungen',
-        reference: 'EU GMP Annex 22 (Modul 10) & Art. 51 Richtlinie 2001/83/EG',
+        reference: 'EU GMP Annex 22 [Draft §3, §9.2] & Art. 51 Richtlinie 2001/83/EG',
         description: 'KI-Systeme besitzen keine pharmazeutische Rechtsverantwortung. Vollautomatische Chargenfreigaben ohne qualifizierte menschliche Prüfung verstoßen gegen europäisches Arzneimittelrecht. Es muss zwingend ein Human-in-the-Loop (HITL) Workflow implementiert sein.'
       });
     }
@@ -1299,6 +1693,8 @@ class Annex22App {
 
     return {
       verdict,
+      score,
+      penalties,
       summary,
       redFlags,
       deliverables,
