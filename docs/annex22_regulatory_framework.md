@@ -1,218 +1,106 @@
-# Master-Übersicht & Regulatorisches Framework: EU GMP Annex 22
+# EU GMP Annex 22: Leitfaden & Gesamtübersicht
 
-> **Dokumentstatus:** Zentrale Wissens- und Referenzlandkarte für das gesamte Annex 22 Lernprojekt.  
-> **Geltungsbereich:** Artificial Intelligence (AI) and Machine Learning (ML) in GxP/pharmazeutischen Umgebungen (Draft Juli 2025, European Commission / EMA / PIC/S).
-
----
-
-## 🧭 Schnellzugriff & Modul-Navigation
-
-| Grundlagen & Scope | Risikomanagement & Spezifikation | Daten, Modell & Validierung | Überwachung & Audits |
-| :--- | :--- | :--- | :--- |
-| • [Modul 01: Intro to AI in GxP](module_01_introduction_ai_gxp.md)<br/>• [Modul 02: Overview Annex 22](module_02_overview_annex_22.md)<br/>• [Modul 03: Scope & Applicability](module_03_scope_applicability.md) | • [Modul 04: Risk-Based Approach](module_04_risk_based_approach.md)<br/>• [Modul 05: Intended Use & Model Def](module_05_intended_use_model_definition.md) | • [Modul 06: Data Governance](module_06_data_governance_quality.md)<br/>• [Modul 07: Model Development](module_07_model_development_training.md)<br/>• [Modul 08: Validation & Testing](module_08_validation_performance_testing.md)<br/>• [Modul 09: Explainability](module_09_explainability_transparency.md) | • [Modul 10: Human Oversight (HITL)](module_10_human_oversight_hitl.md)<br/>• [Modul 11: Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md)<br/>• [Modul 12: Audit Readiness](module_12_audit_inspection_readiness.md) |
+> **Executive Summary:**  
+> Dieses Dokument dient als zentrale Einführung und thematische Orientierungslandkarte. Es vermittelt das übergeordnete Verständnis für den **Draft EU GMP Annex 22** („Artificial Intelligence and Machine Learning in GxP Environments“) und führt zielgerichtet in die vertiefenden Fachmodule.
 
 ---
 
-## 1. Einordnung in das regulatorische Gefüge
+## 1. Was ist Annex 22 und warum ist er ein Wendepunkt?
 
-Annex 22 existiert nicht isoliert, sondern schlägt die Brücke zwischen horizontalem EU-Recht und den spezifischen pharmazeutischen Qualitätsstandards. Details zu den Grundlagen findest du in **[Modul 01](module_01_introduction_ai_gxp.md)** und **[Modul 02](module_02_overview_annex_22.md)**.
+Für Jahrzehnte stützte sich die pharmazeutische Industrie bei computergestützten Systemen auf **EU GMP Annex 11** (deterministische Software: *gleicher Input führt immer zum gleichen Output*). Moderne KI- und Machine-Learning-Systeme lernen jedoch emergent aus Daten und können im Betrieb schleichend degradieren (*Silent Drift*).
+
+Mit dem im Juli 2025 von der Europäischen Kommission (EMA / PIC/S) vorgelegten **Draft Annex 22** entsteht der weltweit erste verbindliche regulatorische Rahmen, der den Einsatz von KI in der pharmazeutischen Produktion regelt.
 
 ```mermaid
-graph TD
-    A["🇪🇺 EU AI Act<br/>(Horizontale Produktsicherheits-Verordnung)"] --> D["🇪🇺 EU GMP Annex 22<br/>(Vertikaler Pharma-Standard für AI/ML)"]
-    B["📋 EU GMP Annex 11<br/>(Computerised Systems & CSV-Basis)"] --> D
-    C["🏛️ ICH Q9 (R1)<br/>(Quality Risk Management)"] --> D
-    E["📖 EU GMP Kapitel 4<br/>(Dokumentation & ALCOA+)"] --> D
-    F["⚙️ GAMP 5 2nd Edition<br/>(Good Automated Manufacturing Practice)"] -.-> D
-    D ==> G["🏭 Pharmazeutische Produktion, QC-Labor & Chargenfreigabe (QP)"]
+graph LR
+    A["EU AI Act<br/>(Horizontale Produktsicherheit)"] --> C["EU GMP Annex 22<br/>(Pharma-spezifischer Standard)"]
+    B["EU GMP Annex 11<br/>(Klassische CSV-Basis)"] --> C
+    C ==> D["GMP-Produktion, QC-Labor & Chargenfreigabe"]
 ```
 
-### Die Rollenteilung der Regularien
-| Regelwerk | Regelungsbereich | Rolle im Verhältnis zu Annex 22 |
-| :--- | :--- | :--- |
-| **EU AI Act** | Gesamtwirtschaftlich (horizontal), risikobasiert (Minimal, Hochrisiko, Verboten). | Übergeordneter Rechtsrahmen für KI-Sicherheit, Grundrechte und Transparenz. |
-| **EU GMP Annex 11** | Alle computergestützten Systeme (CSV). | **Fundament bleibt bestehen:** IQ/OQ, physische Zugriffskontrolle, Audit Trails, klassische Infrastruktur. |
-| **EU GMP Annex 22** | Spezifisch für lernende Algorithmen (statistische Modelle, neuronale Netze, GenAI). | **Zusatzanforderungen:** Modell-Lebenszyklus, drift-monitoring, Intended Use Grenzen, Daten-Governance. |
-| **ICH Q9 (R1)** | Qualitätsrisikomanagement. | Methodik für die risikoproportionale Validierung (FMEA mit KI-Fehlermodi). |
+### Die 3 Kernbotschaften:
+1. **Annex 22 ersetzt Annex 11 nicht:** Annex 11 bleibt das Fundament (IQ/OQ, physische Kontrollen, Audit Trails). Annex 22 ergänzt spezifische Anforderungen für lernende Algorithmen.
+2. **Statisch vor Dynamisch:** Im kritischen GMP-Betrieb sind nur **statische Modelle (eingefrorene Modellgewichte)** zulässig. Sich selbst im laufenden Betrieb weitertrainierende Modelle sind für Freigabeentscheidungen ausgeschlossen.
+3. **Mensch vor Maschine (Human-in-the-Loop):** Die finale Verantwortung für Produktqualität und Patientensicherheit verbleibt ausnahmslos beim qualifizierten pharmazeutischen Personal (z.B. Qualified Person).
 
 ---
 
-## 2. Der 5-Stufen-Entscheidungstrichter (*Decision Funnel*)
-*Ausführliche Details, Fallstricke und Praxisfälle siehe ➔ **[Modul 03: Scope and Applicability of AI Systems](module_03_scope_applicability.md)**.*
+## 2. Die Gesamtprozess-Landkarte (AI Lifecycle)
 
-Bevor ein System entwickelt oder validiert wird, muss es den standardisierten Scoping-Filter durchlaufen:
+Der Lebenszyklus eines GxP-konformen KI-Systems gliedert sich in sechs klar definierte Meilensteine:
 
 ```mermaid
 flowchart TD
-    S1{"1. Handelt es sich um echte KI?<br/>(Statistisches Lernen, Mustererkennung, GenAI?)"}
-    S1 -- Nein (Regelbasiert / Deterministisch) --> OUT1["Rein unter Annex 11<br/>(Klassische CSV)"]
-    S1 -- Ja --> S2{"2. Hat das System GMP-Einfluss?<br/>(Direkt: Freigabe, CQA / Indirekt: QC-Peaks, Schichtplanung?)"}
-    S2 -- Nein --> OUT2["Out of Scope<br/>(Standard-IT Best Practices)"]
-    S2 -- Ja --> S3["3. Risikoklassifizierung<br/>(Unacceptable / High / Moderate / Low)"]
-    S3 --> S4{"4. Architektur-Prüfung<br/>(Statisch vs. Dynamisch?)"}
-    S4 -- Dynamisch / Kontinuierlich lernend --> BLOCKED["❌ Im kritischen GMP-Betrieb unzulässig!"]
-    S4 -- Statisch (Frozen Weights) --> S5["5. Dokumentation im AI-Inventar<br/>(Intended Use + Scoping Rationale)"]
+    M1["1. Intended Use Definition<br/>(Zweck & Systemgrenzen festlegen)"] --> M2["2. Data Governance<br/>(Trainings- & Testdaten nach ALCOA+)"]
+    M2 --> M3["3. Modellentwicklung<br/>(Fixierung der Hyperparameter & Frozen Weights)"]
+    M3 --> M4["4. Unabhängige Validierung<br/>(Adversarial Testing mit ungesehenen Daten)"]
+    M4 --> M5["5. Produktivbetrieb & OOD-Schutz<br/>(Automatische Blockade unzulässiger Eingaben)"]
+    M5 --> M6["6. Kontinuierliches Drift-Monitoring<br/>(Statistische Alarmierung & Change Control)"]
+
+    style M1 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    style M2 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    style M3 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    style M4 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    style M5 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
+    style M6 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
 ```
 
 ---
 
-## 3. Die 4-stufige Risikomatrix nach Annex 22
-*Ausführliche Details zur FMEA-Methodik und den 5 KI-Fehlermodi siehe ➔ **[Modul 04: Risk Based Approach to AI](module_04_risk_based_approach.md)**.*
+## 3. Die 4 Themensäulen & Modul-Wegweiser
 
-Annex 22 erzwingt ein striktes **Proportionalitätsgebot** (*Proportionality Mandate*): Die Tiefe von Validierung, Überwachung und Kontrolle skaliert linear mit dem Risiko.
+Alle Details, Praxisfälle, mathematischen Fehlermodi und Checklisten sind in den jeweiligen Fachmodulen ausgearbeitet:
 
-```mermaid
-quadrantChart
-    title Risikoeinstufung & Governance-Tiefe
-    x-axis "Geringe Kritikalität / Reversibel" --> "Hohe Kritikalität / Irreversibel"
-    y-axis "Advisory / Assistiv (Human-on-the-Loop)" --> "Autonom / Direkt (Human-in-the-Loop)"
-    quadrant-1 "HIGH RISK (Vollvalidierung, 100% HITL, OOD-Schutz)"
-    quadrant-2 "MODERATE RISK (Advisory, Sampling-Tests, HOTL)"
-    quadrant-3 "LOW RISK (Backoffice, Standard-IT-Kontrollen)"
-    quadrant-4 "UNACCEPTABLE (Ausgeschlossen: Autonomes Online-Lernen)"
-    "Chargenfreigabe (Batch Release)": [0.95, 0.9]
-    "PAT / Inline-Prozesskontrolle": [0.85, 0.75]
-    "Autonome Vial-Sichtprüfung": [0.8, 0.85]
-    "Abweichungs-Triage (Deviation AI)": [0.45, 0.5]
-    "LLM-Entwürfe für SOPs / Berichte": [0.35, 0.35]
-    "QC-Peak-Integration": [0.7, 0.6]
-    "Admin / HR-Systeme": [0.1, 0.1]
-```
-
-### Die Risikostufen im Detail
-1. **Unacceptable Risk (Nicht zulässig):**
-   - Autonom online-lernende Modelle, die operative GMP-Entscheidungen ohne feste Validierungsbasis fällen.
-2. **High Risk (Volle Validierung + 100% HITL):**
-   - Direkte Steuerung von Critical Quality Attributes (CQA), Critical Process Parameters (CPP), In-Line-PAT oder autonome Gut/Schlecht-Aussortierung.
-   - *Anforderung:* Tiefgehende Adversarial-Tests, Randfall-Prüfungen, Echtzeit-Drift-Monitoring, zwingende Out-of-Distribution (OOD) Erkennung.
-3. **Moderate Risk (Entscheidungsunterstützung / Advisory):**
-   - Systeme zur Vorab-Klassifikation oder Priorisierung (z.B. Abweichungstriage), deren Ergebnisse vor Wirksamkeit von geschultem Personal freigegeben werden.
-   - *Anforderung:* Validierung mit repräsentativen Datensätzen, periodisches Monitoring, Maßnahmen gegen *Automation Bias*.
-4. **Low Risk (Assistiv / Backoffice):**
-   - Reine Textunterstützung, Zusammenfassungen, nicht-GMP-relevante administrative Planungen.
+### 🏛️ Säule 1: Grundlagen, Einordnung & Scope
+*Welche Systeme fallen unter Annex 22 und wie grenzen wir uns sauber ab?*
+- **[Modul 01: Introduction to AI in GxP Environments](module_01_introduction_ai_gxp.md)**  
+  *Warum klassische CSV versagt, reale Pharma-Fallstudien und die 6 Säulen für Trustworthy AI.*
+- **[Modul 02: Overview of Annex 22](module_02_overview_annex_22.md)**  
+  *Das Zusammenspiel mit Annex 11, Schutz vor Automation Bias und die 5-stufige Roadmap.*
+- **[Modul 03: Scope and Applicability of AI Systems](module_03_scope_applicability.md)**  
+  *Der 5-Stufen-Entscheidungstrichter (Decision Funnel), die 4 Risikostufen und das AI-Inventar.*
 
 ---
 
-## 4. Der End-to-End AI Lifecycle unter Annex 22
-
-Der Lebenszyklus eines KI-Systems umfasst 6 Phasen, die alle lückenlos dokumentiert und qualifiziert sein müssen:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor QA as Quality Assurance (QA)
-    participant VAL as Validation / CSV
-    participant DS as Data Science / IT
-    actor OP as Production / Operator
-    actor QP as Qualified Person (QP)
-
-    Note over QA,VAL: Phase 1: Intended Use Definition
-    QA->>VAL: Genehmigt Intended Use (Scope, Grenzen, Out-of-Scope Bedingungen)
-    
-    Note over DS,VAL: Phase 2: Data Governance (ALCOA+)
-    DS->>VAL: Bereitstellung Trainings- & strikt isolierter Testdaten (Data Lineage)
-    
-    Note over DS: Phase 3: Model Development
-    DS->>DS: Modelltraining & Fixierung der Hyperparameter (Frozen Weights)
-    
-    Note over VAL,QA: Phase 4: Validation & Independent Testing
-    VAL->>QA: Qualifizierungsbericht mit ungesehenen Testdaten (Adversarial Testing)
-    
-    Note over OP,DS: Phase 5: Operation & Continuous Monitoring
-    OP->>DS: Produktiver Einsatz (Eingabedaten werden auf OOD geprüft)
-    DS-->>QA: Automatisches Alerting bei Data Drift / Concept Drift
-    
-    Note over QP: Phase 6: Human Oversight (HITL)
-    OP->>QP: Batch Record inkl. erklärbarer KI-Ergebnisse (Explainability)
-    QP->>QP: Finale Chargenfreigabe durch qualifizierten Menschen
-```
+### ⚖️ Säule 2: Risikobasierter Ansatz & Spezifikation
+*Wie tief müssen wir validieren und wo ziehen wir die unverrückbaren Grenzen?*
+- **[Modul 04: Risk Based Approach to AI](module_04_risk_based_approach.md)**  
+  *Proportionalitätsgebot, Silent Degradation, die 5 KI-Fehlermodi und HITL vs. HOTL.*
+- **[Modul 05: Intended Use and Model Definition](module_05_intended_use_model_definition.md)**  
+  *Das vertragliche Herzstück: Die Zaun-Metapher, Scope Creep und technische Model Lineage.*
 
 ---
 
-## 5. Die 6 Grundprinzipien für „Trustworthy AI“
-
-```mermaid
-mindmap
-  root((Trustworthy AI<br/>Annex 22))
-    1. Intended Use
-      Präziser Verwendungszweck vor Projektstart
-      Strikte Out-of-Scope Kriterien
-      Grenzen blockieren unzulässige Eingaben
-    2. Data Governance
-      ALCOA+ Prinzipien für alle Daten
-      Strikte Trennung von Training & Test
-      Lückenlose Data Lineage
-    3. Independent Validation
-      Testen mit ungesehenen Daten
-      Adversarial & Edge-Case Testing
-      Keine Data Leakage
-    4. Proportionate Explainability
-      Nachvollziehbarkeit proportional zum Risiko
-      Schutz vor reiner Black-Box
-      Dokumentierte Entscheidungspfade
-    5. Meaningful Human Oversight
-      Schutz vor Automation Bias
-      Aktives Challenge-Verfahren
-      Reale Übersteuerungsbefugnis (Override)
-    6. Continuous Monitoring
-      Erkennung von Data & Concept Drift
-      Vordefinierte Alarmschwellen
-      Geregeltes Change Control bei Retraining
-```
+### 🔬 Säule 3: Daten, Entwicklung & Validierung
+*Wie stellen wir sicher, dass das Modell robust und nachvollziehbar arbeitet?*
+- **[Modul 06: Data Governance and Data Quality](module_06_data_governance_quality.md)**  
+  *ALCOA+ für Trainingsdaten, Data Lineage und strikte Trennung von Testdatensätzen.*
+- **[Modul 07: AI Model Development and Training](module_07_model_development_training.md)**  
+  *Algorithmenauswahl, Feature Engineering und unveränderliche Modellversionierung.*
+- **[Modul 08: Validation and Performance Testing](module_08_validation_performance_testing.md)**  
+  *Adversarial Testing, Performance-Metriken (Precision, Recall) und GAMP-Mapping.*
+- **[Modul 09: Explainability and Transparency](module_09_explainability_transparency.md)**  
+  *Explainable AI (XAI), Vermeidung von Black-Boxes und inspektionsfeste Transparenz.*
 
 ---
 
-## 6. Die 5 KI-spezifischen Fehlermodi (FMEA-Erweiterung)
-
-Klassische IT-Fehlerkriterien greifen bei KI zu kurz, da Modelle **nicht mit Fehlermeldung abstürzen, sondern still degradieren (*Silent Degradation*)**:
-
-1. **Systematic Bias:** Die Trainingsdaten spiegeln seltene Realzustände nicht wider; die KI entscheidet reproduzierbar fehlerhaft bei Randgruppen/Extremen.
-2. **Distribution Shift:** Der reale Produktionsprozess verändert sich schleichend gegenüber dem historischen Trainingszeitraum (*Data Drift*).
-3. **Adversarial / Edge Inputs:** Ungewöhnliche Kombinationen von Messwerten überfordern die Modelllogik.
-4. **Confidence Miscalibration:** Die KI liefert eine falsche Prognose, weist dieser aber intern eine extrem hohe Wahrscheinlichkeit (z.B. 99,8%) zu.
-5. **Spurious Correlations:** Scheinzusammenhänge in den Daten (z.B. Beleuchtungswechsel oder Bediener-Kürzel) werden fälschlich als kausale Steuergröße gelernt.
-
----
-
-## 7. Rollenverteilung: Das „Three-Legged Stool“-Modell
-
-```mermaid
-classDiagram
-    class QA_QualityAssurance {
-        +Etabliert AI-Governance Framework
-        +Genehmigt Intended Use & Akzeptanzkriterien
-        +Führt behördliche Inspektionen
-        +Überwacht CAPA & Automation Bias Risiken
-    }
-    class Validation_CSV {
-        +Übersetzt Intended Use in messbare Tests
-        +Erstellt unabhängige Testdatensätze
-        +Führt Qualifizierung (IQ/OQ/PQ) durch
-        +Definiert OOD- und Drift-Schwellen
-    }
-    class IT_DataScience {
-        +Baut MLOps-Infrastruktur & Pipelines
-        +Sichert Data Lineage & Model Registry
-        +Garantiert unveränderliche Modellversionen
-        +Implementiert Drift-Monitoring & Logging
-    }
-    QA_QualityAssurance <--> Validation_CSV : Genehmigung & Kriterien
-    Validation_CSV <--> IT_DataScience : Technische Testbarkeit
-    IT_DataScience <--> QA_QualityAssurance : Audit Trails & Monitoring
-```
+### 🛡️ Säule 4: Menschliche Aufsicht, Betrieb & Inspektion
+*Wie bleibt das System über Jahre hinweg im validierten Zustand?*
+- **[Modul 10: Human Oversight / Human in the Loop](module_10_human_oversight_hitl.md)**  
+  *Aktives Challenge-Design, Übersteuerungsbefugnis (Override) und Qualifikation von Personal & QP.*
+- **[Modul 11: Lifecycle Management and Continuous Monitoring](module_11_lifecycle_continuous_monitoring.md)**  
+  *Früherkennung von Data- & Concept-Drift, Alarmschwellen und kontrolliertes Retraining.*
+- **[Modul 12: Audit and Inspection Readiness](module_12_audit_inspection_readiness.md)**  
+  *Inspektionssimulationen, Verteidigung vor Behörden (EMA/FDA) und typische Rote Flaggen.*
 
 ---
 
-## 8. Inspektions-Readiness & Rote Flaggen für Auditoren
+## 4. Die goldenen Regeln für die Praxis (Executive Rules)
 
-### 🚩 Typische „Red Flags“ bei Inspektionen
-* **Vage Intended Use Aussagen:** Formulierungen wie *„unterstützt Qualitätsentscheidungen“* laden Auditoren zum tiefen Nachbohren ein.
-* **Flache Governance (*Compliance Theater*):** Alle KI-Systeme mit denselben Standard-IT-Formularen ohne Beachtung von Drift oder Bias behandelt.
-* **Informeller *Scope Creep*:** Anwender nutzen das System an der Linie für Produkte oder Packmittel, die nie validiert wurden.
-* **Passives Abnicken (*Perfunctory Review*):** Reviewer bestätigen KI-Vorschläge in Sekunden ohne nachweisbare inhaltliche Auseinandersetzung.
-* **SaaS-Blackbox ohne Kontrolle:** Einbindung von Cloud-KI, deren Vendor-Updates nicht per Change Control gesteuert werden.
-
-### 🛡️ Robuste Audit-Verteidigung (*Audit Defensibility*)
-* Lückenlos gepflegtes, lebendes **AI-Inventar** mit Scoping-Begründungen.
-* Nachweis harter technischer Barrieren (**Out-of-Distribution Detection**), die unzulässige Eingaben an der Linie stoppen.
-* Nachweis aktiver **manueller Notfallübungen (*Fallback Drills*)**, um Operator-Kompetenzen aufrechtzuerhalten.
+| # | Grundsatz | Konkrete Bedeutung für das Projekt |
+| :-: | :--- | :--- |
+| **1** | **Keine Black-Box ohne Zaun** | Jedes KI-System benötigt vor Beginn eine genehmigte *Intended Use Specification* mit festen Out-of-Scope-Bedingungen. |
+| **2** | **Kein stummes Weiterlernen** | Nur statische Modelle mit *Frozen Weights* dürfen für kritische GMP-Entscheidungen herangezogen werden. |
+| **3** | **Daten wie Rohstoffe behandeln** | Trainingsdaten unterliegen denselben ALCOA+-Standards wie pharmazeutische Wirkstoffe. |
+| **4** | **Echtes Hinterfragen (Active Challenge)** | Menschliche Prüfer müssen unabhängig einstufen können, um unkritisches Abnicken (*Automation Bias*) auszuschließen. |
+| **5** | **Instrumentierung gegen Silent Drift** | Ein KI-System muss ab Tag 1 über ein statistisches Monitoring verfügen, das Leistungsabfälle sofort meldet. |
