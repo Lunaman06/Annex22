@@ -1,0 +1,1381 @@
+{
+  "module": {
+    "id": "06",
+    "slug": "06_data_governance_quality",
+    "video_id": "MwEocONFyuA",
+    "title": "Data Governance and Data Quality",
+    "duration": "09:18"
+  },
+  "cues": [
+    {
+      "text": "All right, let's dive straight into this",
+      "start": 0.0,
+      "duration": 4.88
+    },
+    {
+      "text": "explainer on Annex 22 module 6. If",
+      "start": 1.8,
+      "duration": 5.56
+    },
+    {
+      "text": "you're in pharma QA, IT, or validation,",
+      "start": 4.88,
+      "duration": 4.68
+    },
+    {
+      "text": "you already know that data is absolutely",
+      "start": 7.36,
+      "duration": 3.8
+    },
+    {
+      "text": "critical. But when we start talking",
+      "start": 9.56,
+      "duration": 3.48
+    },
+    {
+      "text": "about artificial intelligence, we have",
+      "start": 11.16,
+      "duration": 3.6
+    },
+    {
+      "text": "to completely reframe how we look at",
+      "start": 13.04,
+      "duration": 3.64
+    },
+    {
+      "text": "that data. We can't just treat it as",
+      "start": 14.76,
+      "duration": 4.24
+    },
+    {
+      "text": "passive IT storage anymore. It is",
+      "start": 16.68,
+      "duration": 4.12
+    },
+    {
+      "text": "literally the active pharmaceutical",
+      "start": 19.0,
+      "duration": 3.96
+    },
+    {
+      "text": "ingredient of your AI. It's the core",
+      "start": 20.8,
+      "duration": 4.28
+    },
+    {
+      "text": "element dictating exactly how your model",
+      "start": 22.96,
+      "duration": 3.4
+    },
+    {
+      "text": "is going to behave out in the real",
+      "start": 25.08,
+      "duration": 3.56
+    },
+    {
+      "text": "world. So today, we're breaking down the",
+      "start": 26.36,
+      "duration": 4.28
+    },
+    {
+      "text": "exact data governance and quality",
+      "start": 28.64,
+      "duration": 3.76
+    },
+    {
+      "text": "standards you need to guarantee your",
+      "start": 30.64,
+      "duration": 3.44
+    },
+    {
+      "text": "AI's integrity.",
+      "start": 32.4,
+      "duration": 3.72
+    },
+    {
+      "text": "Here's our road map for today. We'll be",
+      "start": 34.08,
+      "duration": 4.92
+    },
+    {
+      "text": "covering six key areas: the substrate of",
+      "start": 36.12,
+      "duration": 6.24
+    },
+    {
+      "text": "AI, ALCOA plus for AI data, training",
+      "start": 39.0,
+      "duration": 5.76
+    },
+    {
+      "text": "data lineage and bias, test data",
+      "start": 42.36,
+      "duration": 4.48
+    },
+    {
+      "text": "independence, operational data",
+      "start": 44.76,
+      "duration": 3.84
+    },
+    {
+      "text": "governance, and we'll wrap up with",
+      "start": 46.84,
+      "duration": 4.0
+    },
+    {
+      "text": "essential data discipline. Let's get",
+      "start": 48.6,
+      "duration": 4.64
+    },
+    {
+      "text": "right to it. I want you to really think",
+      "start": 50.84,
+      "duration": 4.88
+    },
+    {
+      "text": "about this core thesis for a second.",
+      "start": 53.24,
+      "duration": 5.12
+    },
+    {
+      "text": "Data is the substrate from which AI",
+      "start": 55.72,
+      "duration": 4.84
+    },
+    {
+      "text": "behavior emerges. It makes perfect",
+      "start": 58.36,
+      "duration": 4.2
+    },
+    {
+      "text": "sense, right? If this foundational",
+      "start": 60.56,
+      "duration": 3.88
+    },
+    {
+      "text": "substrate is contaminated by, say, poor",
+      "start": 62.56,
+      "duration": 4.04
+    },
+    {
+      "text": "sampling, data leakage, or undocumented",
+      "start": 64.44,
+      "duration": 4.52
+    },
+    {
+      "text": "transformations, then the AI's output",
+      "start": 66.6,
+      "duration": 4.64
+    },
+    {
+      "text": "inherently becomes toxic. Your model's",
+      "start": 68.96,
+      "duration": 4.64
+    },
+    {
+      "text": "behavior, its statistical reliability,",
+      "start": 71.24,
+      "duration": 4.36
+    },
+    {
+      "text": "its day-to-day operational performance,",
+      "start": 73.6,
+      "duration": 3.64
+    },
+    {
+      "text": "it's all a direct, unavoidable",
+      "start": 75.6,
+      "duration": 3.56
+    },
+    {
+      "text": "reflection of the specific data you feed",
+      "start": 77.24,
+      "duration": 2.84
+    },
+    {
+      "text": "it.",
+      "start": 79.16,
+      "duration": 4.12
+    },
+    {
+      "text": "Section 1: The substrate of AI. Let's",
+      "start": 80.08,
+      "duration": 4.56
+    },
+    {
+      "text": "look at how we actually build this",
+      "start": 83.28,
+      "duration": 3.04
+    },
+    {
+      "text": "substrate of trust across the entire",
+      "start": 84.64,
+      "duration": 3.6
+    },
+    {
+      "text": "life cycle of an AI model.",
+      "start": 86.32,
+      "duration": 4.04
+    },
+    {
+      "text": "The AI data pipeline really breaks down",
+      "start": 88.24,
+      "duration": 4.2
+    },
+    {
+      "text": "into six distinct quality gates. You",
+      "start": 90.36,
+      "duration": 3.68
+    },
+    {
+      "text": "start with sourcing and documenting",
+      "start": 92.44,
+      "duration": 3.4
+    },
+    {
+      "text": "lineage, move through curation and",
+      "start": 94.04,
+      "duration": 3.84
+    },
+    {
+      "text": "quality checks, down into labeling,",
+      "start": 95.84,
+      "duration": 3.24
+    },
+    {
+      "text": "making sure you have interrater",
+      "start": 97.88,
+      "duration": 2.84
+    },
+    {
+      "text": "agreement, then splitting the data",
+      "start": 99.08,
+      "duration": 3.92
+    },
+    {
+      "text": "without any leakage, versioning it as a",
+      "start": 100.72,
+      "duration": 4.52
+    },
+    {
+      "text": "totally immutable snapshot, and finally,",
+      "start": 103.0,
+      "duration": 4.0
+    },
+    {
+      "text": "auditing it. What this tells us is that",
+      "start": 105.24,
+      "duration": 3.8
+    },
+    {
+      "text": "data assembly itself is now a highly",
+      "start": 107.0,
+      "duration": 3.84
+    },
+    {
+      "text": "regulated activity. You can't just",
+      "start": 109.04,
+      "duration": 3.12
+    },
+    {
+      "text": "scrape a bunch of historical files",
+      "start": 110.84,
+      "duration": 3.08
+    },
+    {
+      "text": "together and throw them at a model.",
+      "start": 112.16,
+      "duration": 3.44
+    },
+    {
+      "text": "Every single step requires formal",
+      "start": 113.92,
+      "duration": 3.2
+    },
+    {
+      "text": "approval and tight integration with your",
+      "start": 115.6,
+      "duration": 3.8
+    },
+    {
+      "text": "broader quality systems. Moving on to",
+      "start": 117.12,
+      "duration": 5.88
+    },
+    {
+      "text": "section two, ALCOA plus for AI data.",
+      "start": 119.4,
+      "duration": 5.76
+    },
+    {
+      "text": "Now, as validation professionals, I know",
+      "start": 123.0,
+      "duration": 4.76
+    },
+    {
+      "text": "you know ALCOA plus by heart, but Annex",
+      "start": 125.16,
+      "duration": 4.599
+    },
+    {
+      "text": "22 requires us to evolve those",
+      "start": 127.76,
+      "duration": 4.56
+    },
+    {
+      "text": "principles specifically for AI.",
+      "start": 129.759,
+      "duration": 4.681
+    },
+    {
+      "text": "The crucial takeaway here is that while",
+      "start": 132.32,
+      "duration": 3.88
+    },
+    {
+      "text": "we absolutely keep the classic",
+      "start": 134.44,
+      "duration": 3.64
+    },
+    {
+      "text": "principles, meaning data has to be",
+      "start": 136.2,
+      "duration": 4.2
+    },
+    {
+      "text": "attributable, legible, contemporaneous,",
+      "start": 138.08,
+      "duration": 4.44
+    },
+    {
+      "text": "original, and accurate, we have to add",
+      "start": 140.4,
+      "duration": 4.92
+    },
+    {
+      "text": "some heavy-hitting extensions for AI.",
+      "start": 142.52,
+      "duration": 5.08
+    },
+    {
+      "text": "Your data needs to be complete, meaning",
+      "start": 145.32,
+      "duration": 4.28
+    },
+    {
+      "text": "absolutely no selective omissions of",
+      "start": 147.6,
+      "duration": 4.04
+    },
+    {
+      "text": "unfavorable data points. It must be",
+      "start": 149.6,
+      "duration": 4.8
+    },
+    {
+      "text": "consistent, using uniform formats across",
+      "start": 151.64,
+      "duration": 4.68
+    },
+    {
+      "text": "massive data sets. It has to be",
+      "start": 154.4,
+      "duration": 4.0
+    },
+    {
+      "text": "enduring, so retained for the full life",
+      "start": 156.32,
+      "duration": 3.84
+    },
+    {
+      "text": "cycle of the AI, and it must be",
+      "start": 158.4,
+      "duration": 3.6
+    },
+    {
+      "text": "available. Now, that last one,",
+      "start": 160.16,
+      "duration": 4.04
+    },
+    {
+      "text": "availability, is unique headache for AI",
+      "start": 162.0,
+      "duration": 3.68
+    },
+    {
+      "text": "because these training sets can be",
+      "start": 164.2,
+      "duration": 3.56
+    },
+    {
+      "text": "massive, but you still need an archiving",
+      "start": 165.68,
+      "duration": 3.44
+    },
+    {
+      "text": "strategy that lets you pull them up",
+      "start": 167.76,
+      "duration": 3.44
+    },
+    {
+      "text": "quickly during a standard inspection.",
+      "start": 169.12,
+      "duration": 4.4
+    },
+    {
+      "text": "Which naturally brings us to a slightly",
+      "start": 171.2,
+      "duration": 4.92
+    },
+    {
+      "text": "uncomfortable question. If an inspector",
+      "start": 173.52,
+      "duration": 4.439
+    },
+    {
+      "text": "walked onto your floor right now and",
+      "start": 176.12,
+      "duration": 4.28
+    },
+    {
+      "text": "asked you this, could you hand over the",
+      "start": 177.959,
+      "duration": 5.401
+    },
+    {
+      "text": "exact chain of derivation? Or, let's be",
+      "start": 180.4,
+      "duration": 4.96
+    },
+    {
+      "text": "honest, would you be guessing? That",
+      "start": 183.36,
+      "duration": 4.28
+    },
+    {
+      "text": "takes us to section three, training data",
+      "start": 185.36,
+      "duration": 4.32
+    },
+    {
+      "text": "lineage and bias. Let's talk about how",
+      "start": 187.64,
+      "duration": 3.879
+    },
+    {
+      "text": "missing that chain of derivation creates",
+      "start": 189.68,
+      "duration": 4.04
+    },
+    {
+      "text": "a massive compliance nightmare, and how",
+      "start": 191.519,
+      "duration": 3.761
+    },
+    {
+      "text": "it links directly to one of the biggest",
+      "start": 193.72,
+      "duration": 3.68
+    },
+    {
+      "text": "threats in statistical modeling.",
+      "start": 195.28,
+      "duration": 4.239
+    },
+    {
+      "text": "Picture this real-world scenario. An",
+      "start": 197.4,
+      "duration": 4.28
+    },
+    {
+      "text": "organization deployed an AI using two",
+      "start": 199.519,
+      "duration": 4.241
+    },
+    {
+      "text": "solid years of historical batch data.",
+      "start": 201.68,
+      "duration": 3.76
+    },
+    {
+      "text": "Seems great, right? But during an",
+      "start": 203.76,
+      "duration": 3.44
+    },
+    {
+      "text": "inspection, they couldn't actually",
+      "start": 205.44,
+      "duration": 3.2
+    },
+    {
+      "text": "identify the specific batch",
+      "start": 207.2,
+      "duration": 3.36
+    },
+    {
+      "text": "contributions or the transformation",
+      "start": 208.64,
+      "duration": 4.72
+    },
+    {
+      "text": "history. The impact was brutal, a major",
+      "start": 210.56,
+      "duration": 4.84
+    },
+    {
+      "text": "regulatory finding and a massive,",
+      "start": 213.36,
+      "duration": 4.36
+    },
+    {
+      "text": "painful six-month remediation effort",
+      "start": 215.4,
+      "duration": 4.48
+    },
+    {
+      "text": "just to reconstruct the lineage. This is",
+      "start": 217.72,
+      "duration": 4.04
+    },
+    {
+      "text": "exactly why capturing real-time",
+      "start": 219.88,
+      "duration": 3.8
+    },
+    {
+      "text": "documentation of lineage using dedicated",
+      "start": 221.76,
+      "duration": 4.56
+    },
+    {
+      "text": "tooling like Apache Atlas or Data Hub",
+      "start": 223.68,
+      "duration": 4.68
+    },
+    {
+      "text": "built straight into your pipelines is so",
+      "start": 226.32,
+      "duration": 3.12
+    },
+    {
+      "text": "much easier than trying to",
+      "start": 228.36,
+      "duration": 2.599
+    },
+    {
+      "text": "retrospectively rebuild it for a",
+      "start": 229.44,
+      "duration": 3.24
+    },
+    {
+      "text": "skeptical inspector.",
+      "start": 230.959,
+      "duration": 3.561
+    },
+    {
+      "text": "And having that pristine lineage is",
+      "start": 232.68,
+      "duration": 3.96
+    },
+    {
+      "text": "exactly what helps us hunt down the four",
+      "start": 234.52,
+      "duration": 4.6
+    },
+    {
+      "text": "major types of statistical bias. Biases",
+      "start": 236.64,
+      "duration": 4.28
+    },
+    {
+      "text": "that almost never surface unless you",
+      "start": 239.12,
+      "duration": 4.16
+    },
+    {
+      "text": "have an explicit assessment methodology.",
+      "start": 240.92,
+      "duration": 3.8
+    },
+    {
+      "text": "You've got sampling bias, where your",
+      "start": 243.28,
+      "duration": 3.16
+    },
+    {
+      "text": "data set just fundamentally misses",
+      "start": 244.72,
+      "duration": 3.96
+    },
+    {
+      "text": "operational reality. You have time bias,",
+      "start": 246.44,
+      "duration": 3.68
+    },
+    {
+      "text": "which happens if you accidentally train",
+      "start": 248.68,
+      "duration": 3.36
+    },
+    {
+      "text": "your model during a weird period, like a",
+      "start": 250.12,
+      "duration": 3.4
+    },
+    {
+      "text": "process upset or a right after a",
+      "start": 252.04,
+      "duration": 3.6
+    },
+    {
+      "text": "supplier change. Then there's site bias,",
+      "start": 253.52,
+      "duration": 3.719
+    },
+    {
+      "text": "where you over represent specific,",
+      "start": 255.64,
+      "duration": 3.879
+    },
+    {
+      "text": "usually larger, manufacturing sites. And",
+      "start": 257.239,
+      "duration": 4.481
+    },
+    {
+      "text": "finally, operator bias, where the model",
+      "start": 259.519,
+      "duration": 3.4
+    },
+    {
+      "text": "only learns from the work of your",
+      "start": 261.72,
+      "duration": 2.76
+    },
+    {
+      "text": "absolute best, most experienced",
+      "start": 262.919,
+      "duration": 3.481
+    },
+    {
+      "text": "operators, and then completely fails to",
+      "start": 264.48,
+      "duration": 3.48
+    },
+    {
+      "text": "generalize when a novice steps onto the",
+      "start": 266.4,
+      "duration": 4.4
+    },
+    {
+      "text": "line. Let's look at site bias in action.",
+      "start": 267.96,
+      "duration": 4.959
+    },
+    {
+      "text": "In this case, training data for a batch",
+      "start": 270.8,
+      "duration": 4.76
+    },
+    {
+      "text": "quality AI was pulled primarily from two",
+      "start": 272.919,
+      "duration": 5.201
+    },
+    {
+      "text": "very large sites. Now, convenience",
+      "start": 275.56,
+      "duration": 4.12
+    },
+    {
+      "text": "sampling like that often seems super",
+      "start": 278.12,
+      "duration": 4.28
+    },
+    {
+      "text": "efficient at the time, but it completely",
+      "start": 279.68,
+      "duration": 4.6
+    },
+    {
+      "text": "failed to capture the unique process",
+      "start": 282.4,
+      "duration": 4.12
+    },
+    {
+      "text": "nuances of the company's smaller sites.",
+      "start": 284.28,
+      "duration": 4.76
+    },
+    {
+      "text": "The result? Unreliable quality decisions",
+      "start": 286.52,
+      "duration": 4.28
+    },
+    {
+      "text": "at those smaller sites for six straight",
+      "start": 289.04,
+      "duration": 4.12
+    },
+    {
+      "text": "months. It created severe, sweeping",
+      "start": 290.8,
+      "duration": 4.04
+    },
+    {
+      "text": "retrospective concern about already",
+      "start": 293.16,
+      "duration": 4.2
+    },
+    {
+      "text": "released product. So, statistical bias",
+      "start": 294.84,
+      "duration": 3.96
+    },
+    {
+      "text": "in your data set isn't just some",
+      "start": 297.36,
+      "duration": 4.24
+    },
+    {
+      "text": "academic theory. In pharma, it is a very",
+      "start": 298.8,
+      "duration": 5.28
+    },
+    {
+      "text": "real, direct threat to product quality",
+      "start": 301.6,
+      "duration": 4.04
+    },
+    {
+      "text": "and patient safety.",
+      "start": 304.08,
+      "duration": 3.72
+    },
+    {
+      "text": "Moving right along to section four, test",
+      "start": 305.64,
+      "duration": 4.279
+    },
+    {
+      "text": "data independence. Once you've got a",
+      "start": 307.8,
+      "duration": 4.36
+    },
+    {
+      "text": "clean, unbiased training set, you have",
+      "start": 309.919,
+      "duration": 4.401
+    },
+    {
+      "text": "to rigorously protect your test data.",
+      "start": 312.16,
+      "duration": 4.08
+    },
+    {
+      "text": "The data you actually use to formally",
+      "start": 314.32,
+      "duration": 3.52
+    },
+    {
+      "text": "validate the AI.",
+      "start": 316.24,
+      "duration": 4.28
+    },
+    {
+      "text": "Think about this carefully. A standard",
+      "start": 317.84,
+      "duration": 4.72
+    },
+    {
+      "text": "random 80/20 data split sounds",
+      "start": 320.52,
+      "duration": 4.08
+    },
+    {
+      "text": "statistically bulletproof in a textbook,",
+      "start": 322.56,
+      "duration": 4.32
+    },
+    {
+      "text": "but in structured pharmaceutical data,",
+      "start": 324.6,
+      "duration": 4.04
+    },
+    {
+      "text": "random splits very often mask hidden",
+      "start": 326.88,
+      "duration": 4.039
+    },
+    {
+      "text": "dependencies that silently completely",
+      "start": 328.64,
+      "duration": 4.56
+    },
+    {
+      "text": "contaminate your validation metrics.",
+      "start": 330.919,
+      "duration": 4.081
+    },
+    {
+      "text": "Take this scenario, for example. A",
+      "start": 333.2,
+      "duration": 3.52
+    },
+    {
+      "text": "natural language processing classifier",
+      "start": 335.0,
+      "duration": 3.96
+    },
+    {
+      "text": "was trained on deviation records using",
+      "start": 336.72,
+      "duration": 4.36
+    },
+    {
+      "text": "that classic random split. But here's",
+      "start": 338.96,
+      "duration": 4.56
+    },
+    {
+      "text": "the catch. Related deviation events had",
+      "start": 341.08,
+      "duration": 4.56
+    },
+    {
+      "text": "multiple records sharing the exact same",
+      "start": 343.52,
+      "duration": 4.44
+    },
+    {
+      "text": "text patterns. So, the same contextual",
+      "start": 345.64,
+      "duration": 4.12
+    },
+    {
+      "text": "content ended up in both the training",
+      "start": 347.96,
+      "duration": 4.24
+    },
+    {
+      "text": "set and the test set. This is a textbook",
+      "start": 349.76,
+      "duration": 4.6
+    },
+    {
+      "text": "case of data leakage. It artificially",
+      "start": 352.2,
+      "duration": 4.28
+    },
+    {
+      "text": "inflated the validation metrics, making",
+      "start": 354.36,
+      "duration": 3.84
+    },
+    {
+      "text": "the model look like an absolute genius",
+      "start": 356.48,
+      "duration": 3.48
+    },
+    {
+      "text": "on paper, while completely hiding",
+      "start": 358.2,
+      "duration": 3.32
+    },
+    {
+      "text": "terrible real-world operational",
+      "start": 359.96,
+      "duration": 4.24
+    },
+    {
+      "text": "performance. Your test data must never,",
+      "start": 361.52,
+      "duration": 4.16
+    },
+    {
+      "text": "ever have been seen by the model during",
+      "start": 364.2,
+      "duration": 3.72
+    },
+    {
+      "text": "training. And by the way, it's not just",
+      "start": 365.68,
+      "duration": 4.04
+    },
+    {
+      "text": "the raw data you have to worry about.",
+      "start": 367.92,
+      "duration": 3.8
+    },
+    {
+      "text": "It's the labels, too. Historical",
+      "start": 369.72,
+      "duration": 3.72
+    },
+    {
+      "text": "disposition records aren't always a",
+      "start": 371.72,
+      "duration": 3.88
+    },
+    {
+      "text": "reliable ground truth. Look at this",
+      "start": 373.44,
+      "duration": 4.24
+    },
+    {
+      "text": "visual inspection AI. It was trained on",
+      "start": 375.6,
+      "duration": 4.4
+    },
+    {
+      "text": "historical pass-fail labels. But, it",
+      "start": 377.68,
+      "duration": 3.96
+    },
+    {
+      "text": "turns out those historical human",
+      "start": 380.0,
+      "duration": 3.68
+    },
+    {
+      "text": "inspectors actually had a 15%",
+      "start": 381.64,
+      "duration": 4.6
+    },
+    {
+      "text": "disagreement rate on borderline cases.",
+      "start": 383.68,
+      "duration": 4.72
+    },
+    {
+      "text": "The AI didn't magically smooth that out.",
+      "start": 386.24,
+      "duration": 3.8
+    },
+    {
+      "text": "It perfectly inherited human",
+      "start": 388.4,
+      "duration": 3.28
+    },
+    {
+      "text": "inconsistency.",
+      "start": 390.04,
+      "duration": 3.64
+    },
+    {
+      "text": "Your labels, the annotations telling the",
+      "start": 391.68,
+      "duration": 4.12
+    },
+    {
+      "text": "AI what it's looking at, they require",
+      "start": 393.68,
+      "duration": 3.88
+    },
+    {
+      "text": "just as much rigorous governance,",
+      "start": 395.8,
+      "duration": 3.76
+    },
+    {
+      "text": "version control, and quality review as",
+      "start": 397.56,
+      "duration": 4.84
+    },
+    {
+      "text": "the raw data itself. Section five,",
+      "start": 399.56,
+      "duration": 5.12
+    },
+    {
+      "text": "operational data governance. Because",
+      "start": 402.4,
+      "duration": 4.6
+    },
+    {
+      "text": "deploying a well-trained, validated",
+      "start": 404.68,
+      "duration": 3.96
+    },
+    {
+      "text": "doesn't mean we get to kick our feet up.",
+      "start": 407.0,
+      "duration": 3.44
+    },
+    {
+      "text": "The data integrity discipline has to",
+      "start": 408.64,
+      "duration": 4.16
+    },
+    {
+      "text": "continue straight into production.",
+      "start": 410.44,
+      "duration": 4.16
+    },
+    {
+      "text": "Operational data flowing through your",
+      "start": 412.8,
+      "duration": 5.84
+    },
+    {
+      "text": "deployed AI is a formal GMP record. Let",
+      "start": 414.6,
+      "duration": 5.52
+    },
+    {
+      "text": "me just say that again, to be crystal",
+      "start": 418.64,
+      "duration": 4.64
+    },
+    {
+      "text": "clear. It is a formal GMP record.",
+      "start": 420.12,
+      "duration": 5.52
+    },
+    {
+      "text": "ALCOA plus controls apply to all of your",
+      "start": 423.28,
+      "duration": 4.48
+    },
+    {
+      "text": "live operational data. You need an",
+      "start": 425.64,
+      "duration": 4.16
+    },
+    {
+      "text": "architecture that captures inputs,",
+      "start": 427.76,
+      "duration": 3.68
+    },
+    {
+      "text": "outputs, and confidence scores to",
+      "start": 429.8,
+      "duration": 3.24
+    },
+    {
+      "text": "support drift detection and your audit",
+      "start": 431.44,
+      "duration": 3.64
+    },
+    {
+      "text": "trails. And you have to do all of that",
+      "start": 433.04,
+      "duration": 3.16
+    },
+    {
+      "text": "without slowing down the system's",
+      "start": 435.08,
+      "duration": 3.36
+    },
+    {
+      "text": "performance. Plus, this monitoring data",
+      "start": 436.2,
+      "duration": 3.96
+    },
+    {
+      "text": "requires full retention discipline to",
+      "start": 438.44,
+      "duration": 3.28
+    },
+    {
+      "text": "keep you compliant.",
+      "start": 440.16,
+      "duration": 3.84
+    },
+    {
+      "text": "And here's exactly why keeping a close",
+      "start": 441.72,
+      "duration": 4.88
+    },
+    {
+      "text": "eye on that live data matters so much.",
+      "start": 444.0,
+      "duration": 4.919
+    },
+    {
+      "text": "We face what's known as an operational",
+      "start": 446.6,
+      "duration": 4.56
+    },
+    {
+      "text": "feedback loop. This happens when the",
+      "start": 448.919,
+      "duration": 4.521
+    },
+    {
+      "text": "outputs your AI generates today actually",
+      "start": 451.16,
+      "duration": 4.68
+    },
+    {
+      "text": "become the training inputs for its next",
+      "start": 453.44,
+      "duration": 4.2
+    },
+    {
+      "text": "version update. If you aren't careful",
+      "start": 455.84,
+      "duration": 3.6
+    },
+    {
+      "text": "with your governance here, this feedback",
+      "start": 457.64,
+      "duration": 3.72
+    },
+    {
+      "text": "loop can cause the AI to literally start",
+      "start": 459.44,
+      "duration": 4.44
+    },
+    {
+      "text": "training on its own past predictions. It",
+      "start": 461.36,
+      "duration": 4.8
+    },
+    {
+      "text": "creates an echo chamber that over time",
+      "start": 463.88,
+      "duration": 4.24
+    },
+    {
+      "text": "disastrously amplifies its own",
+      "start": 466.16,
+      "duration": 4.16
+    },
+    {
+      "text": "statistical biases and rapidly degrades",
+      "start": 468.12,
+      "duration": 3.4
+    },
+    {
+      "text": "performance.",
+      "start": 470.32,
+      "duration": 3.48
+    },
+    {
+      "text": "Finally, section six, essential data",
+      "start": 471.52,
+      "duration": 4.12
+    },
+    {
+      "text": "discipline. Let's pull everything we've",
+      "start": 473.8,
+      "duration": 3.16
+    },
+    {
+      "text": "talked about together and look at what",
+      "start": 475.64,
+      "duration": 3.36
+    },
+    {
+      "text": "really separates mature, trustworthy AI",
+      "start": 476.96,
+      "duration": 4.16
+    },
+    {
+      "text": "validation from what is essentially just",
+      "start": 479.0,
+      "duration": 4.32
+    },
+    {
+      "text": "compliance theater. There is a very",
+      "start": 481.12,
+      "duration": 4.56
+    },
+    {
+      "text": "stark contrast between common governance",
+      "start": 483.32,
+      "duration": 4.6
+    },
+    {
+      "text": "mistakes and what inspectors actually",
+      "start": 485.68,
+      "duration": 4.36
+    },
+    {
+      "text": "expect to see. You can't just treat",
+      "start": 487.92,
+      "duration": 4.24
+    },
+    {
+      "text": "training data as a one-time throwaway",
+      "start": 490.04,
+      "duration": 4.36
+    },
+    {
+      "text": "artifact. Inspectors expect a version",
+      "start": 492.16,
+      "duration": 4.16
+    },
+    {
+      "text": "controlled living asset under formal",
+      "start": 494.4,
+      "duration": 4.0
+    },
+    {
+      "text": "change control. You can't have spotty",
+      "start": 496.32,
+      "duration": 3.96
+    },
+    {
+      "text": "documentation of your sampling. They",
+      "start": 498.4,
+      "duration": 4.0
+    },
+    {
+      "text": "want a documented rationale analyzing",
+      "start": 500.28,
+      "duration": 4.44
+    },
+    {
+      "text": "exactly why specific data was chosen and",
+      "start": 502.4,
+      "duration": 4.28
+    },
+    {
+      "text": "what alternatives were ruled out. And",
+      "start": 504.72,
+      "duration": 3.92
+    },
+    {
+      "text": "you absolutely cannot just hope your",
+      "start": 506.68,
+      "duration": 4.2
+    },
+    {
+      "text": "data is representative. You must have an",
+      "start": 508.64,
+      "duration": 4.279
+    },
+    {
+      "text": "explicit structured bias assessment",
+      "start": 510.88,
+      "duration": 4.12
+    },
+    {
+      "text": "methodology. An inspector expects to",
+      "start": 512.919,
+      "duration": 4.24
+    },
+    {
+      "text": "trace your deployed AI directly back to",
+      "start": 515.0,
+      "duration": 3.88
+    },
+    {
+      "text": "an approved version controlled training",
+      "start": 517.159,
+      "duration": 3.841
+    },
+    {
+      "text": "data set. No gaps.",
+      "start": 518.88,
+      "duration": 3.64
+    },
+    {
+      "text": "So, I'll leave you with this provocative",
+      "start": 521.0,
+      "duration": 3.56
+    },
+    {
+      "text": "thought to chew on. Software platforms",
+      "start": 522.52,
+      "duration": 3.319
+    },
+    {
+      "text": "for data lineage and versioning are",
+      "start": 524.56,
+      "duration": 3.72
+    },
+    {
+      "text": "fantastic. At scale, they're absolutely",
+      "start": 525.839,
+      "duration": 4.481
+    },
+    {
+      "text": "mandatory. But tooling alone isn't going",
+      "start": 528.28,
+      "duration": 4.12
+    },
+    {
+      "text": "to cut it. It is the human discipline,",
+      "start": 530.32,
+      "duration": 3.92
+    },
+    {
+      "text": "the active cross-functional engagement",
+      "start": 532.4,
+      "duration": 3.04
+    },
+    {
+      "text": "between your data scientists, your",
+      "start": 534.24,
+      "duration": 3.12
+    },
+    {
+      "text": "engineers, and your QA teams that",
+      "start": 535.44,
+      "duration": 3.76
+    },
+    {
+      "text": "actually makes the system work. Are you",
+      "start": 537.36,
+      "duration": 3.28
+    },
+    {
+      "text": "just relying on software tools to save",
+      "start": 539.2,
+      "duration": 2.639
+    },
+    {
+      "text": "you during an audit? Or are you",
+      "start": 540.64,
+      "duration": 2.8
+    },
+    {
+      "text": "genuinely building the operational data",
+      "start": 541.839,
+      "duration": 2.881
+    },
+    {
+      "text": "discipline required to create a true",
+      "start": 543.44,
+      "duration": 3.04
+    },
+    {
+      "text": "substrate of trust? Think about how your",
+      "start": 544.72,
+      "duration": 3.44
+    },
+    {
+      "text": "organization is approaching this today",
+      "start": 546.48,
+      "duration": 3.48
+    },
+    {
+      "text": "because at the end of the day, your AI",
+      "start": 548.16,
+      "duration": 3.24
+    },
+    {
+      "text": "will only ever be as good as the data",
+      "start": 549.96,
+      "duration": 3.0
+    },
+    {
+      "text": "it's built on. Thanks for joining me on",
+      "start": 551.4,
+      "duration": 2.96
+    },
+    {
+      "text": "this deep dive and I'll catch you next",
+      "start": 552.96,
+      "duration": 3.76
+    },
+    {
+      "text": "time.",
+      "start": 554.36,
+      "duration": 2.36
+    }
+  ]
+}

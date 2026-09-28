@@ -1,0 +1,1386 @@
+{
+  "module": {
+    "id": "11",
+    "slug": "11_lifecycle_continuous_monitoring",
+    "video_id": "sFzPMfLAFok",
+    "title": "Lifecycle Management and Continuous Monitoring",
+    "duration": "09:38"
+  },
+  "cues": [
+    {
+      "text": "Hey everyone and welcome to this",
+      "start": 0.16,
+      "duration": 4.0
+    },
+    {
+      "text": "explainer. Okay, so if you are in",
+      "start": 2.0,
+      "duration": 5.2
+    },
+    {
+      "text": "pharma, QA, IT or validation, you",
+      "start": 4.16,
+      "duration": 5.12
+    },
+    {
+      "text": "already know that getting an AI system",
+      "start": 7.2,
+      "duration": 4.559
+    },
+    {
+      "text": "validated and deployed is a massive,",
+      "start": 9.28,
+      "duration": 4.399
+    },
+    {
+      "text": "massive achievement. But here's the hard",
+      "start": 11.759,
+      "duration": 4.08
+    },
+    {
+      "text": "truth. That initial validation, it's",
+      "start": 13.679,
+      "duration": 4.241
+    },
+    {
+      "text": "really just the starting line. Today,",
+      "start": 15.839,
+      "duration": 5.28
+    },
+    {
+      "text": "we're breaking down EU GMP Annex22,",
+      "start": 17.92,
+      "duration": 5.119
+    },
+    {
+      "text": "specifically module 11, which is all",
+      "start": 21.119,
+      "duration": 3.281
+    },
+    {
+      "text": "about life cycle management and",
+      "start": 23.039,
+      "duration": 2.961
+    },
+    {
+      "text": "continuous monitoring. We're going to",
+      "start": 24.4,
+      "duration": 3.039
+    },
+    {
+      "text": "look at what it actually takes to",
+      "start": 26.0,
+      "duration": 3.519
+    },
+    {
+      "text": "sustain that validated state through the",
+      "start": 27.439,
+      "duration": 4.321
+    },
+    {
+      "text": "messy, everchanging reality of your",
+      "start": 29.519,
+      "duration": 5.521
+    },
+    {
+      "text": "daily operations. Okay, let's dive into",
+      "start": 31.76,
+      "duration": 6.0
+    },
+    {
+      "text": "this. Here is our road map for today's",
+      "start": 35.04,
+      "duration": 5.28
+    },
+    {
+      "text": "operational briefing. First, we'll look",
+      "start": 37.76,
+      "duration": 4.88
+    },
+    {
+      "text": "at what happens beyond that initial AI",
+      "start": 40.32,
+      "duration": 4.96
+    },
+    {
+      "text": "validation. Second, we'll cover how to",
+      "start": 42.64,
+      "duration": 5.68
+    },
+    {
+      "text": "detect three specific types of AI drift.",
+      "start": 45.28,
+      "duration": 4.959
+    },
+    {
+      "text": "Third, we'll build up our defenses",
+      "start": 48.32,
+      "duration": 4.0
+    },
+    {
+      "text": "through change control and retraining.",
+      "start": 50.239,
+      "duration": 4.241
+    },
+    {
+      "text": "And finally, we'll wrap up with periodic",
+      "start": 52.32,
+      "duration": 5.12
+    },
+    {
+      "text": "review and safe retirement. All right,",
+      "start": 54.48,
+      "duration": 5.36
+    },
+    {
+      "text": "section one, beyond initial AI",
+      "start": 57.44,
+      "duration": 5.119
+    },
+    {
+      "text": "validation. So, we really need to",
+      "start": 59.84,
+      "duration": 4.56
+    },
+    {
+      "text": "shatter a common illusion in the pharma",
+      "start": 62.559,
+      "duration": 3.681
+    },
+    {
+      "text": "industry and that's this idea of",
+      "start": 64.4,
+      "duration": 4.399
+    },
+    {
+      "text": "permanent validation. Ask yourself this,",
+      "start": 66.24,
+      "duration": 4.8
+    },
+    {
+      "text": "what actually happens to your AI system",
+      "start": 68.799,
+      "duration": 4.241
+    },
+    {
+      "text": "the day after go live? Look, with",
+      "start": 71.04,
+      "duration": 3.36
+    },
+    {
+      "text": "traditional software, the answer is",
+      "start": 73.04,
+      "duration": 3.84
+    },
+    {
+      "text": "usually, well, it just runs. But AI",
+      "start": 74.4,
+      "duration": 4.719
+    },
+    {
+      "text": "isn't a static calculator. Because it's",
+      "start": 76.88,
+      "duration": 3.76
+    },
+    {
+      "text": "making predictions based on learned",
+      "start": 79.119,
+      "duration": 3.281
+    },
+    {
+      "text": "patterns and because the real world",
+      "start": 80.64,
+      "duration": 3.6
+    },
+    {
+      "text": "operational environment is constantly",
+      "start": 82.4,
+      "duration": 4.16
+    },
+    {
+      "text": "changing around it, AI models actually",
+      "start": 84.24,
+      "duration": 4.48
+    },
+    {
+      "text": "degrade over time. The environment",
+      "start": 86.56,
+      "duration": 4.64
+    },
+    {
+      "text": "evolves, but your model, it stays frozen",
+      "start": 88.72,
+      "duration": 5.6
+    },
+    {
+      "text": "in the past. This is a pretty sharp",
+      "start": 91.2,
+      "duration": 5.04
+    },
+    {
+      "text": "contrast for those of us with deep roots",
+      "start": 94.32,
+      "duration": 3.92
+    },
+    {
+      "text": "in quality assurance. Look at the left",
+      "start": 96.24,
+      "duration": 4.16
+    },
+    {
+      "text": "side here. Traditional computer system",
+      "start": 98.24,
+      "duration": 5.6
+    },
+    {
+      "text": "validation or CSV is so often treated as",
+      "start": 100.4,
+      "duration": 6.079
+    },
+    {
+      "text": "this static oneanddone exercise. You",
+      "start": 103.84,
+      "duration": 4.48
+    },
+    {
+      "text": "validate the software, lock it down, and",
+      "start": 106.479,
+      "duration": 3.841
+    },
+    {
+      "text": "you're basically good to go. But on the",
+      "start": 108.32,
+      "duration": 4.88
+    },
+    {
+      "text": "right, AI validation under Annex22 is",
+      "start": 110.32,
+      "duration": 5.439
+    },
+    {
+      "text": "highly dynamic. AI iterates so much",
+      "start": 113.2,
+      "duration": 4.559
+    },
+    {
+      "text": "faster than conventional software. It",
+      "start": 115.759,
+      "duration": 4.081
+    },
+    {
+      "text": "literally requires continuous oversight",
+      "start": 117.759,
+      "duration": 4.481
+    },
+    {
+      "text": "across its entire life cycle purely",
+      "start": 119.84,
+      "duration": 4.239
+    },
+    {
+      "text": "because the data it processes tomorrow",
+      "start": 122.24,
+      "duration": 3.6
+    },
+    {
+      "text": "might not look anything like the data it",
+      "start": 124.079,
+      "duration": 4.081
+    },
+    {
+      "text": "was trained on yesterday. To manage all",
+      "start": 125.84,
+      "duration": 4.72
+    },
+    {
+      "text": "of this, module 11 establishes some",
+      "start": 128.16,
+      "duration": 4.719
+    },
+    {
+      "text": "really strict life cycle phases. You've",
+      "start": 130.56,
+      "duration": 3.759
+    },
+    {
+      "text": "got your initial validation and",
+      "start": 132.879,
+      "duration": 3.761
+    },
+    {
+      "text": "deployment, right? But then comes steady",
+      "start": 134.319,
+      "duration": 4.161
+    },
+    {
+      "text": "state operation and that requires",
+      "start": 136.64,
+      "duration": 4.16
+    },
+    {
+      "text": "continuous performance monitoring. When",
+      "start": 138.48,
+      "duration": 4.0
+    },
+    {
+      "text": "things inevitably shift, you enter",
+      "start": 140.8,
+      "duration": 3.76
+    },
+    {
+      "text": "change management for model updates and",
+      "start": 142.48,
+      "duration": 4.24
+    },
+    {
+      "text": "woven throughout all of this. You've got",
+      "start": 144.56,
+      "duration": 4.0
+    },
+    {
+      "text": "scheduled periodic reviews to assess",
+      "start": 146.72,
+      "duration": 3.76
+    },
+    {
+      "text": "fitness. Eventually, you reach",
+      "start": 148.56,
+      "duration": 4.08
+    },
+    {
+      "text": "controlled retirement. The absolute key",
+      "start": 150.48,
+      "duration": 3.92
+    },
+    {
+      "text": "takeaway here is that these operational",
+      "start": 152.64,
+      "duration": 4.239
+    },
+    {
+      "text": "disciplines have to integrate seamlessly",
+      "start": 154.4,
+      "duration": 4.32
+    },
+    {
+      "text": "into your broader quality management",
+      "start": 156.879,
+      "duration": 5.041
+    },
+    {
+      "text": "system or QM. Moving right along to",
+      "start": 158.72,
+      "duration": 5.36
+    },
+    {
+      "text": "section two, detecting three types of",
+      "start": 161.92,
+      "duration": 4.319
+    },
+    {
+      "text": "drift. Now, what's really interesting",
+      "start": 164.08,
+      "duration": 4.32
+    },
+    {
+      "text": "about this slide is how we categorize",
+      "start": 166.239,
+      "duration": 4.161
+    },
+    {
+      "text": "the specific threats to an AI systems",
+      "start": 168.4,
+      "duration": 4.4
+    },
+    {
+      "text": "validated state. It's this silent but",
+      "start": 170.4,
+      "duration": 5.68
+    },
+    {
+      "text": "dangerous drift. NX22 says you got to",
+      "start": 172.8,
+      "duration": 5.68
+    },
+    {
+      "text": "monitor three distinct dimensions here.",
+      "start": 176.08,
+      "duration": 4.879
+    },
+    {
+      "text": "First up is data drift. This is when",
+      "start": 178.48,
+      "duration": 4.16
+    },
+    {
+      "text": "your operational inputs start looking",
+      "start": 180.959,
+      "duration": 3.041
+    },
+    {
+      "text": "statistically different from your",
+      "start": 182.64,
+      "duration": 3.12
+    },
+    {
+      "text": "training data. You know, maybe a sensor",
+      "start": 184.0,
+      "duration": 3.44
+    },
+    {
+      "text": "recalibration suddenly shifted the",
+      "start": 185.76,
+      "duration": 5.04
+    },
+    {
+      "text": "feature ranges. Second is concept drift.",
+      "start": 187.44,
+      "duration": 5.28
+    },
+    {
+      "text": "This happens when the underlying input",
+      "start": 190.8,
+      "duration": 4.0
+    },
+    {
+      "text": "output relationship changes. Say the",
+      "start": 192.72,
+      "duration": 3.68
+    },
+    {
+      "text": "physics or chemistry of your process",
+      "start": 194.8,
+      "duration": 3.84
+    },
+    {
+      "text": "changes. So the exact same inputs now",
+      "start": 196.4,
+      "duration": 4.559
+    },
+    {
+      "text": "mean something entirely different. This",
+      "start": 198.64,
+      "duration": 4.48
+    },
+    {
+      "text": "one is the hardest to detect because you",
+      "start": 200.959,
+      "duration": 4.241
+    },
+    {
+      "text": "absolutely need ground truth like",
+      "start": 203.12,
+      "duration": 4.88
+    },
+    {
+      "text": "reference outcomes to spot it. Finally,",
+      "start": 205.2,
+      "duration": 4.959
+    },
+    {
+      "text": "performance drift. This is the actual",
+      "start": 208.0,
+      "duration": 4.239
+    },
+    {
+      "text": "degradation of predictive quality, like",
+      "start": 210.159,
+      "duration": 4.321
+    },
+    {
+      "text": "a noticeable drop in accuracy, which",
+      "start": 212.239,
+      "duration": 3.841
+    },
+    {
+      "text": "honestly is usually just a symptom of",
+      "start": 214.48,
+      "duration": 4.0
+    },
+    {
+      "text": "those first two. Let me give you a real",
+      "start": 216.08,
+      "duration": 4.159
+    },
+    {
+      "text": "world example from the source material",
+      "start": 218.48,
+      "duration": 4.08
+    },
+    {
+      "text": "to show just how fast this can go wrong.",
+      "start": 220.239,
+      "duration": 4.321
+    },
+    {
+      "text": "Picture a predictive maintenance AI for",
+      "start": 222.56,
+      "duration": 4.64
+    },
+    {
+      "text": "bioreactor probes. Okay, so in month",
+      "start": 224.56,
+      "duration": 4.08
+    },
+    {
+      "text": "one, there's routine supplier",
+      "start": 227.2,
+      "duration": 3.44
+    },
+    {
+      "text": "substitution for some raw materials. No",
+      "start": 228.64,
+      "duration": 4.0
+    },
+    {
+      "text": "big deal, right? The AI keeps running.",
+      "start": 230.64,
+      "duration": 3.679
+    },
+    {
+      "text": "But by months three, because the new",
+      "start": 232.64,
+      "duration": 2.879
+    },
+    {
+      "text": "materials behave just slightly",
+      "start": 234.319,
+      "duration": 2.881
+    },
+    {
+      "text": "differently, we get silent AI",
+      "start": 235.519,
+      "duration": 3.521
+    },
+    {
+      "text": "degradation. Concept drift has",
+      "start": 237.2,
+      "duration": 3.759
+    },
+    {
+      "text": "officially set in. By month four, the",
+      "start": 239.04,
+      "duration": 3.6
+    },
+    {
+      "text": "model's accuracy has degraded so much",
+      "start": 240.959,
+      "duration": 3.681
+    },
+    {
+      "text": "that two actual probe failures occur",
+      "start": 242.64,
+      "duration": 3.679
+    },
+    {
+      "text": "during live batches, and they go",
+      "start": 244.64,
+      "duration": 3.36
+    },
+    {
+      "text": "completely undetected by the AI because",
+      "start": 246.319,
+      "duration": 3.28
+    },
+    {
+      "text": "it hadn't yet crossed its course alarm",
+      "start": 248.0,
+      "duration": 3.599
+    },
+    {
+      "text": "thresholds. This turned into major",
+      "start": 249.599,
+      "duration": 3.521
+    },
+    {
+      "text": "deviations and just a massive",
+      "start": 251.599,
+      "duration": 4.081
+    },
+    {
+      "text": "retrospective GMP nightmare. Now, that",
+      "start": 253.12,
+      "duration": 4.88
+    },
+    {
+      "text": "bioreactor failure that happened because",
+      "start": 255.68,
+      "duration": 4.239
+    },
+    {
+      "text": "the drift detection thresholds were just",
+      "start": 258.0,
+      "duration": 4.479
+    },
+    {
+      "text": "too loose. But on the flip side, if you",
+      "start": 259.919,
+      "duration": 4.241
+    },
+    {
+      "text": "make them too tight, you're going to get",
+      "start": 262.479,
+      "duration": 3.841
+    },
+    {
+      "text": "constant false alarms and your team is",
+      "start": 264.16,
+      "duration": 3.68
+    },
+    {
+      "text": "going to suffer from serious alarm",
+      "start": 266.32,
+      "duration": 3.84
+    },
+    {
+      "text": "fatigue. Selecting these thresholds is a",
+      "start": 267.84,
+      "duration": 4.96
+    },
+    {
+      "text": "really critical balancing act. Remember,",
+      "start": 270.16,
+      "duration": 4.56
+    },
+    {
+      "text": "drift detection alerts don't just sit on",
+      "start": 272.8,
+      "duration": 4.24
+    },
+    {
+      "text": "some IT dashboard. They feed directly",
+      "start": 274.72,
+      "duration": 4.0
+    },
+    {
+      "text": "into your deviation system and your",
+      "start": 277.04,
+      "duration": 4.4
+    },
+    {
+      "text": "Kappa processes. So, the sensitivity of",
+      "start": 278.72,
+      "duration": 4.56
+    },
+    {
+      "text": "your thresholds has to perfectly match",
+      "start": 281.44,
+      "duration": 4.0
+    },
+    {
+      "text": "the operational consequence of an AI",
+      "start": 283.28,
+      "duration": 5.04
+    },
+    {
+      "text": "failure. All right, section three,",
+      "start": 285.44,
+      "duration": 5.36
+    },
+    {
+      "text": "change control and retraining.",
+      "start": 288.32,
+      "duration": 4.8
+    },
+    {
+      "text": "And this brilliantly illustrates our",
+      "start": 290.8,
+      "duration": 4.88
+    },
+    {
+      "text": "operational defenses. How do we actually",
+      "start": 293.12,
+      "duration": 5.12
+    },
+    {
+      "text": "fix this drift? Well, the GXP approach",
+      "start": 295.68,
+      "duration": 4.64
+    },
+    {
+      "text": "to AI learning completely avoids the",
+      "start": 298.24,
+      "duration": 4.56
+    },
+    {
+      "text": "trap of unmonitored continuous learning",
+      "start": 300.32,
+      "duration": 5.68
+    },
+    {
+      "text": "by using a very rigid gated process.",
+      "start": 302.8,
+      "duration": 5.119
+    },
+    {
+      "text": "Step one is a trigger. So either a",
+      "start": 306.0,
+      "duration": 4.0
+    },
+    {
+      "text": "scheduled interval or a detected drift",
+      "start": 307.919,
+      "duration": 4.321
+    },
+    {
+      "text": "event. Step two is retraining the model",
+      "start": 310.0,
+      "duration": 4.88
+    },
+    {
+      "text": "with new data. Step three, and I cannot",
+      "start": 312.24,
+      "duration": 4.64
+    },
+    {
+      "text": "stress this enough, is the most",
+      "start": 314.88,
+      "duration": 5.2
+    },
+    {
+      "text": "important formal revalidation. You",
+      "start": 316.88,
+      "duration": 5.12
+    },
+    {
+      "text": "absolutely must generate fresh",
+      "start": 320.08,
+      "duration": 4.64
+    },
+    {
+      "text": "validation evidence. Only after that do",
+      "start": 322.0,
+      "duration": 4.4
+    },
+    {
+      "text": "you reach step four, which is the",
+      "start": 324.72,
+      "duration": 4.319
+    },
+    {
+      "text": "deployment of the new version. Listen,",
+      "start": 326.4,
+      "duration": 4.96
+    },
+    {
+      "text": "treating retraining as just a casual IT",
+      "start": 329.039,
+      "duration": 4.72
+    },
+    {
+      "text": "refresh is a massive compliance trap.",
+      "start": 331.36,
+      "duration": 4.399
+    },
+    {
+      "text": "There is actually a documented case of a",
+      "start": 333.759,
+      "duration": 3.921
+    },
+    {
+      "text": "facility that was using an AI classifier",
+      "start": 335.759,
+      "duration": 4.641
+    },
+    {
+      "text": "for NLP deviations. Their IT team was",
+      "start": 337.68,
+      "duration": 4.32
+    },
+    {
+      "text": "just routinely retraining the model",
+      "start": 340.4,
+      "duration": 3.68
+    },
+    {
+      "text": "every quarter with new data and pushing",
+      "start": 342.0,
+      "duration": 3.6
+    },
+    {
+      "text": "it live based on, you know, a few",
+      "start": 344.08,
+      "duration": 3.28
+    },
+    {
+      "text": "internal performance checks. They",
+      "start": 345.6,
+      "duration": 3.52
+    },
+    {
+      "text": "treated it exactly like a routine",
+      "start": 347.36,
+      "duration": 3.839
+    },
+    {
+      "text": "software patch. Well, when inspectors",
+      "start": 349.12,
+      "duration": 4.079
+    },
+    {
+      "text": "showed up, it triggered a major finding.",
+      "start": 351.199,
+      "duration": 4.241
+    },
+    {
+      "text": "The whole system was suspended. Why?",
+      "start": 353.199,
+      "duration": 3.761
+    },
+    {
+      "text": "Because retraining without formal",
+      "start": 355.44,
+      "duration": 3.12
+    },
+    {
+      "text": "revalidation is considered an",
+      "start": 356.96,
+      "duration": 3.92
+    },
+    {
+      "text": "uncontrolled change. Retraining is a",
+      "start": 358.56,
+      "duration": 5.28
+    },
+    {
+      "text": "major quality event. Period. And you",
+      "start": 360.88,
+      "duration": 4.56
+    },
+    {
+      "text": "know, it's not just the model weights",
+      "start": 363.84,
+      "duration": 2.96
+    },
+    {
+      "text": "you have to worry about. It's the",
+      "start": 365.44,
+      "duration": 3.68
+    },
+    {
+      "text": "configuration. Configuration management",
+      "start": 366.8,
+      "duration": 4.16
+    },
+    {
+      "text": "means tightly controlling parameters",
+      "start": 369.12,
+      "duration": 3.84
+    },
+    {
+      "text": "like decision rules or alert thresholds",
+      "start": 370.96,
+      "duration": 4.32
+    },
+    {
+      "text": "that affect operational behavior. We see",
+      "start": 372.96,
+      "duration": 4.239
+    },
+    {
+      "text": "this all the time. teams making informal",
+      "start": 375.28,
+      "duration": 4.08
+    },
+    {
+      "text": "operational tweaks to thresholds just to",
+      "start": 377.199,
+      "duration": 4.481
+    },
+    {
+      "text": "reduce noise on the factory floor. But",
+      "start": 379.36,
+      "duration": 4.399
+    },
+    {
+      "text": "adjusting a threshold informally that",
+      "start": 381.68,
+      "duration": 4.16
+    },
+    {
+      "text": "creates configuration drift. Those",
+      "start": 383.759,
+      "duration": 3.681
+    },
+    {
+      "text": "configuration values are core part of",
+      "start": 385.84,
+      "duration": 3.44
+    },
+    {
+      "text": "your validated state. Changing them",
+      "start": 387.44,
+      "duration": 3.52
+    },
+    {
+      "text": "without formal change control is an",
+      "start": 389.28,
+      "duration": 3.919
+    },
+    {
+      "text": "immediate inspection exposure because at",
+      "start": 390.96,
+      "duration": 4.079
+    },
+    {
+      "text": "that point you are effectively operating",
+      "start": 393.199,
+      "duration": 4.481
+    },
+    {
+      "text": "an unvalidated system. Let's bring it",
+      "start": 395.039,
+      "duration": 5.041
+    },
+    {
+      "text": "home with section four periodic review",
+      "start": 397.68,
+      "duration": 4.959
+    },
+    {
+      "text": "and safe retirement. To catch that",
+      "start": 400.08,
+      "duration": 4.559
+    },
+    {
+      "text": "really subtle degradation that just sort",
+      "start": 402.639,
+      "duration": 4.56
+    },
+    {
+      "text": "of slips past your daily monitoring, we",
+      "start": 404.639,
+      "duration": 4.881
+    },
+    {
+      "text": "need macrolevel governance. And that is",
+      "start": 407.199,
+      "duration": 4.56
+    },
+    {
+      "text": "where periodic review comes in. For",
+      "start": 409.52,
+      "duration": 4.08
+    },
+    {
+      "text": "high-risisk AI, this should really be",
+      "start": 411.759,
+      "duration": 4.081
+    },
+    {
+      "text": "happening quarterly or by annually. And",
+      "start": 413.6,
+      "duration": 3.52
+    },
+    {
+      "text": "you aren't just looking at today's",
+      "start": 415.84,
+      "duration": 2.72
+    },
+    {
+      "text": "metrics, right? You're looking at",
+      "start": 417.12,
+      "duration": 2.639
+    },
+    {
+      "text": "performance against the original",
+      "start": 418.56,
+      "duration": 3.039
+    },
+    {
+      "text": "validation baselines. You're looking at",
+      "start": 419.759,
+      "duration": 3.761
+    },
+    {
+      "text": "accumulated drift evidence, and you're",
+      "start": 421.599,
+      "duration": 3.44
+    },
+    {
+      "text": "checking if human oversight is actually",
+      "start": 423.52,
+      "duration": 3.44
+    },
+    {
+      "text": "still effective. There's this",
+      "start": 425.039,
+      "duration": 3.361
+    },
+    {
+      "text": "fascinating case study involving a",
+      "start": 426.96,
+      "duration": 3.76
+    },
+    {
+      "text": "visual inspection AI. The system passed",
+      "start": 428.4,
+      "duration": 4.48
+    },
+    {
+      "text": "its first annual review perfectly. High",
+      "start": 430.72,
+      "duration": 4.24
+    },
+    {
+      "text": "fives all around. But during the year 2",
+      "start": 432.88,
+      "duration": 3.759
+    },
+    {
+      "text": "review, a crossf functional committee",
+      "start": 434.96,
+      "duration": 3.04
+    },
+    {
+      "text": "noticed that performance had drifted",
+      "start": 436.639,
+      "duration": 3.68
+    },
+    {
+      "text": "downward by just a tiny tiny margin and",
+      "start": 438.0,
+      "duration": 4.16
+    },
+    {
+      "text": "human override rates had slowly crept",
+      "start": 440.319,
+      "duration": 4.561
+    },
+    {
+      "text": "up. Individually, no alarm thresholds",
+      "start": 442.16,
+      "duration": 4.319
+    },
+    {
+      "text": "were breached. But viewed together",
+      "start": 444.88,
+      "duration": 3.439
+    },
+    {
+      "text": "during that periodic review, they caught",
+      "start": 446.479,
+      "duration": 3.44
+    },
+    {
+      "text": "a gradual concept drift that would have",
+      "start": 448.319,
+      "duration": 3.041
+    },
+    {
+      "text": "absolutely caused a major quality",
+      "start": 449.919,
+      "duration": 3.761
+    },
+    {
+      "text": "failure down the line. Okay, let's",
+      "start": 451.36,
+      "duration": 4.08
+    },
+    {
+      "text": "rapidfire through the biggest compliance",
+      "start": 453.68,
+      "duration": 3.519
+    },
+    {
+      "text": "pitfalls that inspectors are hunting for",
+      "start": 455.44,
+      "duration": 3.759
+    },
+    {
+      "text": "right now. We've talked about poor drift",
+      "start": 457.199,
+      "duration": 3.681
+    },
+    {
+      "text": "sensitivity, retraining without",
+      "start": 459.199,
+      "duration": 3.521
+    },
+    {
+      "text": "revalidation, and there's informal",
+      "start": 460.88,
+      "duration": 4.319
+    },
+    {
+      "text": "configuration tweaks. We also just saw",
+      "start": 462.72,
+      "duration": 4.72
+    },
+    {
+      "text": "exactly why checkbox periodic reviews",
+      "start": 465.199,
+      "duration": 4.241
+    },
+    {
+      "text": "are incredibly dangerous. But look at",
+      "start": 467.44,
+      "duration": 3.68
+    },
+    {
+      "text": "that last bullet for a second.",
+      "start": 469.44,
+      "duration": 4.08
+    },
+    {
+      "text": "Unvalidated monitoring infrastructure.",
+      "start": 471.12,
+      "duration": 4.0
+    },
+    {
+      "text": "You are relying on your drift detection",
+      "start": 473.52,
+      "duration": 3.28
+    },
+    {
+      "text": "pipelines to trigger major governance",
+      "start": 475.12,
+      "duration": 3.68
+    },
+    {
+      "text": "decisions. If that monitoring pipeline",
+      "start": 476.8,
+      "duration": 3.679
+    },
+    {
+      "text": "itself hasn't been validated, you",
+      "start": 478.8,
+      "duration": 3.6
+    },
+    {
+      "text": "literally cannot trust its outputs. Your",
+      "start": 480.479,
+      "duration": 4.481
+    },
+    {
+      "text": "safety net is full of holes. Eventually,",
+      "start": 482.4,
+      "duration": 4.72
+    },
+    {
+      "text": "every AI model reaches the end of its",
+      "start": 484.96,
+      "duration": 4.0
+    },
+    {
+      "text": "useful life. Whether that's due to",
+      "start": 487.12,
+      "duration": 4.079
+    },
+    {
+      "text": "technical obsolescence or just being",
+      "start": 488.96,
+      "duration": 4.4
+    },
+    {
+      "text": "replaced by a much better system, but",
+      "start": 491.199,
+      "duration": 4.4
+    },
+    {
+      "text": "you don't just unplug it and walk away.",
+      "start": 493.36,
+      "duration": 3.92
+    },
+    {
+      "text": "Safe retirement means thoroughly",
+      "start": 495.599,
+      "duration": 3.841
+    },
+    {
+      "text": "evaluating the end of life decision,",
+      "start": 497.28,
+      "duration": 4.16
+    },
+    {
+      "text": "securely archiving the specific model",
+      "start": 499.44,
+      "duration": 4.159
+    },
+    {
+      "text": "versions and the data and carefully",
+      "start": 501.44,
+      "duration": 4.56
+    },
+    {
+      "text": "managing that operational transition.",
+      "start": 503.599,
+      "duration": 4.641
+    },
+    {
+      "text": "Crucially, and people miss this all the",
+      "start": 506.0,
+      "duration": 4.319
+    },
+    {
+      "text": "time, you must evaluate if any",
+      "start": 508.24,
+      "duration": 4.159
+    },
+    {
+      "text": "historical decisions made by the retired",
+      "start": 510.319,
+      "duration": 4.72
+    },
+    {
+      "text": "AI need to be rerun and re-evaluated",
+      "start": 512.399,
+      "duration": 4.88
+    },
+    {
+      "text": "under the replacement system, especially",
+      "start": 515.039,
+      "duration": 4.48
+    },
+    {
+      "text": "if the new system behaves differently.",
+      "start": 517.279,
+      "duration": 4.56
+    },
+    {
+      "text": "So, the crucial point is this. When an",
+      "start": 519.519,
+      "duration": 4.32
+    },
+    {
+      "text": "auditor walks into your facility, they",
+      "start": 521.839,
+      "duration": 3.68
+    },
+    {
+      "text": "aren't just looking at your nice, neat",
+      "start": 523.839,
+      "duration": 3.841
+    },
+    {
+      "text": "initial validation binder. As the",
+      "start": 525.519,
+      "duration": 4.081
+    },
+    {
+      "text": "guidelines emphasize, strong inspection",
+      "start": 527.68,
+      "duration": 3.599
+    },
+    {
+      "text": "readiness sustains value through",
+      "start": 529.6,
+      "duration": 4.239
+    },
+    {
+      "text": "accumulated daily practice. Success in",
+      "start": 531.279,
+      "duration": 4.321
+    },
+    {
+      "text": "AI compliance doesn't come from a",
+      "start": 533.839,
+      "duration": 3.521
+    },
+    {
+      "text": "frantic lastminute pre-insspection",
+      "start": 535.6,
+      "duration": 3.76
+    },
+    {
+      "text": "scramble. It comes from disciplined",
+      "start": 537.36,
+      "duration": 4.08
+    },
+    {
+      "text": "daily adherence to integrating your AI",
+      "start": 539.36,
+      "duration": 3.76
+    },
+    {
+      "text": "life cycle directly into your broader",
+      "start": 541.44,
+      "duration": 3.76
+    },
+    {
+      "text": "quality management system. I want to",
+      "start": 543.12,
+      "duration": 3.839
+    },
+    {
+      "text": "leave you with this final provocative",
+      "start": 545.2,
+      "duration": 4.079
+    },
+    {
+      "text": "thought. If an inspector audited your",
+      "start": 546.959,
+      "duration": 4.641
+    },
+    {
+      "text": "AI's operational drift history right",
+      "start": 549.279,
+      "duration": 5.281
+    },
+    {
+      "text": "now, today what exactly would they find?",
+      "start": 551.6,
+      "duration": 4.32
+    },
+    {
+      "text": "Would they find a tightly managed",
+      "start": 554.56,
+      "duration": 2.8
+    },
+    {
+      "text": "quality activity that's deeply",
+      "start": 555.92,
+      "duration": 3.12
+    },
+    {
+      "text": "integrated into your kapa and change",
+      "start": 557.36,
+      "duration": 3.919
+    },
+    {
+      "text": "control systems? or would they find an",
+      "start": 559.04,
+      "duration": 4.64
+    },
+    {
+      "text": "isolated, unvalidated IT experiment just",
+      "start": 561.279,
+      "duration": 4.481
+    },
+    {
+      "text": "quietly degrading in the background?",
+      "start": 563.68,
+      "duration": 4.0
+    },
+    {
+      "text": "Module 11 gives you the exact tools to",
+      "start": 565.76,
+      "duration": 3.759
+    },
+    {
+      "text": "ensure it is always the former. Thank",
+      "start": 567.68,
+      "duration": 3.279
+    },
+    {
+      "text": "you so much for joining me for this",
+      "start": 569.519,
+      "duration": 3.201
+    },
+    {
+      "text": "explainer. Now, go take a really close",
+      "start": 570.959,
+      "duration": 3.281
+    },
+    {
+      "text": "look at those continuous monitoring",
+      "start": 572.72,
+      "duration": 4.52
+    },
+    {
+      "text": "pipelines.",
+      "start": 574.24,
+      "duration": 3.0
+    }
+  ]
+}

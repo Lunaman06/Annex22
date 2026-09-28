@@ -1,0 +1,1091 @@
+{
+  "module": {
+    "id": "10",
+    "slug": "10_human_oversight_hitl",
+    "video_id": "1382ohCb0oQ",
+    "title": "Human Oversight / Human in the Loop",
+    "duration": "07:19"
+  },
+  "cues": [
+    {
+      "text": "Welcome to today's explainer. If you're",
+      "start": 0.0,
+      "duration": 4.04
+    },
+    {
+      "text": "working in pharma, quality assurance,",
+      "start": 2.24,
+      "duration": 4.44
+    },
+    {
+      "text": "IT, or validation, you already know that",
+      "start": 4.04,
+      "duration": 5.76
+    },
+    {
+      "text": "EU GMP Annex 22 is completely shifting",
+      "start": 6.68,
+      "duration": 5.08
+    },
+    {
+      "text": "how we handle artificial intelligence in",
+      "start": 9.8,
+      "duration": 4.12
+    },
+    {
+      "text": "our critical systems. But today, we're",
+      "start": 11.76,
+      "duration": 3.68
+    },
+    {
+      "text": "going to do something a bit different.",
+      "start": 13.92,
+      "duration": 3.48
+    },
+    {
+      "text": "We're taking the really dry regulatory",
+      "start": 15.44,
+      "duration": 3.96
+    },
+    {
+      "text": "compliance mandates of module 10,",
+      "start": 17.4,
+      "duration": 3.64
+    },
+    {
+      "text": "specifically the rules around human",
+      "start": 19.4,
+      "duration": 3.32
+    },
+    {
+      "text": "oversight and human in the loop, and",
+      "start": 21.04,
+      "duration": 3.12
+    },
+    {
+      "text": "transforming them into a highly",
+      "start": 22.72,
+      "duration": 3.84
+    },
+    {
+      "text": "practical operational playbook. We are",
+      "start": 24.16,
+      "duration": 4.08
+    },
+    {
+      "text": "going to break down exactly how you can",
+      "start": 26.56,
+      "duration": 3.28
+    },
+    {
+      "text": "engineer meaningful oversight that",
+      "start": 28.24,
+      "duration": 4.48
+    },
+    {
+      "text": "inspectors will actually respect. Okay,",
+      "start": 29.84,
+      "duration": 4.36
+    },
+    {
+      "text": "let's dive into our road map for this",
+      "start": 32.72,
+      "duration": 3.6
+    },
+    {
+      "text": "explainer. We'll start with why human",
+      "start": 34.2,
+      "duration": 3.96
+    },
+    {
+      "text": "oversight matters, then look at the",
+      "start": 36.32,
+      "duration": 3.88
+    },
+    {
+      "text": "three oversight tiers, the automation",
+      "start": 38.16,
+      "duration": 4.12
+    },
+    {
+      "text": "bias trap, designing meaningful review",
+      "start": 40.2,
+      "duration": 3.92
+    },
+    {
+      "text": "workflows, and finally, proving",
+      "start": 42.28,
+      "duration": 4.64
+    },
+    {
+      "text": "compliance to inspectors. Section one,",
+      "start": 44.12,
+      "duration": 5.36
+    },
+    {
+      "text": "why human oversight matters. To get this",
+      "start": 46.92,
+      "duration": 4.32
+    },
+    {
+      "text": "right, we really have to understand the",
+      "start": 49.48,
+      "duration": 4.44
+    },
+    {
+      "text": "core philosophy behind the regulation.",
+      "start": 51.24,
+      "duration": 5.24
+    },
+    {
+      "text": "Bringing AI into GXP environments",
+      "start": 53.92,
+      "duration": 4.52
+    },
+    {
+      "text": "doesn't replace human judgment.",
+      "start": 56.48,
+      "duration": 4.16
+    },
+    {
+      "text": "Actually, it paradoxically amplifies the",
+      "start": 58.44,
+      "duration": 5.2
+    },
+    {
+      "text": "absolute need for it. So, I want to pose",
+      "start": 60.64,
+      "duration": 5.44
+    },
+    {
+      "text": "a direct question, especially to the QA",
+      "start": 63.64,
+      "duration": 4.08
+    },
+    {
+      "text": "and validation folks tuning in right",
+      "start": 66.08,
+      "duration": 5.04
+    },
+    {
+      "text": "now. Does AI autonomy truly exist in",
+      "start": 67.72,
+      "duration": 6.28
+    },
+    {
+      "text": "critical GXP applications? I mean, when",
+      "start": 71.12,
+      "duration": 4.68
+    },
+    {
+      "text": "patient risk is on the line and",
+      "start": 74.0,
+      "duration": 4.12
+    },
+    {
+      "text": "regulatory scrutiny is peaking, can we",
+      "start": 75.8,
+      "duration": 4.36
+    },
+    {
+      "text": "ever just let the machine run the whole",
+      "start": 78.12,
+      "duration": 3.96
+    },
+    {
+      "text": "show? Well, the short answer from an",
+      "start": 80.16,
+      "duration": 4.8
+    },
+    {
+      "text": "Annex 22 perspective is absolutely not.",
+      "start": 82.08,
+      "duration": 4.28
+    },
+    {
+      "text": "No way.",
+      "start": 84.96,
+      "duration": 3.28
+    },
+    {
+      "text": "The absolute biggest trap an",
+      "start": 86.36,
+      "duration": 3.76
+    },
+    {
+      "text": "organization can fall into is what",
+      "start": 88.24,
+      "duration": 4.32
+    },
+    {
+      "text": "inspectors call perfunctory oversight.",
+      "start": 90.12,
+      "duration": 4.4
+    },
+    {
+      "text": "This is nominal oversight. It's when a",
+      "start": 92.56,
+      "duration": 3.44
+    },
+    {
+      "text": "highly trained professional simply",
+      "start": 94.52,
+      "duration": 3.36
+    },
+    {
+      "text": "stares at a screen and clicks approve on",
+      "start": 96.0,
+      "duration": 4.24
+    },
+    {
+      "text": "whatever the AI suggests. Sure, it gives",
+      "start": 97.88,
+      "duration": 4.2
+    },
+    {
+      "text": "management this false sense of comfort,",
+      "start": 100.24,
+      "duration": 4.24
+    },
+    {
+      "text": "but under Annex 22, it is a direct",
+      "start": 102.08,
+      "duration": 4.88
+    },
+    {
+      "text": "one-way ticket to regulatory failure. If",
+      "start": 104.48,
+      "duration": 4.72
+    },
+    {
+      "text": "your reviewers aren't genuinely engaged,",
+      "start": 106.96,
+      "duration": 4.36
+    },
+    {
+      "text": "you don't actually have oversight. It's",
+      "start": 109.2,
+      "duration": 3.84
+    },
+    {
+      "text": "just an illusion.",
+      "start": 111.32,
+      "duration": 4.04
+    },
+    {
+      "text": "Moving on to section two, the three",
+      "start": 113.04,
+      "duration": 4.68
+    },
+    {
+      "text": "oversight tiers. Let's break down the",
+      "start": 115.36,
+      "duration": 4.16
+    },
+    {
+      "text": "strict rules governing exactly how",
+      "start": 117.72,
+      "duration": 4.96
+    },
+    {
+      "text": "humans and AI are supposed to interact.",
+      "start": 119.52,
+      "duration": 4.36
+    },
+    {
+      "text": "And this breakdown brilliantly",
+      "start": 122.68,
+      "duration": 3.44
+    },
+    {
+      "text": "illustrates what Annex 22 mandates. We",
+      "start": 123.88,
+      "duration": 4.159
+    },
+    {
+      "text": "have three oversight tiers, perfectly",
+      "start": 126.12,
+      "duration": 3.84
+    },
+    {
+      "text": "matched to patient risk. Up at the top,",
+      "start": 128.039,
+      "duration": 4.041
+    },
+    {
+      "text": "there's HILL, or human in the loop.",
+      "start": 129.96,
+      "duration": 4.04
+    },
+    {
+      "text": "That's for high-risk GMP decisions, like",
+      "start": 132.08,
+      "duration": 4.52
+    },
+    {
+      "text": "batch release. Below that is HOTL, human",
+      "start": 134.0,
+      "duration": 4.4
+    },
+    {
+      "text": "on the loop. This is for moderate-risk",
+      "start": 136.6,
+      "duration": 3.16
+    },
+    {
+      "text": "tasks, like process parameter",
+      "start": 138.4,
+      "duration": 3.76
+    },
+    {
+      "text": "optimization. The AI acts, but a human",
+      "start": 139.76,
+      "duration": 4.48
+    },
+    {
+      "text": "supervises and can intervene. And at the",
+      "start": 142.16,
+      "duration": 4.28
+    },
+    {
+      "text": "very bottom, we have HOOL, human out of",
+      "start": 144.24,
+      "duration": 4.6
+    },
+    {
+      "text": "the loop, for low-risk non-GMP tasks,",
+      "start": 146.44,
+      "duration": 4.44
+    },
+    {
+      "text": "like inventory rebalancing. Let me be",
+      "start": 148.84,
+      "duration": 4.2
+    },
+    {
+      "text": "incredibly clear here. HOOL is rarely,",
+      "start": 150.88,
+      "duration": 4.56
+    },
+    {
+      "text": "if ever, defensible for critical GMP",
+      "start": 153.04,
+      "duration": 3.8
+    },
+    {
+      "text": "applications.",
+      "start": 155.44,
+      "duration": 2.84
+    },
+    {
+      "text": "Let's really focus in on the gold",
+      "start": 156.84,
+      "duration": 3.2
+    },
+    {
+      "text": "standard for high criticality, which is",
+      "start": 158.28,
+      "duration": 3.24
+    },
+    {
+      "text": "human in the loop.",
+      "start": 160.04,
+      "duration": 3.24
+    },
+    {
+      "text": "Operationally speaking, this means your",
+      "start": 161.52,
+      "duration": 3.92
+    },
+    {
+      "text": "reviewers literally must evaluate every",
+      "start": 163.28,
+      "duration": 4.0
+    },
+    {
+      "text": "single AI output before any action is",
+      "start": 165.44,
+      "duration": 3.72
+    },
+    {
+      "text": "taken. It's the default, it's the",
+      "start": 167.28,
+      "duration": 4.16
+    },
+    {
+      "text": "strongest control available. Now, yes,",
+      "start": 169.16,
+      "duration": 3.84
+    },
+    {
+      "text": "obviously, this comes with a slower",
+      "start": 171.44,
+      "duration": 3.64
+    },
+    {
+      "text": "throughput. It's a real operational",
+      "start": 173.0,
+      "duration": 4.04
+    },
+    {
+      "text": "cost. But the expectation here isn't",
+      "start": 175.08,
+      "duration": 4.36
+    },
+    {
+      "text": "just passive observation. Reviewers must",
+      "start": 177.04,
+      "duration": 4.04
+    },
+    {
+      "text": "actively challenge the AI. They need",
+      "start": 179.44,
+      "duration": 3.24
+    },
+    {
+      "text": "application-specific training, so they",
+      "start": 181.08,
+      "duration": 3.32
+    },
+    {
+      "text": "know the AI's limitations, they can spot",
+      "start": 182.68,
+      "duration": 3.44
+    },
+    {
+      "text": "its biases, and they recognize those",
+      "start": 184.4,
+      "duration": 3.24
+    },
+    {
+      "text": "weird edge cases that warrant much",
+      "start": 186.12,
+      "duration": 3.2
+    },
+    {
+      "text": "deeper analysis.",
+      "start": 187.64,
+      "duration": 4.8
+    },
+    {
+      "text": "Section three, the automation bias trap.",
+      "start": 189.32,
+      "duration": 4.199
+    },
+    {
+      "text": "You know, maintaining that active",
+      "start": 192.44,
+      "duration": 2.36
+    },
+    {
+      "text": "challenge we just talked about is",
+      "start": 193.519,
+      "duration": 3.481
+    },
+    {
+      "text": "incredibly difficult over time. And that",
+      "start": 194.8,
+      "duration": 3.8
+    },
+    {
+      "text": "leads us to one of the most dangerous",
+      "start": 197.0,
+      "duration": 3.08
+    },
+    {
+      "text": "operational hazards you're going to",
+      "start": 198.6,
+      "duration": 3.52
+    },
+    {
+      "text": "face. We really need to talk about",
+      "start": 200.08,
+      "duration": 4.52
+    },
+    {
+      "text": "automation bias. It's a well-documented",
+      "start": 202.12,
+      "duration": 4.6
+    },
+    {
+      "text": "cognitive tendency. It's just human",
+      "start": 204.6,
+      "duration": 4.44
+    },
+    {
+      "text": "nature to over-trust automated systems,",
+      "start": 206.72,
+      "duration": 3.72
+    },
+    {
+      "text": "especially when those systems are right",
+      "start": 209.04,
+      "duration": 3.32
+    },
+    {
+      "text": "most of the time. You can have the most",
+      "start": 210.44,
+      "duration": 3.76
+    },
+    {
+      "text": "diligent, highly qualified subject",
+      "start": 212.36,
+      "duration": 3.48
+    },
+    {
+      "text": "matter experts in your lab, but if they",
+      "start": 214.2,
+      "duration": 3.759
+    },
+    {
+      "text": "are constantly handed AI suggestions,",
+      "start": 215.84,
+      "duration": 3.64
+    },
+    {
+      "text": "they will slowly default to just",
+      "start": 217.959,
+      "duration": 4.081
+    },
+    {
+      "text": "confirming those outputs. It's a silent,",
+      "start": 219.48,
+      "duration": 4.92
+    },
+    {
+      "text": "creeping decay of oversight.",
+      "start": 222.04,
+      "duration": 3.919
+    },
+    {
+      "text": "To show you what this actually looks",
+      "start": 224.4,
+      "duration": 3.4
+    },
+    {
+      "text": "like in the real world, consider this",
+      "start": 225.959,
+      "duration": 3.761
+    },
+    {
+      "text": "anonymized case study.",
+      "start": 227.8,
+      "duration": 3.92
+    },
+    {
+      "text": "We're looking at a deviation triage AI",
+      "start": 229.72,
+      "duration": 3.64
+    },
+    {
+      "text": "that was deployed human in the loop",
+      "start": 231.72,
+      "duration": 4.28
+    },
+    {
+      "text": "oversight. In month one, reviewers were",
+      "start": 233.36,
+      "duration": 4.88
+    },
+    {
+      "text": "actively overriding the AI's severity",
+      "start": 236.0,
+      "duration": 4.96
+    },
+    {
+      "text": "classifications about 12% of the time.",
+      "start": 238.24,
+      "duration": 4.6
+    },
+    {
+      "text": "But by month three, internal audits",
+      "start": 240.96,
+      "duration": 3.48
+    },
+    {
+      "text": "started showing a gradual decline in",
+      "start": 242.84,
+      "duration": 4.08
+    },
+    {
+      "text": "disagreements. And by month six, the",
+      "start": 244.44,
+      "duration": 6.28
+    },
+    {
+      "text": "override rate plummeted to a mere 1.5%.",
+      "start": 246.92,
+      "duration": 5.24
+    },
+    {
+      "text": "Now, what's really interesting here is",
+      "start": 250.72,
+      "duration": 4.239
+    },
+    {
+      "text": "the sheer magnitude of that drop. Going",
+      "start": 252.16,
+      "duration": 5.4
+    },
+    {
+      "text": "from 12% to 1.5%",
+      "start": 254.959,
+      "duration": 4.361
+    },
+    {
+      "text": "doesn't happen because the AI suddenly",
+      "start": 257.56,
+      "duration": 4.08
+    },
+    {
+      "text": "got 10 times smarter. It happens because",
+      "start": 259.32,
+      "duration": 3.88
+    },
+    {
+      "text": "the humans simply stop thinking",
+      "start": 261.64,
+      "duration": 4.04
+    },
+    {
+      "text": "critically. And the real-world impact",
+      "start": 263.2,
+      "duration": 3.84
+    },
+    {
+      "text": "was severe.",
+      "start": 265.68,
+      "duration": 3.4
+    },
+    {
+      "text": "Managers doing retrospective reviews",
+      "start": 267.04,
+      "duration": 3.8
+    },
+    {
+      "text": "found that several deviations actually",
+      "start": 269.08,
+      "duration": 4.28
+    },
+    {
+      "text": "required severity reclassification. One",
+      "start": 270.84,
+      "duration": 5.12
+    },
+    {
+      "text": "of them even warranted CAPA escalation.",
+      "start": 273.36,
+      "duration": 4.36
+    },
+    {
+      "text": "So, if your override rate is trending",
+      "start": 275.96,
+      "duration": 4.08
+    },
+    {
+      "text": "towards zero, that is a massive red",
+      "start": 277.72,
+      "duration": 5.16
+    },
+    {
+      "text": "flag. Section four, designing meaningful",
+      "start": 280.04,
+      "duration": 4.84
+    },
+    {
+      "text": "review workflows. Let's pivot away from",
+      "start": 282.88,
+      "duration": 3.64
+    },
+    {
+      "text": "the psychological trap and get into the",
+      "start": 284.88,
+      "duration": 4.4
+    },
+    {
+      "text": "operational blueprint. The solution to",
+      "start": 286.52,
+      "duration": 4.8
+    },
+    {
+      "text": "all of this lies entirely in your",
+      "start": 289.28,
+      "duration": 3.84
+    },
+    {
+      "text": "workflow design. Look at the difference",
+      "start": 291.32,
+      "duration": 3.88
+    },
+    {
+      "text": "between these two approaches. With",
+      "start": 293.12,
+      "duration": 4.12
+    },
+    {
+      "text": "nominal confirmation, the reviewer sees",
+      "start": 295.2,
+      "duration": 4.0
+    },
+    {
+      "text": "the AI suggestion immediately and",
+      "start": 297.24,
+      "duration": 4.28
+    },
+    {
+      "text": "basically just clicks approve. That",
+      "start": 299.2,
+      "duration": 4.52
+    },
+    {
+      "text": "right there breeds automation bias. But",
+      "start": 301.52,
+      "duration": 3.64
+    },
+    {
+      "text": "then we have the independent first",
+      "start": 303.72,
+      "duration": 3.36
+    },
+    {
+      "text": "pattern. This is where the reviewer",
+      "start": 305.16,
+      "duration": 3.68
+    },
+    {
+      "text": "evaluates the data and makes their own",
+      "start": 307.08,
+      "duration": 3.8
+    },
+    {
+      "text": "classification before they are ever",
+      "start": 308.84,
+      "duration": 4.4
+    },
+    {
+      "text": "allowed to see the AI suggestion. If the",
+      "start": 310.88,
+      "duration": 4.44
+    },
+    {
+      "text": "two match, great. If they disagree, it",
+      "start": 313.24,
+      "duration": 3.679
+    },
+    {
+      "text": "triggers a documented adjudication",
+      "start": 315.32,
+      "duration": 4.0
+    },
+    {
+      "text": "process. This independent first pattern",
+      "start": 316.919,
+      "duration": 4.321
+    },
+    {
+      "text": "literally forces genuine engagement and",
+      "start": 319.32,
+      "duration": 4.24
+    },
+    {
+      "text": "preserves independent judgment.",
+      "start": 321.24,
+      "duration": 4.48
+    },
+    {
+      "text": "For the IT and system owners listening,",
+      "start": 323.56,
+      "duration": 4.56
+    },
+    {
+      "text": "building robust escalation mechanisms is",
+      "start": 325.72,
+      "duration": 4.44
+    },
+    {
+      "text": "another critical design pattern. Step",
+      "start": 328.12,
+      "duration": 4.68
+    },
+    {
+      "text": "one, the AI handles routine cases, but",
+      "start": 330.16,
+      "duration": 4.56
+    },
+    {
+      "text": "flags edge cases based on specific",
+      "start": 332.8,
+      "duration": 4.119
+    },
+    {
+      "text": "confidence thresholds. Step two, the",
+      "start": 334.72,
+      "duration": 3.88
+    },
+    {
+      "text": "system automatically escalates these to",
+      "start": 336.919,
+      "duration": 3.561
+    },
+    {
+      "text": "a human review queue, giving the",
+      "start": 338.6,
+      "duration": 3.76
+    },
+    {
+      "text": "reviewer full context. And that means",
+      "start": 340.48,
+      "duration": 3.68
+    },
+    {
+      "text": "showing not just the data, but exactly",
+      "start": 342.36,
+      "duration": 3.92
+    },
+    {
+      "text": "why the AI lacked confidence. Step",
+      "start": 344.16,
+      "duration": 3.92
+    },
+    {
+      "text": "three, a senior reviewer determines the",
+      "start": 346.28,
+      "duration": 4.24
+    },
+    {
+      "text": "disposition and crucially documents the",
+      "start": 348.08,
+      "duration": 4.4
+    },
+    {
+      "text": "rationale contemporaneously. This",
+      "start": 350.52,
+      "duration": 4.2
+    },
+    {
+      "text": "escalation path has to align seamlessly",
+      "start": 352.48,
+      "duration": 3.72
+    },
+    {
+      "text": "with your existing deviation and",
+      "start": 354.72,
+      "duration": 3.08
+    },
+    {
+      "text": "complaint processes.",
+      "start": 356.2,
+      "duration": 3.88
+    },
+    {
+      "text": "Finally, section five, proving",
+      "start": 357.8,
+      "duration": 4.56
+    },
+    {
+      "text": "compliance to inspectors because an",
+      "start": 360.08,
+      "duration": 4.56
+    },
+    {
+      "text": "unproven system is a non-compliant",
+      "start": 362.36,
+      "duration": 4.0
+    },
+    {
+      "text": "system. Let's look at our final",
+      "start": 364.64,
+      "duration": 3.16
+    },
+    {
+      "text": "takeaways directly through the",
+      "start": 366.36,
+      "duration": 3.36
+    },
+    {
+      "text": "inspector's lens.",
+      "start": 367.8,
+      "duration": 3.8
+    },
+    {
+      "text": "So, the crucial point here is knowing",
+      "start": 369.72,
+      "duration": 3.96
+    },
+    {
+      "text": "exactly what metrics an inspector will",
+      "start": 371.6,
+      "duration": 4.08
+    },
+    {
+      "text": "ask for to ensure your oversight isn't",
+      "start": 373.68,
+      "duration": 4.12
+    },
+    {
+      "text": "just a procedural rubber stamp. They're",
+      "start": 375.68,
+      "duration": 3.88
+    },
+    {
+      "text": "going to look for application-specific",
+      "start": 377.8,
+      "duration": 3.88
+    },
+    {
+      "text": "training records, not just generic AI",
+      "start": 379.56,
+      "duration": 4.4
+    },
+    {
+      "text": "literacy, but actual proof your team",
+      "start": 381.68,
+      "duration": 4.68
+    },
+    {
+      "text": "knows this specific AI's failure modes.",
+      "start": 383.96,
+      "duration": 3.92
+    },
+    {
+      "text": "They will audit engagement time per",
+      "start": 386.36,
+      "duration": 3.16
+    },
+    {
+      "text": "review. If your throughput metrics",
+      "start": 387.88,
+      "duration": 3.16
+    },
+    {
+      "text": "essentially penalize people for taking",
+      "start": 389.52,
+      "duration": 3.0
+    },
+    {
+      "text": "time to think, inspectors will",
+      "start": 391.04,
+      "duration": 3.12
+    },
+    {
+      "text": "absolutely flag it. They want to see",
+      "start": 392.52,
+      "duration": 3.36
+    },
+    {
+      "text": "your disagreement rates, the results of",
+      "start": 394.16,
+      "duration": 3.6
+    },
+    {
+      "text": "routine calibration exercises to ensure",
+      "start": 395.88,
+      "duration": 4.52
+    },
+    {
+      "text": "team consistency, and deeply documented",
+      "start": 397.76,
+      "duration": 4.52
+    },
+    {
+      "text": "override rationales. Finally, they'll",
+      "start": 400.4,
+      "duration": 3.68
+    },
+    {
+      "text": "look for cross-functional ownership,",
+      "start": 402.28,
+      "duration": 3.88
+    },
+    {
+      "text": "evidence that QA, IT, and operational",
+      "start": 404.08,
+      "duration": 3.96
+    },
+    {
+      "text": "leaders are all sharing responsibility",
+      "start": 406.16,
+      "duration": 3.32
+    },
+    {
+      "text": "for this governance.",
+      "start": 408.04,
+      "duration": 3.4
+    },
+    {
+      "text": "As we wrap up today's explainer, I want",
+      "start": 409.48,
+      "duration": 3.439
+    },
+    {
+      "text": "to leave you with a question to bring",
+      "start": 411.44,
+      "duration": 3.52
+    },
+    {
+      "text": "straight back to your own organizations'",
+      "start": 412.919,
+      "duration": 4.041
+    },
+    {
+      "text": "AI governance committees.",
+      "start": 414.96,
+      "duration": 3.56
+    },
+    {
+      "text": "Are your reviewers truly challenging",
+      "start": 416.96,
+      "duration": 3.16
+    },
+    {
+      "text": "your AI, or are they just rubber",
+      "start": 418.52,
+      "duration": 2.88
+    },
+    {
+      "text": "stamping it?",
+      "start": 420.12,
+      "duration": 2.799
+    },
+    {
+      "text": "Meaningful oversight is a strategic",
+      "start": 421.4,
+      "duration": 3.6
+    },
+    {
+      "text": "capability, and it requires sustained",
+      "start": 422.919,
+      "duration": 4.121
+    },
+    {
+      "text": "investment. If you aren't measuring it,",
+      "start": 425.0,
+      "duration": 3.84
+    },
+    {
+      "text": "it is decaying silently.",
+      "start": 427.04,
+      "duration": 3.64
+    },
+    {
+      "text": "Thank you so much for joining us, and I",
+      "start": 428.84,
+      "duration": 3.079
+    },
+    {
+      "text": "really encourage you to take these",
+      "start": 430.68,
+      "duration": 2.76
+    },
+    {
+      "text": "blueprints and apply them to your Annex",
+      "start": 431.919,
+      "duration": 5.481
+    },
+    {
+      "text": "22 compliance strategy right away.",
+      "start": 433.44,
+      "duration": 3.96
+    }
+  ]
+}

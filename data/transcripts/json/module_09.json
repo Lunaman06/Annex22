@@ -1,0 +1,1251 @@
+{
+  "module": {
+    "id": "09",
+    "slug": "09_explainability_transparency",
+    "video_id": "GvCEQtf7TFU",
+    "title": "Explainability and Transparency",
+    "duration": "08:14"
+  },
+  "cues": [
+    {
+      "text": "Welcome to this explainer on module nine",
+      "start": 0.0,
+      "duration": 4.12
+    },
+    {
+      "text": "of Annex 22.",
+      "start": 2.36,
+      "duration": 4.6
+    },
+    {
+      "text": "Look, if you're part of a pharma QA, IT,",
+      "start": 4.12,
+      "duration": 4.84
+    },
+    {
+      "text": "or validation team, you already know the",
+      "start": 6.96,
+      "duration": 4.24
+    },
+    {
+      "text": "deal. Deploying AI in a heavily",
+      "start": 8.96,
+      "duration": 4.68
+    },
+    {
+      "text": "regulated GXP environment, it's not just",
+      "start": 11.2,
+      "duration": 4.12
+    },
+    {
+      "text": "about getting the right prediction. It",
+      "start": 13.64,
+      "duration": 3.6
+    },
+    {
+      "text": "is absolutely crucial that you can prove",
+      "start": 15.32,
+      "duration": 3.96
+    },
+    {
+      "text": "exactly why your AI is making those",
+      "start": 17.24,
+      "duration": 3.4
+    },
+    {
+      "text": "predictions.",
+      "start": 19.28,
+      "duration": 2.88
+    },
+    {
+      "text": "So, today we're going to take all those",
+      "start": 20.64,
+      "duration": 2.76
+    },
+    {
+      "text": "high-level principles of AI",
+      "start": 22.16,
+      "duration": 3.28
+    },
+    {
+      "text": "explainability and translate them into",
+      "start": 23.4,
+      "duration": 4.04
+    },
+    {
+      "text": "practical, defensible actions for your",
+      "start": 25.44,
+      "duration": 3.6
+    },
+    {
+      "text": "daily operations.",
+      "start": 27.44,
+      "duration": 2.72
+    },
+    {
+      "text": "We're going to build a framework that",
+      "start": 29.04,
+      "duration": 3.12
+    },
+    {
+      "text": "doesn't just check a compliance box, but",
+      "start": 30.16,
+      "duration": 3.64
+    },
+    {
+      "text": "actually earns the real-world trust of",
+      "start": 32.16,
+      "duration": 4.56
+    },
+    {
+      "text": "your operators and your regulators.",
+      "start": 33.8,
+      "duration": 4.72
+    },
+    {
+      "text": "All right, here is our road map for",
+      "start": 36.72,
+      "duration": 3.68
+    },
+    {
+      "text": "today. We'll start with the transparency",
+      "start": 38.52,
+      "duration": 4.12
+    },
+    {
+      "text": "imperative, move into the explainability",
+      "start": 40.4,
+      "duration": 4.48
+    },
+    {
+      "text": "spectrum, look at how to unlock complex",
+      "start": 42.64,
+      "duration": 4.12
+    },
+    {
+      "text": "models, dive into some real-world case",
+      "start": 44.88,
+      "duration": 3.4
+    },
+    {
+      "text": "studies, and finally wrap up with",
+      "start": 46.76,
+      "duration": 3.64
+    },
+    {
+      "text": "documenting for regulators.",
+      "start": 48.28,
+      "duration": 4.44
+    },
+    {
+      "text": "Okay, let's jump right into section one,",
+      "start": 50.4,
+      "duration": 4.52
+    },
+    {
+      "text": "the transparency imperative, where we'll",
+      "start": 52.72,
+      "duration": 4.16
+    },
+    {
+      "text": "set our baseline. Now, this quote",
+      "start": 54.92,
+      "duration": 3.84
+    },
+    {
+      "text": "brilliantly illustrates our core theme",
+      "start": 56.88,
+      "duration": 5.0
+    },
+    {
+      "text": "for this whole explainer. Explainability",
+      "start": 58.76,
+      "duration": 4.2
+    },
+    {
+      "text": "absolutely has to be proportionate to",
+      "start": 61.88,
+      "duration": 3.2
+    },
+    {
+      "text": "criticality. And this isn't just about",
+      "start": 62.96,
+      "duration": 4.16
+    },
+    {
+      "text": "red tape, right? A regulator's right to",
+      "start": 65.08,
+      "duration": 4.08
+    },
+    {
+      "text": "understand an AI's decisions boils down",
+      "start": 67.12,
+      "duration": 4.72
+    },
+    {
+      "text": "to one thing, patient safety.",
+      "start": 69.16,
+      "duration": 4.12
+    },
+    {
+      "text": "If you've got a black-box model making",
+      "start": 71.84,
+      "duration": 3.04
+    },
+    {
+      "text": "incredibly high-stakes decisions about",
+      "start": 73.28,
+      "duration": 3.56
+    },
+    {
+      "text": "batch quality, you literally cannot just",
+      "start": 74.88,
+      "duration": 3.8
+    },
+    {
+      "text": "shrug and say, \"Well, the algorithm said",
+      "start": 76.84,
+      "duration": 4.24
+    },
+    {
+      "text": "so.\" Trust and audit defensibility mean",
+      "start": 78.68,
+      "duration": 3.84
+    },
+    {
+      "text": "you have to be able to peel back those",
+      "start": 81.08,
+      "duration": 3.96
+    },
+    {
+      "text": "layers. So, we need to be really precise",
+      "start": 82.52,
+      "duration": 4.12
+    },
+    {
+      "text": "with our words here. People mix up",
+      "start": 85.04,
+      "duration": 3.56
+    },
+    {
+      "text": "explainability and interpretability all",
+      "start": 86.64,
+      "duration": 3.72
+    },
+    {
+      "text": "the time, but they are very different",
+      "start": 88.6,
+      "duration": 3.8
+    },
+    {
+      "text": "beasts. Interpretability is basically",
+      "start": 90.36,
+      "duration": 3.76
+    },
+    {
+      "text": "your ability to understand how a model",
+      "start": 92.4,
+      "duration": 3.6
+    },
+    {
+      "text": "works as a whole, looking at its overall",
+      "start": 94.12,
+      "duration": 4.08
+    },
+    {
+      "text": "structure. But explainability? That's",
+      "start": 96.0,
+      "duration": 4.16
+    },
+    {
+      "text": "highly specific. It's your ability to",
+      "start": 98.2,
+      "duration": 4.36
+    },
+    {
+      "text": "say exactly why the AI produced one",
+      "start": 100.16,
+      "duration": 4.56
+    },
+    {
+      "text": "specific output. And the kicker? You",
+      "start": 102.56,
+      "duration": 3.4
+    },
+    {
+      "text": "have to do it in a language that a",
+      "start": 104.72,
+      "duration": 3.4
+    },
+    {
+      "text": "domain expert, like a lab tech or a QA",
+      "start": 105.96,
+      "duration": 4.36
+    },
+    {
+      "text": "reviewer, can instantly understand",
+      "start": 108.12,
+      "duration": 5.2
+    },
+    {
+      "text": "without needing a PhD in data science.",
+      "start": 110.32,
+      "duration": 5.56
+    },
+    {
+      "text": "Moving right along to section two, the",
+      "start": 113.32,
+      "duration": 5.24
+    },
+    {
+      "text": "explainability spectrum. Let's look at",
+      "start": 115.88,
+      "duration": 5.12
+    },
+    {
+      "text": "the balancing act between complexity and",
+      "start": 118.56,
+      "duration": 3.92
+    },
+    {
+      "text": "transparency.",
+      "start": 121.0,
+      "duration": 3.24
+    },
+    {
+      "text": "This is where the rubber meets the road",
+      "start": 122.48,
+      "duration": 4.48
+    },
+    {
+      "text": "for your operations. Fun fact for you,",
+      "start": 124.24,
+      "duration": 4.36
+    },
+    {
+      "text": "industry data actually shows that",
+      "start": 126.96,
+      "duration": 3.159
+    },
+    {
+      "text": "adopting a black box model in a",
+      "start": 128.6,
+      "duration": 3.4
+    },
+    {
+      "text": "high-risk environment can completely",
+      "start": 130.119,
+      "duration": 4.161
+    },
+    {
+      "text": "quadruple your validation timeline.",
+      "start": 132.0,
+      "duration": 4.56
+    },
+    {
+      "text": "Annex 22 doesn't outright ban complex",
+      "start": 134.28,
+      "duration": 4.92
+    },
+    {
+      "text": "models, but man, it heavily incentivizes",
+      "start": 136.56,
+      "duration": 4.399
+    },
+    {
+      "text": "simpler ones. You've got your white box",
+      "start": 139.2,
+      "duration": 3.04
+    },
+    {
+      "text": "categories, things like linear",
+      "start": 140.959,
+      "duration": 2.681
+    },
+    {
+      "text": "regression. These are inherently",
+      "start": 142.24,
+      "duration": 3.2
+    },
+    {
+      "text": "transparent. A regulator can just look",
+      "start": 143.64,
+      "duration": 3.48
+    },
+    {
+      "text": "at the math. Then you have gray box",
+      "start": 145.44,
+      "duration": 3.44
+    },
+    {
+      "text": "models like random forests where you",
+      "start": 147.12,
+      "duration": 3.44
+    },
+    {
+      "text": "need proxy methods to figure out what's",
+      "start": 148.88,
+      "duration": 3.84
+    },
+    {
+      "text": "going on. And finally, the black box",
+      "start": 150.56,
+      "duration": 4.64
+    },
+    {
+      "text": "models, deep neural networks, LLMs,",
+      "start": 152.72,
+      "duration": 5.16
+    },
+    {
+      "text": "their internal logic is a total mystery.",
+      "start": 155.2,
+      "duration": 4.96
+    },
+    {
+      "text": "For highly critical GXP environments,",
+      "start": 157.88,
+      "duration": 4.44
+    },
+    {
+      "text": "honestly, choosing a simpler white box",
+      "start": 160.16,
+      "duration": 3.799
+    },
+    {
+      "text": "model is almost always the smarter",
+      "start": 162.32,
+      "duration": 3.56
+    },
+    {
+      "text": "regulatory play just to avoid that",
+      "start": 163.959,
+      "duration": 3.921
+    },
+    {
+      "text": "massive documentation burden.",
+      "start": 165.88,
+      "duration": 4.079
+    },
+    {
+      "text": ">> Which brings us to section three,",
+      "start": 167.88,
+      "duration": 4.72
+    },
+    {
+      "text": "unlocking complex models.",
+      "start": 169.959,
+      "duration": 4.681
+    },
+    {
+      "text": ">> Well, look, let's be realistic.",
+      "start": 172.6,
+      "duration": 3.84
+    },
+    {
+      "text": "Sometimes to solve a really tough",
+      "start": 174.64,
+      "duration": 4.12
+    },
+    {
+      "text": "problem, you absolutely have to use a",
+      "start": 176.44,
+      "duration": 4.48
+    },
+    {
+      "text": "complex, opaque model.",
+      "start": 178.76,
+      "duration": 3.84
+    },
+    {
+      "text": "When you do, you need post talk",
+      "start": 180.92,
+      "duration": 3.4
+    },
+    {
+      "text": "explanation methods. And the two",
+      "start": 182.6,
+      "duration": 4.76
+    },
+    {
+      "text": "heavyweights here are SHAP and LIME.",
+      "start": 184.32,
+      "duration": 5.08
+    },
+    {
+      "text": "Think of SHAP like perfectly and fairly",
+      "start": 187.36,
+      "duration": 3.32
+    },
+    {
+      "text": "dividing a restaurant bill among",
+      "start": 189.4,
+      "duration": 3.44
+    },
+    {
+      "text": "friends. It uses game theory to give us",
+      "start": 190.68,
+      "duration": 4.16
+    },
+    {
+      "text": "rigorous additive explanations of",
+      "start": 192.84,
+      "duration": 4.119
+    },
+    {
+      "text": "exactly what drove a prediction.",
+      "start": 194.84,
+      "duration": 4.48
+    },
+    {
+      "text": "LIME takes a totally different route. It",
+      "start": 196.959,
+      "duration": 3.841
+    },
+    {
+      "text": "tweaks the inputs right around a",
+      "start": 199.32,
+      "duration": 3.639
+    },
+    {
+      "text": "specific prediction to create a simple,",
+      "start": 200.8,
+      "duration": 3.88
+    },
+    {
+      "text": "localized model just for that one",
+      "start": 202.959,
+      "duration": 3.761
+    },
+    {
+      "text": "moment. It's great for quick snapshots,",
+      "start": 204.68,
+      "duration": 4.32
+    },
+    {
+      "text": "but LIME can be pretty sensitive and",
+      "start": 206.72,
+      "duration": 4.04
+    },
+    {
+      "text": "sometimes unstable.",
+      "start": 209.0,
+      "duration": 3.36
+    },
+    {
+      "text": "Because of that, you'll often see them",
+      "start": 210.76,
+      "duration": 3.84
+    },
+    {
+      "text": "used together. SHAP is your solid",
+      "start": 212.36,
+      "duration": 4.36
+    },
+    {
+      "text": "foundation, and LIME gives you that",
+      "start": 214.6,
+      "duration": 4.76
+    },
+    {
+      "text": "quick complimentary perspective. Beyond",
+      "start": 216.72,
+      "duration": 4.48
+    },
+    {
+      "text": "SHAP and LIME, we've got a few other",
+      "start": 219.36,
+      "duration": 4.04
+    },
+    {
+      "text": "tools in the toolkit. Surrogate models",
+      "start": 221.2,
+      "duration": 3.84
+    },
+    {
+      "text": "let us build the simpler, inspectable",
+      "start": 223.4,
+      "duration": 4.24
+    },
+    {
+      "text": "model that just mimics the complex one.",
+      "start": 225.04,
+      "duration": 4.68
+    },
+    {
+      "text": "Then there's attention visualization.",
+      "start": 227.64,
+      "duration": 4.36
+    },
+    {
+      "text": "This is a huge one if you're using LLMs.",
+      "start": 229.72,
+      "duration": 4.2
+    },
+    {
+      "text": "It gives you heat maps showing exactly",
+      "start": 232.0,
+      "duration": 4.12
+    },
+    {
+      "text": "which words drove the output. But, a",
+      "start": 233.92,
+      "duration": 4.24
+    },
+    {
+      "text": "quick warning, high attention doesn't",
+      "start": 236.12,
+      "duration": 4.32
+    },
+    {
+      "text": "always mean causal influence.",
+      "start": 238.16,
+      "duration": 3.88
+    },
+    {
+      "text": "Finally, my personal favorite,",
+      "start": 240.44,
+      "duration": 3.84
+    },
+    {
+      "text": "counterfactual explanations. These are",
+      "start": 242.04,
+      "duration": 4.24
+    },
+    {
+      "text": "just so incredibly intuitive. They",
+      "start": 244.28,
+      "duration": 3.679
+    },
+    {
+      "text": "literally tell you the minimum change",
+      "start": 246.28,
+      "duration": 3.88
+    },
+    {
+      "text": "needed to alter an outcome. Imagine an",
+      "start": 247.959,
+      "duration": 3.881
+    },
+    {
+      "text": "operator seeing a message like,",
+      "start": 250.16,
+      "duration": 3.6
+    },
+    {
+      "text": "\"Dispatch failed because parameter X was",
+      "start": 251.84,
+      "duration": 4.84
+    },
+    {
+      "text": "5.2. If it had been below 5.0, it would",
+      "start": 253.76,
+      "duration": 4.96
+    },
+    {
+      "text": "have passed.\" I mean, that is practical,",
+      "start": 256.68,
+      "duration": 4.04
+    },
+    {
+      "text": "actionable insight right there.",
+      "start": 258.72,
+      "duration": 4.12
+    },
+    {
+      "text": "But, here's the catch. Having the tools",
+      "start": 260.72,
+      "duration": 4.36
+    },
+    {
+      "text": "is only half the battle. You have to",
+      "start": 262.84,
+      "duration": 4.079
+    },
+    {
+      "text": "calibrate them for your audience, and",
+      "start": 265.08,
+      "duration": 3.92
+    },
+    {
+      "text": "you have three distinct audiences here.",
+      "start": 266.919,
+      "duration": 3.761
+    },
+    {
+      "text": "Operators on the floor, they need",
+      "start": 269.0,
+      "duration": 4.24
+    },
+    {
+      "text": "actionable insight, concrete things they",
+      "start": 270.68,
+      "duration": 5.16
+    },
+    {
+      "text": "can fix right now. Validators, they want",
+      "start": 273.24,
+      "duration": 4.48
+    },
+    {
+      "text": "the statistical detail, the calibration",
+      "start": 275.84,
+      "duration": 4.04
+    },
+    {
+      "text": "analysis. And inspectors, they need",
+      "start": 277.72,
+      "duration": 3.88
+    },
+    {
+      "text": "methodological transparency to know the",
+      "start": 279.88,
+      "duration": 3.52
+    },
+    {
+      "text": "system is sound. You wouldn't hand a",
+      "start": 281.6,
+      "duration": 3.36
+    },
+    {
+      "text": "massive statistical heat map to an",
+      "start": 283.4,
+      "duration": 3.44
+    },
+    {
+      "text": "operator, right? Just like you wouldn't",
+      "start": 284.96,
+      "duration": 3.2
+    },
+    {
+      "text": "give an inspector a one-sentence",
+      "start": 286.84,
+      "duration": 3.0
+    },
+    {
+      "text": "summary. You've got to tailor the",
+      "start": 288.16,
+      "duration": 3.48
+    },
+    {
+      "text": "cognitive load to the person looking at",
+      "start": 289.84,
+      "duration": 3.24
+    },
+    {
+      "text": "the screen.",
+      "start": 291.64,
+      "duration": 3.6
+    },
+    {
+      "text": "All right, moving into section four,",
+      "start": 293.08,
+      "duration": 4.839
+    },
+    {
+      "text": "real-world case studies. Because, let's",
+      "start": 295.24,
+      "duration": 5.2
+    },
+    {
+      "text": "face it, we learn best when things go",
+      "start": 297.919,
+      "duration": 4.321
+    },
+    {
+      "text": "slightly wrong.",
+      "start": 300.44,
+      "duration": 3.24
+    },
+    {
+      "text": "I really want you to think about this",
+      "start": 302.24,
+      "duration": 3.48
+    },
+    {
+      "text": "for a second. What actually happens to",
+      "start": 303.68,
+      "duration": 4.32
+    },
+    {
+      "text": "patient safety, or your chances of",
+      "start": 305.72,
+      "duration": 4.24
+    },
+    {
+      "text": "surviving an audit, when our fancy",
+      "start": 308.0,
+      "duration": 3.8
+    },
+    {
+      "text": "explanation tools give us the wrong",
+      "start": 309.96,
+      "duration": 3.56
+    },
+    {
+      "text": "answers? Let's look at a couple of",
+      "start": 311.8,
+      "duration": 3.48
+    },
+    {
+      "text": "real-world scenarios.",
+      "start": 313.52,
+      "duration": 4.04
+    },
+    {
+      "text": "Picture this. A team uses a predictive",
+      "start": 315.28,
+      "duration": 4.84
+    },
+    {
+      "text": "maintenance AI relying on global feature",
+      "start": 317.56,
+      "duration": 4.359
+    },
+    {
+      "text": "importance to explain things to their",
+      "start": 320.12,
+      "duration": 3.52
+    },
+    {
+      "text": "operators, but there was a massive",
+      "start": 321.919,
+      "duration": 3.881
+    },
+    {
+      "text": "problem. Operators noticed that the list",
+      "start": 323.64,
+      "duration": 4.44
+    },
+    {
+      "text": "of important features varied wildly",
+      "start": 325.8,
+      "duration": 3.52
+    },
+    {
+      "text": "every single time the model was",
+      "start": 328.08,
+      "duration": 4.08
+    },
+    {
+      "text": "retrained. Trust totally collapsed. And",
+      "start": 329.32,
+      "duration": 4.52
+    },
+    {
+      "text": "you can see why, right? Imagine being",
+      "start": 332.16,
+      "duration": 3.28
+    },
+    {
+      "text": "told on Monday that temperature is the",
+      "start": 333.84,
+      "duration": 3.4
+    },
+    {
+      "text": "critical failure point, and on Tuesday",
+      "start": 335.44,
+      "duration": 3.76
+    },
+    {
+      "text": "being told it's pressure for the exact",
+      "start": 337.24,
+      "duration": 4.12
+    },
+    {
+      "text": "same machine state. It felt entirely",
+      "start": 339.2,
+      "duration": 4.2
+    },
+    {
+      "text": "erratic. They ultimately had to shift to",
+      "start": 341.36,
+      "duration": 3.6
+    },
+    {
+      "text": "a much stricter method called",
+      "start": 343.4,
+      "duration": 3.6
+    },
+    {
+      "text": "permutation importance. It just goes to",
+      "start": 344.96,
+      "duration": 3.96
+    },
+    {
+      "text": "show you, basic feature importance can",
+      "start": 347.0,
+      "duration": 4.64
+    },
+    {
+      "text": "be incredibly unstable. Your explanation",
+      "start": 348.92,
+      "duration": 4.84
+    },
+    {
+      "text": "methods need validation just as much as",
+      "start": 351.64,
+      "duration": 3.48
+    },
+    {
+      "text": "your model does.",
+      "start": 353.76,
+      "duration": 3.92
+    },
+    {
+      "text": "Okay, here's another wild one. An AI",
+      "start": 355.12,
+      "duration": 4.96
+    },
+    {
+      "text": "classifying deviations was using Lime to",
+      "start": 357.68,
+      "duration": 5.52
+    },
+    {
+      "text": "explain severity. The issue? Identical",
+      "start": 360.08,
+      "duration": 4.96
+    },
+    {
+      "text": "deviations processed at slightly",
+      "start": 363.2,
+      "duration": 3.64
+    },
+    {
+      "text": "different times were spitting out",
+      "start": 365.04,
+      "duration": 3.68
+    },
+    {
+      "text": "completely different explanations.",
+      "start": 366.84,
+      "duration": 3.48
+    },
+    {
+      "text": "That's that Lime sensitivity we talked",
+      "start": 368.72,
+      "duration": 3.88
+    },
+    {
+      "text": "about earlier. Naturally, the reviewers",
+      "start": 370.32,
+      "duration": 4.68
+    },
+    {
+      "text": "completely ignored the AI and escalated",
+      "start": 372.6,
+      "duration": 4.56
+    },
+    {
+      "text": "everything straight to QA. The team had",
+      "start": 375.0,
+      "duration": 3.68
+    },
+    {
+      "text": "to rip out Lime and replace it with",
+      "start": 377.16,
+      "duration": 3.52
+    },
+    {
+      "text": "deterministic SHAP just to get some",
+      "start": 378.68,
+      "duration": 4.64
+    },
+    {
+      "text": "stability. Method instability destroys",
+      "start": 380.68,
+      "duration": 5.68
+    },
+    {
+      "text": "trust so fast. If your operator gets two",
+      "start": 383.32,
+      "duration": 4.64
+    },
+    {
+      "text": "different explanations for the exact",
+      "start": 386.36,
+      "duration": 3.6
+    },
+    {
+      "text": "same deviation, your whole system's",
+      "start": 387.96,
+      "duration": 4.28
+    },
+    {
+      "text": "defensibility just goes out the window.",
+      "start": 389.96,
+      "duration": 3.8
+    },
+    {
+      "text": "Which brings us to our final section,",
+      "start": 392.24,
+      "duration": 3.12
+    },
+    {
+      "text": "section five, documenting for",
+      "start": 393.76,
+      "duration": 3.32
+    },
+    {
+      "text": "regulators. Let's talk about what they",
+      "start": 395.36,
+      "duration": 3.68
+    },
+    {
+      "text": "actually want to see. Going back to that",
+      "start": 397.08,
+      "duration": 4.12
+    },
+    {
+      "text": "idea of proportionality, when inspectors",
+      "start": 399.04,
+      "duration": 3.8
+    },
+    {
+      "text": "walk in, they're immediately mapping",
+      "start": 401.2,
+      "duration": 3.92
+    },
+    {
+      "text": "your effort against your risk tier. Low",
+      "start": 402.84,
+      "duration": 4.36
+    },
+    {
+      "text": "criticality app? Basic explainability",
+      "start": 405.12,
+      "duration": 4.32
+    },
+    {
+      "text": "like feature importance is totally fine.",
+      "start": 407.2,
+      "duration": 4.16
+    },
+    {
+      "text": "Moderate? A gray box model with some",
+      "start": 409.44,
+      "duration": 3.76
+    },
+    {
+      "text": "selective post hoc explanations does the",
+      "start": 411.36,
+      "duration": 3.32
+    },
+    {
+      "text": "trick. But if you have a high",
+      "start": 413.2,
+      "duration": 3.16
+    },
+    {
+      "text": "criticality application and you're",
+      "start": 414.68,
+      "duration": 3.12
+    },
+    {
+      "text": "running a black box model without a",
+      "start": 416.36,
+      "duration": 3.64
+    },
+    {
+      "text": "massive, validated infrastructure behind",
+      "start": 417.8,
+      "duration": 4.96
+    },
+    {
+      "text": "it, yeah, that is a giant red flag. They",
+      "start": 420.0,
+      "duration": 4.44
+    },
+    {
+      "text": "expect you to either stick to a simple",
+      "start": 422.76,
+      "duration": 3.84
+    },
+    {
+      "text": "white box model or bring extensive,",
+      "start": 424.44,
+      "duration": 4.6
+    },
+    {
+      "text": "undeniable validation to the table.",
+      "start": 426.6,
+      "duration": 4.52
+    },
+    {
+      "text": "And please remember this, explainability",
+      "start": 429.04,
+      "duration": 4.04
+    },
+    {
+      "text": "isn't just a one-and-done validation",
+      "start": 431.12,
+      "duration": 3.68
+    },
+    {
+      "text": "activity that you print out, shove into",
+      "start": 433.08,
+      "duration": 3.32
+    },
+    {
+      "text": "a binder, and forget about. It's a",
+      "start": 434.8,
+      "duration": 3.52
+    },
+    {
+      "text": "living, breathing infrastructure. At",
+      "start": 436.4,
+      "duration": 3.72
+    },
+    {
+      "text": "decision time, those explanations have",
+      "start": 438.32,
+      "duration": 2.92
+    },
+    {
+      "text": "to be logged right alongside the",
+      "start": 440.12,
+      "duration": 2.72
+    },
+    {
+      "text": "prediction so humans can actually",
+      "start": 441.24,
+      "duration": 3.52
+    },
+    {
+      "text": "oversee them. For investigations, you",
+      "start": 442.84,
+      "duration": 3.2
+    },
+    {
+      "text": "need the tools to dig deeper when an",
+      "start": 444.76,
+      "duration": 3.28
+    },
+    {
+      "text": "audit hits. During validation, you have",
+      "start": 446.04,
+      "duration": 3.48
+    },
+    {
+      "text": "to test your explanation methods with",
+      "start": 448.04,
+      "duration": 3.04
+    },
+    {
+      "text": "negative cases to prove they aren't",
+      "start": 449.52,
+      "duration": 3.36
+    },
+    {
+      "text": "misleading your team. And finally,",
+      "start": 451.08,
+      "duration": 3.6
+    },
+    {
+      "text": "evolution. The minute your data or your",
+      "start": 452.88,
+      "duration": 3.28
+    },
+    {
+      "text": "model shifts, you have to revalidate",
+      "start": 454.68,
+      "duration": 3.84
+    },
+    {
+      "text": "those explanations all over again. So,",
+      "start": 456.16,
+      "duration": 3.6
+    },
+    {
+      "text": "I'm going to leave you with this final",
+      "start": 458.52,
+      "duration": 2.84
+    },
+    {
+      "text": "question to chew on as you look at your",
+      "start": 459.76,
+      "duration": 4.0
+    },
+    {
+      "text": "own systems. Is your AI strategy",
+      "start": 461.36,
+      "duration": 4.24
+    },
+    {
+      "text": "actually built for continuous patient",
+      "start": 463.76,
+      "duration": 3.84
+    },
+    {
+      "text": "safety or is it just temporary",
+      "start": 465.6,
+      "duration": 4.0
+    },
+    {
+      "text": "compliance theater? As we gear up for",
+      "start": 467.6,
+      "duration": 3.76
+    },
+    {
+      "text": "module 10, which is going to be all",
+      "start": 469.6,
+      "duration": 3.72
+    },
+    {
+      "text": "about human oversight and the very real",
+      "start": 471.36,
+      "duration": 4.04
+    },
+    {
+      "text": "dangers of automation bias, keep this in",
+      "start": 473.32,
+      "duration": 4.6
+    },
+    {
+      "text": "mind. Confident, validated explanation",
+      "start": 475.4,
+      "duration": 4.72
+    },
+    {
+      "text": "ability is the only true foundation for",
+      "start": 477.92,
+      "duration": 4.36
+    },
+    {
+      "text": "defensible human AI collaboration under",
+      "start": 480.12,
+      "duration": 4.88
+    },
+    {
+      "text": "Annex 22. Without it, you aren't really",
+      "start": 482.28,
+      "duration": 4.6
+    },
+    {
+      "text": "managing AI at all. You're literally",
+      "start": 485.0,
+      "duration": 3.08
+    },
+    {
+      "text": "just guessing.",
+      "start": 486.88,
+      "duration": 2.4
+    },
+    {
+      "text": "Thanks so much for joining me on this",
+      "start": 488.08,
+      "duration": 2.56
+    },
+    {
+      "text": "explainer and I'll see you in the next",
+      "start": 489.28,
+      "duration": 3.84
+    },
+    {
+      "text": "module.",
+      "start": 490.64,
+      "duration": 2.48
+    }
+  ]
+}

@@ -1,0 +1,1536 @@
+{
+  "module": {
+    "id": "08",
+    "slug": "08_validation_performance_testing",
+    "video_id": "9AGeFbRXa98",
+    "title": "Validation and Performance Testing",
+    "duration": "10:26"
+  },
+  "cues": [
+    {
+      "text": "Welcome to the Explainer. Today, we're",
+      "start": 0.0,
+      "duration": 4.2
+    },
+    {
+      "text": "diving straight into a topic that is",
+      "start": 2.52,
+      "duration": 3.48
+    },
+    {
+      "text": "fundamentally reshaping quality",
+      "start": 4.2,
+      "duration": 4.0
+    },
+    {
+      "text": "assurance and IT across the pharma",
+      "start": 6.0,
+      "duration": 5.32
+    },
+    {
+      "text": "industry, module 8 of Annex 22. Now, if",
+      "start": 8.2,
+      "duration": 4.84
+    },
+    {
+      "text": "you work in a GxP environment, you",
+      "start": 11.32,
+      "duration": 3.12
+    },
+    {
+      "text": "already know that validating computer",
+      "start": 13.04,
+      "duration": 3.64
+    },
+    {
+      "text": "systems is this intense, highly rigorous",
+      "start": 14.44,
+      "duration": 4.28
+    },
+    {
+      "text": "process. But when we bring artificial",
+      "start": 16.68,
+      "duration": 4.12
+    },
+    {
+      "text": "intelligence into the mix, well, we're",
+      "start": 18.72,
+      "duration": 4.92
+    },
+    {
+      "text": "experiencing an urgent, massive shift.",
+      "start": 20.8,
+      "duration": 4.28
+    },
+    {
+      "text": "We are moving completely away from",
+      "start": 23.64,
+      "duration": 3.16
+    },
+    {
+      "text": "conventional deterministic computer",
+      "start": 25.08,
+      "duration": 4.0
+    },
+    {
+      "text": "system validation, good old CSV, and",
+      "start": 26.8,
+      "duration": 4.08
+    },
+    {
+      "text": "stepping right into a much more complex",
+      "start": 29.08,
+      "duration": 4.88
+    },
+    {
+      "text": "world of statistical AI validation. I am",
+      "start": 30.88,
+      "duration": 4.44
+    },
+    {
+      "text": "genuinely thrilled to walk you through",
+      "start": 33.96,
+      "duration": 3.16
+    },
+    {
+      "text": "this material, because getting a grip on",
+      "start": 35.32,
+      "duration": 3.64
+    },
+    {
+      "text": "these rules transforms rogue compliance",
+      "start": 37.12,
+      "duration": 4.04
+    },
+    {
+      "text": "into reliable, defensible behavior that",
+      "start": 38.96,
+      "duration": 4.0
+    },
+    {
+      "text": "actually protects patients.",
+      "start": 41.16,
+      "duration": 3.16
+    },
+    {
+      "text": "Okay, let's take a quick look at our",
+      "start": 42.96,
+      "duration": 3.4
+    },
+    {
+      "text": "road map. First, we'll cover the AI",
+      "start": 44.32,
+      "duration": 4.4
+    },
+    {
+      "text": "validation shift, then qualifying your",
+      "start": 46.36,
+      "duration": 4.32
+    },
+    {
+      "text": "AI data, followed by the validation",
+      "start": 48.72,
+      "duration": 4.08
+    },
+    {
+      "text": "metric squad. After that, we'll look at",
+      "start": 50.68,
+      "duration": 3.84
+    },
+    {
+      "text": "testing boundary conditions, some",
+      "start": 52.8,
+      "duration": 3.72
+    },
+    {
+      "text": "real-world failures, and finally,",
+      "start": 54.52,
+      "duration": 4.28
+    },
+    {
+      "text": "defending your evidence. All right,",
+      "start": 56.52,
+      "duration": 5.6
+    },
+    {
+      "text": "section one, the AI validation shift,",
+      "start": 58.8,
+      "duration": 5.36
+    },
+    {
+      "text": "moving from deterministic logic to",
+      "start": 62.12,
+      "duration": 3.88
+    },
+    {
+      "text": "statistical reality.",
+      "start": 64.16,
+      "duration": 3.92
+    },
+    {
+      "text": "So, this is really the first major",
+      "start": 66.0,
+      "duration": 4.12
+    },
+    {
+      "text": "paradigm shift for QA and IT",
+      "start": 68.08,
+      "duration": 3.6
+    },
+    {
+      "text": "professionals operating in these",
+      "start": 70.12,
+      "duration": 3.44
+    },
+    {
+      "text": "regulated environments. With",
+      "start": 71.68,
+      "duration": 4.08
+    },
+    {
+      "text": "conventional CSV, you rely heavily on",
+      "start": 73.56,
+      "duration": 3.96
+    },
+    {
+      "text": "test scripts, right? You put in a",
+      "start": 75.76,
+      "duration": 3.6
+    },
+    {
+      "text": "strictly defined input, and you check",
+      "start": 77.52,
+      "duration": 4.32
+    },
+    {
+      "text": "for a strictly defined expected output.",
+      "start": 79.36,
+      "duration": 4.68
+    },
+    {
+      "text": "It's a simple pass or fail. And that's",
+      "start": 81.84,
+      "duration": 5.4
+    },
+    {
+      "text": "perfect for deterministic logic. But AI,",
+      "start": 84.04,
+      "duration": 6.76
+    },
+    {
+      "text": "AI learns, it adapts. So, simply asking,",
+      "start": 87.24,
+      "duration": 5.56
+    },
+    {
+      "text": "does the system do what was specified,",
+      "start": 90.8,
+      "duration": 4.76
+    },
+    {
+      "text": "is honestly no longer enough. Instead,",
+      "start": 92.8,
+      "duration": 4.84
+    },
+    {
+      "text": "we have to ask, does the model perform",
+      "start": 95.56,
+      "duration": 4.32
+    },
+    {
+      "text": "reliably across realistic operational",
+      "start": 97.64,
+      "duration": 3.48
+    },
+    {
+      "text": "conditions?",
+      "start": 99.88,
+      "duration": 3.24
+    },
+    {
+      "text": "AI validation demands a statistical",
+      "start": 101.12,
+      "duration": 4.32
+    },
+    {
+      "text": "evaluation across representative data to",
+      "start": 103.12,
+      "duration": 3.84
+    },
+    {
+      "text": "establish a baseline for ongoing",
+      "start": 105.44,
+      "duration": 2.76
+    },
+    {
+      "text": "monitoring.",
+      "start": 106.96,
+      "duration": 3.6
+    },
+    {
+      "text": "And this shift extends across the entire",
+      "start": 108.2,
+      "duration": 5.6
+    },
+    {
+      "text": "AI life cycle, from data to training,",
+      "start": 110.56,
+      "duration": 5.84
+    },
+    {
+      "text": "validating, deploying, monitoring, all",
+      "start": 113.8,
+      "duration": 5.24
+    },
+    {
+      "text": "the way to retirement. The absolute most",
+      "start": 116.4,
+      "duration": 4.28
+    },
+    {
+      "text": "crucial thing to remember here is that",
+      "start": 119.04,
+      "duration": 4.6
+    },
+    {
+      "text": "Annex 22 expectations apply everywhere.",
+      "start": 120.68,
+      "duration": 4.72
+    },
+    {
+      "text": "Validation evidence isn't just some",
+      "start": 123.64,
+      "duration": 3.32
+    },
+    {
+      "text": "administrative hoop you jump through",
+      "start": 125.4,
+      "duration": 3.44
+    },
+    {
+      "text": "right before deployment. If you change",
+      "start": 126.96,
+      "duration": 3.36
+    },
+    {
+      "text": "your data sources or, you know, even",
+      "start": 128.84,
+      "duration": 3.44
+    },
+    {
+      "text": "adjust a single hyperparameter, you",
+      "start": 130.32,
+      "duration": 4.48
+    },
+    {
+      "text": "trigger revalidation. The validated",
+      "start": 132.28,
+      "duration": 4.2
+    },
+    {
+      "text": "state is something you actively maintain",
+      "start": 134.8,
+      "duration": 4.159
+    },
+    {
+      "text": "over time, not just a dusty certificate",
+      "start": 136.48,
+      "duration": 4.08
+    },
+    {
+      "text": "hanging on a wall.",
+      "start": 138.959,
+      "duration": 3.961
+    },
+    {
+      "text": "Moving on to section two, qualifying",
+      "start": 140.56,
+      "duration": 3.88
+    },
+    {
+      "text": "your AI data.",
+      "start": 142.92,
+      "duration": 3.8
+    },
+    {
+      "text": "The foundation of inspection-defensible",
+      "start": 144.44,
+      "duration": 3.48
+    },
+    {
+      "text": "AI.",
+      "start": 146.72,
+      "duration": 2.68
+    },
+    {
+      "text": "Because here's the blunt truth. If your",
+      "start": 147.92,
+      "duration": 3.92
+    },
+    {
+      "text": "data's flawed, your entire validation",
+      "start": 149.4,
+      "duration": 4.88
+    },
+    {
+      "text": "crumbles. In the world of AI, data",
+      "start": 151.84,
+      "duration": 4.6
+    },
+    {
+      "text": "validation is itself a regulated",
+      "start": 154.28,
+      "duration": 3.679
+    },
+    {
+      "text": "activity, and there's a critical",
+      "start": 156.44,
+      "duration": 3.64
+    },
+    {
+      "text": "division you must make. The data you use",
+      "start": 157.959,
+      "duration": 4.081
+    },
+    {
+      "text": "to teach the model versus the data you",
+      "start": 160.08,
+      "duration": 3.72
+    },
+    {
+      "text": "use to test it. Training data",
+      "start": 162.04,
+      "duration": 3.6
+    },
+    {
+      "text": "qualification verifies completeness,",
+      "start": 163.8,
+      "duration": 3.76
+    },
+    {
+      "text": "lineage, and checks for bias to make",
+      "start": 165.64,
+      "duration": 4.12
+    },
+    {
+      "text": "sure it actually represents reality. But",
+      "start": 167.56,
+      "duration": 3.96
+    },
+    {
+      "text": "test data qualification is a completely",
+      "start": 169.76,
+      "duration": 3.88
+    },
+    {
+      "text": "different beast. Here, you are verifying",
+      "start": 171.52,
+      "duration": 4.04
+    },
+    {
+      "text": "strict, absolute independence from the",
+      "start": 173.64,
+      "duration": 3.68
+    },
+    {
+      "text": "training data, ensuring it covers your",
+      "start": 175.56,
+      "duration": 3.52
+    },
+    {
+      "text": "full operational scope. We're talking",
+      "start": 177.32,
+      "duration": 3.52
+    },
+    {
+      "text": "every product family, every single site",
+      "start": 179.08,
+      "duration": 2.96
+    },
+    {
+      "text": "condition.",
+      "start": 180.84,
+      "duration": 2.72
+    },
+    {
+      "text": "I want to read this quote directly",
+      "start": 182.04,
+      "duration": 3.76
+    },
+    {
+      "text": "because it's that important. The test",
+      "start": 183.56,
+      "duration": 3.679
+    },
+    {
+      "text": "set is reserved for performance",
+      "start": 185.8,
+      "duration": 3.88
+    },
+    {
+      "text": "verification only and must not influence",
+      "start": 187.239,
+      "duration": 4.041
+    },
+    {
+      "text": "development decisions.",
+      "start": 189.68,
+      "duration": 3.48
+    },
+    {
+      "text": "This means test data lockdown is",
+      "start": 191.28,
+      "duration": 3.76
+    },
+    {
+      "text": "absolutely critical. If your data",
+      "start": 193.16,
+      "duration": 3.4
+    },
+    {
+      "text": "scientists are secretly tweaking the",
+      "start": 195.04,
+      "duration": 3.199
+    },
+    {
+      "text": "model based on what they see in the test",
+      "start": 196.56,
+      "duration": 4.88
+    },
+    {
+      "text": "set, your data is contaminated, period.",
+      "start": 198.239,
+      "duration": 4.681
+    },
+    {
+      "text": "Failing to strictly separate your test",
+      "start": 201.44,
+      "duration": 3.44
+    },
+    {
+      "text": "data is literally the fastest way to",
+      "start": 202.92,
+      "duration": 3.52
+    },
+    {
+      "text": "instantly invalidate your performance",
+      "start": 204.88,
+      "duration": 3.24
+    },
+    {
+      "text": "metrics. It's basically handing an",
+      "start": 206.44,
+      "duration": 3.44
+    },
+    {
+      "text": "inspector a massive compliance finding",
+      "start": 208.12,
+      "duration": 3.44
+    },
+    {
+      "text": "on a silver platter.",
+      "start": 209.88,
+      "duration": 3.72
+    },
+    {
+      "text": "Section three, the validation metric",
+      "start": 211.56,
+      "duration": 5.24
+    },
+    {
+      "text": "squad, or why basic accuracy is just not",
+      "start": 213.6,
+      "duration": 4.44
+    },
+    {
+      "text": "enough.",
+      "start": 216.8,
+      "duration": 2.88
+    },
+    {
+      "text": "Listen, if you hand an inspector a",
+      "start": 218.04,
+      "duration": 3.52
+    },
+    {
+      "text": "validation report that just points to a",
+      "start": 219.68,
+      "duration": 4.2
+    },
+    {
+      "text": "single accuracy score, you're going to",
+      "start": 221.56,
+      "duration": 4.679
+    },
+    {
+      "text": "fail that inspection on the spot. For",
+      "start": 223.88,
+      "duration": 4.0
+    },
+    {
+      "text": "safety-critical applications, you",
+      "start": 226.239,
+      "duration": 3.881
+    },
+    {
+      "text": "strictly require four complementary",
+      "start": 227.88,
+      "duration": 4.16
+    },
+    {
+      "text": "metrics. We call this the validation",
+      "start": 230.12,
+      "duration": 4.36
+    },
+    {
+      "text": "metric quad. First, you've got accuracy",
+      "start": 232.04,
+      "duration": 4.24
+    },
+    {
+      "text": "or the F1 score, which measures overall",
+      "start": 234.48,
+      "duration": 3.72
+    },
+    {
+      "text": "correctness. But, if your data is",
+      "start": 236.28,
+      "duration": 3.96
+    },
+    {
+      "text": "imbalanced, which it usually is, we have",
+      "start": 238.2,
+      "duration": 3.88
+    },
+    {
+      "text": "to add precision and recall to measure",
+      "start": 240.24,
+      "duration": 4.56
+    },
+    {
+      "text": "false positives versus actual misses.",
+      "start": 242.08,
+      "duration": 4.68
+    },
+    {
+      "text": "Third is calibration. Does the AI's",
+      "start": 244.8,
+      "duration": 4.28
+    },
+    {
+      "text": "confidence actually match reality? And",
+      "start": 246.76,
+      "duration": 4.52
+    },
+    {
+      "text": "finally, robustness. How consistently",
+      "start": 249.08,
+      "duration": 3.24
+    },
+    {
+      "text": "does the model behave when your",
+      "start": 251.28,
+      "duration": 3.24
+    },
+    {
+      "text": "operational conditions start varying?",
+      "start": 252.32,
+      "duration": 4.6
+    },
+    {
+      "text": "You literally need all four. Let's dig",
+      "start": 254.52,
+      "duration": 4.24
+    },
+    {
+      "text": "into that fundamental trade-off between",
+      "start": 256.92,
+      "duration": 4.52
+    },
+    {
+      "text": "precision and recall for a second.",
+      "start": 258.76,
+      "duration": 4.8
+    },
+    {
+      "text": "High precision means very few false",
+      "start": 261.44,
+      "duration": 4.2
+    },
+    {
+      "text": "alarms. High recall means very few",
+      "start": 263.56,
+      "duration": 4.96
+    },
+    {
+      "text": "missed cases. And usually pushing one up",
+      "start": 265.64,
+      "duration": 4.68
+    },
+    {
+      "text": "forces the other down.",
+      "start": 268.52,
+      "duration": 3.96
+    },
+    {
+      "text": "In pharma, the asymmetric costs of those",
+      "start": 270.32,
+      "duration": 4.72
+    },
+    {
+      "text": "errors really dictate our choices.",
+      "start": 272.48,
+      "duration": 5.16
+    },
+    {
+      "text": "We typically prioritize recall. We set",
+      "start": 275.04,
+      "duration": 4.48
+    },
+    {
+      "text": "thresholds to ensure absolutely no",
+      "start": 277.64,
+      "duration": 3.92
+    },
+    {
+      "text": "safety events are missed, even if it",
+      "start": 279.52,
+      "duration": 3.96
+    },
+    {
+      "text": "means human operators have to tolerate a",
+      "start": 281.56,
+      "duration": 3.6
+    },
+    {
+      "text": "few more false alarms during their",
+      "start": 283.48,
+      "duration": 4.96
+    },
+    {
+      "text": "shift. Then we have calibration. This is",
+      "start": 285.16,
+      "duration": 4.64
+    },
+    {
+      "text": "the alignment between predicted",
+      "start": 288.44,
+      "duration": 3.84
+    },
+    {
+      "text": "probabilities and observed frequencies.",
+      "start": 289.8,
+      "duration": 4.72
+    },
+    {
+      "text": "Honestly, validation teams miss this one",
+      "start": 292.28,
+      "duration": 5.04
+    },
+    {
+      "text": "all the time, but it's massive. Imagine",
+      "start": 294.52,
+      "duration": 4.96
+    },
+    {
+      "text": "an AI that is completely wrong, but it",
+      "start": 297.32,
+      "duration": 4.64
+    },
+    {
+      "text": "tells the operator it's 99% confident",
+      "start": 299.48,
+      "duration": 4.76
+    },
+    {
+      "text": "it's right. That overconfidence causes",
+      "start": 301.96,
+      "duration": 4.28
+    },
+    {
+      "text": "humans to just blindly trust downstream",
+      "start": 304.24,
+      "duration": 4.88
+    },
+    {
+      "text": "decisions. It's incredibly dangerous. If",
+      "start": 306.24,
+      "duration": 5.64
+    },
+    {
+      "text": "the AI says, \"I'm 80% sure,\" it needs to",
+      "start": 309.12,
+      "duration": 5.04
+    },
+    {
+      "text": "actually be correct exactly 80% of the",
+      "start": 311.88,
+      "duration": 3.28
+    },
+    {
+      "text": "time.",
+      "start": 314.16,
+      "duration": 3.56
+    },
+    {
+      "text": "Now, all of these metrics must be tied",
+      "start": 315.16,
+      "duration": 5.44
+    },
+    {
+      "text": "to strictly defined acceptance criteria.",
+      "start": 317.72,
+      "duration": 5.0
+    },
+    {
+      "text": "We can't use vague targets like shows",
+      "start": 320.6,
+      "duration": 4.52
+    },
+    {
+      "text": "good performance. You need hard,",
+      "start": 322.72,
+      "duration": 5.36
+    },
+    {
+      "text": "quantitative thresholds tied to a solid",
+      "start": 325.12,
+      "duration": 4.96
+    },
+    {
+      "text": "risk-based rationale. You need",
+      "start": 328.08,
+      "duration": 3.88
+    },
+    {
+      "text": "multi-metric requirements and",
+      "start": 330.08,
+      "duration": 4.0
+    },
+    {
+      "text": "subpopulation fairness to make sure the",
+      "start": 331.96,
+      "duration": 3.52
+    },
+    {
+      "text": "model doesn't just look great for the",
+      "start": 334.08,
+      "duration": 3.52
+    },
+    {
+      "text": "majority while completely failing on",
+      "start": 335.48,
+      "duration": 3.88
+    },
+    {
+      "text": "rare edge cases. But, here is the",
+      "start": 337.6,
+      "duration": 2.8
+    },
+    {
+      "text": "kicker.",
+      "start": 339.36,
+      "duration": 3.84
+    },
+    {
+      "text": "These criteria must be sealed before you",
+      "start": 340.4,
+      "duration": 5.16
+    },
+    {
+      "text": "evaluate. Moving the goal posts after",
+      "start": 343.2,
+      "duration": 3.84
+    },
+    {
+      "text": "you see the results completely",
+      "start": 345.56,
+      "duration": 3.76
+    },
+    {
+      "text": "undermines the entire discipline.",
+      "start": 347.04,
+      "duration": 4.6
+    },
+    {
+      "text": "Your criteria must hold up under intense",
+      "start": 349.32,
+      "duration": 4.36
+    },
+    {
+      "text": "inspector scrutiny.",
+      "start": 351.64,
+      "duration": 4.12
+    },
+    {
+      "text": "Okay, section four, testing boundary",
+      "start": 353.68,
+      "duration": 4.04
+    },
+    {
+      "text": "conditions, operational performance",
+      "start": 355.76,
+      "duration": 4.48
+    },
+    {
+      "text": "qualification. So, here we're shifting",
+      "start": 357.72,
+      "duration": 4.2
+    },
+    {
+      "text": "our focus from typical day-to-day",
+      "start": 360.24,
+      "duration": 3.88
+    },
+    {
+      "text": "operations out to the very edges of your",
+      "start": 361.92,
+      "duration": 4.72
+    },
+    {
+      "text": "intended use envelope because strong",
+      "start": 364.12,
+      "duration": 4.2
+    },
+    {
+      "text": "performance under normal sunny day",
+      "start": 366.64,
+      "duration": 3.52
+    },
+    {
+      "text": "conditions does not predict how the",
+      "start": 368.32,
+      "duration": 4.32
+    },
+    {
+      "text": "system will behave during edge cases.",
+      "start": 370.16,
+      "duration": 3.96
+    },
+    {
+      "text": "And that is exactly why inspectors",
+      "start": 372.64,
+      "duration": 3.76
+    },
+    {
+      "text": "examine boundary handling so closely.",
+      "start": 374.12,
+      "duration": 4.28
+    },
+    {
+      "text": "You must test extreme inputs, highly",
+      "start": 376.4,
+      "duration": 4.32
+    },
+    {
+      "text": "unusual data combinations, and you have",
+      "start": 378.4,
+      "duration": 3.68
+    },
+    {
+      "text": "to explicitly validate your",
+      "start": 380.72,
+      "duration": 3.8
+    },
+    {
+      "text": "out-of-distribution or OOD detection",
+      "start": 382.08,
+      "duration": 4.72
+    },
+    {
+      "text": "logic. The AI's ability to essentially",
+      "start": 384.52,
+      "duration": 4.04
+    },
+    {
+      "text": "say, \"Hey, I wasn't trained on this",
+      "start": 386.8,
+      "duration": 3.4
+    },
+    {
+      "text": "data.\" and safely refuse to make a",
+      "start": 388.56,
+      "duration": 3.6
+    },
+    {
+      "text": "prediction is a mandatory part of",
+      "start": 390.2,
+      "duration": 3.88
+    },
+    {
+      "text": "validation. And these results should",
+      "start": 392.16,
+      "duration": 3.56
+    },
+    {
+      "text": "always be reported separately from your",
+      "start": 394.08,
+      "duration": 3.4
+    },
+    {
+      "text": "headline metrics.",
+      "start": 395.72,
+      "duration": 3.56
+    },
+    {
+      "text": "So, I want to pause and pose this direct",
+      "start": 397.48,
+      "duration": 3.96
+    },
+    {
+      "text": "question. What happens to your system",
+      "start": 399.28,
+      "duration": 4.0
+    },
+    {
+      "text": "when data sources fail? What happens",
+      "start": 401.44,
+      "duration": 3.92
+    },
+    {
+      "text": "when physical sensors actually degrade",
+      "start": 403.28,
+      "duration": 4.0
+    },
+    {
+      "text": "out on the manufacturing facility floor?",
+      "start": 405.36,
+      "duration": 4.36
+    },
+    {
+      "text": "Or when highly unusual conditions occur?",
+      "start": 407.28,
+      "duration": 3.8
+    },
+    {
+      "text": "This introduces the concept of",
+      "start": 409.72,
+      "duration": 2.88
+    },
+    {
+      "text": "deliberate fault injection during",
+      "start": 411.08,
+      "duration": 3.52
+    },
+    {
+      "text": "operational performance qualification or",
+      "start": 412.6,
+      "duration": 3.08
+    },
+    {
+      "text": "PQ.",
+      "start": 414.6,
+      "duration": 2.72
+    },
+    {
+      "text": "You have to prove graceful degradation",
+      "start": 415.68,
+      "duration": 3.48
+    },
+    {
+      "text": "of the system. You aren't just verifying",
+      "start": 417.32,
+      "duration": 3.52
+    },
+    {
+      "text": "the model in a vacuum, you're verifying",
+      "start": 419.16,
+      "duration": 4.48
+    },
+    {
+      "text": "the full production pipeline end-to-end.",
+      "start": 420.84,
+      "duration": 5.2
+    },
+    {
+      "text": "Section five, real-world validation",
+      "start": 423.64,
+      "duration": 4.36
+    },
+    {
+      "text": "failures, lessons from the field.",
+      "start": 426.04,
+      "duration": 3.6
+    },
+    {
+      "text": "Because what's really fascinating is",
+      "start": 428.0,
+      "duration": 3.48
+    },
+    {
+      "text": "seeing exactly what happens when these",
+      "start": 429.64,
+      "duration": 3.76
+    },
+    {
+      "text": "frameworks are ignored.",
+      "start": 431.48,
+      "duration": 4.32
+    },
+    {
+      "text": "Let's look at a real example. Take a",
+      "start": 433.4,
+      "duration": 5.08
+    },
+    {
+      "text": "look at this number, 78%.",
+      "start": 435.8,
+      "duration": 5.08
+    },
+    {
+      "text": "That was the actual operational accuracy",
+      "start": 438.48,
+      "duration": 4.28
+    },
+    {
+      "text": "of a deviation classifier that had",
+      "start": 440.88,
+      "duration": 4.28
+    },
+    {
+      "text": "falsely reported a 92% accuracy during",
+      "start": 442.76,
+      "duration": 4.88
+    },
+    {
+      "text": "its validation. So, what caused that",
+      "start": 445.16,
+      "duration": 4.96
+    },
+    {
+      "text": "jarring drop in the real world? Data",
+      "start": 447.64,
+      "duration": 4.72
+    },
+    {
+      "text": "leakage. A deep investigation revealed",
+      "start": 450.12,
+      "duration": 4.12
+    },
+    {
+      "text": "that near duplicate text patterns were",
+      "start": 452.36,
+      "duration": 3.36
+    },
+    {
+      "text": "sitting in both the training and the",
+      "start": 454.24,
+      "duration": 3.32
+    },
+    {
+      "text": "test sets. Because the data wasn't",
+      "start": 455.72,
+      "duration": 3.76
+    },
+    {
+      "text": "strictly independent, the validation",
+      "start": 457.56,
+      "duration": 4.4
+    },
+    {
+      "text": "metrics were artificially inflated. That",
+      "start": 459.48,
+      "duration": 4.6
+    },
+    {
+      "text": "led to 6 months of degraded performance",
+      "start": 461.96,
+      "duration": 4.32
+    },
+    {
+      "text": "and unsurprisingly a major inspection",
+      "start": 464.08,
+      "duration": 3.08
+    },
+    {
+      "text": "finding.",
+      "start": 466.28,
+      "duration": 3.52
+    },
+    {
+      "text": ">> Or consider this calibration failure. A",
+      "start": 467.16,
+      "duration": 5.0
+    },
+    {
+      "text": "team deployed an AI analyzing stability",
+      "start": 469.8,
+      "duration": 4.56
+    },
+    {
+      "text": "photos, which provided confidence scores",
+      "start": 472.16,
+      "duration": 4.28
+    },
+    {
+      "text": "to help prioritize human review.",
+      "start": 474.36,
+      "duration": 3.96
+    },
+    {
+      "text": "However, the AI was systematically",
+      "start": 476.44,
+      "duration": 4.12
+    },
+    {
+      "text": "overconfident on certain specific types",
+      "start": 478.32,
+      "duration": 4.12
+    },
+    {
+      "text": "of images. And because of this",
+      "start": 480.56,
+      "duration": 4.16
+    },
+    {
+      "text": "miscalibration, the prioritization logic",
+      "start": 482.44,
+      "duration": 4.56
+    },
+    {
+      "text": "became heavily biased, which left highly",
+      "start": 484.72,
+      "duration": 4.4
+    },
+    {
+      "text": "critical images completely unreviewed.",
+      "start": 487.0,
+      "duration": 4.0
+    },
+    {
+      "text": "They literally had to suspend the entire",
+      "start": 489.12,
+      "duration": 4.12
+    },
+    {
+      "text": "workflow. It proves that a miscalibrated",
+      "start": 491.0,
+      "duration": 4.48
+    },
+    {
+      "text": "AI is dangerous in direct proportion to",
+      "start": 493.24,
+      "duration": 3.8
+    },
+    {
+      "text": "how much your downstream logic depends",
+      "start": 495.48,
+      "duration": 4.24
+    },
+    {
+      "text": "on it. And finally, a cautionary tale on",
+      "start": 497.04,
+      "duration": 5.08
+    },
+    {
+      "text": "boundary failures. So, a predictive",
+      "start": 499.72,
+      "duration": 3.92
+    },
+    {
+      "text": "maintenance AI was validated, showed",
+      "start": 502.12,
+      "duration": 3.32
+    },
+    {
+      "text": "great performance on standard data. But",
+      "start": 503.64,
+      "duration": 3.32
+    },
+    {
+      "text": "during a weekend startup, the scenario",
+      "start": 505.44,
+      "duration": 3.44
+    },
+    {
+      "text": "produced inputs that were just slightly",
+      "start": 506.96,
+      "duration": 3.8
+    },
+    {
+      "text": "outside the validated envelope. Well,",
+      "start": 508.88,
+      "duration": 3.64
+    },
+    {
+      "text": "the AI confidently predicted normal",
+      "start": 510.76,
+      "duration": 3.959
+    },
+    {
+      "text": "operation, completely masking a real",
+      "start": 512.52,
+      "duration": 4.079
+    },
+    {
+      "text": "probe failure, which led to a massive",
+      "start": 514.719,
+      "duration": 4.041
+    },
+    {
+      "text": "unplanned deviation. If the AI doesn't",
+      "start": 516.599,
+      "duration": 3.361
+    },
+    {
+      "text": "know what it doesn't know, it's a",
+      "start": 518.76,
+      "duration": 3.159
+    },
+    {
+      "text": "massive liability. Your",
+      "start": 519.96,
+      "duration": 4.0
+    },
+    {
+      "text": "out-of-distribution detection logic has",
+      "start": 521.919,
+      "duration": 5.121
+    },
+    {
+      "text": "to be explicitly validated. Section six,",
+      "start": 523.96,
+      "duration": 5.16
+    },
+    {
+      "text": "defending your evidence, the inspector's",
+      "start": 527.04,
+      "duration": 4.32
+    },
+    {
+      "text": "perspective. Let's essentially",
+      "start": 529.12,
+      "duration": 4.12
+    },
+    {
+      "text": "reverse-engineer the inspector's audit",
+      "start": 531.36,
+      "duration": 3.28
+    },
+    {
+      "text": "to make sure your evidence is",
+      "start": 533.24,
+      "duration": 3.68
+    },
+    {
+      "text": "bulletproof. The magic phrase here is",
+      "start": 534.64,
+      "duration": 4.16
+    },
+    {
+      "text": "evidence traceability.",
+      "start": 536.92,
+      "duration": 3.32
+    },
+    {
+      "text": "Honestly, how you organize your",
+      "start": 538.8,
+      "duration": 3.32
+    },
+    {
+      "text": "documentation shapes your inspection",
+      "start": 540.24,
+      "duration": 3.56
+    },
+    {
+      "text": "outcome just as much as the completeness",
+      "start": 542.12,
+      "duration": 3.84
+    },
+    {
+      "text": "of the data itself. You need unbroken",
+      "start": 543.8,
+      "duration": 4.32
+    },
+    {
+      "text": "links from your headline conclusions all",
+      "start": 545.96,
+      "duration": 4.44
+    },
+    {
+      "text": "the way down to the underlying raw data.",
+      "start": 548.12,
+      "duration": 3.92
+    },
+    {
+      "text": "Test data versions have to be explicitly",
+      "start": 550.4,
+      "duration": 3.439
+    },
+    {
+      "text": "identified. The analysis code must be",
+      "start": 552.04,
+      "duration": 3.76
+    },
+    {
+      "text": "completely reproducible. And all those",
+      "start": 553.839,
+      "duration": 3.321
+    },
+    {
+      "text": "intermediate artifacts, like your",
+      "start": 555.8,
+      "duration": 2.76
+    },
+    {
+      "text": "confusion matrices and calibration",
+      "start": 557.16,
+      "duration": 3.48
+    },
+    {
+      "text": "plots, they must be preserved and easily",
+      "start": 558.56,
+      "duration": 3.32
+    },
+    {
+      "text": "accessible.",
+      "start": 560.64,
+      "duration": 3.12
+    },
+    {
+      "text": "This quote really hits the nail on the",
+      "start": 561.88,
+      "duration": 3.32
+    },
+    {
+      "text": "head when it comes to regulatory",
+      "start": 563.76,
+      "duration": 4.079
+    },
+    {
+      "text": "expectations. Inspectors expect to drill",
+      "start": 565.2,
+      "duration": 4.88
+    },
+    {
+      "text": "from a metric in the report to the test",
+      "start": 567.839,
+      "duration": 4.721
+    },
+    {
+      "text": "data and analysis producing it. Your",
+      "start": 570.08,
+      "duration": 4.28
+    },
+    {
+      "text": "validation report cannot just be some",
+      "start": 572.56,
+      "duration": 4.04
+    },
+    {
+      "text": "standalone executive summary. It has to",
+      "start": 574.36,
+      "duration": 4.92
+    },
+    {
+      "text": "support deep technical investigation.",
+      "start": 576.6,
+      "duration": 4.36
+    },
+    {
+      "text": "If an inspector points to a robustness",
+      "start": 579.28,
+      "duration": 4.04
+    },
+    {
+      "text": "metric and asks, \"Show me exactly how",
+      "start": 580.96,
+      "duration": 4.04
+    },
+    {
+      "text": "you calculated this.\" You need to be",
+      "start": 583.32,
+      "duration": 3.56
+    },
+    {
+      "text": "able to trace that back instantly. No",
+      "start": 585.0,
+      "duration": 3.28
+    },
+    {
+      "text": "fumbling around.",
+      "start": 586.88,
+      "duration": 4.32
+    },
+    {
+      "text": "So, as we wrap up this explainer, I want",
+      "start": 588.28,
+      "duration": 4.08
+    },
+    {
+      "text": "to leave you with this somewhat",
+      "start": 591.2,
+      "duration": 3.76
+    },
+    {
+      "text": "provocative question to really chew on.",
+      "start": 592.36,
+      "duration": 5.12
+    },
+    {
+      "text": "Your AI performs perfectly in standard",
+      "start": 594.96,
+      "duration": 4.84
+    },
+    {
+      "text": "conditions today, but when operations",
+      "start": 597.48,
+      "duration": 4.56
+    },
+    {
+      "text": "naturally shift over time, can you prove",
+      "start": 599.8,
+      "duration": 4.12
+    },
+    {
+      "text": "to an inspector that you are still in a",
+      "start": 602.04,
+      "duration": 4.8
+    },
+    {
+      "text": "validated state? Remember, AI validation",
+      "start": 603.92,
+      "duration": 5.68
+    },
+    {
+      "text": "under Annex 22 is an ongoing life cycle",
+      "start": 606.84,
+      "duration": 5.4
+    },
+    {
+      "text": "commitment. Keep your data independent.",
+      "start": 609.6,
+      "duration": 4.8
+    },
+    {
+      "text": "Insist on multi-metric criteria.",
+      "start": 612.24,
+      "duration": 4.2
+    },
+    {
+      "text": "Rigorously test your boundaries and",
+      "start": 614.4,
+      "duration": 4.24
+    },
+    {
+      "text": "maintain flawless traceability.",
+      "start": 616.44,
+      "duration": 4.08
+    },
+    {
+      "text": "Thank you so much for joining me. Keep",
+      "start": 618.64,
+      "duration": 3.48
+    },
+    {
+      "text": "learning, stay structured, and I will",
+      "start": 620.52,
+      "duration": 4.36
+    },
+    {
+      "text": "see you next time.",
+      "start": 622.12,
+      "duration": 2.76
+    }
+  ]
+}
