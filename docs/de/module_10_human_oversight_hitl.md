@@ -45,75 +45,81 @@ flowchart TD
 
 ## 📌 Fachliche Zusammenfassung (Key Takeaways)
 
-### 1. Das Kernprinzip: Keine Autonomie bei kritischen GMP-Entscheidungen
-Unter EU GMP Annex 22 gilt unmissverständlich: **KI-Systeme besitzen keine eigenständige pharmazeutische Rechtsverantwortung.**
-* Die gesetzliche Verantwortung für Produktqualität und Patientensicherheit verbleibt zu 100% beim qualifizierten pharmazeutischen Personal (z.B. Qualified Person nach Art. 51 Richtlinie 2001/83/EG).
-* **Perfunctory Oversight (Schein-Aufsicht):** Wenn ein hochqualifizierter Fachexperte lediglich vor dem Monitor sitzt und vorschlagsgemäß auf „Genehmigen“ klickt, liegt keine echte menschliche Aufsicht vor. Auditoren stufen dies als schwerwiegenden Compliance-Mangel ein.
+### 1. Das Kernprinzip: Menschliche Verantwortung & Entscheidungsbegleitung
+Unter EU GMP Annex 22 gilt das Grundprinzip: **KI-Systeme besitzen keine eigenständige pharmazeutische Rechtsverantwortung ([Draft §2.2]).**
+* **Keine pauschale HITL-Pflicht für voll qualifizierte Modelle:** Der Draft verlangt für umfassend getestete Modelle keine pauschale HITL (Auslegung von §1, §3.3, §10.5; Konfidenz: Mittel). Ein voll qualifiziertes System (z. B. automatisierte Gut-/Schlecht-Aussortierung in der Sichtprüfung) darf innerhalb seines qualifizierten Rahmens automatisiert agieren.
+* **Reduzierter Testaufwand bedingt strikte Operator-Pflichten ([Draft §3.3]):** Wenn das KI-System lediglich Input zu einer menschlichen Entscheidung liefert und der formale Testaufwand des Modells aufgrund dieser menschlichen Letztentscheidung reduziert wurde, muss die Rolle und Verantwortung des Bedieners (*Human Operator*) explizit im *Intended Use* festgelegt werden ([Draft §3.3]).
+* **Überwachung wie bei manuellen Prozessen ([Draft §3.3, §9.1, §9.2]):** Schulung und Arbeitsleistung des Bedieners müssen in diesem Fall genauso überwacht werden wie bei einem rein manuellen Prozess. Das Personal muss in den Grenzen des Systems und im Erkennen von Fehlern geschult sein ([Draft §9.1, §9.2]).
+* **Review-Aufzeichnungen & Ausgabeprüfung ([Draft §10.5]):** Aufzeichnungen über die Überprüfung von Systemausgaben durch Operatoren müssen aufbewahrt werden. Abhängig von der Kritikalität der Anwendung und der Tiefe der Modelltests kann dies die schriftlich geregelte Prüfung jeder einzelnen Ausgabe erfordern.
+* **Entflechtung zum allgemeinen Arzneimittelrecht:** Die Gesamtverantwortung des Herstellers und der Sachkundigen Person (Qualified Person) ergibt sich aus dem allgemeinen EU-Arzneimittelrecht; der Annex-22-Draft ergänzt dies um die spezifischen Anforderungen an die Verlässlichkeit der KI-Unterstützung.
 
-### 2. Die drei Aufsichts-Stufen (Oversight Tiers)
+### 2. Die drei Aufsichts-Stufen (Oversight Tiers) ([Didaktik])
 
-| Stufe | Bezeichnung | Risikoklasse | Funktionsweise | GMP-Zulässigkeit |
+> *Hinweis zur Systematik:* Die Unterteilung in HITL, HOTL und HOOL ist ein etabliertes Industriemodell ([Didaktik]), das hilft, den geforderten Kontrollgrad greifbar zu machen. Der Draft selbst regelt die Aufsicht funktional über §1, §3.3 und §10.5:
+
+| Stufe ([Didaktik]) | Bezeichnung | Typischer Kontext | Funktionsweise | GMP-Einordnung |
 | :---: | :--- | :--- | :--- | :--- |
-| **HITL** | **Human-in-the-Loop** | **Hoch (Critical)** | Der Mensch muss **jeden einzelnen KI-Output prüfen und genehmigen**, bevor eine physische oder datentechnische Aktion ausgeführt wird. | **Zwingender Standard** für Chargenfreigaben, Deviation-Triage und OOS-Untersuchungen. |
-| **HOTL** | **Human-on-the-Loop** | **Mittel (Moderate)** | Das Modell steuert Prozesse innerhalb enger, vorvalidierter Leitplanken autonom. Der Mensch überwacht die Leitwarte und kann jederzeit per Not-Aus (*Override*) eingreifen. | Zulässig für adaptive Prozessregelung (z.B. Bioreaktor-Temperatur), sofern Guardrails validiert sind. |
-| **HOOL** | **Human-out-of-the-Loop** | **Niedrig (Low / Non-GxP)** | Vollautomatisches System ohne menschliche Überprüfung. | **Strikt unzulässig** für alle Tätigkeiten mit direktem Einfluss auf Produktqualität oder Patientensicherheit. |
+| **HITL** | **Human-in-the-Loop** | Reduzierte Modell-Testtiefe ([Draft §3.3, §10.5]) oder GenAI ([Draft §1]) | Der Mensch prüft und zeichnet die Ausgabe, bevor eine physische oder datentechnische Aktion wirksam wird. | Erforderlich, wenn der Testaufwand des Modells reduziert wurde oder bei unkritischer GenAI. |
+| **HOTL** | **Human-on-the-Loop** | Voll qualifizierte Prozessautomatisierung | Das Modell steuert Prozesse innerhalb vorvalidierter Parameter. Der Mensch überwacht Trends und greift bei Abweichungen ein. | Zulässig für qualifizierte Inline-Regelungen (z. B. PAT), sofern Grenzen und Monitoring validiert sind. |
+| **HOOL** | **Human-out-of-the-Loop** | Autonome Systeme ohne menschliche Kontrollmöglichkeit | Vollautomatisches System ohne Überwachungsmöglichkeit. | Für kritische GMP-Prozesse unvereinbar mit den Grundsätzen von Annex 11 und Annex 22 ([Draft §1, §2.2]). |
 
 ### 3. Die Automation-Bias-Falle (Creeping Decay of Oversight)
-Die größte praktische Gefahr im Routinebetrieb ist die menschliche Psychologie:
-* Wenn ein System monatelang zuverlässig funktioniert, gewöhnen sich Prüfer daran, dass die KI „fast immer recht hat“.
-* Die kognitive Wachsamkeit lässt nach (*Cognitive Complacency*), und Prüfer überfliegen Warnungen nur noch oberflächlich.
+Die größte praktische Gefahr bei Systemen mit menschlicher Letztentscheidung ist die kognitive Gewöhnung:
+* Wenn ein System im Alltag zuverlässig funktioniert, gewöhnen sich Prüfer daran, dass die KI „fast immer recht hat“.
+* Die kognitive Wachsamkeit lässt nach (*Cognitive Complacency*), und Prüfer überfliegen Warnungen nur noch oberflächlich (*Perfunctory Review*).
 
 > [!CAUTION]
-> **Praxisfall:** Ein Pharmawerk führte ein KI-System zur Klassifizierung von Abweichungsberichten (*Deviation Triage*) ein. 
+> **Illustratives Praxisszenario (didaktisches Fallbeispiel, nicht belegt):** Ein Pharmawerk führte ein KI-System zur Klassifizierung von Abweichungsberichten (*Deviation Triage*) ein. 
 > - *Monat 1:* Prüfer überstimmten die KI in **12% der Fälle** (*Healthy Challenge*).
 > - *Monat 3:* Die Widerspruchsrate sank auf 5%.
 > - *Monat 6:* Die Widerspruchsrate fiel auf **1,5%**.
 > Eine interne Sonderprüfung deckte auf: Die KI war keineswegs besser geworden; die Prüfer hatten lediglich aufgehört, Berichte gründlich selbst zu lesen. Mehrere schwerwiegende Abweichungen waren fälschlich als „geringfügig“ eingestuft worden und erforderten nachträgliche CAPA-Verfahren.
 
-**Die goldene Inspektoren-Regel:** Eine **Widerspruchsrate (*Override Rate*), die gegen 0% tendiert**, ist kein Beweis für ein perfektes Modell, sondern ein **Alarmsignal für kollabierte menschliche Aufsicht**.
+**Überwachung der Widerspruchsrate ([Draft §10.5] / [Didaktik]):**
+In hochgradig präzisen und stabilen Prozessen kann eine niedrige Override-Rate normal sein. Ein dauerhaftes Verharren bei 0% sollte jedoch Anlass für eine risikobasierte Überprüfung sein, um sicherzustellen, dass kein unkritisches Durchwinken (*Automation Bias*) vorliegt. Gemäß [Draft §10.5] müssen Aufzeichnungen über den Review geführt und ausgewertet werden.
 
-### 4. Workflow-Architektur gegen Automation Bias: Das Independent-First-Pattern
-Um menschliche Prüfer wach und unabhängig zu halten, muss die Benutzeroberfläche (*UI/UX-Design*) aktiv gegen Bias schützen:
-* **Anti-Pattern (Nominal Confirmation):** Das System zeigt die KI-Empfehlung („Batch freigeben, Konfidenz 98%“) fett markiert an. Der Prüfer klickt unbewusst nur noch auf „Bestätigen“.
-* **Best Practice (Independent-First Pattern):** Der Prüfer analysiert das Dossier und muss **seine eigene Entscheidung erfassen, bevor die KI-Bewertung sichtbar wird**.
+### 4. Workflow-Architektur gegen Automation Bias: Das Independent-First-Pattern ([Didaktik])
+Um menschliche Prüfer wach und unabhängig zu halten, kann das Interaktionsdesign aktiv unterstützen:
+* **Anti-Pattern (Nominal Confirmation):** Das System zeigt die KI-Empfehlung („Batch freigeben, Konfidenz 98%“) dominant an. Der Prüfer neigt unbewusst zum bloßen Bestätigen.
+* **Best Practice (Independent-First Pattern, [Didaktik]):** Der Prüfer analysiert den Sachverhalt und erfasst **seine eigene Bewertung, bevor die KI-Empfehlung eingeblendet wird**.
   - Stimmen beide überein: Schneller Durchlauf.
-  - Weichen beide ab: Das System zwingt den Prüfer zu einer schriftlichen, zeitnahen Begründung im Audit Trail (*Documented Adjudication*).
-* **Konfidenzbasierte Eskalation:** Fällt der Konfidenzscore der KI unter einen vorvalidierten Schwellenwert (z.B. < 95%), verweigert das System jede Routineabarbeitung und leitet den Fall automatisch mit detaillierter Fehlerursache an einen Senior-Reviewer weiter.
+  - Weichen beide ab: Das System fordert eine dokumentierte Begründung (*Adjudication*).
+* **Konfidenzbasierte Eskalation:** Fällt der Konfidenzscore der KI unter einen vorvalidierten Schwellenwert, wird der Fall automatisch zur vertieften Überprüfung an erfahrenes Fachpersonal geleitet.
 
 ### 5. Was Behördeninspektoren sehen wollen
-Bei Inspektionen prüfen Auditoren gezielt die Tiefe der menschlichen Kontrolle:
-1. **Verweildauer pro Review (Dwell Time):** Werden 50-seitige Batch-Protokolle innerhalb von 4 Sekunden freigegeben, ist die Aufsicht eine Farce. Durchsatz-KPIs dürfen Prüfer nicht für gründliches Nachprüfen bestrafen!
-2. **Modellspezifische Qualifikationsnachweise:** Schulungszertifikate dürfen nicht nur allgemeine „KI-Grundlagen“ bescheinigen, sondern müssen nachweisen, dass der Prüfer die **spezifischen Fehlermodi und Grenzen genau dieses Modells** kennt.
-3. **Audit-Trail für Overrides:** Jeder Fall, in dem der Mensch die KI überstimmt hat (oder der KI gefolgt ist, obwohl sie niedrige Konfidenz hatte), muss lückenlos begründet und auffindbar sein.
+Bei Inspektionen prüfen Auditoren gezielt die Qualität der menschlichen Aufsicht:
+1. **Plausibilität der Review-Dauer:** Werden umfangreiche Chargenprotokolle in Sekundenschnelle freigegeben, ist die Aufsicht unglaubwürdig. Durchsatz-KPIs dürfen Prüfer nicht für gründliches Nachprüfen bestrafen.
+2. **Qualifikation und Training ([Draft §9.1, §9.2]):** Schulungsnachweise müssen belegen, dass das Personal die spezifischen Grenzen und Fehlermodi des KI-Modells versteht sowie weiß, wie und wann das System zu überstimmen ist (*Override*).
+3. **Audit-Trail für Overrides ([Draft §10.5]):** Aufzeichnungen über Korrekturen und Überstimmungen müssen auffindbar und begründet sein.
 
 ---
 
 ## 💡 Zentrale Fachbegriffe & Konzepte (Glossar)
 
-- **Human-in-the-Loop (HITL):** Aufsichtsmodell, bei dem jede KI-generierte Entscheidung vor ihrer Wirksamkeit der aktiven, bewussten Prüfung und Bestätigung durch einen Menschen bedarf.
-- **Human-on-the-Loop (HOTL):** Aufsichtsmodell, bei dem Prozesse innerhalb validierter Grenzen automatisiert ablaufen, der Mensch jedoch die Prozessführung überwacht und intervenieren kann.
-- **Automation Bias:** Die unbewusste menschliche Neigung, automatisierten Systemvorschlägen blind zu vertrauen und widersprechende reale Indikatoren zu ignorieren.
-- **Independent-First Pattern:** Ein Interaktions-Design, bei dem der menschliche Prüfer seine Bewertung vornimmt, bevor er den Vorschlag der KI sieht, um unbeeinflusste Urteile sicherzustellen.
-- **Override Rate:** Die statistische Häufigkeit, mit der menschliche Prüfer eine Empfehlung des KI-Systems korrigieren oder ablehnen; dient als zentraler Vitalitäts-KPI für die Aufsicht.
-- **Adjudication (Schiedsentscheidung):** Der formal dokumentierte Entscheidungs- und Begründungsprozess im Falle einer Diskrepanz zwischen menschlicher Ersteinschätzung und KI-Vorhersage.
+- **Human-in-the-Loop (HITL) ([Didaktik]):** Aufsichtsmodell, bei dem jede KI-generierte Ausgabe vor Wirksamkeit von einem Menschen geprüft und genehmigt wird (nach [Draft §3.3] zwingend, wenn Modell-Testaufwand dadurch reduziert wurde; nach [Draft §1] bei nicht-kritischer GenAI).
+- **Human-on-the-Loop (HOTL) ([Didaktik]):** Aufsichtsmodell, bei dem Prozesse innerhalb validierter Grenzen automatisiert ablaufen und der Mensch überwacht sowie intervenieren kann.
+- **Automation Bias:** Die unbewusste Neigung, automatisierten Systemvorschlägen unkritisch zu vertrauen und manuelle Prüfungen zu vernachlässigen.
+- **Independent-First Pattern ([Didaktik]):** Interaktionsdesign, bei dem die menschliche Bewertung vor der Einblendung des KI-Ergebnisses erfolgt, um unvoreingenommene Urteile zu fördern.
+- **Override Rate ([Didaktik]):** Häufigkeit, mit der menschliche Prüfer Modellvorschläge korrigieren; dient als risikobasierter Indikator für die Wachsamkeit des Personals.
+- **Adjudication ([Didaktik]):** Dokumentierte Begründung im Falle einer Diskrepanz zwischen menschlicher Ersteinschätzung und Modellvorhersage.
 
 ---
 
 ## 📋 GxP-Compliance Checklist: Human Oversight
 
 ### Absolute Must-Haves:
-- [ ] Ist für alle risikobehafteten GxP-Funktionen ein verbindliches **Human-in-the-Loop (HITL)**-Verfahren implementiert?
-- [ ] Besitzen die menschlichen Prüfer die uneingeschränkte, technisch gesicherte Befugnis, KI-Vorhersagen jederzeit zu überstimmen (*Override Authority*)?
-- [ ] Wird die **Override-Rate monatlich überwacht**, um ein Einschlafen der Aufmerksamkeit (*Automation Bias*) frühzeitig zu erkennen?
-- [ ] Schützt das UI-Design durch Blind-Review-Mechanismen (*Independent-First*) oder Schwellenwert-Eskalationen vor passivem Durchklicken?
-- [ ] Liegen modellspezifische Schulungsnachweise vor, die belegen, dass Prüfer über die typischen Fehlermodi dieses Modells geschult wurden?
-- [ ] Erfasst das Audit-Trail-System die Prüfdauer (*Dwell Time*) und schriftliche Begründungen bei Abweichungen zeitnah?
+- [ ] Wurde bei Modellen mit reduzierter Testtiefe die Operator-Verantwortung explizit im *Intended Use* verankert ([Draft §3.3])?
+- [ ] Werden Schulung und Arbeitsleistung der Bediener wie bei manuellen Prozessen überwacht ([Draft §3.3, §9.1])?
+- [ ] Wurde das Personal geschult, wie und wann das KI-System zu überstimmen ist (*Override*, [Draft §9.2])?
+- [ ] Werden Aufzeichnungen über die Überprüfung der Systemausgaben durch Operatoren geführt und aufbewahrt ([Draft §10.5])?
+- [ ] Schützt das Workflow-Design wirksam vor unkritischem Durchklicken (*Automation Bias*)?
+- [ ] Werden Overrides und Abweichungen im Audit Trail nachvollziehbar dokumentiert ([Draft §10.5])?
 
 ### Rote Flaggen bei Inspektionen (Red Flags):
-- ❌ Das KI-System führt bei kritischen Chargen- oder Laborprüfungen vollautomatische Freigaben ohne menschliche Signatur durch (*HOOL*).
-- ❌ Die monatliche Widerspruchsrate liegt dauerhaft bei 0% und wird von der Leitung fälschlich als „Perfektion“ gefeiert.
-- ❌ Arbeitsanweisungen (SOPs) belohnen Prüfer nach reiner Klickanzahl / Durchlaufzeit ohne Qualitätskontrolle der Reviews.
-- ❌ Prüfer können die Frage des Inspektors: *„Welche typischen Fehler macht diese KI und woran erkennen Sie diese?“* nicht beantworten.
+- ❌ Der Testaufwand des Modells wurde mit Verweis auf menschliche Kontrolle reduziert, aber es existieren weder Operator-SOPs noch Schulungsnachweise ([Draft §3.3]).
+- ❌ Das Personal kann die Frage des Inspektors: *„Welche typischen Fehler macht diese KI und wie erkennen Sie diese?“* nicht beantworten ([Draft §9.1]).
+- ❌ Eine Override-Rate von dauerhaft 0% in komplexen Beurteilungsprozessen wird ohne jede Plausibilitätsprüfung hingenommen.
+- ❌ Zeitdruck oder Durchsatz-KPIs zwingen Bediener zu oberflächlichen Bestätigungen in Sekundenschnelle.
 
 ---
 
