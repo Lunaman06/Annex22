@@ -35,7 +35,7 @@ graph LR
 
 ### Rechtlicher Status & Verbindlichkeit:
 * **Aktueller Status (Stand 2026):** Der Annex 22 ist derzeit ein **Draft (Konsultationsentwurf)** der Europäischen Kommission / EMA und PIC/S. Die öffentliche Konsultationsphase endete am **7. Oktober 2025**. Auf dem anschließenden *EMA Multi-Stakeholder Workshop* (30. Juni / 1. Juli 2026) wurden Rückmeldungen und Weiterentwicklungen erörtert; eine Neubewertung einzelner Restriktionen (z. B. GenAI-Ausschluss) ist Gegenstand laufender Prüfungen durch die Inspektorengruppen, ein förmlicher Änderungsbeschluss liegt jedoch noch nicht vor. Die finale Veröffentlichung wird für **Ende 2026 / Anfang 2027** erwartet.
-* **Faktische Prüfungsrelevanz heute:** Obwohl formell noch im Entwurfsstadium, orientieren sich europäische Aufsichtsbehörden und Inspektoren bereits heute an den Grundprinzipien des Drafts als aktuellem **„State of the Art“** im Rahmen von Annex-11-Inspektionen.
+* **Faktische Relevanz in der Praxis ([Auslegung]):** Obwohl formell noch im Entwurfsstadium (Konsultationsentwurf), wird in der Industrie- und Inspektionspraxis erwartet, dass sich Audits und Validierungsstrategien bereits heute an den im Draft formulierten Grundprinzipien als maßgeblichem Stand von Wissenschaft und Technik (*State of the Art*) orientieren.
 * **Das EudraLex Digital Package:** Annex 22 steht nicht isoliert, sondern bildet zusammen mit der Revision von **Annex 11** (Computerised Systems) und **Kapitel 4** (Dokumentation) das modernisierte regulatorische Digitalpaket der europäischen Arzneimittelproduktion.
 
 ### Die 3 Kernbotschaften:
@@ -48,6 +48,7 @@ Zur eindeutigen Trennung zwischen behördlichen Vorgaben und Industriepraxis gil
 * **`[Draft §X.Y]`**: Konkrete regulatorische Anforderung oder Aussage aus dem offiziellen Konsultationsentwurf EU GMP Annex 22 (Juli 2025) mit exakter Fundstelle.
 * **`[Best Practice: Quelle]`**: Anerkannte Methoden und Industriestandards mit benannter Quelle (z. B. `[Best Practice: ISPE GAMP AI Guide]`, `[Best Practice: ICH Q9 (R1)]` oder `[Best Practice: ML-Praxis]`).
 * **`[Didaktik]`**: Didaktische Modelle, Strukturierungshilfen, Analogien (z. B. „Zaun-Metapher“) und illustrative Fallbeispiele dieses Lernprojekts.
+* **`[Auslegung]`**: Fachliche Interpretation und regulatorische Einordnung abgeleiteter Sachverhalte.
 
 ---
 
@@ -187,17 +188,17 @@ Zur Schließung spezifischer technischer Lücken und für moderne Automatisierun
 
 ## 5. Zentrales Quellen- & Referenzverzeichnis (Primary Regulatory Sources)
 
-Dieses Lernrepositorium stützt sich auf folgende Primärquellen und Referenzwerke:
+Dieses Lernrepositorium stützt sich auf folgende Primärquellen und Referenzwerke (Stand / Abrufdatum: 28. September 2026):
 
-| Ref | Herausgeber / Dokument | Relevanz & Fundstelle |
-| :---: | :--- | :--- |
-| **Q1** | **Europäische Kommission / EMA / PIC/S:** [Draft Annex 22: Artificial Intelligence and Machine Learning in GxP Environments (Juli 2025)](https://health.ec.europa.eu/document/download/5f38a92d-bb8e-4264-8898-ea076e926db6_en?filename=mp_vol4_chap4_annex22_consultation_guideline_en.pdf) | **Verbindliche Primärquelle:** Offizieller Konsultationsentwurf (6 Seiten; Konsultationsfrist endete am 7. Oktober 2025). |
-| **Q2** | **European Medicines Agency (EMA):** [GMP Multi-Stakeholder Workshop on AI Guidance Development (Annex 22)](https://www.ema.europa.eu/en/events/good-manufacturing-practice-multistakeholder-workshop-expert-contributions-artificial-intelligence-guidance-development-annex-22) | **Fachdialog (30. Juni / 1. Juli 2026):** Diskussion von Expertenbeiträgen; Neubewertung einzelner Vorgaben ist Gegenstand laufender Prüfungen (kein förmlicher Beschluss). |
-| **Q3** | **Europäische Union:** Verordnung (EU) 2024/1689 (*EU AI Act*) | Horizontales Unionsrecht; Definition von „AI system“ in Art. 3(1) VO 2024/1689 wurde in das Glossar des Annex-22-Drafts übernommen. |
-| **Q4** | **Europäische Kommission:** EudraLex Vol. 4, *Annex 11: Computerised Systems* | Regulatorisches Fundament; Annex 22 gilt explizit als ergänzende Leitlinie (*additional guidance* nach Draft §1). |
-| **Q5** | **Europäische Kommission:** EudraLex Vol. 4, *Chapter 4: Documentation* | Grundanforderungen an Datenintegrität, Revisionssicherheit und Protokollierung im EudraLex Digital Package. |
-| **Q6** | **Europäische Union:** Richtlinie 2001/83/EG (Gemeinschaftskodex für Humanarzneimittel) | Arzneimittelrechtlicher Rahmen für Herstellerverantwortung, Chargenzertifizierung durch die Qualified Person (Art. 51) und Mängelverfahren (Art. 111(7)). |
-| **Q7** | **Europäische Kommission / EMA:** *Compilation of Community Procedures on Inspections* | Offizielle EU-Mängelkategorien bei GMP-Inspektionen: *Critical*, *Major*, *Other Deficiency*. |
-| **Q8** | **ISPE:** *GAMP® 5: A Risk-Based Approach to Compliant GxP Computerized Systems (Second Edition, 2022)* | Globaler Industriestandard für risikobasierte Softwarequalifizierung (Softwarekategorien 1, 3, 4, 5). |
-| **Q9** | **ISPE:** *GAMP® Guide: Enabling Artificial Intelligence and Machine Learning in GxP Environments (Juli 2025)* | Etablierte Industriepraxis für das duale Lebenszyklusmodell, Living Validation und Machine Learning Governance ([Best Practice: ISPE GAMP]). |
-| **Q10** | **US FDA:** *AI/ML-Based Software as a Medical Device Action Plan & AI in Drug Manufacturing* | Separater regulatorischer Kontext der US-Behörde; relevant für internationale Vermarktung, kein europäischer Annex-22-Rechtsgrund. |
+| Ref | Herausgeber / Dokument | Relevanz & Fundstelle | Abrufdatum |
+| :---: | :--- | :--- | :---: |
+| **Q1** | **Europäische Kommission / EMA / PIC/S:** [Annex 22: Artificial Intelligence (consultation draft)](https://health.ec.europa.eu/document/download/5f38a92d-bb8e-4264-8898-ea076e926db6_en?filename=mp_vol4_chap4_annex22_consultation_guideline_en.pdf) | **Verbindliche Primärquelle:** Offizieller Konsultationsentwurf (6 Seiten; Konsultationsfrist endete am 7. Oktober 2025). | 2026-09-28 |
+| **Q2** | **European Medicines Agency (EMA):** [GMP Multi-Stakeholder Workshop on AI Guidance Development (Annex 22)](https://www.ema.europa.eu/en/events/good-manufacturing-practice-multistakeholder-workshop-expert-contributions-artificial-intelligence-guidance-development-annex-22) | **Fachdialog (30. Juni / 1. Juli 2026):** Diskussion von Expertenbeiträgen; Neubewertung einzelner Vorgaben ist Gegenstand laufender Prüfungen (kein förmlicher Beschluss). | 2026-09-28 |
+| **Q3** | **Europäische Union:** Verordnung (EU) 2024/1689 (*EU AI Act*) | Horizontales Unionsrecht; Definition von „AI system“ in Art. 3(1) VO 2024/1689 wurde in das Glossar des Annex-22-Drafts übernommen. | 2026-09-28 |
+| **Q4** | **Europäische Kommission:** EudraLex Vol. 4, *Annex 11: Computerised Systems* | Regulatorisches Fundament; Annex 22 gilt explizit als ergänzende Leitlinie (*additional guidance* nach Draft §1). | 2026-09-28 |
+| **Q5** | **Europäische Kommission:** EudraLex Vol. 4, *Chapter 4: Documentation* | Grundanforderungen an Datenintegrität, Revisionssicherheit und Protokollierung im EudraLex Digital Package. | 2026-09-28 |
+| **Q6** | **Europäische Union:** Richtlinie 2001/83/EG (Gemeinschaftskodex für Humanarzneimittel) | Arzneimittelrechtlicher Rahmen für Herstellerverantwortung, Chargenzertifizierung durch die Qualified Person (Art. 51) und Mängelverfahren (Art. 111(7)). | 2026-09-28 |
+| **Q7** | **Europäische Kommission / EMA:** *Compilation of Union Procedures on Inspections and Exchange of Information* | Offizielle EU-Mängelkategorien bei GMP-Inspektionen: *Critical*, *Major*, *Other Deficiency*. | 2026-09-28 |
+| **Q8** | **ISPE:** *GAMP® 5: A Risk-Based Approach to Compliant GxP Computerized Systems (Second Edition, 2022)* | Globaler Industriestandard für risikobasierte Softwarequalifizierung (Softwarekategorien 1, 3, 4, 5). | 2026-09-28 |
+| **Q9** | **ISPE:** *GAMP® Guide: Enabling Artificial Intelligence and Machine Learning in GxP Environments (Juli 2025)* | Etablierte Industriepraxis für das duale Lebenszyklusmodell, Living Validation und Machine Learning Governance ([Best Practice: ISPE GAMP]). | 2026-09-28 |
+| **Q10** | **US FDA (CDER):** [Artificial Intelligence in Drug Manufacturing; Notice of Request for Information and Comments (Docket No. FDA-2023-N-0487, März 2023)](https://www.federalregister.gov/documents/2023/03/01/2023-04221/artificial-intelligence-in-drug-manufacturing-notice-of-request-for-information-and-comments) | US-Diskussionspapier und FRAME-Initiative zu AI/ML in der pharmazeutischen Produktion; separater US-Kontext, kein europäischer Rechtsgrund. | 2026-09-28 |
