@@ -20,25 +20,39 @@
 ## 🧭 Visualisierung: Nominal Confirmation vs. Independent-First Review
 
 ```mermaid
-flowchart TD
-    subgraph Bad["❌ Nominal Confirmation (Hohes Automation-Bias-Risiko)"]
+flowchart LR
+    subgraph Bad["❌ Nominal Confirmation"]
         direction TB
-        B1["KI zeigt Vorhersage & Konfidenz sofort an"] --> B2["Mensch prüft flüchtig unter Zeitdruck"]
-        B2 --> B3["Unkritisches 'Durchwinken' (Rubber Stamping)"]
+        B1["1. KI zeigt Vorhersage sofort an<br/><i>(Anchoring Effect)</i>"]
+        B2["2. Mensch prüft flüchtig unter Zeitdruck<br/><i>(Kognitive Entlastung)</i>"]
+        B3["3. Unkritisches Durchwinken<br/><i>(Rubber Stamping, Override ➔ 0%)</i>"]
+        B1 --> B2 --> B3
     end
 
-    subgraph Good["✅ Independent-First Pattern (Annex 22 Best Practice)"]
+    subgraph Good["✅ Independent-First Review"]
         direction TB
-        G1["Mensch bewertet Daten zuerst UNABHÄNGIG (Blind Review)"] --> G2["System blendet KI-Empfehlung erst danach ein"]
-        G2 --> G3{"Stimmen Mensch & KI überein?"}
-        G3 -- Ja --> G4["Schnelle Dokumentation & Freigabe"]
-        G3 -- Nein --> G5["Formale Adjudikation mit contemporärem Audit-Trail-Eintrag"]
+        G1["1. Operator stuft unabhängig ein<br/><i>(Blind Review ohne KI-Einfluss)</i>"]
+        G2["2. KI-Empfehlung wird eingeblendet<br/><i>(Konfidenz & Begründung)</i>"]
+        G3{"3. Stimmen Mensch<br/>& KI überein?"}
+        G4["Direkte Freigabe<br/><i>(Hohe Konkordanz)</i>"]
+        G5["Formale Adjudikation<br/><i>(Contemporärer Audit-Trail)</i>"]
+        G1 --> G2 --> G3
+        G3 -- "Ja" --> G4
+        G3 -- "Nein" --> G5
     end
 
-    Bad -.->|Gefahr: Override-Rate fällt gegen 0%| Good
+    Bad ==>|"Upgrade zur echten<br/>menschlichen Kontrolle"| Good
 
     style Bad fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style Good fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style B1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B3 fill:#ffffff,stroke:#ef4444,stroke-width:1.5px
+    style G1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G3 fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style G4 fill:#ecfdf5,stroke:#059669,stroke-width:1px
+    style G5 fill:#fefce8,stroke:#ca8a04,stroke-width:1.5px
 ```
 
 ---

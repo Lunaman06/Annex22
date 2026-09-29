@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_07_model_development_training.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -27,26 +27,39 @@ language: en
 ## 🧭 Core Concept: From Ad-hoc Experiment to GxP Engineering
 
 ```mermaid
-flowchart TD
-    subgraph DS["❌ Conventional Data Science (Ad-hoc)"]
+flowchart LR
+    subgraph DS["❌ Ad-hoc Data Science"]
         direction TB
-        DS1["Focus: Raw Benchmark Accuracy"] --> DS2["Ad-hoc Scripting in Notebooks"]
-        DS2 --> DS3["Hyperparameters Chosen by Intuition"]
-        DS3 --> DS4["Ephemeral Environments & Variable Seeds"]
+        DS1["Focus: Raw Benchmark Accuracy"]
+        DS2["Ad-hoc Scripting in Notebooks"]
+        DS3["Hyperparameters by Intuition"]
+        DS4["Ephemeral Seeds & Environments"]
+        DS1 --> DS2 --> DS3 --> DS4
     end
 
-    DS ==>|Mandatory GxP Paradigm Shift| A22
-
-    subgraph A22["✅ Annex 22 GMP Engineering (Controlled)"]
+    subgraph A22["✅ Annex 22 Controlled"]
         direction TB
-        G1["Focus: Trustworthiness & Calibration"] --> G2["Validated MLOps & Cloud Pipeline (Annex 11)"]
-        G2 --> G3["Systematic Hyperparameter Search with Rationale"]
-        G3 --> G4["Reproducibility: Git + DVC + Fixed Seeds"]
-        G4 --> G5["Frozen Weights & Standardized Model Card"]
+        G1["Focus: Trustworthiness & Calibration"]
+        G2["Validated MLOps Pipeline (Annex 11)"]
+        G3["Systematic Hyperparameter Search"]
+        G4["Reproducible: Git + DVC + Fixed Seeds"]
+        G5["Frozen Weights & Model Card"]
+        G1 --> G2 --> G3 --> G4 --> G5
     end
+
+    DS ==>|"Mandatory Paradigm Shift<br/>for GMP Operations"| A22
 
     style DS fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style DS1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS3 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS4 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style G1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G5 fill:#ffffff,stroke:#16a34a,stroke-width:1.5px
 ```
 
 ---

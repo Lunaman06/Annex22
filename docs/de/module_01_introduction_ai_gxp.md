@@ -11,22 +11,25 @@
 ## 🧭 Kernkonzept im Überblick: Der Paradigmenwechsel
 
 ```mermaid
-graph LR
-    subgraph A11["Traditionelle CSV (Annex 11)"]
+flowchart LR
+    subgraph A11["💻 Traditionelle CSV (Annex 11)"]
         direction TB
-        A1["Programmierter Code<br/>(Line-by-Line)"] --> A2["Deterministisches System<br/>(Wie ein Taschenrechner)"]
-        A2 --> A3["Feste Spezifikation<br/>(Input A ➔ Output B)"]
-        A3 --> A4["Einmaliges Testen<br/>(Sign-off & Done)"]
+        A1["Programmierter Code<br/><i>(Line-by-Line Logik)</i>"] --> A2["Deterministisches System<br/><i>(Input A ➔ Output B)</i>"]
+        A2 --> A3["Feste Spezifikation<br/><i>(Verifizierbare Regeln)</i>"]
+        A3 --> A4["Einmalige Validierung<br/><i>(Sign-off & statischer Freeze)</i>"]
     end
 
-    subgraph A22["KI / Machine Learning (Annex 22)"]
+    subgraph A22["🧠 AI / Machine Learning (Annex 22)"]
         direction TB
-        B1["Trainingsdaten & ALCOA+"] --> B2["Emergente Modell-Logik<br/>(Statistisches Lernen)"]
-        B2 --> B3["Generalisierung & Randfälle<br/>(Adversarial / Edge Cases)"]
-        B3 --> B4["Kontinuierliches Monitoring<br/>(Schutz vor Silent Drift)"]
+        B1["Trainingsdaten & ALCOA+<br/><i>(Substrat der Logik)</i>"] --> B2["Emergentes Modellverhalten<br/><i>(Statistisches Lernen)</i>"]
+        B2 --> B3["Generalisierung & Randfälle<br/><i>(OOD & Adversarial Testing)</i>"]
+        B3 --> B4["Living Validation<br/><i>(Schutz vor Silent Drift)</i>"]
     end
 
-    A11 -. "Paradigmenwechsel" .-> A22
+    A11 ==>|"Paradigmenwechsel"| A22
+
+    style A11 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
+    style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 ---

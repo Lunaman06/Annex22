@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/appendix_genai_rag_gxp.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/appendix_genai_rag_gxp.md, sync_date: 2026-09-29 -->
 # Guide: Generative AI (GenAI), LLMs & RAG in GxP Environments
 
 <div align="center">
@@ -45,36 +45,47 @@ In a regulated GxP environment, an LLM must **never generate answers freely from
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion["1. Qualified Document Ingestion (GxP Archive)"]
-        D1["Approved SOPs, Batch Records, LIMS Dossiers"] --> D2["Chunking & Embedding (Fixed Chunk Size & Overlap)"]
-        D2 --> D3["Validated Vector Database (e.g., Qdrant, pgvector)"]
+    subgraph Ingestion["1. Document Ingest"]
+        direction LR
+        D1["Approved SOPs & LIMS"] --> D2["Chunking & Embedding"] --> D3["Validated Vector DB"]
     end
 
-    subgraph Query["2. Sandboxed Inference & Guardrails"]
-        U1["Operator / QA Query"] --> G_IN["Input Guardrail<br/><i>(PII Masking, Prompt Injection Filter)</i>"]
-        G_IN --> RET["Semantic Retrieval (Top-K Chunks)"]
-        RET --> PROMPT["Fixed System Prompt + Context Chunks + Query"]
-        PROMPT --> LLM["LLM (Temperature = 0.0, Seed Fixed)"]
-        LLM --> G_OUT["Output Guardrail<br/><i>(Format Check, Schema Enforcement, Citation Audit)</i>"]
+    subgraph Query["2. Inference & Guardrails"]
+        direction LR
+        U1["Operator Query"] --> G_IN["Input Guardrails<br/><i>(PII & Injection)</i>"] --> RET["Semantic Retrieval"] --> LLM["LLM (Temp = 0.0)"] --> G_OUT["Output Guardrails<br/><i>(Schema & Citations)</i>"]
     end
 
-    subgraph Evaluation["3. Automated RAG-Triad Evaluation"]
-        G_OUT --> TR1["Context Relevance: Precision of retrieved SOP excerpts"]
-        TR1 --> TR2["Groundedness: Is output 100% supported by context?"]
-        TR2 --> TR3["Answer Relevance: Does output directly address prompt?"]
+    subgraph Evaluation["3. RAG-Triad Evaluation"]
+        direction LR
+        TR1["Context Relevance"] --> TR2["Groundedness = 1.0<br/><i>(100% Factuality)</i>"] --> TR3["Answer Relevance"]
     end
 
-    subgraph HITL["4. Pharmaceutical Authorization"]
-        TR3 --> REV["Qualified Human Reviewer (QA / QP)<br/><i>(Clickable ALCOA+ citations to source SOP)</i>"]
-        REV --> SIGN["Qualified Electronic Signature (Annex 11)"]
+    subgraph HITL["4. GxP Release (HITL)"]
+        direction LR
+        REV["Human Reviewer (QA/QP)<br/><i>(ALCOA+ Citation Check)</i>"] --> SIGN["Qualified Signature<br/><i>(Annex 11 / Part 11)</i>"]
     end
 
-    Ingestion -.-> RET
+    Ingestion -.->|"Indexed Vector Space"| Query
+    Query ==>|"Generated Raw Draft"| Evaluation
+    Evaluation ==>|"Releasable Draft"| HITL
 
-    style Ingestion fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style Ingestion fill:#f8fafc,stroke:#64748b,stroke-width:1.5px
     style Query fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style Evaluation fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style Evaluation fill:#fefce8,stroke:#ca8a04,stroke-width:1.5px
     style HITL fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style D1 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style D2 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style D3 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style U1 fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style G_IN fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style RET fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style LLM fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style G_OUT fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style TR1 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style TR2 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style TR3 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style REV fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style SIGN fill:#ecfdf5,stroke:#059669,stroke-width:2px
 ```
 
 ### The 3 Core Pillars of GxP RAG:
@@ -90,14 +101,14 @@ flowchart TD
 In place of confusion matrices and accuracy metrics, GenAI validation adopts the standardized **RAG Triad Framework** (evaluated via tools such as *Ragas, TruLens, DeepEval*):
 
 ```mermaid
-graph TD
-    Q["User Query"]
-    C["Retrieved Context Chunks"]
-    A["Generated Model Response"]
+flowchart TD
+    Q["👤 User Query<br/><b>(Query)</b>"]
+    C["📚 Retrieved Context<br/><b>(Context / Chunks)</b>"]
+    A["🤖 Generated Response<br/><b>(Response)</b>"]
 
-    Q <-->|1. Context Relevance| C
-    C <-->|2. Groundedness / Faithfulness| A
-    Q <-->|3. Answer Relevance| A
+    Q <-->|"1. Context Relevance"| C
+    C <-->|"2. Groundedness (Factuality)"| A
+    Q <-->|"3. Answer Relevance"| A
 
     style Q fill:#f8fafc,stroke:#64748b,stroke-width:2px
     style C fill:#eff6ff,stroke:#2563eb,stroke-width:2px

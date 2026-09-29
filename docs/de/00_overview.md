@@ -18,16 +18,20 @@ Für Jahrzehnte stützte sich die pharmazeutische Industrie bei computergestütz
 Mit dem im Juli 2025 von der Europäischen Kommission (EMA / PIC/S) vorgelegten **Draft Annex 22** entsteht der weltweit erste spezifische regulatorische Rahmen für den Einsatz von KI in der pharmazeutischen Produktion.
 
 ```mermaid
-graph LR
-    subgraph DigitalPackage["EudraLex Vol. 4 Digital Package (2025/2026)"]
-        direction TB
-        P1["Kapitel 4 Revision<br/><i>(Dokumentation & Datenintegrität)</i>"]
-        P2["Annex 11 Revision<br/><i>(Computerised Systems: Cloud, Agile, QMS)</i>"]
+flowchart TD
+    A["⚖️ EU AI Act<br/><i>(Horizontale Produktsicherheit)</i>"]
+
+    subgraph DigitalPackage["EudraLex Vol. 4 Digital Package"]
+        direction LR
+        P1["Kapitel 4 Revision<br/><i>(Dokumentation & Integrität)</i>"]
+        P2["Annex 11 Revision<br/><i>(Computerised Systems)</i>"]
         P3["Annex 22 Neufassung<br/><i>(Artificial Intelligence & ML)</i>"]
     end
 
-    A["EU AI Act<br/>(Horizontale Produktsicherheit)"] --> DigitalPackage
-    DigitalPackage ==> D["GMP-Produktion, QC-Labor & Chargenfreigabe"]
+    D["🏭 GMP-Produktion, QC-Labor & Chargenfreigabe<br/><i>(Patientensicherheit & Produktqualität)</i>"]
+
+    A ==> DigitalPackage
+    DigitalPackage ==> D
 
     style DigitalPackage fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
@@ -58,41 +62,41 @@ Die folgende Landkarte verbindet das regulatorische Fundament direkt mit den ope
 
 ```mermaid
 flowchart TD
-    subgraph S0["🧭 Einstieg & Regulatorisches Fundament"]
-        M01["Modul 01: Intro to AI in GxP<br/><i>(CSV-Grenzen, Fallstudien & 6 Trust-Säulen)</i>"]
-        M02["Modul 02: Overview Annex 22<br/><i>(Harmonisierung mit Annex 11 & 5-Stufen-Roadmap)</i>"]
-        M03["Modul 03: Scope & Applicability<br/><i>(5-Stufen-Entscheidungstrichter & Risikoklassen)</i>"]
+    subgraph S0["🧭 Einstieg & Fundament"]
+        M01["Modul 01: Intro to AI in GxP<br/><i>(CSV-Grenzen, Fallstudien & Säulen)</i>"]
+        M02["Modul 02: Overview Annex 22<br/><i>(Harmonisierung mit Annex 11)</i>"]
+        M03["Modul 03: Scope & Applicability<br/><i>(Entscheidungstrichter & Risikoklassen)</i>"]
         M01 --> M02 --> M03
     end
 
-    subgraph S1["Phase I: Spezifikation & Risikomanagement"]
-        M04["Modul 04: Risk-Based Approach<br/><i>(Proportionalität, 5 Fehlermodi & Kritikalität)</i>"]
-        M05["Modul 05: Intended Use & Boundaries<br/><i>(Systemgrenzen, 'Zaun-Metapher' & Lineage)</i>"]
+    subgraph S1["Phase I: Spezifikation & Risiko"]
+        M04["Modul 04: Risk-Based Approach<br/><i>(5 Fehlermodi & Kritikalität)</i>"]
+        M05["Modul 05: Intended Use & Boundaries<br/><i>(Systemgrenzen & Lineage)</i>"]
         M04 --> M05
     end
 
-    subgraph S2["Phase II: Daten-Governance & Modellentwicklung"]
-        M06["Modul 06: Data Governance & Quality<br/><i>(ALCOA+ für Daten, Split-Integrität & Bias)</i>"]
-        M07["Modul 07: Model Development & Training<br/><i>(Algorithmenwahl, Frozen Weights & Versionierung)</i>"]
+    subgraph S2["Phase II: Daten & Modellierung"]
+        M06["Modul 06: Data Governance & Quality<br/><i>(ALCOA+ für Daten & Bias)</i>"]
+        M07["Modul 07: Model Development & Training<br/><i>(Frozen Weights & Versionierung)</i>"]
         M06 --> M07
     end
 
-    subgraph S3["Phase III: Validierung & Erklärbarkeit"]
-        M08["Modul 08: Validation & Performance Testing<br/><i>(Adversarial Testing, Metriken & Staff Independence)</i>"]
-        M09["Modul 09: Explainability & Transparency<br/><i>(XAI, Vermeidung von Black-Boxes & Audit-Fähigkeit)</i>"]
+    subgraph S3["Phase III: Validierung & XAI"]
+        M08["Modul 08: Validation & Performance<br/><i>(Adversarial Testing & Metriken)</i>"]
+        M09["Modul 09: Explainability & Transparency<br/><i>(XAI & Audit-Fähigkeit)</i>"]
         M08 --> M09
     end
 
-    subgraph S4["Phase IV: GxP-Betrieb, Human Oversight & Überwachung"]
-        M10["Modul 10: Human Oversight (HITL)<br/><i>(Active Challenge, Override & QP-Verantwortung)</i>"]
-        M11["Modul 11: Continuous Monitoring<br/><i>(Früherkennung von Silent Drift & Retraining)</i>"]
-        M12["Modul 12: Audit & Inspection Readiness<br/><i>(EMA/FDA-Inspektionssimulation & Rote Flaggen)</i>"]
+    subgraph S4["Phase IV: GxP-Betrieb & Oversight"]
+        M10["Modul 10: Human Oversight (HITL)<br/><i>(Active Challenge & QP-Verantwortung)</i>"]
+        M11["Modul 11: Continuous Monitoring<br/><i>(Silent Drift & Retraining)</i>"]
+        M12["Modul 12: Audit Readiness<br/><i>(Inspektionssimulation & Rote Flaggen)</i>"]
         M10 --> M11 --> M12
     end
 
-    subgraph SA["📖 Spezial-Leitfäden (Industrie-Best-Practices)"]
-        APP_GEN["🤖 Spezial-Leitfaden: GenAI, LLMs & RAG<br/><i>(RAG Triad, Guardrails & Drafting Assistant)</i>"]
-        APP_GAMP["📘 ISPE GAMP® AI Guide (Juli 2025)<br/><i>(Duales V-Modell, Software-Kategorien & Living Validation)</i>"]
+    subgraph SA["📖 Industrie-Best-Practices"]
+        APP_GEN["🤖 Spezial-Leitfaden: GenAI & RAG<br/><i>(RAG Triad, Guardrails & Assistant)</i>"]
+        APP_GAMP["📘 ISPE GAMP® AI Guide (2025)<br/><i>(Duales V-Modell & Living Validation)</i>"]
     end
 
     S0 ==> S1

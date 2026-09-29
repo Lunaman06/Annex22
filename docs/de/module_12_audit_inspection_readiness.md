@@ -21,16 +21,25 @@
 
 ```mermaid
 flowchart TD
-    I1["Schritt 1: Master AI Inventory anfordern<br/><i>(Vollständigkeit prüfen, Risikoklassen abgleichen)</i>"] --> I2["Schritt 2: Stichprobe auswählen & Traceability prüfen<br/><i>(Tier 1 Policy ➔ Tier 2 System Specs ➔ Tier 3 Code & Data Hashes)</i>"]
-    I2 --> I3["Schritt 3: Historische Entscheidung herausgreifen<br/><i>(Live-Challenge: Explainability, Konfidenz & Deviation-Verknüpfung)</i>"]
-    I3 --> I4["Schritt 4: Shopfloor-Interviews durchführen<br/><i>(Technischer Fluency-Test des Linienpersonals zu Fehlermodi)</i>"]
-    I4 --> I5["Schritt 5: Soll vs. Ist abgleichen<br/><i>(Prüfung: Entspricht die Praxis an der Linie exakt der schriftlichen SOP?)</i>"]
+    subgraph P1["Stufe I: Dokumenten- & System-Audit (Top-Down)"]
+        direction LR
+        I1["Schritt 1: AI-Inventar anfordern<br/><i>(Vollständigkeit & Risikoklassen)</i>"] --> I2["Schritt 2: Traceability prüfen<br/><i>(Policy ➔ URS ➔ Hashes & Code)</i>"]
+    end
 
-    style I1 fill:#f8fafc,stroke:#64748b,stroke-width:2px
-    style I2 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style I3 fill:#fefce8,stroke:#ca8a04,stroke-width:2px
-    style I4 fill:#faf5ff,stroke:#9333ea,stroke-width:2px
-    style I5 fill:#ecfdf5,stroke:#059669,stroke-width:3px
+    subgraph P2["Stufe II: Live-Challenge & Shopfloor-Verifikation (Bottom-Up)"]
+        direction LR
+        I3["Schritt 3: Historischer Falltest<br/><i>(Explainability & Deviation-Link)</i>"] --> I4["Schritt 4: Bediener-Interviews<br/><i>(Fluency-Check zu Fehlermodi)</i>"] --> I5["Schritt 5: Soll vs. Ist Abgleich<br/><i>(SOP-Treue an der Linie)</i>"]
+    end
+
+    P1 ==>|"Stichproben-Tiefenbohrung"| P2
+
+    style P1 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
+    style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style I1 fill:#ffffff,stroke:#3b82f6,stroke-width:1.5px
+    style I2 fill:#ffffff,stroke:#3b82f6,stroke-width:1.5px
+    style I3 fill:#ffffff,stroke:#ca8a04,stroke-width:1.5px
+    style I4 fill:#ffffff,stroke:#9333ea,stroke-width:1.5px
+    style I5 fill:#ecfdf5,stroke:#059669,stroke-width:2.5px
 ```
 
 ---

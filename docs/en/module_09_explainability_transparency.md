@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/module_09_explainability_transparency.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/module_09_explainability_transparency.md, sync_date: 2026-09-29 -->
 # Module 09: Explainability and Transparency
 
 <div align="center">
@@ -21,34 +21,46 @@
 ## 🧭 Visualization: The Explainability Spectrum in GxP
 
 ```mermaid
-graph LR
-    subgraph WhiteBox["⚪ White-Box Models"]
-        direction TB
-        W1["Linear Regression, Decision Trees"]
-        W2["Inherently transparent & auditable"]
-        W3["Low validation overhead"]
+flowchart TD
+    subgraph WhiteBox["⚪ Level 1: White-Box"]
+        direction LR
+        W1["Examples:<br/><b>Linear Models, Decision Trees</b>"]
+        W2["Transparency:<br/><b>Inherently interpretable logic</b>"]
+        W3["GxP Validation:<br/><b>Standard Qualification</b>"]
+        W1 --- W2 --- W3
     end
 
-    subgraph GrayBox["🔘 Gray-Box Models"]
-        direction TB
-        G1["Random Forests, Gradient Boosting"]
-        G2["Post-hoc methods required"]
-        G3["Moderate validation overhead"]
+    subgraph GrayBox["🔘 Level 2: Gray-Box"]
+        direction LR
+        G1["Examples:<br/><b>Random Forests, XGBoost</b>"]
+        G2["Transparency:<br/><b>Global Feature Importance</b>"]
+        G3["GxP Validation:<br/><b>Moderate Effort & Heuristics</b>"]
+        G1 --- G2 --- G3
     end
 
-    subgraph BlackBox["⚫ Black-Box Models"]
-        direction TB
-        B1["Deep Neural Networks, Complex Ensembles"]
-        B2["Opaque: SHAP, LIME, Attention Maps"]
-        B3["Significantly higher qualification overhead"]
+    subgraph BlackBox["⚫ Level 3: Black-Box"]
+        direction LR
+        B1["Examples:<br/><b>Deep Neural Networks, LLMs</b>"]
+        B2["Transparency:<br/><b>SHAP, LIME, Attention Maps</b>"]
+        B3["GxP Validation:<br/><b>Maximum XAI Justification</b>"]
+        B1 --- B2 --- B3
     end
 
-    WhiteBox -->|Increasing model complexity & explainability demand| GrayBox
-    GrayBox --> BlackBox
+    WhiteBox ==>|"Increasing Complexity & Risk"| GrayBox
+    GrayBox ==>|"Mandatory Post-hoc Explainability"| BlackBox
 
     style WhiteBox fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
     style GrayBox fill:#fefce8,stroke:#ca8a04,stroke-width:2px
     style BlackBox fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style W1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style W2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style W3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G1 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style G2 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style G3 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style B1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B3 fill:#ffffff,stroke:#ef4444,stroke-width:1px
 ```
 
 ---

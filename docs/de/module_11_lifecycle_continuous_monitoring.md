@@ -21,22 +21,32 @@
 
 ```mermaid
 flowchart TD
-    subgraph DriftTypes["⚠️ Die 3 Formen des Leistungsabfalls ([Didaktik / Best Practice])"]
-        D1["1. Data Drift (Covariate Shift)<br/><i>Veränderung der Eingangsverteilung (z.B. neue Rohstoff-Charge, Sensoralterung)</i>"]
-        D2["2. Concept Drift<br/><i>Veränderung der Ursache-Wirkungs-Beziehung (z.B. geänderte Prozesschemie)</i>"]
-        D3["3. Performance Drift<br/><i>Symptomatischer Abfall von Recall, Precision oder F1-Score</i>"]
+    subgraph S1["1. Data Drift (Covariate Shift)"]
+        direction LR
+        D1["Ursache: Veränderte Rohstoff- & Sensordaten"] ==> C1["🛡️ GxP: Statistisches Monitoring (PSI > 0.2 & KS-Test)"]
     end
 
-    subgraph Defense["🛡️ GxP-Abwehrmechanismen"]
-        C1["Statistisches Monitoring (KS-Test, PSI)"] --> D1
-        C2["Periodische Referenz-Labortests"] --> D2
-        C3["Formale Change Control & Revalidierung"] --> D3
+    subgraph S2["2. Concept Drift (Kausal)"]
+        direction LR
+        D2["Ursache: Veränderte Prozesschemie P(Y|X)"] ==> C2["🛡️ GxP: Periodische Referenz-Labortests"]
     end
 
-    DriftTypes ==> Defense
+    subgraph S3["3. Performance Drift"]
+        direction LR
+        D3["Symptom: Kritischer Abfall von Recall & F1"] ==> C3["🛡️ GxP: Formale CAPA & Revalidierung"]
+    end
 
-    style DriftTypes fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style Defense fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    S1 ==> S2 ==> S3
+
+    style S1 fill:#f8fafc,stroke:#3b82f6,stroke-width:1.5px
+    style S2 fill:#f8fafc,stroke:#ca8a04,stroke-width:1.5px
+    style S3 fill:#f8fafc,stroke:#ef4444,stroke-width:1.5px
+    style D1 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C1 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style D2 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C2 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style D3 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C3 fill:#ecfdf5,stroke:#059669,stroke-width:2px
 ```
 
 ---

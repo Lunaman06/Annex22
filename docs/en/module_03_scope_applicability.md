@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_03_scope_applicability.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -19,21 +19,21 @@ language: en
 
 ```mermaid
 flowchart TD
-    Start["Software System / Algorithm"] --> Q1{"1. Is it based on statistical<br/>learning / machine learning?"}
-    
-    Q1 -- No (Rule-Based) --> ANNEX11["✅ Governed Exclusively by Annex 11<br/>(Traditional CSV)"]
-    Q1 -- Yes --> Q2{"2. Does it have direct or indirect<br/>impact on GxP processes?"}
-    
-    Q2 -- No --> OOS["❌ Out of Scope<br/>(Standard Corporate IT Controls)"]
-    Q2 -- Yes --> Q3["3. Assign Risk Tier<br/>(Unacceptable / High / Moderate / Low)"]
-    
+    Start["Software System / Algorithm"] --> Q1{"1. Is it based on<br/>statistical learning / ML?"}
+
+    Q1 -- "No (deterministic)" --> ANNEX11["✅ Exclusively under Annex 11<br/><i>(Traditional CSV)</i>"]
+    Q1 -- "Yes (learning)" --> Q2{"2. Direct / indirect impact<br/>on GxP processes?"}
+
+    Q2 -- "No" --> OOS["❌ Out of Scope<br/><i>(Standard IT Controls)</i>"]
+    Q2 -- "Yes" --> Q3["3. Risk Tiering<br/><i>(ICH Q9 R1 / Annex 22 Tiers)</i>"]
+
     Q3 --> Q4{"4. Architectural Check:<br/>Static or Dynamic Weights?"}
-    Q4 -- Dynamic --> REJECT["🚫 Prohibited for Critical GMP Operations!"]
-    Q4 -- Static --> INV["📋 Register in Master AI Inventory<br/>(Approved Scoping Rationale)"]
+    Q4 -- "Dynamic (Online Retraining)" --> REJECT["🚫 Prohibited by Draft §1<br/><i>(Not for Critical GMP)</i>"]
+    Q4 -- "Static (Frozen Weights)" --> INV["📋 Register in AI Inventory<br/><i>(Approved Scoping Rationale)</i>"]
 
     style Start fill:#f8fafc,stroke:#64748b,stroke-width:2px
-    style ANNEX11 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style OOS fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px
+    style ANNEX11 fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
+    style OOS fill:#f1f5f9,stroke:#94a3b8,stroke-width:1px
     style Q3 fill:#fefce8,stroke:#ca8a04,stroke-width:2px
     style REJECT fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style INV fill:#f0fdf4,stroke:#16a34a,stroke-width:2px

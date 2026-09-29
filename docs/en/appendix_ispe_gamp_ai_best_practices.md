@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/appendix_ispe_gamp_ai_best_practices.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/appendix_ispe_gamp_ai_best_practices.md, sync_date: 2026-09-29 -->
 # Guide: ISPE GAMP® AI Guide & Established Industry Best Practices
 
 <div align="center">
@@ -19,19 +19,25 @@
 To prevent compliance ambiguities across multidisciplinary project teams, the governance hierarchy must be precisely understood:
 
 ```mermaid
-graph TD
-    A["Statutory Regulations & Health Authority Mandates<br/><b>EU GMP Annex 11 & Draft Annex 22 (EMA / PIC/S)</b><br/><i>(Defines WHAT is legally required and prohibited)</i>"]
-    B["Industry Consensus Framework (Methodology)<br/><b>ISPE GAMP® 5 (2nd Edition, 2022)</b><br/><i>(Defines risk-based lifecycle & V-model)</i>"]
-    C["Specialized Best-Practice Guide<br/><b>ISPE GAMP® Guide: Artificial Intelligence (July 2025)</b><br/><i>(290 pages of actionable engineering & validation guidance for AI)</i>"]
+flowchart TD
+    A["⚖️ Statutory Regulations & Health Authority Mandates<br/><b>EU GMP Annex 11 & Draft Annex 22 (EMA / PIC/S)</b><br/><i>(Defines WHAT is legally required and prohibited)</i>"]
 
-    A ==> B
-    B ==> C
-    C ==> D["Inspection-Ready Implementation (SOPs, MLOps, Quality Management System)"]
+    subgraph Frameworks["Industry Frameworks & Methodology"]
+        direction LR
+        B["📘 Foundational Framework<br/><b>ISPE GAMP® 5 (2nd Ed., 2022)</b><br/><i>(Risk-based V-Model & CSV)</i>"]
+        C["📗 Specialized AI Guide<br/><b>ISPE GAMP® AI Guide (2025)</b><br/><i>(Data Science, MLOps & Living Validation)</i>"]
+    end
+
+    D["🏭 Inspection-Ready Implementation in Pharma<br/><b>SOPs, validated pipelines & lived quality management</b>"]
+
+    A ==> Frameworks
+    Frameworks ==> D
 
     style A fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style B fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style C fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style D fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style Frameworks fill:#f8fafc,stroke:#3b82f6,stroke-width:1.5px
+    style B fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style C fill:#ffffff,stroke:#16a34a,stroke-width:1.5px
+    style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 * **Annex 22** is the *Regulation* (the legal benchmark applied during official regulatory inspections).
@@ -46,26 +52,38 @@ The primary methodological innovation introduced in the ISPE GAMP AI Guide is th
 
 ```mermaid
 flowchart LR
-    subgraph SoftwareCycle["💻 Software & Infrastructure Track (Annex 11)"]
+    subgraph SoftwareCycle["💻 Software & MLOps Track"]
         direction TB
-        S1["Requirements & URS"] --> S2["Architecture & MLOps Pipeline"]
-        S2 --> S3["Infrastructure Qualification (IQ/OQ)"]
-        S3 --> S4["System Release & Change Control"]
+        S1["Requirements & URS"]
+        S2["MLOps Pipeline Architecture"]
+        S3["Infrastructure Qualification (IQ/OQ)"]
+        S4["System Release & Change Control"]
+        S1 --> S2 --> S3 --> S4
     end
 
-    subgraph DataCycle["📊 Data & Model Track (Annex 22)"]
+    subgraph DataCycle["📊 Data & Model Track"]
         direction TB
-        D1["Data Sourcing & Lineage"] --> D2["Curation & ALCOA+ Audit"]
-        D2 --> D3["Model Training & Tuning (Validation Set)"]
-        D3 --> D4["Independent Evaluation (Hold-out Test Set)"]
+        D1["Data Sourcing & Lineage"]
+        D2["Curation & ALCOA+ Audit"]
+        D3["Training & Hyperparameter Tuning"]
+        D4["Independent Test Evaluation"]
+        D1 --> D2 --> D3 --> D4
     end
 
-    SoftwareCycle <===>|Continuous Synchronization| DataCycle
-    DataCycle --> PROD["Joint Release (PQ / Model Card) & Continuous Monitoring"]
+    SoftwareCycle <===>|"Continuous Synchronization"| DataCycle
+    DataCycle ==> PROD["🏭 Joint Release (PQ / Model Card)<br/>& continuous drift monitoring"]
 
     style SoftwareCycle fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style DataCycle fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
     style PROD fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style S1 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S2 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S3 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S4 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style D1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
 ```
 
 1. **The Software Track:** Conforms to classical GAMP lifecycle stages (specifications, build verification, container security, IQ/OQ of pipeline orchestration).
@@ -125,15 +143,23 @@ A defining tenet of GAMP 5 Second Edition states: **Validation is not an event c
 
 ### The 3 Pillars of Living Validation:
 ```mermaid
-graph TD
-    LV["🛡️ Living Validation (GAMP AI Guide)"] --> S1["1. Real-Time Dashboards<br/><i>(Live monitoring of PSI, drift indices & human override rates)</i>"]
-    LV --> S2["2. Gated Change Control<br/><i>(Zero retraining without formal revalidation)</i>"]
-    LV --> S3["3. Periodic Review Audits<br/><i>(Risk-based comparison against validation baseline)</i>"]
+flowchart TD
+    LV["🛡️ Living Validation (ISPE GAMP AI Guide)<br/><i>(Continuous maintenance of the qualified state)</i>"]
+
+    subgraph Pillars["The 3 Operational Pillars of Living Validation"]
+        direction LR
+        S1["1. Real-Time Dashboards<br/><i>(PSI & drift metrics,<br/>operator overrides)</i>"]
+        S2["2. Gated Change Management<br/><i>(Strict revalidation<br/>before any model update)</i>"]
+        S3["3. Periodic Review Audits<br/><i>(Risk-based alignment<br/>with validation baseline)</i>"]
+    end
+
+    LV ==> Pillars
 
     style LV fill:#f8fafc,stroke:#0284c7,stroke-width:2px
-    style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style S2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:2px
+    style Pillars fill:#ffffff,stroke:#bae6fd,stroke-width:1.5px
+    style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px
+    style S2 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:1.5px
 ```
 
 * **Automated Drift Alerting:** If the *Population Stability Index (PSI)* breaches the pre-validated threshold of $0.2$, a deviation ticket is automatically raised in the Quality Management System (QMS).

@@ -11,29 +11,40 @@
 ## 🧭 Kernkonzept im Überblick: Die Zaun-Metapher & Scope-Schutz
 
 ```mermaid
-graph TD
-    subgraph Inside["Innerhalb des Zauns (Validierter Betriebsbereich)"]
+flowchart LR
+    subgraph Inside["✅ Validierter Bereich (Im Zaun)"]
         direction TB
-        IN1["Spezifizierte Produkte, Packmittel & Linien"]
-        IN2["Validierte Sensoren & Datenformate"]
-        IN3["Quantitativ belegte Performance (Accuracy/Recall)"]
-        IN4["Rechtsverbindlicher Intended Use Freigabestatus"]
+        IN1["Spezifizierte Produkte & Linien"]
+        IN2["Validierte Sensoren & Formate"]
+        IN3["Belegte Performance (Recall/Acc)"]
+        IN4["Rechtsverbindlicher Intended Use"]
+        IN1 --- IN2 --- IN3 --- IN4
     end
 
-    subgraph Fence["Der regulatorische Zaun"]
+    subgraph Defense["🛡️ Der Schutz-Zaun"]
         direction TB
-        FENCE["🛡️ OUT-OF-DISTRIBUTION (OOD) DETECTION<br/>Harte System-Blockade bei unzulässigen Eingaben"]
+        FENCE["<b>OOD-DETECTION GATE</b><br/><i>Strikte Grenzwertprüfung</i>"]
+        ACTION["🛑 Sofortiger System-Stopp<br/><i>Inferenz verweigert & Alarm</i>"]
+        FENCE ==> ACTION
     end
 
-    subgraph Outside["Außerhalb des Zauns (Unvalidiertes Niemandsland)"]
+    subgraph Outside["🚫 Niemandsland (Scope Creep)"]
         direction TB
-        OUT1["Neue Packmittel ohne Re-Validierung (Scope Creep)"]
-        OUT2["Neuartige Erstauftretungen & Safety Events"]
-        OUT3["Anfahrprozesse & Notbetrieb ohne URS-Spezifikation"]
-        OUT4["❌ Automatische Systemabschaltung & Menschliche Eskalation"]
+        OUT1["Neue Packmittel ohne Freigabe"]
+        OUT2["Neuartige Defekte & Extremlagen"]
+        OUT3["Anfahrprozesse & Notbetrieb"]
+        OUT4["Fremd-Rohstoffe ohne URS-Check"]
+        OUT1 --- OUT2 --- OUT3 --- OUT4
     end
 
-    Inside <==> Fence <==> Outside
+    Inside ==>|"Zulässiger Routinebetrieb"| FENCE
+    Outside -.->|"Unerlaubte Eingaben"| FENCE
+
+    style Inside fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style Defense fill:#eff6ff,stroke:#2563eb,stroke-width:2px
+    style Outside fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style FENCE fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style ACTION fill:#fff7ed,stroke:#ea580c,stroke-width:2px
 ```
 
 ---

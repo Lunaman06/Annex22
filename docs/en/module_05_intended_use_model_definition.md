@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_05_intended_use_model_definition.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -18,33 +18,40 @@ language: en
 ## 🧭 Core Concept: The Fence Metaphor & Scope Protection
 
 ```mermaid
-graph TD
-    subgraph Inside["Inside the Fence (Validated Operational Envelope)"]
+flowchart LR
+    subgraph Inside["✅ Validated Envelope (Inside Fence)"]
         direction TB
-        IN1["Specified Products, Packaging & Production Lines"]
-        IN2["Validated Sensor Ranges & Data Formats"]
-        IN3["Quantitatively Verified Performance (Recall/Precision)"]
-        IN4["Legally Authorized Intended Use Baseline"]
+        IN1["Specified Products & Lines"]
+        IN2["Validated Sensors & Formats"]
+        IN3["Verified Performance (Recall/Acc)"]
+        IN4["Legally Binding Intended Use"]
+        IN1 --- IN2 --- IN3 --- IN4
     end
 
-    subgraph Fence["The Regulatory Fence"]
+    subgraph Defense["🛡️ Regulatory Defense Fence"]
         direction TB
-        FENCE["🛡️ OUT-OF-DISTRIBUTION (OOD) SAFEGUARDS<br/>Hard System Interlock on Invalid Inputs"]
+        FENCE["<b>OOD-DETECTION GATE</b><br/><i>Strict Boundary Verification</i>"]
+        ACTION["🛑 Hard System Interlock<br/><i>Inference Refused & Alert</i>"]
+        FENCE ==> ACTION
     end
 
-    subgraph Outside["Outside the Fence (Unvalidated Wilderness)"]
+    subgraph Outside["🚫 Unvalidated Wilderness (Scope Creep)"]
         direction TB
-        OUT1["New Packaging Formats Without Revalidation (Scope Creep)"]
-        OUT2["Novel First-Occurrence Defects & Safety Anomalies"]
-        OUT3["Start-up Cycles & Emergency Modes Excluded from URS"]
-        OUT4["❌ Automatic Refusal to Predict & Human Escalation"]
+        OUT1["New Packaging without Clearance"]
+        OUT2["Novel Defects & Edge Cases"]
+        OUT3["Start-up Cycles & Emergency Modes"]
+        OUT4["Unverified Raw Materials"]
+        OUT1 --- OUT2 --- OUT3 --- OUT4
     end
 
-    Inside <==> Fence <==> Outside
+    Inside ==>|"Approved Routine Operation"| FENCE
+    Outside -.->|"Unauthorized Inputs"| FENCE
 
     style Inside fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style Fence fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style Defense fill:#eff6ff,stroke:#2563eb,stroke-width:2px
     style Outside fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style FENCE fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style ACTION fill:#fff7ed,stroke:#ea580c,stroke-width:2px
 ```
 
 ---

@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/module_08_validation_performance_testing.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/module_08_validation_performance_testing.md, sync_date: 2026-09-29 -->
 # Module 08: Validation and Performance Testing
 
 <div align="center">
@@ -21,22 +21,45 @@
 ## 🧭 Visualization: The Annex 22 "Validation Metric Quad"
 
 ```mermaid
-graph TD
-    subgraph MetricQuad["🛡️ The Validation Metric Quad"]
-        M1["1. F1-Score & Balanced Accuracy<br/><i>(Overall performance balancing class imbalances)</i>"]
-        M2["2. Recall vs. Precision<br/><i>(Asymmetric costs: Zero tolerance for false negatives)</i>"]
-        M3["3. Model Calibration (ECE)<br/><i>(Confidence vs. reality; prevents automation bias)</i>"]
-        M4["4. Robustness & Fault Tolerance<br/><i>(Stability under noise, sensor drift & dropouts)</i>"]
+flowchart TD
+    PQ["📋 Operational Qualification (PQ)<br/><i>(Fully isolated independent test dataset)</i>"]
+
+    subgraph MetricQuad["🛡️ Validation Metric Quad"]
+        direction TB
+        subgraph TopRow["Classification & Asymmetry"]
+            direction LR
+            M1["1. F1-Score & Accuracy<br/><i>(Balance class imbalances)</i>"]
+            M2["2. Recall vs. Precision<br/><i>(Asymmetry: High Recall for Safety)</i>"]
+            M1 <--> M2
+        end
+
+        subgraph BottomRow["Calibration & Robustness"]
+            direction LR
+            M3["3. Model Calibration (ECE)<br/><i>(Confidence vs. Reality)</i>"]
+            M4["4. Robustness & Fault Tolerance<br/><i>(Noise & Drift Resistance)</i>"]
+            M3 <--> M4
+        end
+
+        TopRow ==>|"Complementary Dimensions"| BottomRow
     end
 
-    PQ["Operational Boundary Qualification (PQ)"] --> MetricQuad
-    MetricQuad ==> OOD["OOD Protection: Safe refusal on invalid/unknown inputs"]
-    OOD ==> PASS["Release for GMP Routine Operations"]
+    OOD["🛡️ OOD & Boundary Testing<br/><i>(Safe refusal on boundary violation)</i>"]
+    PASS["✅ Release for GMP Routine Operations<br/><i>(Model Card & Audit Trail Sign-off)</i>"]
+
+    PQ ==> MetricQuad
+    MetricQuad ==> OOD
+    OOD ==> PASS
 
     style MetricQuad fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style TopRow fill:#ffffff,stroke:#bae6fd,stroke-width:1px
+    style BottomRow fill:#ffffff,stroke:#bae6fd,stroke-width:1px
     style PQ fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style OOD fill:#fefce8,stroke:#ca8a04,stroke-width:2px
-    style PASS fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style PASS fill:#f0fdf4,stroke:#16a34a,stroke-width:2.5px
+    style M1 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M2 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M3 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M4 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
 ```
 
 ---

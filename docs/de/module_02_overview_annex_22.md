@@ -11,28 +11,41 @@
 ## 🧭 Kernkonzept im Überblick: Koexistenz & Automation Bias Schutz
 
 ```mermaid
-graph TD
-    subgraph Foundation["1. Regulatorisches Fundament: Annex 11"]
-        F1["Computerised Systems Validation (CSV)"]
-        F2["IQ / OQ / PQ & User Requirements"]
-        F3["Audit Trails & Physische Zugriffskontrollen"]
+flowchart TD
+    subgraph RegArchitecture["Regulatorische Architektur & Zusammenspiel"]
+        direction LR
+        subgraph Foundation["1. Fundament: Annex 11"]
+            direction TB
+            F1["Computerised Systems Validation (CSV)"]
+            F2["IQ / OQ & Qualifizierung"]
+            F3["Audit Trails & Zugriffskontrolle"]
+            F1 --- F2 --- F3
+        end
+
+        subgraph Annex22["2. Spezifischer Aufsatz: Annex 22"]
+            direction TB
+            A1["Rechtsverbindlicher Intended Use"]
+            A2["Strikte Testdaten-Isolation"]
+            A3["Proportionale Explainability"]
+            A4["Continuous Drift Monitoring"]
+            A1 --- A2 --- A3 --- A4
+        end
+
+        Foundation ==>|"Ergänzt um KI-Anforderungen"| Annex22
     end
 
-    subgraph Annex22["2. Der KI-Aufsatz: Annex 22"]
-        A1["Rechtsverbindlicher Intended Use"]
-        A2["Strikte Testdaten-Isolation"]
-        A3["Proportionale Explainability"]
-        A4["Continuous Drift Monitoring"]
+    subgraph ChallengeLoop["3. Operativer Schutz vor Automation Bias (Human Oversight)"]
+        direction LR
+        C1["Operator sichtet<br/>Ereignis"] --> C2["Unabhängige Ersteinstufung<br/><i>(Blind Review)</i>"]
+        C2 --> C3["KI-Empfehlung wird<br/>eingeblendet"]
+        C3 --> C4["Aktiver Abgleich & Freigabe<br/><i>(Active Challenge)</i>"]
     end
 
-    subgraph ChallengeLoop["3. Schutz vor Automation Bias"]
-        C1["Operator sichtet Ereignis"] --> C2["Mensch stuft unabhängig ein<br/>(Blind Review)"]
-        C2 --> C3["KI-Empfehlung wird eingeblendet"]
-        C3 --> C4["Aktiver Abgleich & Freigabe<br/>(Active Challenge)"]
-    end
+    RegArchitecture ==>|"Verbindliche Leitlinie für HITL"| ChallengeLoop
 
-    Foundation --> Annex22
-    Annex22 -. "Gestaltung der Human Oversight" .-> ChallengeLoop
+    style Foundation fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
+    style Annex22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style ChallengeLoop fill:#fefce8,stroke:#ca8a04,stroke-width:2px
 ```
 
 ---

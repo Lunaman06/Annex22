@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/module_12_audit_inspection_readiness.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/module_12_audit_inspection_readiness.md, sync_date: 2026-09-29 -->
 # Module 12: Audit and Inspection Readiness
 
 <div align="center">
@@ -22,16 +22,25 @@
 
 ```mermaid
 flowchart TD
-    I1["Step 1: Request Master AI Inventory<br/><i>(Verify completeness, validate criticality tiering)</i>"] --> I2["Step 2: Sample Selection & Traceability Audit<br/><i>(Tier 1 Policy ➔ Tier 2 System Specs ➔ Tier 3 Code & Data Hashes)</i>"]
-    I2 --> I3["Step 3: Historical Decision Deep-Dive<br/><i>(Live Challenge: Explainability, confidence & deviation linkage)</i>"]
-    I3 --> I4["Step 4: Shopfloor Interviews<br/><i>(Assess frontline operational fluency regarding model failure modes)</i>"]
-    I4 --> I5["Step 5: Practice vs. Procedure Reconciliation<br/><i>(Verify: Does actual floor operation match approved SOPs exactly?)</i>"]
+    subgraph P1["Stage I: Document & System Audit (Top-Down)"]
+        direction LR
+        I1["Step 1: Request AI Inventory<br/><i>(Completeness & Risk Tiers)</i>"] --> I2["Step 2: Verify Traceability<br/><i>(Policy ➔ URS ➔ Hashes & Code)</i>"]
+    end
 
-    style I1 fill:#f8fafc,stroke:#64748b,stroke-width:2px
-    style I2 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style I3 fill:#fefce8,stroke:#ca8a04,stroke-width:2px
-    style I4 fill:#faf5ff,stroke:#9333ea,stroke-width:2px
-    style I5 fill:#ecfdf5,stroke:#059669,stroke-width:3px
+    subgraph P2["Stage II: Live Challenge & Shopfloor Verification (Bottom-Up)"]
+        direction LR
+        I3["Step 3: Historical Case Test<br/><i>(Explainability & Deviation Link)</i>"] --> I4["Step 4: Operator Interviews<br/><i>(Fluency Check on Failure Modes)</i>"] --> I5["Step 5: Practice vs. Procedure<br/><i>(SOP Adherence on the Line)</i>"]
+    end
+
+    P1 ==>|"Sample Drill-Down"| P2
+
+    style P1 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
+    style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style I1 fill:#ffffff,stroke:#3b82f6,stroke-width:1.5px
+    style I2 fill:#ffffff,stroke:#3b82f6,stroke-width:1.5px
+    style I3 fill:#ffffff,stroke:#ca8a04,stroke-width:1.5px
+    style I4 fill:#ffffff,stroke:#9333ea,stroke-width:1.5px
+    style I5 fill:#ecfdf5,stroke:#059669,stroke-width:2.5px
 ```
 
 ---

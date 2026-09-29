@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_02_overview_annex_22.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -18,32 +18,41 @@ language: en
 ## 🧭 Core Concept: Coexistence & Guarding Against Automation Bias
 
 ```mermaid
-graph TD
-    subgraph Foundation["1. Regulatory Foundation: Annex 11"]
-        F1["Computerised Systems Validation (CSV)"]
-        F2["IQ / OQ / PQ & User Requirements"]
-        F3["Audit Trails & Physical Access Controls"]
+flowchart TD
+    subgraph RegArchitecture["Regulatory Architecture & Interaction"]
+        direction LR
+        subgraph Foundation["1. Foundation: Annex 11"]
+            direction TB
+            F1["Computerised Systems Validation (CSV)"]
+            F2["IQ / OQ & Qualification"]
+            F3["Audit Trails & Access Control"]
+            F1 --- F2 --- F3
+        end
+
+        subgraph Annex22["2. Specific AI Layer: Annex 22"]
+            direction TB
+            A1["Legally Binding Intended Use"]
+            A2["Strict Test Data Isolation"]
+            A3["Proportionate Explainability"]
+            A4["Continuous Drift Monitoring"]
+            A1 --- A2 --- A3 --- A4
+        end
+
+        Foundation ==>|"Supplements with AI Requirements"| Annex22
     end
 
-    subgraph Annex22["2. Specialized AI Layer: Annex 22"]
-        A1["Binding Intended Use Definition"]
-        A2["Strict Test Data Isolation"]
-        A3["Proportionate Explainability"]
-        A4["Continuous Drift Monitoring"]
+    subgraph ChallengeLoop["3. Mitigating Automation Bias (Human Oversight)"]
+        direction LR
+        C1["Operator Observes<br/>Event"] --> C2["Independent Initial Review<br/><i>(Blind Evaluation)</i>"]
+        C2 --> C3["AI Recommendation<br/>is Displayed"]
+        C3 --> C4["Active Challenge & Sign-off<br/><i>(Adjudication)</i>"]
     end
 
-    subgraph ChallengeLoop["3. Mitigating Automation Bias"]
-        C1["Operator Observes Event"] --> C2["Human Makes Independent Review<br/>(Blind Evaluation)"]
-        C2 --> C3["AI Recommendation is Displayed"]
-        C3 --> C4["Active Adjudication & Sign-off<br/>(Active Challenge)"]
-    end
+    RegArchitecture ==>|"Binding Guidance for HITL"| ChallengeLoop
 
-    Foundation --> Annex22
-    Annex22 -. "Architecting Human Oversight" .-> ChallengeLoop
-
-    style Foundation fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style Foundation fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style Annex22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style ChallengeLoop fill:#eff6ff,stroke:#2563eb,stroke-width:2px
+    style ChallengeLoop fill:#fefce8,stroke:#ca8a04,stroke-width:2px
 ```
 
 ---

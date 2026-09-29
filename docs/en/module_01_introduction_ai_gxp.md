@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_01_introduction_ai_gxp.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -18,24 +18,24 @@ language: en
 ## 🧭 Core Concept: The Paradigm Shift
 
 ```mermaid
-graph LR
-    subgraph A11["Traditional CSV (Annex 11)"]
+flowchart LR
+    subgraph A11["💻 Traditional CSV (Annex 11)"]
         direction TB
-        A1["Programmed Code<br/>(Line-by-Line Logic)"] --> A2["Deterministic System<br/>(Like a Calculator)"]
-        A2 --> A3["Fixed Specification<br/>(Input A ➔ Output B)"]
-        A3 --> A4["Point-in-Time Testing<br/>(Sign-off & Complete)"]
+        A1["Programmed Code<br/><i>(Line-by-Line Logic)</i>"] --> A2["Deterministic System<br/><i>(Input A ➔ Output B)</i>"]
+        A2 --> A3["Fixed Specification<br/><i>(Verifiable Rules)</i>"]
+        A3 --> A4["Single Validation<br/><i>(Sign-off & Static Freeze)</i>"]
     end
 
-    subgraph A22["AI / Machine Learning (Annex 22)"]
+    subgraph A22["🧠 AI / Machine Learning (Annex 22)"]
         direction TB
-        B1["Training Data & ALCOA+"] --> B2["Emergent Model Logic<br/>(Statistical Learning)"]
-        B2 --> B3["Generalization & Edge Cases<br/>(Adversarial / Boundary Testing)"]
-        B3 --> B4["Continuous Monitoring<br/>(Guarding Against Silent Drift)"]
+        B1["Training Data & ALCOA+<br/><i>(Substrate of Logic)</i>"] --> B2["Emergent Model Behavior<br/><i>(Statistical Learning)</i>"]
+        B2 --> B3["Generalization & Edge Cases<br/><i>(OOD & Adversarial Testing)</i>"]
+        B3 --> B4["Living Validation<br/><i>(Guarding Against Drift)</i>"]
     end
 
-    A11 -. "Paradigm Shift" .-> A22
+    A11 ==>|"Paradigm Shift"| A22
 
-    style A11 fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style A11 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
     style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 

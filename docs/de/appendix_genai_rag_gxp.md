@@ -44,36 +44,47 @@ Ein LLM darf im regulierten pharmazeutischen Umfeld **niemals frei aus seinem an
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion["1. Qualifizierter Dokumenten-Ingest (GxP-Archiv)"]
-        D1["Freigegebene SOPs, Batch Records, LIMS"] --> D2["Chunking & Embedding (Festgelegte Chunk-Size)"]
-        D2 --> D3["Validierte Vektor-Datenbank (z.B. Qdrant, pgvector)"]
+    subgraph Ingestion["1. Dokumenten-Ingest"]
+        direction LR
+        D1["Freigegebene SOPs & LIMS"] --> D2["Chunking & Embedding"] --> D3["Validierte Vektor-DB"]
     end
 
-    subgraph Query["2. Gekapselte Inferenz & Guardrails"]
-        U1["Operator / QA-Anfrage"] --> G_IN["Input Guardrail<br/><i>(PII-Masking, Prompt-Injection-Filter)</i>"]
-        G_IN --> RET["Semantisches Retrieval (Top-K Chunks)"]
-        RET --> PROMPT["Fester System-Prompt + Kontext-Chunks + Frage"]
-        PROMPT --> LLM["LLM (Temperature = 0.0, Seed fixiert)"]
-        LLM --> G_OUT["Output Guardrail<br/><i>(Format-Check, Schema-Validierung, Zitat-Prüfung)</i>"]
+    subgraph Query["2. Inferenz & Guardrails"]
+        direction LR
+        U1["Operator-Anfrage"] --> G_IN["Input Guardrails<br/><i>(PII & Injection)</i>"] --> RET["Semantisches Retrieval"] --> LLM["LLM (Temp = 0.0)"] --> G_OUT["Output Guardrails<br/><i>(Schema & Zitate)</i>"]
     end
 
-    subgraph Evaluation["3. Automatisierte RAG-Triad-Prüfung"]
-        G_OUT --> TR1["Context Relevance: Relevanz der gefundenen SOPs"]
-        TR1 --> TR2["Groundedness: Ist die Antwort zu 100% im Text belegt?"]
-        TR2 --> TR3["Answer Relevance: Wird die Frage exakt beantwortet?"]
+    subgraph Evaluation["3. RAG-Triad Evaluation"]
+        direction LR
+        TR1["Context Relevance"] --> TR2["Groundedness = 1.0<br/><i>(100% Faktentreue)</i>"] --> TR3["Answer Relevance"]
     end
 
-    subgraph HITL["4. Pharmazeutische Freigabe"]
-        TR3 --> REV["Menschlicher Reviewer (QA / QP)<br/><i>(Klickbare ALCOA+-Zitate zur Quell-SOP)</i>"]
-        REV --> SIGN["Qualifizierte elektronische Signatur (Annex 11)"]
+    subgraph HITL["4. GxP-Freigabe (HITL)"]
+        direction LR
+        REV["Menschlicher Reviewer (QA/QP)<br/><i>(ALCOA+ Zitat-Check)</i>"] --> SIGN["Qualifizierte Signatur<br/><i>(Annex 11 / Part 11)</i>"]
     end
 
-    Ingestion -.-> RET
+    Ingestion -.->|"Indizierter Vektorraum"| Query
+    Query ==>|"Generierter Roh-Entwurf"| Evaluation
+    Evaluation ==>|"Freigabefähiger Entwurf"| HITL
 
-    style Ingestion fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style Ingestion fill:#f8fafc,stroke:#64748b,stroke-width:1.5px
     style Query fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style Evaluation fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style Evaluation fill:#fefce8,stroke:#ca8a04,stroke-width:1.5px
     style HITL fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style D1 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style D2 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style D3 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style U1 fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style G_IN fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style RET fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style LLM fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style G_OUT fill:#ffffff,stroke:#2563eb,stroke-width:1px
+    style TR1 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style TR2 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style TR3 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style REV fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style SIGN fill:#ecfdf5,stroke:#059669,stroke-width:2px
 ```
 
 ### Die 3 Kernprinzipien von GxP-RAG:
@@ -89,14 +100,14 @@ flowchart TD
 Anstelle von Accuracy und F1-Score setzt die Validierung von GenAI auf das standardisierte **RAG-Triad-Framework** (unterstützt durch Tools wie *Ragas, TruLens, DeepEval*):
 
 ```mermaid
-graph TD
-    Q["Benutzer-Anfrage (Query)"]
-    C["Abgerufener Kontext (Context / Chunks)"]
-    A["Generierte Antwort (Response)"]
+flowchart TD
+    Q["👤 Benutzer-Anfrage<br/><b>(Query)</b>"]
+    C["📚 Abgerufener Kontext<br/><b>(Context / Chunks)</b>"]
+    A["🤖 Generierte Antwort<br/><b>(Response)</b>"]
 
-    Q <-->|1. Context Relevance| C
-    C <-->|2. Groundedness / Faithfulness| A
-    Q <-->|3. Answer Relevance| A
+    Q <-->|"1. Context Relevance"| C
+    C <-->|"2. Groundedness (Faktentreue)"| A
+    Q <-->|"3. Answer Relevance"| A
 
     style Q fill:#f8fafc,stroke:#64748b,stroke-width:2px
     style C fill:#eff6ff,stroke:#2563eb,stroke-width:2px
@@ -151,24 +162,24 @@ Wie sieht ein audit-fester Einsatz in der Realität aus?
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as Operator / QA-Mitarbeiter
+    actor User as Operator / QA
     participant UI as GxP-Webportal
-    participant Guard as Guardrails & RAG-Pipeline
+    participant Guard as Guardrails & RAG
     participant LLM as Foundation Model
-    actor Reviewer as Qualifizierter QA-Prüfer
+    actor Reviewer as QA / QP Reviewer
 
     User->>UI: Eingabe: "Erstelle Abweichungs-Entwurf für OOS Charge 2026-B12"
     UI->>Guard: Input-Prüfung & Ingest Messdaten
     Guard->>LLM: Inferenz mit RAG-Kontext & striktem Prompt
     LLM-->>Guard: Generierter Textentwurf
-    Guard->>Guard: RAG-Triad Validierung (Groundedness = 1.0?)
-    Guard-->>UI: Entwurf mit gelb markierten Quellenzitaten
+    Guard->>Guard: RAG-Triad Check (Groundedness = 1.0?)
+    Guard-->>UI: Entwurf mit Quellenzitaten
     Note over UI,Reviewer: Phase der menschlichen Letztverantwortung (HITL)
     UI->>Reviewer: Vorlage zur formalen Fachprüfung
     Reviewer->>Reviewer: Gegenprüfung aller Zitate mit Original-LIMS
     Reviewer->>UI: Korrektur / Editierung des Textes
-    Reviewer->>UI: Elektronische Signatur nach Annex 11 / 21 CFR Part 11
-    UI->>UI: Übernahme in offiziellen GMP-Chargenbericht
+    Reviewer->>UI: Signatur nach Annex 11 / 21 CFR Part 11
+    UI->>UI: Übernahme in offiziellen GMP-Bericht
 ```
 
 ### Die goldenen Regeln für GenAI-Audits:

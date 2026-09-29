@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/module_11_lifecycle_continuous_monitoring.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/module_11_lifecycle_continuous_monitoring.md, sync_date: 2026-09-29 -->
 # Module 11: Lifecycle Management and Continuous Monitoring
 
 <div align="center">
@@ -22,22 +22,32 @@
 
 ```mermaid
 flowchart TD
-    subgraph DriftTypes["⚠️ The 3 Forms of Performance Degradation ([Didaktik / Best Practice])"]
-        D1["1. Data Drift (Covariate Shift)<br/><i>Shift in input distribution (e.g., new raw material lot, sensor aging)</i>"]
-        D2["2. Concept Drift<br/><i>Shift in underlying cause-and-effect relationship (e.g., altered reaction chemistry)</i>"]
-        D3["3. Performance Drift<br/><i>Symptomatic decline in Recall, Precision, or F1-score</i>"]
+    subgraph S1["1. Data Drift (Covariate Shift)"]
+        direction LR
+        D1["Cause: Altered raw material & sensor data"] ==> C1["🛡️ GxP: Statistical Monitoring (PSI > 0.2 & KS-Test)"]
     end
 
-    subgraph Defense["🛡️ GxP Defense Mechanisms"]
-        C1["Statistical Monitoring (KS-Test, PSI)"] --> D1
-        C2["Periodic Reference Laboratory Testing"] --> D2
-        C3["Formal Change Control & Revalidation"] --> D3
+    subgraph S2["2. Concept Drift (Causal)"]
+        direction LR
+        D2["Cause: Altered process chemistry P(Y|X)"] ==> C2["🛡️ GxP: Periodic Reference Lab Testing"]
     end
 
-    DriftTypes ==> Defense
+    subgraph S3["3. Performance Drift"]
+        direction LR
+        D3["Symptom: Critical degradation of Recall & F1"] ==> C3["🛡️ GxP: Formal CAPA & Revalidation"]
+    end
 
-    style DriftTypes fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style Defense fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    S1 ==> S2 ==> S3
+
+    style S1 fill:#f8fafc,stroke:#3b82f6,stroke-width:1.5px
+    style S2 fill:#f8fafc,stroke:#ca8a04,stroke-width:1.5px
+    style S3 fill:#f8fafc,stroke:#ef4444,stroke-width:1.5px
+    style D1 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C1 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style D2 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C2 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style D3 fill:#ffffff,stroke:#64748b,stroke-width:1px
+    style C3 fill:#ecfdf5,stroke:#059669,stroke-width:2px
 ```
 
 ---

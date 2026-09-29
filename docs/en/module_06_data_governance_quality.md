@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_06_data_governance_quality.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -28,18 +28,28 @@ language: en
 
 ```mermaid
 flowchart TD
-    G1["Gate 1: Sourcing & Lineage<br/><i>(Origin, Material Lots, Unbroken Provenance)</i>"] --> G2["Gate 2: Curation & Preprocessing<br/><i>(ALCOA+ Audit, Outlier Rationale, Schema Units)</i>"]
-    G2 --> G3["Gate 3: Labeling & Ground Truth<br/><i>(Inter-Rater Reliability, Cohen's Kappa, Disposition Review)</i>"]
-    G3 --> G4["Gate 4: Leakage-Free Splitting<br/><i>(Stratified Partitioning by Lot/Site, NO Naive Random Splits)</i>"]
-    G4 --> G5["Gate 5: Immutable Versioning<br/><i>(Cryptographic Hashes, DVC Snapshots, Change Control)</i>"]
-    G5 --> G6["Gate 6: Audit & Formal Sign-off<br/><i>(QA & Data Owner Authorization Before Training)</i>"]
+    subgraph P1["Stage I: Data Acquisition & Curation"]
+        direction LR
+        G1["Gate 1: Sourcing & Lineage<br/><i>(Provenance & Traceability)</i>"] --> G2["Gate 2: Curation & Preprocessing<br/><i>(ALCOA+ & Outliers)</i>"]
+        G2 --> G3["Gate 3: Labeling & Ground Truth<br/><i>(Cohen's Kappa & Review)</i>"]
+    end
 
-    style G1 fill:#f8fafc,stroke:#64748b,stroke-width:2px
-    style G2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style G3 fill:#fefce8,stroke:#ca8a04,stroke-width:2px
-    style G4 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style G5 fill:#faf5ff,stroke:#9333ea,stroke-width:2px
-    style G6 fill:#ecfdf5,stroke:#059669,stroke-width:3px
+    subgraph P2["Stage II: Isolation & Release"]
+        direction LR
+        G4["Gate 4: Leakage-Free Split<br/><i>(Stratified by Batches)</i>"] --> G5["Gate 5: Immutable Versioning<br/><i>(DVC Snapshot & Hashes)</i>"]
+        G5 --> G6["Gate 6: Formal QA Sign-off<br/><i>(Release Before Training)</i>"]
+    end
+
+    P1 ==>|"Validated Raw Data Base"| P2
+
+    style P1 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
+    style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style G1 fill:#ffffff,stroke:#64748b,stroke-width:1.5px
+    style G2 fill:#ffffff,stroke:#16a34a,stroke-width:1.5px
+    style G3 fill:#ffffff,stroke:#ca8a04,stroke-width:1.5px
+    style G4 fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style G5 fill:#ffffff,stroke:#9333ea,stroke-width:1.5px
+    style G6 fill:#ecfdf5,stroke:#059669,stroke-width:2.5px
 ```
 
 ---

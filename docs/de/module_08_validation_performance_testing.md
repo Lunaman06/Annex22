@@ -20,22 +20,45 @@
 ## 🧭 Visualisierung: Das Annex 22 „Validation Metric Quad“
 
 ```mermaid
-graph TD
-    subgraph MetricQuad["🛡️ Das Validierungs-Metrik-Quartett"]
-        M1["1. F1-Score & Accuracy<br/><i>(Gesamtgenauigkeit bei Klassenimbalancen)</i>"]
-        M2["2. Recall vs. Precision<br/><i>(Asymmetrische Kosten: Null Toleranz für falsche Negative)</i>"]
-        M3["3. Model Calibration (ECE)<br/><i>(Konfidenz vs. Realität; Schutz vor Automation Bias)</i>"]
-        M4["4. Robustness & Fault Tolerance<br/><i>(Stabilität bei Rauschen, Drift & Sensorausfall)</i>"]
+flowchart TD
+    PQ["📋 Betriebliche Qualifizierung (PQ)<br/><i>(Vollständig isoliertes Testdatenset)</i>"]
+
+    subgraph MetricQuad["🛡️ Validierungs-Metrik-Quartett"]
+        direction TB
+        subgraph TopRow["Klassifikation & Asymmetrie"]
+            direction LR
+            M1["1. F1-Score & Accuracy<br/><i>(Klassenimbalancen ausgleichen)</i>"]
+            M2["2. Recall vs. Precision<br/><i>(Asymmetrie: Hoher Recall für Safety)</i>"]
+            M1 <--> M2
+        end
+
+        subgraph BottomRow["Vertrauen & Stabilität"]
+            direction LR
+            M3["3. Model Calibration (ECE)<br/><i>(Konfidenz vs. Realität)</i>"]
+            M4["4. Robustness & Fault Tolerance<br/><i>(Rauschen & Drift-Resistenz)</i>"]
+            M3 <--> M4
+        end
+
+        TopRow ==>|"Komplementäre Dimensionen"| BottomRow
     end
 
-    PQ["Betriebliche Grenzwert-Qualifizierung (PQ)"] --> MetricQuad
-    MetricQuad ==> OOD["OOD-Schutzprüfung: Sicheres Verweigern bei ungültigen Eingaben"]
-    OOD ==> PASS["Freigabe für GMP-Routinebetrieb"]
+    OOD["🛡️ OOD- & Boundary-Testing<br/><i>(Sicheres Verweigern bei Grenzwertverletzung)</i>"]
+    PASS["✅ Freigabe für GMP-Routinebetrieb<br/><i>(Model Card & Audit Trail Sign-off)</i>"]
+
+    PQ ==> MetricQuad
+    MetricQuad ==> OOD
+    OOD ==> PASS
 
     style MetricQuad fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style TopRow fill:#ffffff,stroke:#bae6fd,stroke-width:1px
+    style BottomRow fill:#ffffff,stroke:#bae6fd,stroke-width:1px
     style PQ fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style OOD fill:#fefce8,stroke:#ca8a04,stroke-width:2px
-    style PASS fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style PASS fill:#f0fdf4,stroke:#16a34a,stroke-width:2.5px
+    style M1 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M2 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M3 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
+    style M4 fill:#f8fafc,stroke:#0284c7,stroke-width:1.5px
 ```
 
 ---

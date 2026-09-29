@@ -1,4 +1,4 @@
-<!-- metadata source_file: docs/de/module_10_human_oversight_hitl.md, sync_date: 2026-09-28 -->
+<!-- metadata source_file: docs/de/module_10_human_oversight_hitl.md, sync_date: 2026-09-29 -->
 # Module 10: Human Oversight and Human-in-the-Loop (HITL)
 
 <div align="center">
@@ -21,25 +21,39 @@
 ## 🧭 Visualization: Nominal Confirmation vs. Independent-First Review
 
 ```mermaid
-flowchart TD
-    subgraph Bad["❌ Nominal Confirmation (High Automation Bias Risk)"]
+flowchart LR
+    subgraph Bad["❌ Nominal Confirmation"]
         direction TB
-        B1["AI displays prediction & confidence score upfront"] --> B2["Human performs superficial check under time pressure"]
-        B2 --> B3["Passive sign-off / Rubber-stamping"]
+        B1["1. AI displays prediction upfront<br/><i>(Anchoring Effect)</i>"]
+        B2["2. Operator checks superficially<br/><i>(Cognitive Offloading)</i>"]
+        B3["3. Passive rubber-stamping<br/><i>(Rubber Stamping, Override ➔ 0%)</i>"]
+        B1 --> B2 --> B3
     end
 
-    subgraph Good["✅ Independent-First Pattern (Annex 22 Best Practice)"]
+    subgraph Good["✅ Independent-First Review"]
         direction TB
-        G1["Human reviews primary evidence INDEPENDENTLY (Blind Review)"] --> G2["System reveals AI recommendation only after human input"]
-        G2 --> G3{"Do Human & AI Agree?"}
-        G3 -- Yes --> G4["Accelerated sign-off & release"]
-        G3 -- No --> G5["Mandatory adjudication with contemporaneous audit-trail entry"]
+        G1["1. Operator assesses independently<br/><i>(Blind Review without AI bias)</i>"]
+        G2["2. AI recommendation displayed<br/><i>(Confidence & Rationale)</i>"]
+        G3{"3. Do Human<br/>& AI Agree?"}
+        G4["Direct Sign-off<br/><i>(High Concordance)</i>"]
+        G5["Formal Adjudication<br/><i>(Contemporaneous Audit-Trail)</i>"]
+        G1 --> G2 --> G3
+        G3 -- "Yes" --> G4
+        G3 -- "No" --> G5
     end
 
-    Bad -.->|Risk: Override rate degrades toward 0%| Good
+    Bad ==>|"Upgrade to Genuine<br/>Human Control"| Good
 
     style Bad fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style Good fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style B1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style B3 fill:#ffffff,stroke:#ef4444,stroke-width:1.5px
+    style G1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G3 fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style G4 fill:#ecfdf5,stroke:#059669,stroke-width:1px
+    style G5 fill:#fefce8,stroke:#ca8a04,stroke-width:1.5px
 ```
 
 ---

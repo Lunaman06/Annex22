@@ -20,26 +20,39 @@
 ## 🧭 Visualisierung: Vom Ad-hoc-Experiment zum GxP-Modell
 
 ```mermaid
-flowchart TD
-    subgraph DS["❌ Konventionelle Data Science (Ad-hoc)"]
+flowchart LR
+    subgraph DS["❌ Ad-hoc Data Science"]
         direction TB
-        DS1["Fokus: Reine Benchmark-Accuracy"] --> DS2["Ad-hoc Scripting in Notebooks"]
-        DS2 --> DS3["Hyperparameter per Bauchgefühl"]
-        DS3 --> DS4["Flüchtige Umgebungen & variable Seeds"]
+        DS1["Fokus: Reine Benchmark-Accuracy"]
+        DS2["Ad-hoc Scripting in Notebooks"]
+        DS3["Hyperparameter per Bauchgefühl"]
+        DS4["Flüchtige Seeds & Umgebungen"]
+        DS1 --> DS2 --> DS3 --> DS4
     end
 
-    DS ==>|Zwingender Paradigmenwechsel für GxP| A22
-
-    subgraph A22["✅ Annex 22 GMP Engineering (Controlled)"]
+    subgraph A22["✅ Annex 22 Kontrolliert"]
         direction TB
-        G1["Fokus: Trustworthiness & Kalibrierung"] --> G2["Validierte MLOps- & Cloud-Pipeline (Annex 11)"]
-        G2 --> G3["Systematische Hyperparameter-Suche mit Rationale"]
-        G3 --> G4["Reproduzierbarkeit: Git + DVC + Fixed Seeds"]
-        G4 --> G5["Frozen Weights & standardisierte Model Card"]
+        G1["Fokus: Trustworthiness & Kalibrierung"]
+        G2["Validierte MLOps-Pipeline (Annex 11)"]
+        G3["Systematische Hyperparameter-Suche"]
+        G4["Reproduzierbar: Git + DVC + Fixed Seeds"]
+        G5["Frozen Weights & Model Card"]
+        G1 --> G2 --> G3 --> G4 --> G5
     end
+
+    DS ==>|"Zwingender Paradigmenwechsel<br/>für GMP-Betrieb"| A22
 
     style DS fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style DS1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS3 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style DS4 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style G1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style G5 fill:#ffffff,stroke:#16a34a,stroke-width:1.5px
 ```
 
 ---

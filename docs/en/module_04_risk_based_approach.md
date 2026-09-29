@@ -1,7 +1,7 @@
 <!-- metadata
 source_file: docs/de/module_04_risk_based_approach.md
 source_commit: 8fed97a
-sync_date: 2026-09-28
+sync_date: 2026-09-29
 language: en
 -->
 
@@ -18,30 +18,32 @@ language: en
 ## 🧭 Core Concept: 5 AI Failure Modes & Silent Degradation
 
 ```mermaid
-graph TD
-    subgraph FailModes["The 5 AI-Specific Failure Modes (FMEA Extension)"]
-        M1["1. Systematic Bias<br/>(Skewed Training Corpora)"]
-        M2["2. Distribution Shift<br/>(Data & Concept Drift)"]
-        M3["3. Adversarial / Edge Cases<br/>(Untrained Extreme Inputs)"]
-        M4["4. Confidence Miscalibration<br/>(Highly Confident, Yet Wrong)"]
-        M5["5. Spurious Correlations<br/>(Confounded Association Logic)"]
+flowchart LR
+    subgraph FailModes["⚠️ 5 AI Failure Modes"]
+        direction TB
+        M1["1. Systematic Data Bias"]
+        M2["2. Distribution / Concept Drift"]
+        M3["3. Adversarial / Edge Cases"]
+        M4["4. Confidence Miscalibration"]
+        M5["5. Spurious Correlations"]
+        M1 --- M2 --- M3 --- M4 --- M5
     end
 
-    subgraph Impact["Operational Impact"]
-        Silent["⚠️ SILENT DEGRADATION<br/>(No crash, no stack trace,<br/>just stealthy quality loss)"]
+    Silent["🚨 SILENT DEGRADATION<br/><b>No System Crash</b><br/><i>Stealthy Quality Loss<br/>Without Error Codes</i>"]
+
+    subgraph Mitigation["🛡️ Annex 22 Controls"]
+        direction TB
+        C1["Out-of-Distribution (OOD) Gates"]
+        C2["Human Oversight & Active Challenge"]
+        C3["Continuous Statistical Monitoring"]
+        C1 --- C2 --- C3
     end
 
-    subgraph Mitigation["Annex 22 Safeguards"]
-        OOD["Out-of-Distribution (OOD) Safeguards"]
-        HITL["100% Human-in-the-Loop Oversight"]
-        DriftMon["Continuous Statistical Monitoring"]
-    end
-
-    FailModes ==> Silent
-    Silent ==> Mitigation
+    FailModes ==>|"Silently Leads to"| Silent
+    Silent ==>|"Controlled by"| Mitigation
 
     style FailModes fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style Silent fill:#fff7ed,stroke:#f97316,stroke-width:2px
+    style Silent fill:#fff7ed,stroke:#ea580c,stroke-width:2px
     style Mitigation fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 

@@ -11,27 +11,33 @@
 ## 🧭 Kernkonzept im Überblick: Die 5 KI-Fehlermodi & Silent Degradation
 
 ```mermaid
-graph TD
-    subgraph FailModes["Die 5 KI-spezifischen Fehlermodi (FMEA-Erweiterung)"]
-        M1["1. Systematic Bias<br/>(Verzerrte Trainingsdaten)"]
-        M2["2. Distribution Shift<br/>(Data & Concept Drift)"]
-        M3["3. Adversarial / Edge Cases<br/>(Ungelernte Extremwerte)"]
-        M4["4. Confidence Miscalibration<br/>(Hochsicher, aber falsch)"]
-        M5["5. Spurious Correlations<br/>(Scheinkausalitäten gelernt)"]
+flowchart LR
+    subgraph FailModes["⚠️ 5 KI-Fehlermodi"]
+        direction TB
+        M1["1. Systematic Data Bias"]
+        M2["2. Distribution / Concept Drift"]
+        M3["3. Adversarial / Edge Cases"]
+        M4["4. Confidence Miscalibration"]
+        M5["5. Spurious Correlations"]
+        M1 --- M2 --- M3 --- M4 --- M5
     end
 
-    subgraph Impact["Die Auswirkung"]
-        Silent["⚠️ SILENT DEGRADATION<br/>(Kein Absturz, kein Error-Code,<br/>sondern schleichender Qualitätsverlust)"]
+    Silent["🚨 SILENT DEGRADATION<br/><b>Kein Systemabsturz</b><br/><i>Schleichender Qualitätsverlust<br/>ohne Software-Fehlercode</i>"]
+
+    subgraph Mitigation["🛡️ Annex 22 Kontrollen"]
+        direction TB
+        C1["Out-of-Distribution (OOD) Gates"]
+        C2["Human Oversight & Active Challenge"]
+        C3["Kontinuierliches statistisches Monitoring"]
+        C1 --- C2 --- C3
     end
 
-    subgraph Mitigation["Annex 22 Gegenmaßnahmen"]
-        OOD["Out-of-Distribution (OOD) Detection"]
-        HITL["100% Human-in-the-Loop"]
-        DriftMon["Kontinuierliches statistisches Monitoring"]
-    end
+    FailModes ==>|"Führen unbemerkt zu"| Silent
+    Silent ==>|"Wird beherrscht durch"| Mitigation
 
-    FailModes ==> Silent
-    Silent ==> Mitigation
+    style FailModes fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style Silent fill:#fff7ed,stroke:#ea580c,stroke-width:2px
+    style Mitigation fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 ---

@@ -13,16 +13,23 @@
 ```mermaid
 flowchart TD
     Start["Software-System / Algorithmus"] --> Q1{"1. Basiert das System auf<br/>statistischem Lernen / ML?"}
-    
-    Q1 -- Nein (Regelbasiert) --> ANNEX11["✅ Bleibt rein unter Annex 11<br/>(Klassische CSV)"]
-    Q1 -- Ja --> Q2{"2. Hat es direkten oder indirekten<br/>Einfluss auf GxP-Prozesse?"}
-    
-    Q2 -- Nein --> OOS["❌ Out of Scope<br/>(Standard-IT-Kontrollen)"]
-    Q2 -- Ja --> Q3["3. Risikoklassifizierung<br/>(Unacceptable / High / Moderate / Low)"]
-    
+
+    Q1 -- "Nein (deterministisch)" --> ANNEX11["✅ Rein unter Annex 11<br/><i>(Klassische CSV)</i>"]
+    Q1 -- "Ja (lernend)" --> Q2{"2. Direkter / indirekter<br/>Einfluss auf GxP-Prozesse?"}
+
+    Q2 -- "Nein" --> OOS["❌ Out of Scope<br/><i>(Standard-IT-Kontrollen)</i>"]
+    Q2 -- "Ja" --> Q3["3. Risikoklassifizierung<br/><i>(ICH Q9 R1 / Annex 22 Tiers)</i>"]
+
     Q3 --> Q4{"4. Architektur-Check:<br/>Statisch oder Dynamisch?"}
-    Q4 -- Dynamisch --> REJECT["🚫 Vom Draft nicht abgedeckt;<br/>nicht für kritische GMP-Prozesse verwenden ([Draft §1])"]
-    Q4 -- Statisch --> INV["📋 Eintragung in das AI-Inventar<br/>(Verbindliche Scoping Rationale)"]
+    Q4 -- "Dynamisch (Online-Retraining)" --> REJECT["🚫 Vom Draft ausgeschlossen<br/><i>(Nicht in kritischen GMP-Prozessen)</i>"]
+    Q4 -- "Statisch (Frozen Weights)" --> INV["📋 Eintrag in Master AI-Inventar<br/><i>(Validierte Scoping Rationale)</i>"]
+
+    style Start fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style ANNEX11 fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
+    style OOS fill:#f1f5f9,stroke:#94a3b8,stroke-width:1px
+    style Q3 fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style REJECT fill:#fef2f2,stroke:#ef4444,stroke-width:2px
+    style INV fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 ---

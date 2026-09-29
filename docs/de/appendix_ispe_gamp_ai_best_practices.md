@@ -18,19 +18,25 @@
 Um Missverständnisse in Projekten zu vermeiden, muss die Hierarchie zwischen Regulatorik und Industrie-Leitfäden glasklar sein:
 
 ```mermaid
-graph TD
-    A["Gesetzlicher Rahmen & Behördenvorgaben<br/><b>EU GMP Annex 11 & Draft Annex 22 (EMA / PIC/S)</b><br/><i>(Definiert WAS rechtlich gefordert und verboten ist)</i>"]
-    B["Industrie-Konsensstandard (Methodik)<br/><b>ISPE GAMP® 5 (2nd Edition, 2022)</b><br/><i>(Definiert das risikobasierte V-Modell & Lebenszyklus)</i>"]
-    C["Spezialisierter Best-Practice-Leitfaden<br/><b>ISPE GAMP® Guide: Artificial Intelligence (Juli 2025)</b><br/><i>(290 Seiten konkrete technische Umsetzung für Data Science & AI)</i>"]
+flowchart TD
+    A["⚖️ Gesetzlicher Rahmen & Behördenvorgaben<br/><b>EU GMP Annex 11 & Draft Annex 22 (EMA / PIC/S)</b><br/><i>(Definiert WAS rechtlich gefordert und verboten ist)</i>"]
 
-    A ==> B
-    B ==> C
-    C ==> D["Inspektionsfeste Umsetzung im Pharma-Unternehmen (SOPs, MLOps, QMS)"]
+    subgraph Frameworks["Industrie-Leitfäden & Methodik"]
+        direction LR
+        B["📘 Übergreifender Rahmen<br/><b>ISPE GAMP® 5 (2nd Ed., 2022)</b><br/><i>(Risikobasiertes V-Modell & CSV)</i>"]
+        C["📗 Spezialisierter AI-Leitfaden<br/><b>ISPE GAMP® AI Guide (2025)</b><br/><i>(Data Science, MLOps & Living Validation)</i>"]
+    end
+
+    D["🏭 Inspektionsfeste Umsetzung im Pharma-Unternehmen<br/><b>SOPs, validierte Pipelines & gelebtes Qualitätsmanagement</b>"]
+
+    A ==> Frameworks
+    Frameworks ==> D
 
     style A fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-    style B fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style C fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style D fill:#f8fafc,stroke:#64748b,stroke-width:2px
+    style Frameworks fill:#f8fafc,stroke:#3b82f6,stroke-width:1.5px
+    style B fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
+    style C fill:#ffffff,stroke:#16a34a,stroke-width:1.5px
+    style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
 ```
 
 * **Annex 22** ist die *Regulierung* (Inspektionsmaßstab der Behörden).
@@ -45,26 +51,38 @@ Die größte methodische Neuerung im ISPE GAMP AI Guide ist das **duale Lebenszy
 
 ```mermaid
 flowchart LR
-    subgraph SoftwareCycle["💻 Software- & Infrastruktur-Zyklus (Annex 11)"]
+    subgraph SoftwareCycle["💻 Software- & MLOps-Zyklus"]
         direction TB
-        S1["Requirements & URS"] --> S2["Architektur & MLOps Pipeline"]
-        S2 --> S3["Infrastruktur-Qualifizierung (IQ/OQ)"]
-        S3 --> S4["System-Release & Change Control"]
+        S1["Requirements & URS"]
+        S2["MLOps Pipeline-Architektur"]
+        S3["Infrastruktur-Qualifizierung (IQ/OQ)"]
+        S4["System-Release & Change Control"]
+        S1 --> S2 --> S3 --> S4
     end
 
-    subgraph DataCycle["📊 Daten- & Modell-Zyklus (Annex 22)"]
+    subgraph DataCycle["📊 Daten- & Modell-Zyklus"]
         direction TB
-        D1["Data Sourcing & Lineage"] --> D2["Curation & ALCOA+ Audit"]
-        D2 --> D3["Model Training & Tuning (Validation Set)"]
-        D3 --> D4["Unabhängige Evaluierung (Hold-out Test)"]
+        D1["Data Sourcing & Lineage"]
+        D2["Curation & ALCOA+ Audit"]
+        D3["Training & Hyperparameter-Tuning"]
+        D4["Unabhängige Testdaten-Evaluierung"]
+        D1 --> D2 --> D3 --> D4
     end
 
-    SoftwareCycle <===>|Kontinuierliche Synchronisation| DataCycle
-    DataCycle --> PROD["Gemeinsame Freigabe (PQ / Model Card) & Drift-Monitoring"]
+    SoftwareCycle <===>|"Kontinuierliche Synchronisation"| DataCycle
+    DataCycle ==> PROD["🏭 Gemeinsame Freigabe (PQ / Model Card)<br/>& kontinuierliches Drift-Monitoring"]
 
     style SoftwareCycle fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style DataCycle fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
     style PROD fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style S1 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S2 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S3 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style S4 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style D1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style D4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
 ```
 
 1. **Der Software-Zyklus:** Folgt dem klassischen GAMP-Lebenszyklus (Spezifikation, Build, IQ/OQ der Pipeline-Infrastruktur, Container-Sicherheit).
@@ -124,15 +142,23 @@ Einer der wichtigsten Kernsätze von GAMP 5 Second Edition lautet: **Validierung
 
 ### Die 3 Säulen der Living Validation:
 ```mermaid
-graph TD
-    LV["🛡️ Living Validation (GAMP AI Guide)"] --> S1["1. Real-Time Dashboards<br/><i>(Laufende Überwachung von PSI, Drift-Metriken & Overrides)</i>"]
-    LV --> S2["2. Gated Change Management<br/><i>(Kein Retraining ohne formale Revalidierung)</i>"]
-    LV --> S3["3. Periodic Review Audits<br/><i>(Risikobasierter Abgleich mit der Validierungs-Baseline)</i>"]
+flowchart TD
+    LV["🛡️ Living Validation (ISPE GAMP AI Guide)<br/><i>(Kontinuierliche Aufrechterhaltung des validierten Zustands)</i>"]
+
+    subgraph Pillars["Die 3 operativen Säulen der Living Validation"]
+        direction LR
+        S1["1. Real-Time Dashboards<br/><i>(PSI- & Drift-Metriken,<br/>Bediener-Overrides)</i>"]
+        S2["2. Gated Change Management<br/><i>(Strikte Revalidierung<br/>vor jedem Modell-Update)</i>"]
+        S3["3. Periodic Review Audits<br/><i>(Risikobasierter Abgleich<br/>mit Validierungs-Baseline)</i>"]
+    end
+
+    LV ==> Pillars
 
     style LV fill:#f8fafc,stroke:#0284c7,stroke-width:2px
-    style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:2px
-    style S2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:2px
+    style Pillars fill:#ffffff,stroke:#bae6fd,stroke-width:1.5px
+    style S1 fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px
+    style S2 fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style S3 fill:#faf5ff,stroke:#a855f7,stroke-width:1.5px
 ```
 
 * **Automatisierte Drift-Alarmierung:** Überschreitet der *Population Stability Index (PSI)* den Wert von $0,2$, wird vollautomatisch ein Ticket im Abweichungswesen (QMS) ausgelöst.
