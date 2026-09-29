@@ -10,7 +10,12 @@ import { SearchEngine } from './search.js';
 class Annex22App {
   constructor() {
     this.lang = localStorage.getItem('annex22_lang') || 'de';
-    this.theme = localStorage.getItem('annex22_theme') || 'dark';
+    let storedTheme = localStorage.getItem('annex22_theme') || 'neutral';
+    if (storedTheme === 'dark') {
+      storedTheme = 'neutral';
+      localStorage.setItem('annex22_theme', 'neutral');
+    }
+    this.theme = storedTheme;
     this.currentModuleId = this.getInitialRoute();
     this.checklistState = JSON.parse(localStorage.getItem('annex22_checklists') || '{}');
     this.searchEngine = new SearchEngine();
@@ -71,34 +76,26 @@ class Annex22App {
     document.documentElement.setAttribute('data-theme', this.theme);
   }
 
-  toggleTheme() {
-    this.theme = this.theme === 'dark' ? 'light' : 'dark';
+  setTheme(themeId) {
+    this.theme = themeId;
     localStorage.setItem('annex22_theme', this.theme);
     this.initTheme();
     this.initMermaid();
+
+    document.querySelectorAll('.theme-option-item').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.setTheme === themeId);
+    });
+
+    const wrap = document.getElementById('themePickerWrap');
+    wrap?.classList.remove('open');
+    document.getElementById('themeTriggerBtn')?.setAttribute('aria-expanded', 'false');
+
     this.renderContent();
   }
 
-  initMermaid() {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'base',
-      themeVariables: this.theme === 'dark' ? {
-        darkMode: true,
-        background: '#101624',
-        primaryColor: '#1e293b',
-        primaryTextColor: '#f8fafc',
-        primaryBorderColor: '#6366f1',
-        lineColor: '#38bdf8',
-        secondaryColor: '#182235',
-        tertiaryColor: '#0f172a',
-        fontFamily: 'Inter, Outfit, sans-serif',
-        fontSize: '15px',
-        mainBkg: '#1e293b',
-        nodeBorder: '#818cf8',
-        clusterBkg: '#0b1120',
-        clusterBorder: '#334155'
-      } : {
+  getMermaidThemeVariables(theme) {
+    if (theme === 'light') {
+      return {
         darkMode: false,
         background: '#ffffff',
         primaryColor: '#f1f5f9',
@@ -113,7 +110,90 @@ class Annex22App {
         nodeBorder: '#6366f1',
         clusterBkg: '#f8fafc',
         clusterBorder: '#cbd5e1'
-      },
+      };
+    }
+
+    if (theme === 'slate') {
+      return {
+        darkMode: true,
+        background: '#181b22',
+        primaryColor: '#222630',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#6366f1',
+        lineColor: '#38bdf8',
+        secondaryColor: '#1d212a',
+        tertiaryColor: '#0f1217',
+        fontFamily: 'Inter, Outfit, sans-serif',
+        fontSize: '15px',
+        mainBkg: '#222630',
+        nodeBorder: '#818cf8',
+        clusterBkg: '#12151b',
+        clusterBorder: '#334155'
+      };
+    }
+
+    if (theme === 'midnight') {
+      return {
+        darkMode: true,
+        background: '#101624',
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#6366f1',
+        lineColor: '#38bdf8',
+        secondaryColor: '#182235',
+        tertiaryColor: '#0f172a',
+        fontFamily: 'Inter, Outfit, sans-serif',
+        fontSize: '15px',
+        mainBkg: '#1e293b',
+        nodeBorder: '#818cf8',
+        clusterBkg: '#0b1120',
+        clusterBorder: '#334155'
+      };
+    }
+
+    if (theme === 'oled') {
+      return {
+        darkMode: true,
+        background: '#0e0e11',
+        primaryColor: '#18181c',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#818cf8',
+        lineColor: '#38bdf8',
+        secondaryColor: '#141418',
+        tertiaryColor: '#000000',
+        fontFamily: 'Inter, Outfit, sans-serif',
+        fontSize: '15px',
+        mainBkg: '#18181c',
+        nodeBorder: '#818cf8',
+        clusterBkg: '#050505',
+        clusterBorder: '#27272a'
+      };
+    }
+
+    // Default: 'neutral' (Clean Zinc / Charcoal Gray)
+    return {
+      darkMode: true,
+      background: '#1a1a1e',
+      primaryColor: '#242429',
+      primaryTextColor: '#ffffff',
+      primaryBorderColor: '#6366f1',
+      lineColor: '#38bdf8',
+      secondaryColor: '#1f1f24',
+      tertiaryColor: '#121214',
+      fontFamily: 'Inter, Outfit, sans-serif',
+      fontSize: '15px',
+      mainBkg: '#242429',
+      nodeBorder: '#818cf8',
+      clusterBkg: '#141416',
+      clusterBorder: '#3f3f46'
+    };
+  }
+
+  initMermaid() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: this.getMermaidThemeVariables(this.theme),
       flowchart: {
         htmlLabels: true,
         curve: 'basis',
@@ -190,9 +270,63 @@ class Annex22App {
             <button class="lang-btn ${this.lang === 'en' ? 'active' : ''}" data-lang="en">🇬🇧 EN</button>
           </div>
 
-          <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle color theme">
-            <i data-lucide="${this.theme === 'dark' ? 'sun' : 'moon'}"></i>
-          </button>
+          <div class="theme-picker-wrap" id="themePickerWrap">
+            <button class="theme-btn" id="themeTriggerBtn" aria-label="${this.lang === 'de' ? 'Farbschema wählen' : 'Select color theme'}" title="${this.lang === 'de' ? 'Farbschema wählen' : 'Select color theme'}" aria-haspopup="true" aria-expanded="false">
+              <i data-lucide="palette"></i>
+            </button>
+
+            <div class="theme-dropdown-menu" id="themeDropdownMenu">
+              <div class="theme-dropdown-header">
+                <span>${this.lang === 'de' ? 'Farbschema' : 'Color Theme'}</span>
+              </div>
+              <div class="theme-options-list">
+                <button class="theme-option-item ${this.theme === 'neutral' ? 'active' : ''}" data-set-theme="neutral">
+                  <span class="theme-swatch neutral"></span>
+                  <div class="theme-info">
+                    <div class="theme-name">${this.lang === 'de' ? 'Neutral Grau (Zinc)' : 'Neutral Gray (Zinc)'}</div>
+                    <div class="theme-desc">${this.lang === 'de' ? 'Elegante Graustufen & weißer Text' : 'Refined matte grays & white text'}</div>
+                  </div>
+                  <i data-lucide="check" class="theme-check-icon"></i>
+                </button>
+
+                <button class="theme-option-item ${this.theme === 'slate' ? 'active' : ''}" data-set-theme="slate">
+                  <span class="theme-swatch slate"></span>
+                  <div class="theme-info">
+                    <div class="theme-name">${this.lang === 'de' ? 'Schiefergrau (Slate)' : 'Slate Gray'}</div>
+                    <div class="theme-desc">${this.lang === 'de' ? 'Kühles Anthrazit mit Stahl-Nuancen' : 'Cool steel-tinted charcoal'}</div>
+                  </div>
+                  <i data-lucide="check" class="theme-check-icon"></i>
+                </button>
+
+                <button class="theme-option-item ${this.theme === 'midnight' ? 'active' : ''}" data-set-theme="midnight">
+                  <span class="theme-swatch midnight"></span>
+                  <div class="theme-info">
+                    <div class="theme-name">${this.lang === 'de' ? 'Midnight Blau' : 'Midnight Blue'}</div>
+                    <div class="theme-desc">${this.lang === 'de' ? 'Cyber-Pharma Dunkelblau' : 'Classic cyber navy'}</div>
+                  </div>
+                  <i data-lucide="check" class="theme-check-icon"></i>
+                </button>
+
+                <button class="theme-option-item ${this.theme === 'oled' ? 'active' : ''}" data-set-theme="oled">
+                  <span class="theme-swatch oled"></span>
+                  <div class="theme-info">
+                    <div class="theme-name">${this.lang === 'de' ? 'OLED Tiefschwarz' : 'OLED Pitch Black'}</div>
+                    <div class="theme-desc">${this.lang === 'de' ? 'Reines Schwarz & maximaler Kontrast' : 'True pitch black & high contrast'}</div>
+                  </div>
+                  <i data-lucide="check" class="theme-check-icon"></i>
+                </button>
+
+                <button class="theme-option-item ${this.theme === 'light' ? 'active' : ''}" data-set-theme="light">
+                  <span class="theme-swatch light"></span>
+                  <div class="theme-info">
+                    <div class="theme-name">${this.lang === 'de' ? 'Klar & Hell' : 'Daylight Mode'}</div>
+                    <div class="theme-desc">${this.lang === 'de' ? 'Tageslicht & reduzierter Kontrast' : 'Clean pharmaceutical daylight'}</div>
+                  </div>
+                  <i data-lucide="check" class="theme-check-icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -2285,8 +2419,37 @@ Antworte NUR mit reinem JSON ohne Markdown-Ticks.`;
       document.getElementById('siteSidebar')?.classList.toggle('mobile-open');
     });
 
-    document.getElementById('themeToggleBtn')?.addEventListener('click', () => {
-      this.toggleTheme();
+    const themeWrap = document.getElementById('themePickerWrap');
+    const themeTrigger = document.getElementById('themeTriggerBtn');
+
+    themeTrigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = themeWrap?.classList.toggle('open');
+      themeTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.theme-option-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetTheme = btn.dataset.setTheme;
+        if (targetTheme) {
+          this.setTheme(targetTheme);
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (themeWrap && !themeWrap.contains(e.target)) {
+        themeWrap.classList.remove('open');
+        themeTrigger?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && themeWrap?.classList.contains('open')) {
+        themeWrap.classList.remove('open');
+        themeTrigger?.setAttribute('aria-expanded', 'false');
+      }
     });
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
