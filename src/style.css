@@ -1495,6 +1495,46 @@ html[data-theme="light"] .diagram-modal-backdrop {
 }
 .gxp-callout-caution .callout-header { color: #fb7185; }
 
+.gxp-callout-executive {
+  border-color: var(--brand-primary, #3b82f6);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(14, 165, 233, 0.05) 100%);
+  border-left-width: 4px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12);
+  padding: 1.35rem 1.65rem;
+  margin: 1.75rem 0 2rem 0;
+}
+.gxp-callout-executive .callout-header {
+  color: var(--brand-cyan, #06b6d4);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.65rem;
+}
+.gxp-callout-executive .callout-content {
+  font-size: 1.025rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+.gxp-callout-executive .callout-content p {
+  margin: 0;
+}
+html[data-theme="light"] .gxp-callout-executive {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.07) 0%, rgba(14, 165, 233, 0.04) 100%);
+  border-color: #2563eb;
+}
+html[data-theme="light"] .gxp-callout-executive .callout-header {
+  color: #1d4ed8;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid var(--border-medium);
+  padding: 0.85rem 1.35rem;
+  margin: 1.5rem 0;
+  background: var(--bg-surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-secondary);
+}
+
 /* ==========================================================================
    Interactive Checklists & Red Flags
    ========================================================================== */

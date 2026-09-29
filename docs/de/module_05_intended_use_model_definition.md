@@ -18,7 +18,7 @@ flowchart LR
         IN2["Validierte Sensoren & Formate"]
         IN3["Belegte Performance (Recall/Acc)"]
         IN4["Rechtsverbindlicher Intended Use"]
-        IN1 --- IN2 --- IN3 --- IN4
+        IN1 --> IN2 --> IN3 --> IN4
     end
 
     subgraph Defense["🛡️ Der Schutz-Zaun"]
@@ -34,7 +34,7 @@ flowchart LR
         OUT2["Neuartige Defekte & Extremlagen"]
         OUT3["Anfahrprozesse & Notbetrieb"]
         OUT4["Fremd-Rohstoffe ohne URS-Check"]
-        OUT1 --- OUT2 --- OUT3 --- OUT4
+        OUT1 --> OUT2 --> OUT3 --> OUT4
     end
 
     Inside ==>|"Zulässiger Routinebetrieb"| FENCE
@@ -45,6 +45,14 @@ flowchart LR
     style Outside fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style FENCE fill:#ffffff,stroke:#2563eb,stroke-width:1.5px
     style ACTION fill:#fff7ed,stroke:#ea580c,stroke-width:2px
+    style IN1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style IN2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style IN3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style IN4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style OUT1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style OUT2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style OUT3 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style OUT4 fill:#ffffff,stroke:#ef4444,stroke-width:1px
 ```
 
 ---

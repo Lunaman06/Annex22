@@ -181,12 +181,28 @@ export function parseModuleMarkdown(rawMarkdown, moduleId, lang = 'de') {
     </div>`;
   };
 
-  // Blockquotes: intercept GitHub alerts [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION]
-  renderer.blockquote = ({ text }) => {
-    const alertMatch = text.match(/^\s*<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br>|\n)?([\s\S]*?)<\/p>/i);
+  // Blockquotes: intercept GitHub alerts [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION] and Executive Summary
+  renderer.blockquote = function(token) {
+    const rawText = token.text || '';
+
+    // Check for Executive Summary
+    if (/^\s*\*{2}Executive Summary:?\*{2}/i.test(rawText)) {
+      const bodyText = rawText.replace(/^\s*\*{2}Executive Summary:?\*{2}\s*:?\s*/i, '');
+      const lexed = marked.lexer(bodyText);
+      const contentHtml = this.parser.parse(lexed);
+      return `<div class="gxp-callout gxp-callout-executive">
+        <div class="callout-header">
+          <i data-lucide="bookmark-check"></i>
+          <strong>Executive Summary</strong>
+        </div>
+        <div class="callout-content">${contentHtml}</div>
+      </div>`;
+    }
+
+    const alertMatch = rawText.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*([\s\S]*)$/i);
     if (alertMatch) {
       const type = alertMatch[1].toUpperCase();
-      const content = alertMatch[3];
+      const contentText = alertMatch[2];
       const iconMap = {
         NOTE: 'info',
         TIP: 'lightbulb',
@@ -204,17 +220,19 @@ export function parseModuleMarkdown(rawMarkdown, moduleId, lang = 'de') {
 
       const title = titleMap[type] ? titleMap[type][lang] : type;
       const icon = iconMap[type] || 'info';
+      const lexed = marked.lexer(contentText);
+      const contentHtml = this.parser.parse(lexed);
 
       return `<div class="gxp-callout gxp-callout-${type.toLowerCase()}">
         <div class="callout-header">
           <i data-lucide="${icon}"></i>
           <strong>${title}</strong>
         </div>
-        <div class="callout-content">${content}</div>
+        <div class="callout-content">${contentHtml}</div>
       </div>`;
     }
 
-    return `<blockquote>${text}</blockquote>`;
+    return `<blockquote>${this.parser.parse(token.tokens)}</blockquote>`;
   };
 
   // Lists and Checklist items (marked v15: use this.parser.parse for recursive inline token resolution)

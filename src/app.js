@@ -572,11 +572,29 @@ class Annex22App {
   renderOverviewHomeView(container) {
     const raw = getDocContent('00_overview', this.lang);
     const parsed = parseModuleMarkdown(raw, '00_overview', this.lang);
-    const stats = this.getGlobalChecklistStats();
+
+    const hasToc = parsed.toc && parsed.toc.length > 0;
+    const tocHtml = hasToc ? `
+      <aside class="doc-toc-column">
+        <div class="doc-toc-card">
+          <div class="toc-header">
+            <i data-lucide="list"></i>
+            <span>${this.lang === 'de' ? 'Auf dieser Seite' : 'On this page'}</span>
+          </div>
+          <nav class="toc-nav">
+            ${parsed.toc.map(item => `
+              <a href="#${item.id}" class="toc-link depth-${item.depth}" data-toc-id="${item.id}">
+                ${item.text}
+              </a>
+            `).join('')}
+          </nav>
+        </div>
+      </aside>
+    ` : '';
 
     container.innerHTML = `
       <!-- Hero Banner -->
-      <div class="hero-banner">
+      <div class="hero-banner" style="margin-bottom:2rem;">
         <div class="hero-tag">
           <i data-lucide="shield-check"></i>
           <span>${this.lang === 'de' ? 'Offizieller Draft 2026/2027 • Annex 11 Durchsetzung' : 'Official Draft 2026/2027 • Annex 11 Enforcement'}</span>
@@ -584,142 +602,90 @@ class Annex22App {
         <h1 class="hero-title">${this.lang === 'de' ? 'EU GMP Annex 22: Künstliche Intelligenz in der Pharma-Produktion' : 'EU GMP Annex 22: Artificial Intelligence in GxP Manufacturing'}</h1>
         <p class="hero-subtitle">${this.lang === 'de' ? 'Das interaktive Wissens- und Compliance-Portal für regulatorische Sicherheit, MLOps-Validierung und Inspektionsbereitschaft.' : 'The interactive compliance and learning portal for regulatory rigor, MLOps validation, and audit readiness.'}</p>
 
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;">
-          <button class="header-btn primary" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="simulator">
-            <i data-lucide="flask-conical"></i>
-            <span>${this.lang === 'de' ? '🧪 Eigenes KI-Projekt simulieren' : '🧪 Simulate your AI Project'}</span>
-          </button>
-          <button class="header-btn" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="module_01_introduction_ai_gxp">
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <button class="header-btn primary" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="module_01_introduction_ai_gxp">
             <i data-lucide="book-open"></i>
-            <span>${this.lang === 'de' ? 'Modul 01 aufschlagen' : 'Start with Module 01'}</span>
+            <span>${this.lang === 'de' ? 'Mit Modul 01 starten' : 'Start with Module 01'}</span>
+          </button>
+          <button class="header-btn" style="font-size:0.95rem; padding:0.65rem 1.25rem;" data-route="simulator">
+            <i data-lucide="flask-conical"></i>
+            <span>${this.lang === 'de' ? '🧪 KI-Projekt simulieren' : '🧪 Simulate AI Project'}</span>
           </button>
         </div>
-
-        <div class="hero-stats-grid">
-          <div class="hero-stat-card">
-            <span class="hero-stat-value">12 + 2</span>
-            <span class="hero-stat-label">${this.lang === 'de' ? 'Fachmodule & Praxis-Guides' : 'Core Modules & Best-Practice Guides'}</span>
-          </div>
-          <div class="hero-stat-card">
-            <span class="hero-stat-value">${stats.completed} / ${stats.total}</span>
-            <span class="hero-stat-label">${this.lang === 'de' ? 'Lernkriterien absolviert' : 'Learning Criteria Completed'}</span>
-          </div>
-          <div class="hero-stat-card">
-            <span class="hero-stat-value">100%</span>
-            <span class="hero-stat-label">${this.lang === 'de' ? 'Zweisprachig (DE / EN Synchron)' : 'Bilingual (DE / EN Synchronized)'}</span>
-          </div>
-          <div class="hero-stat-card">
-            <span class="hero-stat-value">GAMP 5</span>
-            <span class="hero-stat-label">${this.lang === 'de' ? 'ISPE AI Guide 2025 Harmonisiert' : 'ISPE AI Guide 2025 Harmonized'}</span>
-          </div>
-        </div>
       </div>
 
-      <!-- Interactive AI Lifecycle Navigator -->
-      <div class="lifecycle-section">
-        <div class="section-title-wrap">
-          <div>
-            <h2 class="section-title">${this.lang === 'de' ? '🧭 Der pharmazeutische KI-Lebenszyklus' : '🧭 The Pharmaceutical AI Lifecycle'}</h2>
-            <p class="section-desc">${this.lang === 'de' ? 'Wähle eine Lebenszyklus-Phase, um direkt in die regulatorischen Leitfäden einzutauchen:' : 'Select a lifecycle phase to dive into the regulatory compliance guide:'}</p>
+      <div class="module-layout-grid ${hasToc ? 'has-toc' : 'no-toc'}">
+        <div class="module-content-pane">
+          <!-- Interactive AI Lifecycle Navigator -->
+          <div class="lifecycle-section" style="margin-bottom:2.25rem;">
+            <div class="section-title-wrap">
+              <div>
+                <h2 class="section-title">${this.lang === 'de' ? '🧭 Der pharmazeutische KI-Lebenszyklus' : '🧭 The Pharmaceutical AI Lifecycle'}</h2>
+                <p class="section-desc">${this.lang === 'de' ? 'Direkteinstieg in die 6 Lebenszyklus-Phasen und Fachmodule:' : 'Direct entry into the 6 lifecycle phases and core modules:'}</p>
+              </div>
+            </div>
+
+            <div class="lifecycle-track">
+              <a href="#module_01_introduction_ai_gxp" class="lifecycle-step-card" data-route="module_01_introduction_ai_gxp">
+                <div class="step-number-badge">1</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Scope & Strategy' : 'Scope & Strategy'}</div>
+                <div class="step-card-modules">Modul 01 - 03</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'Keine dynamischen Modelle im GMP-Betrieb' : 'No dynamic learning models in GMP operations'}</div>
+              </a>
+
+              <a href="#module_04_risk_based_approach" class="lifecycle-step-card" data-route="module_04_risk_based_approach">
+                <div class="step-number-badge">2</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Risk & Intended Use' : 'Risk & Intended Use'}</div>
+                <div class="step-card-modules">Modul 04 - 05</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'ICH Q9 R1 & Out-of-Distribution Grenzen' : 'ICH Q9 R1 & Out-of-Distribution boundaries'}</div>
+              </a>
+
+              <a href="#module_06_data_governance_quality" class="lifecycle-step-card" data-route="module_06_data_governance_quality">
+                <div class="step-number-badge">3</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Data Governance' : 'Data Governance'}</div>
+                <div class="step-card-modules">Modul 06</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'ALCOA+ Integrität & Labeling-Audits' : 'ALCOA+ integrity & labeling audit trails'}</div>
+              </a>
+
+              <a href="#module_07_model_development_training" class="lifecycle-step-card" data-route="module_07_model_development_training">
+                <div class="step-number-badge">4</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Training & MLOps' : 'Training & MLOps'}</div>
+                <div class="step-card-modules">Modul 07</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'Gefrorene Gewichte & 3-Wege-Splits' : 'Frozen weights & strictly isolated 3-way split'}</div>
+              </a>
+
+              <a href="#module_08_validation_performance_testing" class="lifecycle-step-card" data-route="module_08_validation_performance_testing">
+                <div class="step-number-badge">5</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Metric Quad & XAI' : 'Metric Quad & XAI'}</div>
+                <div class="step-card-modules">Modul 08 - 09</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'Personelle Unabhängigkeit & SHAP/LIME' : 'Staff independence & SHAP/LIME stability'}</div>
+              </a>
+
+              <a href="#module_10_human_oversight_hitl" class="lifecycle-step-card" data-route="module_10_human_oversight_hitl">
+                <div class="step-number-badge">6</div>
+                <div class="step-card-title">${this.lang === 'de' ? 'Human Oversight' : 'Human Oversight'}</div>
+                <div class="step-card-modules">Modul 10 - 12</div>
+                <div class="step-card-guardrail">${this.lang === 'de' ? 'HITL-Pflicht & Schutz vor Automation Bias' : 'Mandatory HITL & anti-complacency workflows'}</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Main Overview Content -->
+          <div class="markdown-body">
+            ${parsed.html}
           </div>
         </div>
 
-        <div class="lifecycle-track">
-          <a href="#module_01_introduction_ai_gxp" class="lifecycle-step-card" data-route="module_01_introduction_ai_gxp">
-            <div class="step-number-badge">1</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Scope & Strategy' : 'Scope & Strategy'}</div>
-            <div class="step-card-modules">Modul 01 - 03</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'Keine dynamischen Modelle im GMP-Betrieb' : 'No dynamic learning models in GMP operations'}</div>
-          </a>
-
-          <a href="#module_04_risk_based_approach" class="lifecycle-step-card" data-route="module_04_risk_based_approach">
-            <div class="step-number-badge">2</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Risk & Intended Use' : 'Risk & Intended Use'}</div>
-            <div class="step-card-modules">Modul 04 - 05</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'ICH Q9 R1 & Out-of-Distribution Grenzen' : 'ICH Q9 R1 & Out-of-Distribution boundaries'}</div>
-          </a>
-
-          <a href="#module_06_data_governance_quality" class="lifecycle-step-card" data-route="module_06_data_governance_quality">
-            <div class="step-number-badge">3</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Data Governance' : 'Data Governance'}</div>
-            <div class="step-card-modules">Modul 06</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'ALCOA+ Integrität & Labeling-Audits' : 'ALCOA+ integrity & labeling audit trails'}</div>
-          </a>
-
-          <a href="#module_07_model_development_training" class="lifecycle-step-card" data-route="module_07_model_development_training">
-            <div class="step-number-badge">4</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Training & MLOps' : 'Training & MLOps'}</div>
-            <div class="step-card-modules">Modul 07</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'Gefrorene Gewichte & 3-Wege-Splits' : 'Frozen weights & strictly isolated 3-way split'}</div>
-          </a>
-
-          <a href="#module_08_validation_performance_testing" class="lifecycle-step-card" data-route="module_08_validation_performance_testing">
-            <div class="step-number-badge">5</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Metric Quad & XAI' : 'Metric Quad & XAI'}</div>
-            <div class="step-card-modules">Modul 08 - 09</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'Personelle Unabhängigkeit & SHAP/LIME' : 'Staff independence & SHAP/LIME stability'}</div>
-          </a>
-
-          <a href="#module_10_human_oversight_hitl" class="lifecycle-step-card" data-route="module_10_human_oversight_hitl">
-            <div class="step-number-badge">6</div>
-            <div class="step-card-title">${this.lang === 'de' ? 'Human Oversight' : 'Human Oversight'}</div>
-            <div class="step-card-modules">Modul 10 - 12</div>
-            <div class="step-card-guardrail">${this.lang === 'de' ? 'HITL-Pflicht & Schutz vor Automation Bias' : 'Mandatory HITL & anti-complacency workflows'}</div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Key Regulatory Guardrails Grid -->
-      <div class="section-title-wrap">
-        <div>
-          <h2 class="section-title">${this.lang === 'de' ? '🛡️ Die 4 Eisernen Regeln von Annex 22' : '🛡️ The 4 Iron Laws of Annex 22'}</h2>
-          <p class="section-desc">${this.lang === 'de' ? 'Nicht verhandelbare regulatorische Prinzipien für den GxP-Einsatz:' : 'Non-negotiable compliance principles for regulated operations:'}</p>
-        </div>
-      </div>
-
-      <div class="guardrails-grid">
-        <div class="guardrail-card">
-          <div class="guardrail-icon-wrap" style="color:var(--brand-rose);">
-            <i data-lucide="lock"></i>
-          </div>
-          <h3 class="guardrail-title">${this.lang === 'de' ? '1. Keine autonome Freigabe' : '1. Zero Autonomous Release'}</h3>
-          <p class="guardrail-desc">${this.lang === 'de' ? 'KI-Systeme tragen keine pharmazeutische Rechtsverantwortung. Human-in-the-Loop (HITL) ist für Chargenfreigaben und OOS zwingend vorgeschrieben.' : 'AI models hold zero statutory accountability. Human-in-the-Loop (HITL) is mandatory for batch disposition and OOS triage.'}</p>
-        </div>
-
-        <div class="guardrail-card">
-          <div class="guardrail-icon-wrap" style="color:var(--brand-cyan);">
-            <i data-lucide="snowflake"></i>
-          </div>
-          <h3 class="guardrail-title">${this.lang === 'de' ? '2. Nur statische Modelle' : '2. Static Frozen Weights Only'}</h3>
-          <p class="guardrail-desc">${this.lang === 'de' ? 'Dynamisch, sich selbst während der Produktion weitertrainierende Modelle sind im GMP-Betrieb strikt verboten. Jedes Update bedarf einer Revalidierung.' : 'Dynamically auto-retraining models are prohibited in GMP manufacturing. Any weight update requires formal revalidation.'}</p>
-        </div>
-
-        <div class="guardrail-card">
-          <div class="guardrail-icon-wrap" style="color:var(--brand-emerald);">
-            <i data-lucide="activity"></i>
-          </div>
-          <h3 class="guardrail-title">${this.lang === 'de' ? '3. Das Metric Quad' : '3. The Metric Quad'}</h3>
-          <p class="guardrail-desc">${this.lang === 'de' ? 'Eine bloße globale "Accuracy" führt zur Beanstandung. Annex 22 verlangt F1-Score, maximalen Recall, Modellkalibrierung (ECE) und Robustheit.' : 'Relying solely on Accuracy fails inspection. Annex 22 mandates F1-score, Recall maximization, Calibration (ECE), and Robustness.'}</p>
-        </div>
-
-        <div class="guardrail-card">
-          <div class="guardrail-icon-wrap" style="color:var(--brand-primary);">
-            <i data-lucide="bot"></i>
-          </div>
-          <h3 class="guardrail-title">${this.lang === 'de' ? '4. RAG-First bei GenAI' : '4. RAG-First for GenAI'}</h3>
-          <p class="guardrail-desc">${this.lang === 'de' ? 'LLMs dürfen nur als Drafting Assistants mit RAG-Architektur agieren. Jede Textpassage erfordert lückenlose ALCOA+-Zitate zur Quell-SOP.' : 'LLMs may operate solely as drafting assistants via sandboxed RAG. Every assertion requires clickable ALCOA+ source citations.'}</p>
-        </div>
-      </div>
-
-      <!-- Main Overview Content -->
-      <div class="markdown-body">
-        ${parsed.html}
+        ${tocHtml}
       </div>
     `;
 
     createIcons({ icons });
     this.initMermaidDiagrams();
     this.bindCheckboxes(container);
+    if (hasToc) {
+      this.initTocObserver(container);
+    }
   }
 
   renderModuleView(container, moduleId) {

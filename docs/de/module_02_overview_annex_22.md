@@ -14,31 +14,31 @@
 flowchart TD
     subgraph RegArchitecture["Regulatorische Architektur & Zusammenspiel"]
         direction LR
-        subgraph Foundation["1. Fundament: Annex 11"]
+        subgraph Foundation["1. Fundament (Annex 11)"]
             direction TB
-            F1["Computerised Systems Validation (CSV)"]
-            F2["IQ / OQ & Qualifizierung"]
-            F3["Audit Trails & Zugriffskontrolle"]
-            F1 --- F2 --- F3
+            F1["<b>Computerised Systems Validation (CSV)</b><br/><i>(Traditionelle Software-Basis)</i>"]
+            F2["<b>Infrastruktur & Qualifizierung</b><br/><i>(IQ / OQ & Systemfreigabe)</i>"]
+            F3["<b>Audit Trails & Zugriffskontrolle</b><br/><i>(Datenintegrität & Part 11)</i>"]
+            F1 --> F2 --> F3
         end
 
-        subgraph Annex22["2. Spezifischer Aufsatz: Annex 22"]
+        subgraph Annex22["2. Spezifischer Aufsatz (Annex 22)"]
             direction TB
-            A1["Rechtsverbindlicher Intended Use"]
-            A2["Strikte Testdaten-Isolation"]
-            A3["Proportionale Explainability"]
-            A4["Continuous Drift Monitoring"]
-            A1 --- A2 --- A3 --- A4
+            A1["<b>Rechtsverbindlicher Intended Use</b><br/><i>(Eindeutige Systemgrenzen [§3.1])</i>"]
+            A2["<b>Strikte Testdaten-Isolation</b><br/><i>(Unabhängige Validierung [§6.2])</i>"]
+            A3["<b>Proportionale Explainability</b><br/><i>(Modelltransparenz & XAI [§8.1])</i>"]
+            A4["<b>Continuous Drift Monitoring</b><br/><i>(Lebenszyklus-Überwachung [§10.3])</i>"]
+            A1 --> A2 --> A3 --> A4
         end
 
-        Foundation ==>|"Ergänzt um KI-Anforderungen"| Annex22
+        Foundation ==>|"Ergänzt um KI-Vorgaben"| Annex22
     end
 
-    subgraph ChallengeLoop["3. Operativer Schutz vor Automation Bias (Human Oversight)"]
+    subgraph ChallengeLoop["3. Human Oversight & Schutz vor Automation Bias"]
         direction LR
-        C1["Operator sichtet<br/>Ereignis"] --> C2["Unabhängige Ersteinstufung<br/><i>(Blind Review)</i>"]
-        C2 --> C3["KI-Empfehlung wird<br/>eingeblendet"]
-        C3 --> C4["Aktiver Abgleich & Freigabe<br/><i>(Active Challenge)</i>"]
+        C1["1. Operator sichtet<br/>Ereignis"] --> C2["2. Unabhängige Ersteinstufung<br/><i>(Blind Review)</i>"]
+        C2 --> C3["3. KI-Empfehlung wird<br/>eingeblendet"]
+        C3 --> C4["4. Aktiver Abgleich & Freigabe<br/><i>(Active Challenge)</i>"]
     end
 
     RegArchitecture ==>|"Verbindliche Leitlinie für HITL"| ChallengeLoop
@@ -46,6 +46,17 @@ flowchart TD
     style Foundation fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style Annex22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
     style ChallengeLoop fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style F1 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style F2 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style F3 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style A1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style C1 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C2 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C3 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C4 fill:#ecfdf5,stroke:#059669,stroke-width:1.5px
 ```
 
 ---

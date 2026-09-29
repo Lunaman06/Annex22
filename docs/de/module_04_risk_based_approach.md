@@ -19,17 +19,17 @@ flowchart LR
         M3["3. Adversarial / Edge Cases"]
         M4["4. Confidence Miscalibration"]
         M5["5. Spurious Correlations"]
-        M1 --- M2 --- M3 --- M4 --- M5
+        M1 --> M2 --> M3 --> M4 --> M5
     end
 
     Silent["🚨 SILENT DEGRADATION<br/><b>Kein Systemabsturz</b><br/><i>Schleichender Qualitätsverlust<br/>ohne Software-Fehlercode</i>"]
 
     subgraph Mitigation["🛡️ Annex 22 Kontrollen"]
         direction TB
-        C1["Out-of-Distribution (OOD) Gates"]
-        C2["Human Oversight & Active Challenge"]
-        C3["Kontinuierliches statistisches Monitoring"]
-        C1 --- C2 --- C3
+        C1["1. Out-of-Distribution (OOD) Gates"]
+        C2["2. Human Oversight & Active Challenge"]
+        C3["3. Kontinuierliches statistisches Monitoring"]
+        C1 --> C2 --> C3
     end
 
     FailModes ==>|"Führen unbemerkt zu"| Silent
@@ -38,6 +38,14 @@ flowchart LR
     style FailModes fill:#fef2f2,stroke:#ef4444,stroke-width:2px
     style Silent fill:#fff7ed,stroke:#ea580c,stroke-width:2px
     style Mitigation fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style M1 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style M2 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style M3 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style M4 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style M5 fill:#ffffff,stroke:#ef4444,stroke-width:1px
+    style C1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style C2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style C3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
 ```
 
 ---

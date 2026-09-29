@@ -26,7 +26,7 @@ flowchart TD
         W1["Beispiele:<br/><b>Lineare Modelle, Decision Trees</b>"]
         W2["Transparenz:<br/><b>Inhärent nachvollziehbare Logik</b>"]
         W3["GxP-Validierung:<br/><b>Standard-Qualifizierung</b>"]
-        W1 --- W2 --- W3
+        W1 --> W2 --> W3
     end
 
     subgraph GrayBox["🔘 Stufe 2: Gray-Box"]
@@ -34,7 +34,7 @@ flowchart TD
         G1["Beispiele:<br/><b>Random Forests, XGBoost</b>"]
         G2["Transparenz:<br/><b>Globale Feature Importance</b>"]
         G3["GxP-Validierung:<br/><b>Moderater Aufwand & Heuristiken</b>"]
-        G1 --- G2 --- G3
+        G1 --> G2 --> G3
     end
 
     subgraph BlackBox["⚫ Stufe 3: Black-Box"]
@@ -42,7 +42,7 @@ flowchart TD
         B1["Beispiele:<br/><b>Deep Neural Networks, LLMs</b>"]
         B2["Transparenz:<br/><b>SHAP, LIME, Attention Maps</b>"]
         B3["GxP-Validierung:<br/><b>Maximaler XAI-Nachweisaufwand</b>"]
-        B1 --- B2 --- B3
+        B1 --> B2 --> B3
     end
 
     WhiteBox ==>|"Steigende Komplexität & Risiko"| GrayBox

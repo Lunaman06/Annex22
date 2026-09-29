@@ -21,38 +21,49 @@ language: en
 flowchart TD
     subgraph RegArchitecture["Regulatory Architecture & Interaction"]
         direction LR
-        subgraph Foundation["1. Foundation: Annex 11"]
+        subgraph Foundation["1. Foundation (Annex 11)"]
             direction TB
-            F1["Computerised Systems Validation (CSV)"]
-            F2["IQ / OQ & Qualification"]
-            F3["Audit Trails & Access Control"]
-            F1 --- F2 --- F3
+            F1["<b>Computerised Systems Validation (CSV)</b><br/><i>(Traditional Software Baseline)</i>"]
+            F2["<b>Infrastructure & Qualification</b><br/><i>(IQ / OQ & System Release)</i>"]
+            F3["<b>Audit Trails & Access Control</b><br/><i>(Data Integrity & Part 11)</i>"]
+            F1 --> F2 --> F3
         end
 
-        subgraph Annex22["2. Specific AI Layer: Annex 22"]
+        subgraph Annex22["2. Specific Overlay (Annex 22)"]
             direction TB
-            A1["Legally Binding Intended Use"]
-            A2["Strict Test Data Isolation"]
-            A3["Proportionate Explainability"]
-            A4["Continuous Drift Monitoring"]
-            A1 --- A2 --- A3 --- A4
+            A1["<b>Legally Binding Intended Use</b><br/><i>(Explicit Operational Boundaries [§3.1])</i>"]
+            A2["<b>Strict Test Data Isolation</b><br/><i>(Independent Validation [§6.2])</i>"]
+            A3["<b>Proportional Explainability</b><br/><i>(Model Transparency & XAI [§8.1])</i>"]
+            A4["<b>Continuous Drift Monitoring</b><br/><i>(Lifecycle Surveillance [§10.3])</i>"]
+            A1 --> A2 --> A3 --> A4
         end
 
-        Foundation ==>|"Supplements with AI Requirements"| Annex22
+        Foundation ==>|"Augmented with AI Controls"| Annex22
     end
 
-    subgraph ChallengeLoop["3. Mitigating Automation Bias (Human Oversight)"]
+    subgraph ChallengeLoop["3. Human Oversight & Anti-Automation-Bias Safeguard"]
         direction LR
-        C1["Operator Observes<br/>Event"] --> C2["Independent Initial Review<br/><i>(Blind Evaluation)</i>"]
-        C2 --> C3["AI Recommendation<br/>is Displayed"]
-        C3 --> C4["Active Challenge & Sign-off<br/><i>(Adjudication)</i>"]
+        C1["1. Operator Reviews<br/>Event"] --> C2["2. Independent Assessment<br/><i>(Blind Review)</i>"]
+        C2 --> C3["3. AI Recommendation<br/>Revealed"]
+        C3 --> C4["4. Active Challenge & Release<br/><i>(Sign-off Verification)</i>"]
     end
 
-    RegArchitecture ==>|"Binding Guidance for HITL"| ChallengeLoop
+    RegArchitecture ==>|"Mandatory Guideline for HITL"| ChallengeLoop
 
     style Foundation fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
     style Annex22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
     style ChallengeLoop fill:#fefce8,stroke:#ca8a04,stroke-width:2px
+    style F1 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style F2 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style F3 fill:#ffffff,stroke:#3b82f6,stroke-width:1px
+    style A1 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A2 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A3 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style A4 fill:#ffffff,stroke:#16a34a,stroke-width:1px
+    style C1 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C2 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C3 fill:#ffffff,stroke:#ca8a04,stroke-width:1px
+    style C4 fill:#ecfdf5,stroke:#059669,stroke-width:1.5px
 ```
 
 ---
