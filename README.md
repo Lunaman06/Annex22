@@ -100,3 +100,21 @@ Um die Konsistenz zwischen den deutschen und englischen Dokumenten sicherzustell
 python3 scripts/check_doc_sync.py
 ```
 *Prüft das Vorhandensein aller 15 Dokumente in beiden Sprachen sowie die `<!-- metadata ... -->`-Tags.*
+
+---
+
+## ✍️ Content-Pflege & Synchronisations-Workflow (Fine-Tuning)
+
+Die Web-Applikation bindet alle Markdown-Dokumente dynamisch über Vites `import.meta.glob('/docs/**/*.md')` ein. 
+
+### 1. Inhaltliche Änderungen (Texte, Formeln, Diagramme, Checklisten)
+* **Kein Code-Eingriff nötig:** Änderungen an Fließtext, KaTeX-Formeln (`$$...$$`), Mermaid-Diagrammen oder GxP-Checklisten (`- [ ]`) werden **vollautomatisch und live** von der Web-App übernommen (Vite Hot Module Replacement).
+* **Zweisprachigkeit (DE/EN-Sync):** 
+  * Änderungen werden idealerweise zuerst in **`docs/de/`** ausgearbeitet und lokal im Browser gegengelesen.
+  * Anschließend wird die englische Spiegeldatei in **`docs/en/`** nachgezogen.
+  * Mit `python3 scripts/check_doc_sync.py` wird die Parität beider Sprachbäume validiert.
+
+### 2. Wann muss Code in `src/` angepasst werden?
+* **Neues Modul hinzugefügt oder Datei umbenannt:** Einmaliger Eintrag in [`src/data.js`](src/data.js) (`MODULE_REGISTRY` & `PHASES`), damit das Modul in der linken Navigation, der Phasen-Roadmap und der Instant-Volltextsuche indiziert wird.
+* **Titel & Untertitel in der linken Navigation:** Diese Metadaten werden zentral in [`src/data.js`](src/data.js) gepflegt.
+* **Neue Badge-Typen:** Wenn ein völlig neues Kennzeichnungs-Muster (z. B. `[ISO 13485]`) als farbiges Pillen-Badge gerendert werden soll, wird der Renderer in [`src/markdown.js`](src/markdown.js) erweitert.

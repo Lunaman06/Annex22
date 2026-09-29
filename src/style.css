@@ -1,4 +1,5 @@
 /* src/style.css - Annex 22 Compliance Portal Design System */
+@import 'katex/dist/katex.min.css';
 
 :root {
   /* Font Families */
@@ -39,7 +40,7 @@
   --header-height: 70px;
   --sidebar-width: 320px;
   --toc-width: 260px;
-  --content-max-width: 940px;
+  --content-max-width: 1200px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -369,8 +370,13 @@ body::after {
   z-index: 50;
 }
 
+.site-sidebar > * {
+  flex-shrink: 0;
+}
+
 /* Sidebar Compliance Progress Card */
 .sidebar-progress-card {
+  flex-shrink: 0;
   background: linear-gradient(135deg, var(--bg-surface-elevated), var(--bg-canvas));
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -473,10 +479,16 @@ body::after {
 
 .nav-item.active {
   background: var(--bg-surface-elevated);
-  color: #fff;
+  color: var(--brand-primary);
   border-left: 3px solid var(--brand-primary);
   font-weight: 600;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .nav-item.active {
+  background: #eef2ff;
+  color: #4338ca;
+  border-left-color: #4f46e5;
 }
 
 .nav-item-num {
@@ -486,6 +498,7 @@ body::after {
   background: var(--brand-primary-glow);
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .nav-item-title {
@@ -493,6 +506,7 @@ body::after {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .nav-item-badge {
@@ -502,6 +516,12 @@ body::after {
   border-radius: 4px;
   background: var(--bg-surface-hover);
   color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+html[data-theme="light"] .nav-item-badge {
+  background: #e2e8f0;
+  color: #475569;
 }
 
 /* ==========================================================================
@@ -807,6 +827,112 @@ body::after {
   line-height: 1.5;
 }
 
+/* Module Layout Grid with On-Page Table of Contents */
+.module-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--toc-width);
+  gap: 2.5rem;
+  align-items: start;
+  position: relative;
+  width: 100%;
+}
+
+.module-layout-grid.no-toc {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.module-content-pane {
+  min-width: 0;
+  width: 100%;
+}
+
+.doc-toc-column {
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+  max-height: calc(100vh - var(--header-height) - 3rem);
+  overflow-y: auto;
+  align-self: start;
+}
+
+.doc-toc-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  box-shadow: var(--card-shadow);
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.toc-header i {
+  width: 15px;
+  height: 15px;
+  color: var(--brand-primary);
+}
+
+.toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.toc-link {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  border-left: 2px solid transparent;
+  word-break: break-word;
+}
+
+.toc-link:hover {
+  color: var(--text-main);
+  background: var(--bg-surface-hover);
+}
+
+.toc-link.active {
+  color: var(--brand-primary);
+  font-weight: 600;
+  border-left-color: var(--brand-primary);
+  background: var(--brand-primary-glow);
+}
+
+html[data-theme="light"] .toc-link.active {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.toc-link.depth-3 {
+  padding-left: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+@media (max-width: 1200px) {
+  .module-layout-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .doc-toc-column {
+    display: none;
+  }
+}
+
 /* Markdown Render Typography */
 .markdown-body {
   font-size: 1rem;
@@ -818,6 +944,36 @@ body::after {
   display: none; /* Rendered via custom module-header */
 }
 
+/* Heading Anchor & Doc Heading styles */
+.doc-heading {
+  position: relative;
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
+}
+
+.heading-anchor {
+  position: absolute;
+  left: -1.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: var(--brand-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 400;
+  text-decoration: none;
+  user-select: none;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.doc-heading:hover .heading-anchor {
+  opacity: 0.75;
+}
+
+.heading-anchor:hover {
+  opacity: 1 !important;
+  color: var(--brand-cyan);
+}
+
 .markdown-body h2 {
   font-family: var(--font-heading);
   font-size: 1.65rem;
@@ -827,9 +983,6 @@ body::after {
   margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .markdown-body h3 {
@@ -991,11 +1144,12 @@ html[data-theme="light"] .markdown-body strong {
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .mermaid-wrapper:hover {
   border-color: var(--border-active);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.12);
 }
 
 .mermaid-actions {
@@ -1006,18 +1160,29 @@ html[data-theme="light"] .markdown-body strong {
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .mermaid-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 0.825rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+.mermaid-label i {
   color: var(--brand-cyan);
+}
+
+.mermaid-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .mermaid-action-btn {
@@ -1029,7 +1194,7 @@ html[data-theme="light"] .markdown-body strong {
   color: var(--text-main);
   font-size: 0.775rem;
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.85rem;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: var(--transition-fast);
@@ -1045,27 +1210,42 @@ html[data-theme="light"] .markdown-body strong {
 .mermaid-viewport {
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
+  align-items: center;
+  padding: 1.5rem 1.25rem;
   cursor: zoom-in;
+  background: var(--bg-canvas);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  min-height: 200px;
+}
+
+.mermaid-viewport:hover {
+  border-color: var(--border-active);
 }
 
 .mermaid {
-  max-width: 100%;
-  min-width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-/* Mermaid SVG High-Contrast Overrides */
+/* Mermaid SVG Middle-Ground ("Mittelweg") Sizing:
+   Balanced size for inline documentation reading: wide enough that
+   all node text and relationships are clear and legible without opening the zoom modal,
+   while constrained in height so it doesn't dominate the page */
 .mermaid svg {
+  width: 100% !important;
+  max-width: 780px !important;
+  min-width: min(100%, 540px);
   height: auto !important;
+  max-height: 560px;
   font-family: var(--font-body) !important;
-}
-
-.mermaid svg text {
-  font-family: var(--font-body) !important;
-  font-size: 14.5px !important;
-  font-weight: 500 !important;
+  display: block;
+  margin: 0 auto;
 }
 
 .mermaid svg .node rect,
@@ -1077,21 +1257,74 @@ html[data-theme="light"] .markdown-body strong {
   stroke-width: 2px !important;
 }
 
-.mermaid svg .edgeLabel {
+.mermaid svg .edgeLabel,
+.mermaid svg .edgeLabel *,
+.diagram-modal-content svg .edgeLabel,
+.diagram-modal-content svg .edgeLabel * {
   background-color: var(--bg-surface-elevated) !important;
-  padding: 4px 8px !important;
   border-radius: 4px !important;
   font-size: 13px !important;
   color: var(--text-main) !important;
+  fill: var(--text-main) !important;
+}
+
+/* Contrast fix: if a node has an inline light pastel fill (e.g. #eff6ff, #fefce8, #f0fdf4),
+   enforce dark high-contrast text color for both SVG text and foreignObject HTML labels.
+   Applies to BOTH inline diagrams (.mermaid svg) and zoom modal (.diagram-modal-content svg) */
+.mermaid svg .node:has(rect[style*="fill:#e" i]) .label *,
+.mermaid svg .node:has(rect[style*="fill: #e" i]) .label *,
+.mermaid svg .node:has(rect[style*="fill:#f" i]) .label *,
+.mermaid svg .node:has(rect[style*="fill: #f" i]) .label *,
+.mermaid svg .node:has(polygon[style*="fill:#e" i]) .label *,
+.mermaid svg .node:has(polygon[style*="fill: #e" i]) .label *,
+.mermaid svg .node:has(polygon[style*="fill:#f" i]) .label *,
+.mermaid svg .node:has(polygon[style*="fill: #f" i]) .label *,
+.diagram-modal-content svg .node:has(rect[style*="fill:#e" i]) .label *,
+.diagram-modal-content svg .node:has(rect[style*="fill: #e" i]) .label *,
+.diagram-modal-content svg .node:has(rect[style*="fill:#f" i]) .label *,
+.diagram-modal-content svg .node:has(rect[style*="fill: #f" i]) .label *,
+.diagram-modal-content svg .node:has(polygon[style*="fill:#e" i]) .label *,
+.diagram-modal-content svg .node:has(polygon[style*="fill: #e" i]) .label *,
+.diagram-modal-content svg .node:has(polygon[style*="fill:#f" i]) .label *,
+.diagram-modal-content svg .node:has(polygon[style*="fill: #f" i]) .label *,
+.mermaid svg .gxp-light-node .label *,
+.mermaid svg .gxp-light-node text,
+.mermaid svg .gxp-light-node tspan,
+.diagram-modal-content svg .gxp-light-node .label *,
+.diagram-modal-content svg .gxp-light-node text,
+.diagram-modal-content svg .gxp-light-node tspan {
+  fill: #090d16 !important;
+  color: #090d16 !important;
+  font-weight: 600 !important;
+}
+
+/* Cluster/Subgraph Title Contrast fix (e.g. MetricQuad with #f8fafc background) */
+.mermaid svg .cluster:has(rect[style*="fill:#e" i]) .cluster-label *,
+.mermaid svg .cluster:has(rect[style*="fill: #e" i]) .cluster-label *,
+.mermaid svg .cluster:has(rect[style*="fill:#f" i]) .cluster-label *,
+.mermaid svg .cluster:has(rect[style*="fill: #f" i]) .cluster-label *,
+.diagram-modal-content svg .cluster:has(rect[style*="fill:#e" i]) .cluster-label *,
+.diagram-modal-content svg .cluster:has(rect[style*="fill: #e" i]) .cluster-label *,
+.diagram-modal-content svg .cluster:has(rect[style*="fill:#f" i]) .cluster-label *,
+.diagram-modal-content svg .cluster:has(rect[style*="fill: #f" i]) .cluster-label *,
+.mermaid svg .gxp-light-cluster .cluster-label *,
+.mermaid svg .gxp-light-cluster text,
+.mermaid svg .gxp-light-cluster tspan,
+.diagram-modal-content svg .gxp-light-cluster .cluster-label *,
+.diagram-modal-content svg .gxp-light-cluster text,
+.diagram-modal-content svg .gxp-light-cluster tspan {
+  fill: #090d16 !important;
+  color: #090d16 !important;
+  font-weight: 700 !important;
 }
 
 /* Fullscreen Diagram Lightbox Modal */
 .diagram-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(4, 7, 13, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(8, 12, 22, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 300;
   display: flex;
   flex-direction: column;
@@ -1100,30 +1333,43 @@ html[data-theme="light"] .markdown-body strong {
   transition: opacity var(--transition-fast);
 }
 
+html[data-theme="light"] .diagram-modal-backdrop {
+  background: rgba(241, 245, 249, 0.96);
+}
+
 .diagram-modal-backdrop.open {
   opacity: 1;
   pointer-events: auto;
 }
 
 .diagram-modal-toolbar {
-  height: 60px;
+  height: 64px;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-subtle);
-  background: rgba(16, 22, 36, 0.85);
-  backdrop-filter: blur(16px);
+  background: var(--bg-surface);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
 }
 
 .diagram-modal-title {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-main);
+  max-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diagram-modal-title i {
+  color: var(--brand-cyan);
 }
 
 .diagram-modal-controls {
@@ -1133,29 +1379,38 @@ html[data-theme="light"] .markdown-body strong {
 }
 
 .diagram-ctrl-btn {
-  width: 36px;
-  height: 36px;
+  height: 38px;
+  padding: 0 0.8rem;
   border-radius: var(--radius-sm);
-  background: var(--bg-surface);
+  background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--text-main);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.35rem;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 600;
   transition: var(--transition-fast);
 }
 
 .diagram-ctrl-btn:hover {
-  background: var(--bg-surface-hover);
-  border-color: var(--border-active);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 0 12px var(--brand-primary-glow);
+}
+
+.diagram-ctrl-btn.close-btn:hover {
+  background: var(--brand-rose);
+  border-color: var(--brand-rose);
 }
 
 .diagram-zoom-level {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--brand-cyan);
   padding: 0 0.5rem;
   min-width: 55px;
@@ -1179,16 +1434,15 @@ html[data-theme="light"] .markdown-body strong {
 
 .diagram-modal-content {
   transform-origin: center center;
-  transition: transform 0.05s ease-out;
+  transition: transform 0.08s ease-out;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .diagram-modal-content svg {
-  max-width: none !important;
-  max-height: none !important;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
 }
 
 
@@ -1321,7 +1575,8 @@ html[data-theme="light"] .markdown-body strong {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  color: #fecdd3;
+  color: #ffe4e6;
+  line-height: 1.5;
 }
 
 .red-flag-badge {
@@ -1330,8 +1585,212 @@ html[data-theme="light"] .markdown-body strong {
   font-weight: 700;
   background: #f43f5e;
   color: #fff;
-  padding: 0.15rem 0.4rem;
+  padding: 0.15rem 0.45rem;
   border-radius: 4px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.red-flag-text {
+  flex: 1;
+}
+
+/* Light Theme Contrast Fix for Red Flags */
+html[data-theme="light"] .red-flag-item {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #9f1239;
+}
+
+html[data-theme="light"] .red-flag-item strong {
+  color: #881337;
+}
+
+html[data-theme="light"] .red-flag-badge {
+  background: #e11d48;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   GxP Math & Formula Displays (KaTeX)
+   ========================================================================== */
+.gxp-formula-card {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.75rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-left: 4px solid var(--brand-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  transition: all var(--transition-normal);
+}
+
+.gxp-formula-card:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15);
+}
+
+html[data-theme="light"] .gxp-formula-card {
+  background: linear-gradient(135deg, #f8faff 0%, #f0fdf4 100%);
+  border: 1px solid #c7d2fe;
+  border-left: 4px solid #4f46e5;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.08);
+  color: #1e1b4b;
+}
+
+.katex {
+  font-size: 1.1em;
+  text-rendering: geometricPrecision;
+}
+
+html[data-theme="light"] .katex {
+  color: #1e293b;
+}
+
+/* ==========================================================================
+   GxP Evidence & Attribution Badges (Pills)
+   [Draft §X.Y], [Best Practice: ...], [Didaktik], [Auslegung], [GAMP 5], etc.
+   ========================================================================== */
+.gxp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  line-height: 1.35;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  margin: 0 0.25rem;
+  vertical-align: middle;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.gxp-badge .badge-icon {
+  font-size: 0.85em;
+  line-height: 1;
+  display: inline-block;
+}
+
+.gxp-badge .badge-text {
+  font-weight: 600;
+}
+
+/* Heading context: prevent badges from blowing up heading line-height */
+.doc-heading .gxp-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+
+/* 1. Draft §... (Regulatory requirement from Annex 22 Consultation Draft) - Indigo */
+.gxp-badge-draft {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+}
+.gxp-badge-draft:hover {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: #818cf8;
+}
+html[data-theme="light"] .gxp-badge-draft {
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+html[data-theme="light"] .gxp-badge-draft:hover {
+  background: #e0e7ff;
+  border-color: #818cf8;
+}
+
+/* 2. Best Practice (Industry standard / ISPE GAMP / ICH Q9) - Emerald */
+.gxp-badge-bestpractice {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+.gxp-badge-bestpractice:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #34d399;
+}
+html[data-theme="light"] .gxp-badge-bestpractice {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+html[data-theme="light"] .gxp-badge-bestpractice:hover {
+  background: #d1fae5;
+  border-color: #34d399;
+}
+
+/* 3. Didaktik (Learning Framework, Analogy, Pedagogical Aid) - Cyan/Sky */
+.gxp-badge-didaktik {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+}
+.gxp-badge-didaktik:hover {
+  background: rgba(6, 182, 212, 0.25);
+  border-color: #22d3ee;
+}
+html[data-theme="light"] .gxp-badge-didaktik {
+  background: #f0fdfa;
+  color: #0e7490;
+  border: 1px solid #99f6e4;
+}
+html[data-theme="light"] .gxp-badge-didaktik:hover {
+  background: #ccfbf1;
+  border-color: #2dd4bf;
+}
+
+/* 4. Auslegung (Regulatory interpretation & expert deduction) - Amber */
+.gxp-badge-auslegung {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+.gxp-badge-auslegung:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: #fbbf24;
+}
+html[data-theme="light"] .gxp-badge-auslegung {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+html[data-theme="light"] .gxp-badge-auslegung:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+}
+
+/* 5. Reference Standards (GAMP 5, ICH Q9, Annex 11) - Purple */
+.gxp-badge-ref {
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+.gxp-badge-ref:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #c084fc;
+}
+html[data-theme="light"] .gxp-badge-ref {
+  background: #faf5ff;
+  color: #6b21a8;
+  border: 1px solid #e9d5ff;
+}
+html[data-theme="light"] .gxp-badge-ref:hover {
+  background: #f3e8ff;
+  border-color: #c084fc;
 }
 
 /* ==========================================================================

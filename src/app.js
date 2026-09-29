@@ -217,6 +217,7 @@ class Annex22App {
       </div>
 
       <!-- Fullscreen Diagram Lightbox Modal -->
+      <!-- Fullscreen Diagram Lightbox Modal -->
       <div class="diagram-modal-backdrop" id="diagramModal">
         <div class="diagram-modal-toolbar">
           <div class="diagram-modal-title">
@@ -224,11 +225,26 @@ class Annex22App {
             <span id="diagramModalTitle">${this.lang === 'de' ? 'Prozess- & Architektur-Diagramm' : 'Process & Architecture Diagram'}</span>
           </div>
           <div class="diagram-modal-controls">
-            <button class="diagram-ctrl-btn" id="diagZoomOutBtn" title="Zoom Out (−)">−</button>
+            <button class="diagram-ctrl-btn" id="diagZoomOutBtn" title="${this.lang === 'de' ? 'Verkleinern (−)' : 'Zoom Out (−)'}">
+              <i data-lucide="minus"></i>
+              <span>−</span>
+            </button>
             <span class="diagram-zoom-level" id="diagZoomLevel">100%</span>
-            <button class="diagram-ctrl-btn" id="diagZoomInBtn" title="Zoom In (+)">+</button>
-            <button class="diagram-ctrl-btn" id="diagResetBtn" title="Reset Zoom">↺</button>
-            <button class="diagram-ctrl-btn" id="diagCloseBtn" title="Schließen (Esc)" style="margin-left:0.5rem; color:var(--brand-rose);">✕</button>
+            <button class="diagram-ctrl-btn" id="diagZoomInBtn" title="${this.lang === 'de' ? 'Vergrößern (+)' : 'Zoom In (+)'}">
+              <i data-lucide="plus"></i>
+              <span>+</span>
+            </button>
+            <button class="diagram-ctrl-btn" id="diagFitBtn" title="${this.lang === 'de' ? 'Einpassen' : 'Fit to Screen'}">
+              <i data-lucide="maximize-2"></i>
+              <span>${this.lang === 'de' ? 'Einpassen' : 'Fit'}</span>
+            </button>
+            <button class="diagram-ctrl-btn" id="diagResetBtn" title="${this.lang === 'de' ? '100% Originalgröße' : '100% Scale'}">
+              <span>100%</span>
+            </button>
+            <button class="diagram-ctrl-btn close-btn" id="diagCloseBtn" title="${this.lang === 'de' ? 'Schließen (Esc)' : 'Close (Esc)'}">
+              <i data-lucide="x"></i>
+              <span>${this.lang === 'de' ? 'Schließen' : 'Close'}</span>
+            </button>
           </div>
         </div>
         <div class="diagram-modal-canvas" id="diagramCanvas">
@@ -253,34 +269,63 @@ class Annex22App {
       if (zoomLevelEl) zoomLevelEl.textContent = `${Math.round(this.diagZoom * 100)}%`;
     };
 
-    const resetTransform = () => {
+    const fitToScreen = () => {
+      this.diagZoom = this.initialFitZoom || 1.0;
+      this.diagPan = { x: 0, y: 0 };
+      updateTransform();
+    };
+
+    const resetToOriginal = () => {
       this.diagZoom = 1.0;
       this.diagPan = { x: 0, y: 0 };
       updateTransform();
     };
 
-    document.getElementById('diagZoomInBtn')?.addEventListener('click', () => {
-      this.diagZoom = Math.min(3.5, this.diagZoom + 0.25);
+    document.getElementById('diagZoomInBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.diagZoom = Math.min(4.0, +(this.diagZoom + 0.25).toFixed(2));
       updateTransform();
     });
 
-    document.getElementById('diagZoomOutBtn')?.addEventListener('click', () => {
-      this.diagZoom = Math.max(0.3, this.diagZoom - 0.25);
+    document.getElementById('diagZoomOutBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.diagZoom = Math.max(0.35, +(this.diagZoom - 0.25).toFixed(2));
       updateTransform();
     });
 
-    document.getElementById('diagResetBtn')?.addEventListener('click', resetTransform);
+    document.getElementById('diagFitBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fitToScreen();
+    });
+
+    document.getElementById('diagResetBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      resetToOriginal();
+    });
 
     const closeModal = () => {
       modal?.classList.remove('open');
       if (content) content.innerHTML = '';
-      resetTransform();
+      this.diagZoom = 1.0;
+      this.diagPan = { x: 0, y: 0 };
+      this.isPanningDiag = false;
+      this.hasDraggedDiag = false;
     };
 
-    document.getElementById('diagCloseBtn')?.addEventListener('click', closeModal);
+    document.getElementById('diagCloseBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeModal();
+    });
 
-    modal?.addEventListener('click', (e) => {
-      if (e.target === canvas) closeModal();
+    // Close only when clicking directly on canvas AND user was not dragging/panning
+    canvas?.addEventListener('click', (e) => {
+      if (this.hasDraggedDiag) {
+        this.hasDraggedDiag = false;
+        return;
+      }
+      if (e.target === canvas) {
+        closeModal();
+      }
     });
 
     window.addEventListener('keydown', (e) => {
@@ -289,24 +334,32 @@ class Annex22App {
       }
     });
 
+    // Wheel zoom
     canvas?.addEventListener('wheel', (e) => {
       e.preventDefault();
-      const delta = e.deltaY * -0.0015;
-      this.diagZoom = Math.min(3.5, Math.max(0.3, this.diagZoom + delta));
+      const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+      this.diagZoom = Math.min(4.0, Math.max(0.35, +(this.diagZoom * zoomFactor).toFixed(2)));
       updateTransform();
     }, { passive: false });
 
+    // Drag / Pan logic
     canvas?.addEventListener('mousedown', (e) => {
       if (e.button !== 0) return;
       this.isPanningDiag = true;
+      this.hasDraggedDiag = false;
       this.panStart = { x: e.clientX - this.diagPan.x, y: e.clientY - this.diagPan.y };
       canvas.classList.add('panning');
     });
 
     window.addEventListener('mousemove', (e) => {
       if (!this.isPanningDiag) return;
-      this.diagPan.x = e.clientX - this.panStart.x;
-      this.diagPan.y = e.clientY - this.panStart.y;
+      const newX = e.clientX - this.panStart.x;
+      const newY = e.clientY - this.panStart.y;
+      if (Math.abs(newX - this.diagPan.x) > 3 || Math.abs(newY - this.diagPan.y) > 3) {
+        this.hasDraggedDiag = true;
+      }
+      this.diagPan.x = newX;
+      this.diagPan.y = newY;
       updateTransform();
     });
 
@@ -318,24 +371,64 @@ class Annex22App {
     });
   }
 
-  openDiagramModal(svgElement) {
+  openDiagramModal(svgElement, title) {
     const modal = document.getElementById('diagramModal');
     const content = document.getElementById('diagramContent');
+    const titleEl = document.getElementById('diagramModalTitle');
+    const canvas = document.getElementById('diagramCanvas');
     if (!modal || !content || !svgElement) return;
+
+    if (title && titleEl) {
+      titleEl.textContent = title;
+    }
 
     content.innerHTML = '';
     const clonedSvg = svgElement.cloneNode(true);
+
+    // Extract natural viewBox dimensions
+    const viewBoxAttr = svgElement.getAttribute('viewBox');
+    let vbWidth = 1000;
+    let vbHeight = 600;
+    if (viewBoxAttr) {
+      const parts = viewBoxAttr.split(/[\s,]+/).map(Number);
+      if (parts.length === 4 && parts[2] > 0 && parts[3] > 0) {
+        vbWidth = parts[2];
+        vbHeight = parts[3];
+      }
+    }
+
+    // Set cloned SVG to display at clear resolution
     clonedSvg.removeAttribute('width');
     clonedSvg.removeAttribute('height');
-    clonedSvg.style.width = '100%';
-    clonedSvg.style.height = 'auto';
-    content.appendChild(clonedSvg);
+    clonedSvg.removeAttribute('style');
+    clonedSvg.setAttribute('viewBox', viewBoxAttr || `0 0 ${vbWidth} ${vbHeight}`);
 
-    this.diagZoom = 1.0;
+    const baseRenderWidth = Math.min(Math.max(vbWidth * 1.1, 750), 1500);
+    clonedSvg.style.width = `${baseRenderWidth}px`;
+    clonedSvg.style.height = 'auto';
+    clonedSvg.style.display = 'block';
+
+    content.appendChild(clonedSvg);
+    this.fixDiagramContrast(clonedSvg);
+
+    // Calculate smart initial fit for user's screen
+    const canvasRect = canvas ? canvas.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight - 64 };
+    const availWidth = (canvasRect.width || window.innerWidth) * 0.85;
+    const availHeight = (canvasRect.height || (window.innerHeight - 64)) * 0.78;
+    const baseRenderHeight = (baseRenderWidth * vbHeight) / vbWidth;
+
+    const scaleX = availWidth / baseRenderWidth;
+    const scaleY = availHeight / baseRenderHeight;
+    const initialFit = Math.min(scaleX, scaleY, 1.05);
+
+    this.diagZoom = Math.max(0.35, +initialFit.toFixed(2));
+    this.initialFitZoom = this.diagZoom;
     this.diagPan = { x: 0, y: 0 };
-    content.style.transform = `translate(0px, 0px) scale(1)`;
+    this.hasDraggedDiag = false;
+
+    content.style.transform = `translate(0px, 0px) scale(${this.diagZoom})`;
     const zoomLevelEl = document.getElementById('diagZoomLevel');
-    if (zoomLevelEl) zoomLevelEl.textContent = '100%';
+    if (zoomLevelEl) zoomLevelEl.textContent = `${Math.round(this.diagZoom * 100)}%`;
 
     modal.classList.add('open');
   }
@@ -394,11 +487,18 @@ class Annex22App {
         const mod = MODULE_REGISTRY.find(m => m.id === modId);
         if (!mod) return;
         const isActive = this.currentModuleId === mod.id;
+        const rawTitle = mod.title[this.lang] || mod.title.de || '';
+        const cleanTitle = rawTitle.replace(/^(Modul|Module|Anhang|Appendix)\s*(\d+|A\d+)?:?\s*/i, '');
+        const rawBadge = mod.badge[this.lang] || mod.badge.de || '';
+        const cleanBadge = rawBadge
+          .replace(/^Phase \d+:\s*/i, '')
+          .replace(/^(Spezial-Guide|Special Guide)$/i, 'Guide');
+
         navHtml += `
-          <a href="#${mod.id}" class="nav-item ${isActive ? 'active' : ''}" data-route="${mod.id}">
+          <a href="#${mod.id}" class="nav-item ${isActive ? 'active' : ''}" data-route="${mod.id}" title="${rawTitle}">
             <span class="nav-item-num">${mod.number}</span>
-            <span class="nav-item-title">${mod.title[this.lang].replace(/^Modul \d+:\s*/, '')}</span>
-            <span class="nav-item-badge">${mod.badge[this.lang]}</span>
+            <span class="nav-item-title">${cleanTitle}</span>
+            <span class="nav-item-badge">${cleanBadge}</span>
           </a>
         `;
       });
@@ -633,6 +733,25 @@ class Annex22App {
     const prevMod = currentIndex > 0 ? MODULE_REGISTRY[currentIndex - 1] : null;
     const nextMod = currentIndex < MODULE_REGISTRY.length - 1 ? MODULE_REGISTRY[currentIndex + 1] : null;
 
+    const hasToc = parsed.toc && parsed.toc.length > 0;
+    const tocHtml = hasToc ? `
+      <aside class="doc-toc-column">
+        <div class="doc-toc-card">
+          <div class="toc-header">
+            <i data-lucide="list"></i>
+            <span>${this.lang === 'de' ? 'Auf dieser Seite' : 'On this page'}</span>
+          </div>
+          <nav class="toc-nav">
+            ${parsed.toc.map(item => `
+              <a href="#${item.id}" class="toc-link depth-${item.depth}" data-toc-id="${item.id}">
+                ${item.text}
+              </a>
+            `).join('')}
+          </nav>
+        </div>
+      </aside>
+    ` : '';
+
     container.innerHTML = `
       <div class="module-header">
         <div class="module-meta-bar">
@@ -648,35 +767,81 @@ class Annex22App {
         <p class="module-subtitle">${mod.subtitle[this.lang]}</p>
       </div>
 
-      <div class="markdown-body">
-        ${parsed.html}
-      </div>
+      <div class="module-layout-grid ${hasToc ? 'has-toc' : 'no-toc'}">
+        <div class="module-content-pane">
+          <div class="markdown-body">
+            ${parsed.html}
+          </div>
 
-      <!-- Module Navigation Footer -->
-      <div class="module-footer-nav">
-        ${prevMod ? `
-          <a href="#${prevMod.id}" class="footer-nav-card" data-route="${prevMod.id}">
-            <span class="footer-nav-label">⬅ ${this.lang === 'de' ? 'Vorheriges Modul' : 'Previous Module'}</span>
-            <span class="footer-nav-title">${prevMod.title[this.lang]}</span>
-          </a>
-        ` : '<div></div>'}
+          <!-- Module Navigation Footer -->
+          <div class="module-footer-nav">
+            ${prevMod ? `
+              <a href="#${prevMod.id}" class="footer-nav-card" data-route="${prevMod.id}">
+                <span class="footer-nav-label">⬅ ${this.lang === 'de' ? 'Vorheriges Modul' : 'Previous Module'}</span>
+                <span class="footer-nav-title">${prevMod.title[this.lang]}</span>
+              </a>
+            ` : '<div></div>'}
 
-        ${nextMod ? `
-          <a href="#${nextMod.id}" class="footer-nav-card" style="text-align:right;" data-route="${nextMod.id}">
-            <span class="footer-nav-label">${this.lang === 'de' ? 'Nächstes Modul' : 'Next Module'} ➔</span>
-            <span class="footer-nav-title">${nextMod.title[this.lang]}</span>
-          </a>
-        ` : '<div></div>'}
+            ${nextMod ? `
+              <a href="#${nextMod.id}" class="footer-nav-card" style="text-align:right;" data-route="${nextMod.id}">
+                <span class="footer-nav-label">${this.lang === 'de' ? 'Nächstes Modul' : 'Next Module'} ➔</span>
+                <span class="footer-nav-title">${nextMod.title[this.lang]}</span>
+              </a>
+            ` : '<div></div>'}
+          </div>
+        </div>
+
+        ${tocHtml}
       </div>
     `;
 
     createIcons({ icons });
     this.initMermaidDiagrams();
     this.bindCheckboxes(container);
+    if (hasToc) {
+      this.initTocObserver(container);
+    }
 
     document.getElementById('printModuleBtn')?.addEventListener('click', () => {
       window.print();
     });
+  }
+
+  initTocObserver(container) {
+    const tocLinks = container.querySelectorAll('.toc-link');
+    if (!tocLinks.length) return;
+
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-toc-id');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          tocLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+
+    const headings = container.querySelectorAll('.doc-heading');
+    if (!headings.length || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(l => {
+            const matches = l.getAttribute('data-toc-id') === id;
+            l.classList.toggle('active', matches);
+          });
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -70% 0px'
+    });
+
+    headings.forEach(h => observer.observe(h));
   }
 
   renderSimulatorView(container) {
@@ -1958,30 +2123,146 @@ Antworte NUR mit reinem JSON ohne Markdown-Ticks.`;
   initMermaidDiagrams() {
     setTimeout(() => {
       try {
+        const preNodes = document.querySelectorAll('pre.mermaid');
+        if (!preNodes.length) return;
+
         mermaid.run({
-          nodes: document.querySelectorAll('pre.mermaid')
+          nodes: preNodes
         }).then(() => {
           document.querySelectorAll('.mermaid-wrapper').forEach(wrapper => {
-            const svg = wrapper.querySelector('svg');
-            const btn = wrapper.querySelector('button[data-action="fullscreen"]');
             const viewport = wrapper.querySelector('.mermaid-viewport');
-
-            const handleOpen = () => {
-              if (svg) this.openDiagramModal(svg);
+            const getDiagramSvg = () => {
+              return viewport?.querySelector('svg') ||
+                     wrapper.querySelector('.mermaid-viewport svg') ||
+                     wrapper.querySelector('svg:not(.lucide)');
             };
 
-            btn?.addEventListener('click', (e) => {
-              e.stopPropagation();
-              handleOpen();
-            });
+            const svg = getDiagramSvg();
+            if (svg) {
+              svg.style.maxWidth = '100%';
+              svg.style.height = 'auto';
+              this.fixDiagramContrast(svg);
+            }
 
-            viewport?.addEventListener('click', handleOpen);
+            const title = wrapper.getAttribute('data-diagram-title') || (this.lang === 'de' ? 'Prozess- & Architektur-Diagramm' : 'Process & Architecture Diagram');
+
+            const handleOpen = (e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
+              const currentSvg = getDiagramSvg();
+              if (currentSvg) {
+                this.openDiagramModal(currentSvg, title);
+              }
+            };
+
+            const btn = wrapper.querySelector('button[data-action="fullscreen"]');
+            if (btn) {
+              btn.onclick = handleOpen;
+            }
+
+            if (viewport) {
+              viewport.onclick = handleOpen;
+            }
           });
+        }).catch(err => {
+          console.warn('Mermaid rendering notice:', err);
         });
       } catch (err) {
-        console.warn('Mermaid rendering notice:', err);
+        console.warn('Mermaid initialization notice:', err);
       }
-    }, 50);
+    }, 60);
+  }
+
+  fixDiagramContrast(svg) {
+    if (!svg) return;
+
+    const isLightColor = (colorStr) => {
+      if (!colorStr) return false;
+      const str = colorStr.toLowerCase().trim();
+      if (str.startsWith('#')) {
+        const hex = str.slice(1);
+        if (hex.length >= 3) {
+          const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.slice(0, 2), 16);
+          const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.slice(2, 4), 16);
+          const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.slice(4, 6), 16);
+          if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            return lum > 160;
+          }
+        }
+      }
+      if (str.startsWith('rgb')) {
+        const matches = str.match(/\d+/g);
+        if (matches && matches.length >= 3) {
+          const r = Number(matches[0]);
+          const g = Number(matches[1]);
+          const b = Number(matches[2]);
+          const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+          return lum > 160;
+        }
+      }
+      return str.includes('#e') || str.includes('#f') || str.includes('white') || str.includes('light');
+    };
+
+    // 1. Process all diagram nodes
+    svg.querySelectorAll('.node').forEach(node => {
+      const shape = node.querySelector('rect, polygon, circle, ellipse, path');
+      let fillColor = '';
+      if (shape) {
+        const style = shape.getAttribute('style') || '';
+        const fillAttr = shape.getAttribute('fill') || '';
+        const fillMatch = style.match(/fill:\s*([^;!]+)/i);
+        if (fillMatch) {
+          fillColor = fillMatch[1].trim();
+        } else if (fillAttr) {
+          fillColor = fillAttr.trim();
+        } else {
+          try {
+            fillColor = window.getComputedStyle(shape).fill;
+          } catch (_) {}
+        }
+      }
+
+      if (isLightColor(fillColor)) {
+        node.classList.add('gxp-light-node');
+        const labels = node.querySelectorAll('.label *, .nodeLabel, text, tspan, p, span, div');
+        labels.forEach(el => {
+          el.style.setProperty('color', '#090d16', 'important');
+          el.style.setProperty('fill', '#090d16', 'important');
+          el.style.setProperty('font-weight', '600', 'important');
+        });
+      }
+    });
+
+    // 2. Process all clusters / subgraphs
+    svg.querySelectorAll('.cluster').forEach(cluster => {
+      const shape = cluster.querySelector('rect, polygon, circle, ellipse, path');
+      let fillColor = '';
+      if (shape) {
+        const style = shape.getAttribute('style') || '';
+        const fillAttr = shape.getAttribute('fill') || '';
+        const fillMatch = style.match(/fill:\s*([^;!]+)/i);
+        if (fillMatch) {
+          fillColor = fillMatch[1].trim();
+        } else if (fillAttr) {
+          fillColor = fillAttr.trim();
+        } else {
+          try {
+            fillColor = window.getComputedStyle(shape).fill;
+          } catch (_) {}
+        }
+      }
+
+      if (isLightColor(fillColor)) {
+        cluster.classList.add('gxp-light-cluster');
+        const clusterLabels = cluster.querySelectorAll('.cluster-label *, text, tspan, p, span, div');
+        clusterLabels.forEach(el => {
+          el.style.setProperty('color', '#090d16', 'important');
+          el.style.setProperty('fill', '#090d16', 'important');
+          el.style.setProperty('font-weight', '700', 'important');
+        });
+      }
+    });
   }
 
   exportAuditJSON() {
