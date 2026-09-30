@@ -6,6 +6,14 @@ import { createIcons, icons } from 'lucide';
 import { MODULE_REGISTRY, PHASES, getDocContent } from './data.js';
 import { parseModuleMarkdown } from './markdown.js';
 import { SearchEngine } from './search.js';
+import {
+  CANDIDATE_MODELS,
+  calculateLiveScore,
+  extractParametersHeuristically,
+  buildCoAuditorPrompt,
+  parseCoAuditorResponse,
+  generateExpertBlueprint
+} from './simulator-engine.js';
 
 class Annex22App {
   constructor() {
@@ -51,6 +59,8 @@ class Annex22App {
       apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '',
       modelChoice: 'gemma-4-31b-it',
       isEvaluating: false,
+      isChatThinking: false,
+      showApiKeyInput: false,
       blueprint: null,
       techTestRunning: false,
       techTestResult: null,
@@ -984,13 +994,25 @@ class Annex22App {
               <span class="opt-card-tag" style="background:rgba(16,185,129,0.15); color:var(--brand-emerald); font-weight:700; border:1px solid rgba(16,185,129,0.3);">⚡ Gemma 4 31B Backend</span>
               <span style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-mono);">Endpoint: gemma-4-31b-it (14.4k RPD / 30 RPM)</span>
             </div>
-            <div style="display:flex; gap:0.5rem; align-items:center;">
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="header-btn" id="simToggleApiKeyBtn" style="padding:0.4rem 0.8rem; font-size:0.85rem;">
+                <i data-lucide="key"></i>
+                <span>${s.apiKey ? (this.lang === 'de' ? 'API-Key aktiv' : 'Key Active') : (this.lang === 'de' ? 'API-Key eingeben (BYOK)' : 'Enter API Key')}</span>
+              </button>
               <button class="header-btn primary" id="simRunTechTestBtn" style="padding:0.4rem 0.9rem; font-size:0.85rem;" ${s.techTestRunning ? 'disabled' : ''}>
                 <i data-lucide="${s.techTestRunning ? 'loader-2' : 'zap'}"></i>
                 <span>${s.techTestRunning ? (this.lang === 'de' ? 'Sende Test-Prompt...' : 'Sending test prompt...') : (this.lang === 'de' ? 'Technischer API-Test (Prompt senden)' : 'Run Technical API Test')}</span>
               </button>
             </div>
           </div>
+          ${s.showApiKeyInput ? `
+            <div style="margin-top:0.85rem; padding:0.75rem 1rem; border-radius:var(--radius-sm); background:var(--bg-canvas); border:1px solid var(--border-subtle); display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted); font-family:var(--font-mono);">Google AI Studio Key:</span>
+              <input type="password" id="simApiKeyInput" value="${s.apiKey || ''}" placeholder="AI Studio Key (AQ.Ab... oder AIza...)" style="flex:1; min-width:220px; padding:0.4rem 0.75rem; font-size:0.85rem; border-radius:var(--radius-sm); border:1px solid var(--border-subtle); background:var(--bg-surface); color:var(--text-main);" />
+              <button class="header-btn primary" id="simSaveApiKeyBtn" style="padding:0.4rem 0.9rem; font-size:0.85rem;">Speichern</button>
+              ${s.apiKey ? `<button class="header-btn" id="simClearApiKeyBtn" style="padding:0.4rem 0.75rem; font-size:0.85rem; color:var(--brand-rose);">Löschen</button>` : ''}
+            </div>
+          ` : ''}
           ${s.techTestResult ? `
             <div style="margin-top:0.85rem; padding:0.75rem 1rem; border-radius:var(--radius-sm); background:var(--bg-canvas); border:1px solid ${s.techTestResult.ok ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'};">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; font-size:0.75rem; font-family:var(--font-mono);">
@@ -1072,63 +1094,7 @@ class Annex22App {
   }
 
   calculateLiveScore() {
-    const s = this.simState;
-    let score = 100;
-    const penalties = [];
-    const flags = [];
-
-    if (s.learningType === 'dynamic') {
-      score -= 35;
-      penalties.push({
-        label: this.lang === 'de' ? 'Dynamisches Selbstlernen im GMP-Betrieb' : 'Dynamic self-learning in GMP',
-        deduction: -35,
-        citation: '[Draft §1]'
-      });
-      flags.push({
-        title: this.lang === 'de' ? 'Kritisches Finding: Dynamisches Selbstlernen' : 'Critical Finding: Dynamic Continuous Learning',
-        ref: 'EU GMP Annex 22 [Draft §1]',
-        desc: this.lang === 'de' 
-          ? 'Kontinuierliches Nachtrainieren im GMP-Routinebetrieb ist nicht zulässig („should not be used“). Es drohen unkontrollierter Modell-Drift und Verlust des validierten Zustands. Lösung: Frozen Weights mit kontrolliertem Offline-Retraining unter Change Control.'
-          : 'Continuous self-learning in GMP routine operation is not permitted. Risk of uncontrolled drift and invalid state. Remediation: Frozen weights with offline retraining under change control.'
-      });
-    }
-
-    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process')) {
-      score -= 30;
-      penalties.push({
-        label: this.lang === 'de' ? 'Vollautonomie bei qualitätskritischer Freigabe' : 'Full autonomy on critical release',
-        deduction: -30,
-        citation: '[Draft §3, §9.2]'
-      });
-      flags.push({
-        title: this.lang === 'de' ? 'Kritisches Finding: Unzulässige Vollautonomie (HOOL)' : 'Critical Finding: Unsupervised Autonomy (HOOL)',
-        ref: 'EU GMP Annex 22 [Draft §3, §9.2] & Art. 51 2001/83/EG',
-        desc: this.lang === 'de'
-          ? 'Qualitätskritische Entscheidungen und Chargenfreigaben dürfen nicht vollständig an KI delegiert werden. Ein Human-in-the-Loop mit dokumentierter Override-Befugnis ist zwingend erforderlich.'
-          : 'Quality-critical decisions and batch release must not be fully delegated to AI without qualified human oversight.'
-      });
-    }
-
-    if (s.dataSource === 'public_cloud') {
-      score -= 15;
-      penalties.push({
-        label: this.lang === 'de' ? 'Unverifizierte Public Cloud Daten / IP-Risiko' : 'Public cloud / unverified data source',
-        deduction: -15,
-        citation: '[Draft §5, §6]'
-      });
-    }
-
-    if (s.modelType === 'genai_rag') {
-      score -= 10;
-      penalties.push({
-        label: this.lang === 'de' ? 'GenAI Stochastik & Halluzinationsrisiko' : 'GenAI stochasticity & hallucination risk',
-        deduction: -10,
-        citation: '[Draft §8, GAMP Guide 2025]'
-      });
-    }
-
-    score = Math.max(10, Math.min(100, score));
-    return { score, penalties, flags };
+    return calculateLiveScore(this.simState, this.lang);
   }
 
   renderSimChatView() {
@@ -1174,6 +1140,15 @@ class Annex22App {
                 </div>
               </div>
             `).join('')}
+            ${s.isChatThinking ? `
+              <div class="sim-chat-msg auditor">
+                <div class="sim-chat-avatar">🤖</div>
+                <div class="sim-chat-bubble thinking">
+                  <i data-lucide="loader-2" class="spin-icon"></i>
+                  <span>${this.lang === 'de' ? 'Co-Auditor analysiert Projektparameter (Gemma 4 31B)...' : 'Co-Auditor analyzing compliance parameters (Gemma 4 31B)...'}</span>
+                </div>
+              </div>
+            ` : ''}
           </div>
 
           <!-- Quick Suggestion Chips -->
@@ -1181,18 +1156,18 @@ class Annex22App {
             <span style="font-size:0.75rem; color:var(--text-faint); width:100%; font-weight:600; margin-bottom:0.15rem;">
               ${this.lang === 'de' ? '💡 Schnellauswahl / Vorschläge:' : '💡 Quick Suggestions:'}
             </span>
-            <button class="sim-chip-btn" data-chat-quick="vision">🔍 Optische Vial-Inspektion (Parenteralia)</button>
-            <button class="sim-chip-btn" data-chat-quick="genai">🤖 GenAI SOP Drafting</button>
-            <button class="sim-chip-btn" data-chat-quick="freeze">❄️ Frozen Weights einsetzen</button>
-            <button class="sim-chip-btn" data-chat-quick="dynamic">🔄 Dynamisches Selbstlernen testen</button>
-            <button class="sim-chip-btn" data-chat-quick="hitl">👤 Human-in-the-Loop aktivieren</button>
+            <button class="sim-chip-btn" data-chat-quick="vision" ${s.isChatThinking ? 'disabled' : ''}>🔍 Optische Vial-Inspektion (Parenteralia)</button>
+            <button class="sim-chip-btn" data-chat-quick="genai" ${s.isChatThinking ? 'disabled' : ''}>🤖 GenAI SOP Drafting</button>
+            <button class="sim-chip-btn" data-chat-quick="freeze" ${s.isChatThinking ? 'disabled' : ''}>❄️ Frozen Weights einsetzen</button>
+            <button class="sim-chip-btn" data-chat-quick="dynamic" ${s.isChatThinking ? 'disabled' : ''}>🔄 Dynamisches Selbstlernen testen</button>
+            <button class="sim-chip-btn" data-chat-quick="hitl" ${s.isChatThinking ? 'disabled' : ''}>👤 Human-in-the-Loop aktivieren</button>
           </div>
 
           <!-- Input Bar -->
           <form class="sim-chat-input-bar" id="simChatForm">
-            <input type="text" class="sim-chat-input" id="simChatInput" placeholder="${this.lang === 'de' ? 'Beschreibe dein Projekt oder beantworte die Frage...' : 'Describe your project or answer the question...'}" />
-            <button type="submit" class="header-btn primary" style="padding:0.6rem 1.15rem; border-radius:var(--radius-pill);">
-              <i data-lucide="send"></i>
+            <input type="text" class="sim-chat-input" id="simChatInput" ${s.isChatThinking ? 'disabled' : ''} placeholder="${s.isChatThinking ? (this.lang === 'de' ? 'Analyse läuft...' : 'Analyzing...') : (this.lang === 'de' ? 'Beschreibe dein Projekt oder beantworte die Frage...' : 'Describe your project or answer the question...')}" />
+            <button type="submit" class="header-btn primary" style="padding:0.6rem 1.15rem; border-radius:var(--radius-pill);" ${s.isChatThinking ? 'disabled' : ''}>
+              <i data-lucide="${s.isChatThinking ? 'loader-2' : 'send'}" class="${s.isChatThinking ? 'spin-icon' : ''}"></i>
               <span>${this.lang === 'de' ? 'Senden' : 'Send'}</span>
             </button>
           </form>
@@ -1726,6 +1701,30 @@ class Annex22App {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // API Key Toggle & Save (BYOK)
+    document.getElementById('simToggleApiKeyBtn')?.addEventListener('click', () => {
+      this.simState.showApiKeyInput = !this.simState.showApiKeyInput;
+      this.renderSimulatorView(container);
+    });
+
+    document.getElementById('simSaveApiKeyBtn')?.addEventListener('click', () => {
+      const input = document.getElementById('simApiKeyInput');
+      const val = (input?.value || '').trim();
+      if (val) {
+        localStorage.setItem('gemini_api_key', val);
+        this.simState.apiKey = val;
+      }
+      this.simState.showApiKeyInput = false;
+      this.renderSimulatorView(container);
+    });
+
+    document.getElementById('simClearApiKeyBtn')?.addEventListener('click', () => {
+      localStorage.removeItem('gemini_api_key');
+      this.simState.apiKey = '';
+      this.simState.showApiKeyInput = false;
+      this.renderSimulatorView(container);
+    });
+
     // Technical API Test
     document.getElementById('simRunTechTestBtn')?.addEventListener('click', () => {
       this.runTechnicalApiTest();
@@ -1748,7 +1747,7 @@ class Annex22App {
     });
   }
 
-  handleChatInput(userText, container) {
+  async handleChatInput(userText, container) {
     if (!userText || !userText.trim()) return;
     const cleanText = userText.trim();
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -1760,70 +1759,71 @@ class Annex22App {
       time
     });
 
-    // 2. Parse text and adapt state
-    const lower = cleanText.toLowerCase();
+    // 2. Set thinking state and render immediately
+    this.simState.isChatThinking = true;
+    this.renderSimulatorView(container);
+    setTimeout(() => {
+      const msgBox = document.getElementById('simChatMsgContainer');
+      if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+    }, 30);
 
-    if (lower.includes('vial') || lower.includes('partikel') || lower.includes('optisch') || lower.includes('kamera') || lower.includes('vision') || lower.includes('parenteralia')) {
-      this.simState.projectName = this.simState.projectName || 'AI-Vision Inspektion Parenteralia';
-      this.simState.intendedUse = cleanText;
-      this.simState.processArea = 'in_process';
-      this.simState.modelType = 'vision_defect';
-    } else if (lower.includes('genai') || lower.includes('sop') || lower.includes('rag') || lower.includes('llm') || lower.includes('abweichung') || lower.includes('deviation')) {
-      this.simState.projectName = this.simState.projectName || 'GenAI SOP & Deviation Drafting Assistant';
-      this.simState.intendedUse = cleanText;
-      this.simState.processArea = 'oos_investigation';
-      this.simState.modelType = 'genai_rag';
-    } else if (lower.includes('bioreaktor') || lower.includes('ferment') || lower.includes('sensor') || lower.includes('ausbeute')) {
-      this.simState.projectName = this.simState.projectName || 'Bioprozess-Monitoring & Soft-Sensor';
-      this.simState.intendedUse = cleanText;
-      this.simState.processArea = 'in_process';
-      this.simState.modelType = 'predictive_ml';
-    }
+    const apiKey = this.simState.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '';
 
-    if (lower.includes('freeze') || lower.includes('statisch') || lower.includes('fest') || lower.includes('eingefroren')) {
-      this.simState.learningType = 'static';
-    } else if (lower.includes('dynamisch') || lower.includes('kontinuierlich') || lower.includes('selbstlern') || lower.includes('online')) {
-      this.simState.learningType = 'dynamic';
-    }
-
-    if (lower.includes('hitl') || lower.includes('mensch') || lower.includes('loop') || lower.includes('override') || lower.includes('freigabe')) {
-      this.simState.autonomyLevel = 'hitl';
-    } else if (lower.includes('autonom') || lower.includes('hool') || lower.includes('vollautomat')) {
-      this.simState.autonomyLevel = 'hool';
-    }
-
-    // 3. Formulate Co-Auditor response
     let auditorReply = '';
-    const s = this.simState;
+    let extractedParams = null;
 
-    if (lower.includes('dynamisch') || lower.includes('kontinuierlich') || lower.includes('selbstlern')) {
-      auditorReply = this.lang === 'de'
-        ? `⚠️ **Wichtiger regulatorischer Hinweis nach Annex 22 [Draft §1]:**\nKontinuierliches Selbstlernen im GMP-Routinebetrieb führt zu unkontrollierbarem Concept-Drift und Verlust des validierten Zustands. Die EMA schließt das für kritische Prozesse faktisch aus („should not be used“). Ich habe dafür **-35 Punkte** im Readiness Score abgezogen.\n\n👉 *Praxis-Empfehlung:* Nutze im Betrieb **Frozen Weights** und führe Nachtrainings nur offline in einer qualifizierten MLOps-Pipeline mit formeller Revalidierung durch.\n\nWie sieht euer Plan für die **menschliche Aufsicht (Human Oversight nach Draft §3)** aus? Behält ein Mitarbeiter die Freigabehoheit?`
-        : `⚠️ **Regulatory Warning [Draft §1]:**\nContinuous self-learning in GMP operations leads to uncontrolled drift and loss of the validated state. EMA explicitly excludes this for critical applications. A penalty of **-35 points** was applied.\n\n👉 *Remediation:* Deploy with **Frozen Weights** and retrain only offline under formal change control.\n\nWhat is your plan for **Human Oversight (Draft §3)**?`;
-    } else if (lower.includes('freeze') || lower.includes('statisch') || lower.includes('fest')) {
-      auditorReply = this.lang === 'de'
-        ? `✅ **Hervorragend [Draft §1 & Modul 07]:**\nDie Verwendung von festen Gewichten (*Frozen Weights*) ist die Grundvoraussetzung für Deterministik und Reproduzierbarkeit nach GxP.\n\nNächste Frage: **Wer hat die Letztentscheidung (Human Oversight nach Draft §3 & §9.2)?** Ist ein Human-in-the-Loop (HITL) mit dokumentierter Override-Befugnis vorgesehen?`
-        : `✅ **Great [Draft §1]:** Using frozen weights ensures determinism and repeatability in GxP.\n\nNext: What is your **Human Oversight strategy (Draft §3 & §9.2)**?`;
-    } else if (lower.includes('hitl') || lower.includes('mensch') || lower.includes('loop')) {
-      auditorReply = this.lang === 'de'
-        ? `✅ **Sehr gut [Draft §3, §9.2 & Art. 51 2001/83/EG]:**\nHuman-in-the-Loop (HITL) stellt sicher, dass die pharmazeutische Verantwortung beim qualifizierten Fachpersonal bleibt. Wichtig: Eure SOPs müssen ein spezifisches *Override-Training* vorschreiben, um Automation Bias vorzubeugen!\n\nDie zentralen Leitplanken sind nun erfasst. Klicke rechts auf **'Validierungs-Blueprint berechnen'**, um das vollständige Dossier zu generieren.`
-        : `✅ **Approved [Draft §3 & §9.2]:** Human-in-the-Loop ensures legal accountability remains with qualified personnel.\n\nYou can now generate your validation blueprint!`;
-    } else if (lower.includes('autonom') || lower.includes('hool')) {
-      auditorReply = this.lang === 'de'
-        ? `⚠️ **Kritisches Finding [Draft §3 & Art. 51 2001/83/EG]:**\nVollautonome Entscheidungen ohne menschliche Prüf- und Überstimmungsinstanz sind für qualitätskritische Prozesse unzulässig! Dafür wurden **-30 Punkte** abgezogen.\n\nEmpfehlung: Auf HITL umstellen oder mindestens eine Vier-Augen-Freigabe implementieren.`
-        : `⚠️ **Critical Finding [Draft §3]:** Unsupervised autonomy is prohibited for quality-critical processes. -30 points penalty applied.`;
-    } else {
-      auditorReply = this.lang === 'de'
-        ? `Verstanden! Für **${s.projectName || 'dein Projekt'}** müssen wir die architektonischen Schutzmaßnahmen nach Annex 22 prüfen:\n\n**Wie soll das Modell im GMP-Betrieb arbeiten?**\nWird es mit festen Parametern betrieben (**Frozen Weights**) oder ist ein **kontinuierliches Weitertrainieren zur Laufzeit** geplant?`
-        : `Understood! For **${s.projectName || 'your project'}**, we must verify Annex 22 guardrails:\n\nWill the model operate with **Frozen Weights** or is **continuous learning** planned?`;
+    if (apiKey && apiKey.trim().length > 5) {
+      try {
+        const prompt = buildCoAuditorPrompt(cleanText, this.simState, this.lang);
+        const liveRes = await this.callRawGemmaAPI(prompt);
+        const parsed = parseCoAuditorResponse(liveRes.text, this.simState, this.lang);
+        auditorReply = parsed.auditorReply;
+        extractedParams = parsed.extractedParameters;
+      } catch (err) {
+        console.warn('Gemma 4 call failed in chat, falling back to expert heuristic:', err);
+      }
     }
 
+    // Fallback if no LLM response or no key
+    if (!auditorReply || !extractedParams) {
+      extractedParams = extractParametersHeuristically(cleanText, this.simState);
+      const lower = cleanText.toLowerCase();
+
+      if (extractedParams.learningType === 'dynamic') {
+        auditorReply = this.lang === 'de'
+          ? `⚠️ **Wichtiger regulatorischer Hinweis nach Annex 22 [Draft §1]:**\nKontinuierliches Selbstlernen im GMP-Routinebetrieb führt zu unkontrollierbarem Concept-Drift und Verlust des validierten Zustands. Die EMA schließt das für kritische Prozesse faktisch aus („should not be used“). Ich habe dafür **-35 Punkte** im Readiness Score abgezogen.\n\n👉 *Praxis-Empfehlung:* Nutze im Betrieb **Frozen Weights** und führe Nachtrainings nur offline in einer qualifizierten MLOps-Pipeline mit formeller Revalidierung durch.\n\nWie sieht euer Plan für die **menschliche Aufsicht (Human Oversight nach Draft §3)** aus? Behält ein Mitarbeiter die Freigabehoheit?`
+          : `⚠️ **Regulatory Warning [Draft §1]:**\nContinuous self-learning in GMP operations leads to uncontrolled drift and loss of the validated state. EMA explicitly excludes this for critical applications. A penalty of **-35 points** was applied.\n\n👉 *Remediation:* Deploy with **Frozen Weights** and retrain only offline under formal change control.\n\nWhat is your plan for **Human Oversight (Draft §3)**?`;
+      } else if (lower.includes('froz') || lower.includes('freeze') || lower.includes('statisch') || lower.includes('fest')) {
+        auditorReply = this.lang === 'de'
+          ? `✅ **Hervorragend [Draft §1 & Modul 07]:**\nDie Verwendung von festen Gewichten (*Frozen Weights*) ist die Grundvoraussetzung für Deterministik und Reproduzierbarkeit nach GxP.\n\nNächste Frage: **Wer hat die Letztentscheidung (Human Oversight nach Draft §3 & §9.2)?** Ist ein Human-in-the-Loop (HITL) mit dokumentierter Override-Befugnis vorgesehen?`
+          : `✅ **Great [Draft §1]:** Using frozen weights ensures determinism and repeatability in GxP.\n\nNext: What is your **Human Oversight strategy (Draft §3 & §9.2)**?`;
+      } else if (extractedParams.autonomyLevel === 'hitl' && (lower.includes('hitl') || lower.includes('mensch') || lower.includes('loop'))) {
+        auditorReply = this.lang === 'de'
+          ? `✅ **Sehr gut [Draft §3, §9.2 & Art. 51 2001/83/EG]:**\nHuman-in-the-Loop (HITL) stellt sicher, dass die pharmazeutische Verantwortung beim qualifizierten Fachpersonal bleibt. Wichtig: Eure SOPs müssen ein spezifisches *Override-Training* vorschreiben, um Automation Bias vorzubeugen!\n\nDie zentralen Leitplanken sind nun erfasst. Klicke rechts auf **'Validierungs-Blueprint berechnen'**, um das vollständige Dossier zu generieren.`
+          : `✅ **Approved [Draft §3 & §9.2]:** Human-in-the-Loop ensures legal accountability remains with qualified personnel.\n\nYou can now generate your validation blueprint!`;
+      } else if (extractedParams.autonomyLevel === 'hool') {
+        auditorReply = this.lang === 'de'
+          ? `⚠️ **Kritisches Finding [Draft §3 & Art. 51 2001/83/EG]:**\nVollautonome Entscheidungen ohne menschliche Prüf- und Überstimmungsinstanz sind für qualitätskritische Prozesse unzulässig! Dafür wurden **-30 Punkte** abgezogen.\n\nEmpfehlung: Auf HITL umstellen oder mindestens eine Vier-Augen-Freigabe implementieren.`
+          : `⚠️ **Critical Finding [Draft §3]:** Unsupervised autonomy is prohibited for quality-critical processes. -30 points penalty applied.`;
+      } else {
+        auditorReply = this.lang === 'de'
+          ? `Verstanden! Für **${extractedParams.projectName || 'dein Projekt'}** müssen wir die architektonischen Schutzmaßnahmen nach Annex 22 prüfen:\n\n**Wie soll das Modell im GMP-Betrieb arbeiten?**\nWird es mit festen Parametern betrieben (**Frozen Weights**) oder ist ein **kontinuierliches Weitertrainieren zur Laufzeit** geplant?`
+          : `Understood! For **${extractedParams.projectName || 'your project'}**, we must verify Annex 22 guardrails:\n\nWill the model operate with **Frozen Weights** or is **continuous learning** planned?`;
+      }
+    }
+
+    // 3. Apply extracted parameters to simState
+    Object.assign(this.simState, extractedParams);
+
+    // 4. Append Auditor message
+    this.simState.isChatThinking = false;
     this.simState.chatMessages.push({
       sender: 'auditor',
       text: auditorReply,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     });
 
+    // 5. Re-render simulator (updates Live Inspector & Score in real-time)
     this.renderSimulatorView(container);
     setTimeout(() => {
       const msgBox = document.getElementById('simChatMsgContainer');
@@ -1860,7 +1860,9 @@ class Annex22App {
     this.simState.isEvaluating = true;
     this.renderSimulatorView(document.getElementById('contentWrapper'));
 
-    if (this.simState.apiKey && this.simState.apiKey.trim().length > 5) {
+    const apiKey = this.simState.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '';
+
+    if (apiKey && apiKey.trim().length > 5) {
       try {
         const result = await this.callGeminiAPI();
         this.simState.blueprint = result;
@@ -1883,121 +1885,18 @@ class Annex22App {
   }
 
   generateExpertBlueprint() {
-    const s = this.simState;
-    const { score, penalties, flags } = this.calculateLiveScore();
-    const redFlags = [...flags];
-    const deliverables = [];
-    const testingRequirements = [];
-    const auditQuestions = [];
-    let verdict = score >= 80 ? 'VALIDATION_READY' : (score >= 50 ? 'CONDITIONAL' : 'REJECT');
-
-    // 1. Check Dynamic Learning
-    if (s.learningType === 'dynamic' && !redFlags.some(f => f.title.includes('Dynamisches'))) {
-      redFlags.push({
-        title: 'Verstoß gegen das Verbot dynamisch selbstlernender Modelle',
-        reference: 'EU GMP Annex 22 [Draft §1] (Modul 03 / Modul 07)',
-        description: 'Der Entwurf von Annex 22 schließt Modelle, die sich im GMP-Routinebetrieb selbstständig weitertrainieren, kategorisch aus. Das Modell muss mit fest gefrorenen Parametern (Frozen Weights) betrieben werden. Retrainings erfordern eine isolierte Offline-Umgebung und einen formalen Revalidierungsbericht.'
-      });
-    }
-
-    // 2. Check HOOL on critical tasks
-    if (s.autonomyLevel === 'hool' && (s.processArea === 'batch_release' || s.processArea === 'in_process') && !redFlags.some(f => f.title.includes('Vollautonomie'))) {
-      redFlags.push({
-        title: 'Unzulässige Vollautonomie (HOOL) bei qualitätskritischen Entscheidungen',
-        reference: 'EU GMP Annex 22 [Draft §3, §9.2] & Art. 51 Richtlinie 2001/83/EG',
-        description: 'KI-Systeme besitzen keine pharmazeutische Rechtsverantwortung. Vollautomatische Chargenfreigaben ohne qualifizierte menschliche Prüfung verstoßen gegen europäisches Arzneimittelrecht. Es muss zwingend ein Human-in-the-Loop (HITL) Workflow implementiert sein.'
-      });
-    }
-
-    // 3. GenAI Checks
-    if (s.modelType === 'genai_rag') {
-      if (verdict !== 'REJECT') verdict = 'CONDITIONAL';
-      deliverables.push({
-        name: 'RAG-First Architektur-Spezifikation & Guardrail-Protokoll',
-        tier: 'Tier 2 (System)',
-        requirements: 'Nachweis, dass das LLM strikt auf freigegebene interne Dokumente beschränkt ist (kein freies Internet). Eingangs-Filter (Prompt Injection / PII) und Ausgangs-Guardrails (Schema Enforcement).'
-      });
-      deliverables.push({
-        name: 'Prompt Governance & Golden Regression Testsuite',
-        tier: 'Tier 3 (Technisch)',
-        requirements: 'Prompts müssen als validierter Source Code in Git versioniert sein. Automatisierte Testsuite mit mind. 100 verifizierten Standardfragen zum Erkennen von Provider-Backend-Updates.'
-      });
-      testingRequirements.push({
-        metric: 'RAG Triad: Groundedness / Faithfulness = 1.0',
-        purpose: 'Halluzinations-Prävention',
-        details: 'Jede generierte Behauptung muss zu 100% mathematisch aus den abgerufenen Kontext-SOPs belegbar sein. ALCOA+-Zitierpflicht (Dokument-ID, Version, Absatz).'
-      });
-      auditQuestions.push({
-        question: 'Wie stellen Sie sicher, dass Ihr Cloud-Sprachmodell keine erfundenen pharmazeutischen Fakten (Halluzinationen) in den Bericht übernimmt?',
-        recommendedAnswer: 'Durch unsere validierte RAG-Triad-Pipeline und den Groundedness-Filter. Sinkt die Faktentreue unter 1.0, verweigert das System die Ausgabe. Zudem fungiert das Tool rein als Drafting Assistant mit zwingender QP-Prüfung.'
-      });
-    } else {
-      // Predictive ML / Vision Deliverables
-      deliverables.push({
-        name: 'Model Definition & Intended Use Specification',
-        tier: 'Tier 2 (System)',
-        requirements: 'Formale Festlegung der Systemgrenzen, Eingangs-Sensorparameter und Out-of-Distribution (OOD) Erkennungslogik.'
-      });
-      deliverables.push({
-        name: 'Unabhängiger Validierungsplan & Metric Quad Bericht',
-        tier: 'Tier 2 (Qualifizierung)',
-        requirements: 'Durchführung der OQ/PQ durch personell unabhängige Tester (Staff Independence) auf einem unverbrauchten Hold-out Testdatensatz.'
-      });
-      testingRequirements.push({
-        metric: 'Recall (Sensitivität) ≥ 99.5% (Pre-Sealed)',
-        purpose: 'Schutz vor False Negatives',
-        details: 'Asymmetrische Fehlerkosten: Eine defekte Einheit darf niemals unentdeckt bleiben. Akzeptanzkriterien müssen vor Testdurchführung versiegelt werden.'
-      });
-      testingRequirements.push({
-        metric: 'Expected Calibration Error (ECE) ≤ 0.05',
-        purpose: 'Schutz vor Automation Bias',
-        details: 'Verhindert, dass das Modell bei Fehlentscheidungen fälschlich hohe Konfidenzen anzeigt und das Bedienpersonal täuscht.'
-      });
-      auditQuestions.push({
-        question: 'Waren die Ingenieure, die den finalen Validierungstest durchgeführt haben, unabhängig vom Entwicklungsteam?',
-        recommendedAnswer: 'Ja, gemäß PIC/S- und Annex-22-Vorgaben wurde die Qualifizierung auf dem versiegelten Hold-out-Set von unabhängigen Validierungsingenieuren der QA abgenommen (Staff Independence).'
-      });
-    }
-
-    deliverables.push({
-      name: 'Master AI Inventory Eintrag & SOP Change Control',
-      tier: 'Tier 1 (Governance)',
-      requirements: 'Eintragung im verbindlichen KI-Inventar zur Vermeidung von Schatten-KI. Festlegung statistischer Drift-Schwellenwerte (PSI > 0.2).'
-    });
-
-    const summary = verdict === 'REJECT'
-      ? `Die aktuelle Konfiguration enthält fundamentale Verstöße gegen den Draft EU GMP Annex 22 (siehe Red Flags unten). Ein System mit dynamischem Weiterlernen oder ohne menschliche Freigabeinstanz ist im GxP-Betrieb nicht zulassungsfähig. Vor der Validierungsplanung müssen Architektur und Betriebsmodus zwingend angepasst werden.`
-      : (verdict === 'CONDITIONAL'
-        ? `Das Projekt ist grundsätzlich qualifizierungsfähig, unterliegt jedoch als Generative-KI-System strengen Auflagen. Es darf ausschließlich als "Drafting Assistant" unter RAG-Architektur agieren. Eine autonome Dokumentenübernahme ist ausgeschlossen.`
-        : `Das geplante System erfüllt die architektonischen Kernvorgaben von Annex 22 (statisches Modell, Human-in-the-Loop, definierte Systemgrenzen). Das Qualifizierungsteam kann die Validierungsplanung auf Basis des Metric Quad und unabhängiger Hold-out-Sets initiieren.`);
-
-    return {
-      verdict,
-      score,
-      penalties,
-      summary,
-      redFlags,
-      deliverables,
-      testingRequirements,
-      auditQuestions
-    };
+    return generateExpertBlueprint(this.simState, this.lang);
   }
 
   async callRawGemmaAPI(prompt) {
     const s = this.simState;
     const apiKey = s.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '';
     
-    // Cascading models: Gemma 4 31B -> Gemma 4 26B -> Gemini 2.5 Flash Lite -> Gemini 1.5 Flash
-    const candidateModels = [
-      'gemma-4-31b-it',
-      'gemma-4-26b-a4b-it',
-      'gemini-2.5-flash-lite',
-      'gemini-1.5-flash'
-    ];
+    // Cascading models: Gemma 4 31B -> Gemma 4 26B -> Gemini 3 Flash Preview -> Gemini 3.5 Flash -> Gemini Flash Latest
     let lastError = null;
     let tried = [];
 
-    for (const model of candidateModels) {
+    for (const model of CANDIDATE_MODELS) {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       
       // Clean Gemma payload: no role:user, no generationConfig to prevent 500 internal server error
@@ -2013,7 +1912,8 @@ class Annex22App {
         const response = await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(10000)
         });
 
         if (!response.ok) {

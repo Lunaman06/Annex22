@@ -2894,6 +2894,26 @@ html[data-theme="light"] .gxp-badge-ref:hover {
   border-top-right-radius: 2px;
 }
 
+.sim-chat-bubble.thinking {
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px dashed var(--brand-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--brand-cyan);
+  font-style: italic;
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .sim-chat-quick-actions {
   display: flex;
   flex-wrap: wrap;
