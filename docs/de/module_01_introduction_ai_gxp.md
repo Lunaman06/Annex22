@@ -28,8 +28,8 @@ flowchart LR
 
     A11 ==>|"Paradigmenwechsel"| A22
 
-    style A11 fill:#f8fafc,stroke:#3b82f6,stroke-width:2px
-    style A22 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    style A11 fill:#2563eb18,stroke:#3b82f6,stroke-width:2px
+    style A22 fill:#16a34a18,stroke:#16a34a,stroke-width:2px
 ```
 
 ---

@@ -173,19 +173,19 @@ class Annex22App {
     // Default: 'neutral' (Clean Zinc / Charcoal Gray)
     return {
       darkMode: true,
-      background: '#1a1a1e',
-      primaryColor: '#242429',
+      background: '#2d313b',
+      primaryColor: '#373c47',
       primaryTextColor: '#ffffff',
       primaryBorderColor: '#6366f1',
       lineColor: '#38bdf8',
-      secondaryColor: '#1f1f24',
-      tertiaryColor: '#121214',
+      secondaryColor: '#2b2e37',
+      tertiaryColor: '#24272e',
       fontFamily: 'Inter, Outfit, sans-serif',
       fontSize: '15px',
-      mainBkg: '#242429',
+      mainBkg: '#373c47',
       nodeBorder: '#818cf8',
-      clusterBkg: '#141416',
-      clusterBorder: '#3f3f46'
+      clusterBkg: '#24272e',
+      clusterBorder: '#4a505e'
     };
   }
 
