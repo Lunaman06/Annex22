@@ -48,10 +48,12 @@ class Annex22App {
       learningType: 'static',
       autonomyLevel: 'hitl',
       dataSource: 'internal_gxp',
-      apiKey: localStorage.getItem('gemini_api_key') || '',
-      modelChoice: 'gemma-27b',
+      apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '',
+      modelChoice: 'gemma-4-31b-it',
       isEvaluating: false,
       blueprint: null,
+      techTestRunning: false,
+      techTestResult: null,
       chatMessages: [
         {
           sender: 'auditor',
@@ -975,6 +977,38 @@ class Annex22App {
           </p>
         </div>
 
+        <!-- Technical API Test Bar -->
+        <div class="sim-api-test-banner" style="background:var(--bg-surface-elevated); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.85rem 1.15rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <span class="opt-card-tag" style="background:rgba(16,185,129,0.15); color:var(--brand-emerald); font-weight:700; border:1px solid rgba(16,185,129,0.3);">⚡ Gemma 4 31B Backend</span>
+              <span style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-mono);">Endpoint: gemma-4-31b-it (14.4k RPD / 30 RPM)</span>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <button class="header-btn primary" id="simRunTechTestBtn" style="padding:0.4rem 0.9rem; font-size:0.85rem;" ${s.techTestRunning ? 'disabled' : ''}>
+                <i data-lucide="${s.techTestRunning ? 'loader-2' : 'zap'}"></i>
+                <span>${s.techTestRunning ? (this.lang === 'de' ? 'Sende Test-Prompt...' : 'Sending test prompt...') : (this.lang === 'de' ? 'Technischer API-Test (Prompt senden)' : 'Run Technical API Test')}</span>
+              </button>
+            </div>
+          </div>
+          ${s.techTestResult ? `
+            <div style="margin-top:0.85rem; padding:0.75rem 1rem; border-radius:var(--radius-sm); background:var(--bg-canvas); border:1px solid ${s.techTestResult.ok ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'};">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; font-size:0.75rem; font-family:var(--font-mono);">
+                <span style="font-weight:700; color:${s.techTestResult.ok ? 'var(--brand-emerald)' : 'var(--brand-rose)'};">
+                  ${s.techTestResult.ok ? '✔ HTTP 200 OK — Antwort erhalten' : '✖ Fehler beim Aufruf'}
+                </span>
+                <span style="color:var(--text-muted);">
+                  Modell: ${s.techTestResult.model} | Latenz: ${s.techTestResult.latency}ms
+                </span>
+              </div>
+              <div style="font-size:0.85rem; color:var(--text-main); line-height:1.45; white-space:pre-wrap;">
+                <strong>Prompt:</strong> <em>"${s.techTestResult.prompt}"</em><br/>
+                <strong>Gemma 4 Antwort:</strong> ${s.techTestResult.text}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+
         <!-- Stepper Navigation -->
         <div class="simulator-stepper">
           <div class="sim-step-item ${s.step === 1 ? 'active' : ''} ${s.step > 1 ? 'completed' : ''}">
@@ -1404,28 +1438,16 @@ class Annex22App {
           </div>
         </div>
 
-        <!-- Optional Gemini / Gemma API Integration -->
-        <div class="sim-form-group" style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <label class="sim-label" style="font-size:0.95rem;">
-              <i data-lucide="sparkles" style="color:var(--brand-cyan);"></i>
-              <span>${this.lang === 'de' ? 'KI-Audit-Engine (Gemini API für Gemma 27B / Gemini 1.5):' : 'AI Audit Engine (Gemini API for Gemma 27B / Gemini 1.5):'}</span>
-            </label>
-            <span class="opt-card-tag">${s.apiKey ? 'API KEY GESPEICHERT' : 'OFFLINE-EXPERTEN-MODUS'}</span>
+        <!-- Gemma 4 31B Engine Status -->
+        <div class="sim-form-group" style="background:var(--bg-surface-elevated); padding:1rem 1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <i data-lucide="shield-check" style="color:var(--brand-emerald);"></i>
+            <div>
+              <div style="font-size:0.9rem; font-weight:600; color:var(--text-main);">${this.lang === 'de' ? 'Integrierte KI-Validierungs-Engine' : 'Integrated AI Validation Engine'}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Gemma 4 31B (Google AI Studio • 14.4k RPD / 30 RPM)</div>
+            </div>
           </div>
-          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
-            ${this.lang === 'de' 
-              ? 'Optional: Trage deinen Gemini API-Key ein, um die Analyse über Gemma 27B / Gemini laufen zu lassen. Ohne Key nutzt der Simulator unsere integrierte deterministische Annex-22-Experten-Regelengine!' 
-              : 'Optional: Enter your Gemini API key to evaluate with Gemma 27B / Gemini. Without a key, the simulator uses our built-in Annex 22 expert rule engine!'}
-          </p>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <input type="password" class="sim-input" id="simApiKeyInput" value="${s.apiKey}" placeholder="AIzaSy... (Gemini API Key)" style="flex:1; min-width:240px;" />
-            <select class="sim-input" id="simModelChoice" style="width:180px;">
-              <option value="gemma-27b" ${s.modelChoice === 'gemma-27b' ? 'selected' : ''}>Gemma 2 27B IT</option>
-              <option value="gemini-1.5-flash" ${s.modelChoice === 'gemini-1.5-flash' ? 'selected' : ''}>Gemini 1.5 Flash</option>
-              <option value="gemini-1.5-pro" ${s.modelChoice === 'gemini-1.5-pro' ? 'selected' : ''}>Gemini 1.5 Pro</option>
-            </select>
-          </div>
+          <span class="opt-card-tag" style="background:rgba(16,185,129,0.15); color:var(--brand-emerald); font-weight:700;">AKTIV & GEKOPPELT</span>
         </div>
 
         <div class="sim-actions-footer">
@@ -1704,16 +1726,9 @@ class Annex22App {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Step 2 API Key
-    const apiKeyInput = document.getElementById('simApiKeyInput');
-    apiKeyInput?.addEventListener('input', (e) => {
-      this.simState.apiKey = e.target.value.trim();
-      localStorage.setItem('gemini_api_key', this.simState.apiKey);
-    });
-
-    const modelChoiceInput = document.getElementById('simModelChoice');
-    modelChoiceInput?.addEventListener('change', (e) => {
-      this.simState.modelChoice = e.target.value;
+    // Technical API Test
+    document.getElementById('simRunTechTestBtn')?.addEventListener('click', () => {
+      this.runTechnicalApiTest();
     });
 
     // Run Evaluation
@@ -1968,11 +1983,96 @@ class Annex22App {
     };
   }
 
+  async callRawGemmaAPI(prompt) {
+    const s = this.simState;
+    const apiKey = s.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || localStorage.getItem('gemini_api_key') || '';
+    
+    // Cascading models: Gemma 4 31B -> Gemma 4 26B -> Gemini 2.5 Flash Lite -> Gemini 1.5 Flash
+    const candidateModels = [
+      'gemma-4-31b-it',
+      'gemma-4-26b-a4b-it',
+      'gemini-2.5-flash-lite',
+      'gemini-1.5-flash'
+    ];
+    let lastError = null;
+    let tried = [];
+
+    for (const model of candidateModels) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      
+      // Clean Gemma payload: no role:user, no generationConfig to prevent 500 internal server error
+      const payload = {
+        contents: [
+          {
+            parts: [{ text: prompt }]
+          }
+        ]
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errBody = await response.text();
+          console.warn(`Model ${model} returned HTTP ${response.status}:`, errBody);
+          tried.push(`${model} (HTTP ${response.status})`);
+          lastError = new Error(`${model} failed: ${errBody}`);
+          continue;
+        }
+
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        if (text && text.trim().length > 0) {
+          return { modelUsed: model, text: text.trim(), data };
+        }
+      } catch (err) {
+        console.warn(`Model ${model} error:`, err);
+        tried.push(`${model} (${err.message})`);
+        lastError = err;
+      }
+    }
+
+    throw new Error(`Alle Modelle fehlgeschlagen (${tried.join(', ')}): ${lastError?.message || 'Keine Antwort'}`);
+  }
+
+  async runTechnicalApiTest() {
+    this.simState.techTestRunning = true;
+    this.renderSimulatorView(document.getElementById('contentWrapper'));
+
+    const prompt = 'Hallo! Bitte bestätige in genau einem kurzen Satz auf Deutsch, dass die Verbindung zu Google AI Studio aktiv ist und du bereit bist als KI-Assistent für EU GMP Annex 22.';
+    const startTime = performance.now();
+
+    try {
+      const response = await this.callRawGemmaAPI(prompt);
+      const latency = Math.round(performance.now() - startTime);
+      this.simState.techTestResult = {
+        ok: true,
+        prompt,
+        latency,
+        model: response.modelUsed,
+        text: response.text
+      };
+    } catch (err) {
+      const latency = Math.round(performance.now() - startTime);
+      this.simState.techTestResult = {
+        ok: false,
+        prompt,
+        latency,
+        model: 'Auto-Fallback',
+        text: `Verbindungsfehler: ${err.message}`
+      };
+    } finally {
+      this.simState.techTestRunning = false;
+      this.renderSimulatorView(document.getElementById('contentWrapper'));
+    }
+  }
+
   async callGeminiAPI() {
     const s = this.simState;
-    const modelEndpoint = s.modelChoice === 'gemini-1.5-pro' ? 'gemini-1.5-pro' : 'gemini-1.5-flash';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelEndpoint}:generateContent?key=${s.apiKey}`;
-
     const prompt = `Du bist ein führender Inspektor der Europäischen Arzneimittel-Agentur (EMA) und PIC/S für den Draft EU GMP Annex 22.
 Analysiere folgende pharmazeutische KI-Projektidee:
 - Projektname: ${s.projectName}
@@ -2001,22 +2101,8 @@ Erstelle ein strenges, inspektionsfestes Compliance-Dossier im JSON-Format mit f
 }
 Antworte NUR mit reinem JSON ohne Markdown-Ticks.`;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.1 }
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Gemini API Error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-    text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+    const res = await this.callRawGemmaAPI(prompt);
+    let text = res.text.replace(/```json/gi, '').replace(/```/g, '').trim();
     return JSON.parse(text);
   }
 
