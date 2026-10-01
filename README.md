@@ -20,17 +20,22 @@ Aus der Wissensbasis wurde eine eigenständige, moderne Web-Applikation abgeleit
 * **🔍 Instant-Volltextsuche:** `Cmd + K` oder `Strg + K` für blitzschnelles Durchsuchen aller Leitfäden, Glossarbegriffe und Kriterien.
 * **🎨 Modernes Design-System:** Dark & Light Mode (`color-scheme`, Glassmorphism), dynamische Mermaid-Prozessdiagramme und responsive Drawer-Navigation.
 
-### Web-App lokal starten:
+### Web-App starten (Standard: Docker-Sandbox):
+
+Die Anwendung wird vollständig isoliert über Docker / OrbStack betrieben, sodass **keine** lokalen Node.js- oder Python-Installationen auf dem macOS-System erforderlich sind:
+
 ```bash
-# Abhängigkeiten installieren
-npm install
+# Startet den Dev-Server mit Live-Reloading auf http://localhost:5173/
+docker compose up
+```
+*(Hintergrund-Modus: `docker compose up -d`)*
 
-# Lokalen Entwicklungsserver starten
-npm run dev
-# ➔ Läuft unter http://localhost:5173/
+```bash
+# Tests im Container ausführen
+docker compose run --rm app npm test
 
-# Produktions-Bundle bauen
-npm run build
+# Dokumentensynchronität prüfen
+docker compose run --rm app python3 scripts/check_doc_sync.py
 ```
 
 ---
@@ -81,7 +86,11 @@ Annex22/
 │   └── search.js                              # Instant Client-Side Suchmaschine
 ├── docs/                                      # Zentraler Wissenshub
 │   ├── de/                                    # Deutsche Master-Dokumente (SSOT, 15 Dateien)
-│   └── en/                                    # Englische synchrone Spiegel-Dokumente (15 Dateien)
+│   ├── en/                                    # Englische synchrone Spiegel-Dokumente (15 Dateien)
+│   └── dev/                                   # Entwickler- & Produkt-Dokumentation
+│       ├── app_design.md                      # Technische App-Architektur & Design (für Python-Devs)
+│       ├── prd.md                             # 22Annex.ai Product Requirements Document
+│       └── evaluation_criteria.md             # Simulator Benchmark- & Evaluierungskriterien
 ├── scripts/
 │   ├── check_doc_sync.py                      # Verifikationsskript für DE/EN-Dokumentensynchronität
 │   └── extract_transcripts.py                 # Extraktionsskript für YouTube-Transkripte

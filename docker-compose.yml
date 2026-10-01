@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    container_name: annex22-portal
+    ports:
+      - "5173:5173"
+    volumes:
+      # Synchronisiere lokalen Ordner für Live-Reloading in Vite
+      - .:/app
+      # Verhindere Überschreiben von node_modules im Container durch Host-Dateien
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped

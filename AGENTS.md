@@ -24,27 +24,42 @@ Die Wissensbasis basiert auf dem 12-teiligen Kurs:
    - Wenn eine Anforderung im Draft strikt ist (z.B. Ausschluss dynamischer, sich selbst weitertrainierender Modelle im GMP-Betrieb; Einschränkung von LLMs für kritische Entscheidungen), muss dies präzise herausgearbeitet werden.
 4. **Interaktives Lernen:**
    - Der Assistent unterstützt den Nutzer aktiv durch das Erstellen von Zusammenfassungen, das Erklären unklarer Passagen, das Abfragen von Wissen durch Testfragen und das Verknüpfen mit realen Pharma-Szenarien.
+5. **Verpflichtender Container-Betrieb (Sandbox-Pflicht & Host-Schutz):**
+   - **Start ausschließlich via Container:** Die Web-App **muss ausnahmslos im Docker-/OrbStack-Container gestartet werden** (`docker compose up`).
+   - **Kein Start auf dem Host:** Es dürfen **keine** Node- oder Python-Prozesse direkt auf dem macOS-Host gestartet werden (kein lokales `npm run dev` oder lokales Python). Auf dem Host werden keine Pakete installiert.
+   - **Befehle & Tests isoliert ausführen:** Sämtliche Aufgaben werden über den Container abgewickelt:
+     - Dev-Server: `docker compose up` (oder `docker compose up -d`)
+     - Test-Suite: `docker compose run --rm app npm test`
+     - Python-Sync: `docker compose run --rm app python3 scripts/check_doc_sync.py`
+     - Production Build: `docker compose run --rm app npm run build`
+   - **Host-Rolle:** Das macOS-System dient ausschließlich als Editor und Dateisystem. Docker spiegelt alle Änderungen live per Volume-Mount (`.:/app`).
+6. **IDE-Layout & Arbeitsumgebung:**
+   - Der Agent / Chat befindet sich bevorzugt auf der **linken Seite** (Secondary Side Bar links durch Positionierung der Primary Side Bar rechts oder Zuklappen mit `Cmd + B`), sodass der Dokumentations- und Code-Kontext rechts im breiten Hauptfenster liegt.
 
 ---
 
 ## 📂 Verzeichnisstruktur
 ```text
 Annex22/
-├── README.md                          # Gesamtüberblick & Lernfortschritt
-├── AGENTS.md                          # Verhaltensrichtlinien & Repo-Konventionen
+├── README.md                          # Gesamtüberblick & Portal-Dokumentation
+├── AGENTS.md                          # Verhaltensrichtlinien, Sandbox-Regeln & Repo-Konventionen
+├── Dockerfile                         # Multi-Runtime Container (Node.js 20 + Python 3)
+├── docker-compose.yml                 # Sandbox-Definition für Dev-Server & isolierte Befehle
+├── .devcontainer/                     # 1-Klick Dev-Container Konfiguration
+├── package.json                       # Web-App Abhängigkeiten (Vite, Marked, Mermaid)
 ├── requirements.txt                   # Python-Abhängigkeiten (youtube-transcript-api, yt-dlp)
+├── src/                               # Web-App Quellcode (Vanilla JS, CSS, Engine, Search)
 ├── scripts/
-│   └── extract_transcripts.py         # Skript zum Aktualisieren & Extrahieren der Transkripte
+│   ├── check_doc_sync.py              # Verifikationsskript für DE/EN-Dokumentensynchronität
+│   └── extract_transcripts.py         # Skript zum Extrahieren von YouTube-Transkripten
+├── tests/                             # Automatisierte GxP-Benchmark- & Unit-Tests
 ├── data/
-│   └── transcripts/
-│       ├── json/                      # Rohdaten mit Timecodes & Metadaten
-│       └── markdown/                  # Lesbare Texttranskripte mit Zeitmarkern
+│   └── transcripts/                   # Extrahierte YouTube-Untertitel (JSON & Markdown)
 └── docs/                              # Zentraler Wissenshub
-    ├── 00_overview.md # Master-Framework & Prozesslandkarte
-    ├── module_01_introduction_ai_gxp.md
-    ├── module_02_overview_annex_22.md
-    ├── module_03_scope_applicability.md
-    ├── module_04_risk_based_approach.md
-    ├── module_05_intended_use_model_definition.md
-    └── module_06_... bis module_12_...
+    ├── de/                            # 15 Deutsche Master-Dokumente (SSOT)
+    ├── en/                            # 15 Englische synchrone Spiegel-Dokumente
+    └── dev/                           # Entwickler- & Produkt-Dokumentation
+        ├── app_design.md              # Technische App-Architektur & Design (für Python-Devs)
+        ├── prd.md                     # 22Annex.ai Product Requirements Document
+        └── evaluation_criteria.md     # Evaluierungskriterien für den KI-Simulator
 ```
